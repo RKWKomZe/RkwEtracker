@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2017-03-15T07:47:15Z" product-name="rkw_etracker">
+		<header/>
+		<body>
+
+            <trans-unit id="rkwMailService.sendReport.subjectDefault">
+                <source>Report "%s"</source>
+                <target>Bericht "%s"</target>
+            </trans-unit>
+
+
+            <!-- Controller/RedirectController -->
+            <trans-unit id="redirectController.error.redirect">
+                <source>Login to eTracker-Application failed.</source>
+                <target>Der automatische Login in die eTracker-Applikation war leider nicht möglich.</target>
+            </trans-unit>
+
+
+            <!-- Templates/Redirect/Redirect.html -->
+            <trans-unit id="templates_redirect_redirect.info">
+                <source>You can login into eTracker by using this link.</source>
+                <target>Klicken Sie hier, um sich manuell einzuloggen.</target>
+            </trans-unit>
+
+
+            <!-- Templates/Email/Report.html -->
+            <trans-unit id="templates_email_report.legendAreaData">
+                <source>Legend: V = Vists | V = Vistors | PI = Page Impressions | PI p.V. = Page Impressions per Visit | Time p.V. = Time per Visit | BR = Bounce Rate</source>
+                <target><![CDATA[Legende: B = <a href="https://www.etracker.com/glossar/besuch/" target="_blank">Besuche</a> | B2 = <a href="https://www.etracker.com/glossar/besucher/" target="_blank">Besucher</a> | PI = <a href="https://www.etracker.com/glossar/page-impression-pi/" target="_blank">Page Impressions</a> | PI / B. = Page Impressions pro Besuch | Zeit / B. = Zeit pro Besuch | BR = <a href="https://www.etracker.com/glossar/absprungrate/" target="_blank">Bounce Rate</a>]]></target>
+            </trans-unit>
+            <trans-unit id="templates_email_report.legendDownloadData">
+                <source>Legend: - </source>
+                <target>Legende: -</target>
+            </trans-unit>
+            <trans-unit id="templates_email_report.summary">
+                <source>Summary</source>
+                <target>Zusammenfassung</target>
+            </trans-unit>
+            <trans-unit id="templates_email_report.categories">
+                <source>Categories</source>
+                <target>Kategorien</target>
+            </trans-unit>
+            <trans-unit id="templates_email_report.groups">
+                <source>Groups</source>
+                <target>Projekte</target>
+            </trans-unit>
+            <trans-unit id="templates_email_report.categoryLevel1">
+                <source>Category 1</source>
+                <target>Kategorie 1</target>
+            </trans-unit>
+            <trans-unit id="templates_email_report.categoryLevel2">
+                <source>Category 2</source>
+                <target>Kategorie 2</target>
+            </trans-unit>
+            <trans-unit id="templates_email_report.categoryLevel3">
+                <source>Category 3</source>
+                <target>Kategorie 3</target>
+            </trans-unit>
+            <trans-unit id="templates_email_report.categoryLevel4">
+                <source>Category 4</source>
+                <target>Kategorie 4</target>
+            </trans-unit>
+            <trans-unit id="templates_email_report.categoryLevel5">
+                <source>Category 5</source>
+                <target>Kategorie 1</target>
+            </trans-unit>
+            <trans-unit id="templates_email_report.visits">
+                <source>V</source>
+                <target>B</target>
+            </trans-unit>
+            <trans-unit id="templates_email_report.visitors">
+                <source>V2</source>
+                <target>B2</target>
+            </trans-unit>
+            <trans-unit id="templates_email_report.pageImpressions">
+                <source>PI</source>
+                <target>PI</target>
+            </trans-unit>
+            <trans-unit id="templates_email_report.pageImpressionsPerVisit">
+                <source>PI p.V.</source>
+                <target>PI / B.</target>
+            </trans-unit>
+            <trans-unit id="templates_email_report.timePerVisit">
+                <source>Time p.V.</source>
+                <target>Zeit / B.</target>
+            </trans-unit>
+            <trans-unit id="templates_email_report.bouncesPerVisit">
+                <source>BR</source>
+                <target>BR</target>
+            </trans-unit>
+            <trans-unit id="templates_email_report.action">
+                <source>Action</source>
+                <target>Aktion</target>
+            </trans-unit>
+            <trans-unit id="templates_email_report.category">
+                <source>Category</source>
+                <target>Kategorie</target>
+            </trans-unit>
+            <trans-unit id="templates_email_report.events">
+                <source>Events</source>
+                <target>Events</target>
+            </trans-unit>
+            <trans-unit id="templates_email_report.uniqueEvents">
+                <source>Unique Events</source>
+                <target>Eind. Events</target>
+            </trans-unit>
+            <trans-unit id="templates_email_report.headline1">
+                <source>Clicks</source>
+                <target>Websiteaufrufe</target>
+            </trans-unit>
+            <trans-unit id="templates_email_report.headline2">
+                <source>Downloads</source>
+                <target>Downloads</target>
+            </trans-unit>
+            <trans-unit id="templates_email_report.eTrackerLogin">
+                <source>Login to eTracker</source>
+                <target>Bei eTracker einloggen (nur aus dem RKW Kompetenzzentrum möglich)</target>
+            </trans-unit>
+            <trans-unit id="templates_email_report.noData">
+                <source>No data available, yet.</source>
+                <target>Derzeit liegen noch keine Daten vor.</target>
+            </trans-unit>
+        </body>
+	</file>
+</xliff>

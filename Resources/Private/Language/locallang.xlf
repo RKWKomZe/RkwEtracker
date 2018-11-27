@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2017-03-15T07:47:15Z" product-name="rkw_etracker">
+		<header/>
+		<body>
+
+            <trans-unit id="rkwMailService.sendReport.subjectDefault">
+                <source>Report "%s"</source>
+            </trans-unit>
+
+
+            <!-- Controller/RedirectController -->
+            <trans-unit id="redirectController.error.redirect">
+                <source>Login to eTracker-Application failed.</source>
+            </trans-unit>
+
+
+            <!-- Templates/Redirect/Redirect.html -->
+            <trans-unit id="templates_redirect_redirect.info">
+                <source>You can login into eTracker by using this link.</source>
+            </trans-unit>
+
+
+
+            <!-- Templates/Email/Report.html -->
+            <trans-unit id="templates_email_report.legendAreaData">
+                <source>Legend: V = Vists | V2 = Vistors | PI = Page Impressions | PI p.V. = Page Impressions per Visit | Time p.V. = Time per Visit | BR = Bounce Rate</source>
+            </trans-unit>
+            <trans-unit id="templates_email_report.legendDownloadData">
+                <source>Legend: - </source>
+            </trans-unit>
+            <trans-unit id="templates_email_report.summary">
+                <source>Summary</source>
+            </trans-unit>
+            <trans-unit id="templates_email_report.categories">
+                <source>Categories</source>
+            </trans-unit>
+            <trans-unit id="templates_email_report.groups">
+                <source>Groups</source>
+            </trans-unit>
+            <trans-unit id="templates_email_report.categoryLevel1">
+                <source>Category 1</source>
+            </trans-unit>
+            <trans-unit id="templates_email_report.categoryLevel2">
+                <source>Category 2</source>
+            </trans-unit>
+            <trans-unit id="templates_email_report.categoryLevel3">
+                <source>Category 3</source>
+            </trans-unit>
+            <trans-unit id="templates_email_report.categoryLevel4">
+                <source>Category 4</source>
+            </trans-unit>
+            <trans-unit id="templates_email_report.categoryLevel5">
+                <source>Category 5</source>
+            </trans-unit>
+            <trans-unit id="templates_email_report.visits">
+                <source>V</source>
+            </trans-unit>
+            <trans-unit id="templates_email_report.visitors">
+                <source>V2</source>
+            </trans-unit>
+            <trans-unit id="templates_email_report.pageImpressions">
+                <source>PI</source>
+            </trans-unit>
+            <trans-unit id="templates_email_report.pageImpressionsPerVisit">
+                <source>PI p.V.</source>
+            </trans-unit>
+            <trans-unit id="templates_email_report.timePerVisit">
+                <source>Time p.V.</source>
+            </trans-unit>
+            <trans-unit id="templates_email_report.bouncesPerVisit">
+                <source>BR</source>
+            </trans-unit>
+            <trans-unit id="templates_email_report.action">
+                <source>Action</source>
+            </trans-unit>
+            <trans-unit id="templates_email_report.category">
+                <source>Category</source>
+            </trans-unit>
+            <trans-unit id="templates_email_report.events">
+                <source>Events</source>
+            </trans-unit>
+            <trans-unit id="templates_email_report.uniqueEvents">
+                <source>Unique Events</source>
+            </trans-unit>
+            <trans-unit id="templates_email_report.headline1">
+                <source>Clicks</source>
+            </trans-unit>
+            <trans-unit id="templates_email_report.headline2">
+                <source>Downloads</source>
+            </trans-unit>
+            <trans-unit id="templates_email_report.eTrackerLogin">
+                <source>Login to eTracker</source>
+            </trans-unit>
+            <trans-unit id="templates_email_report.noData">
+                <source>No data available, yet.</source>
+            </trans-unit>
+
+
+
+        </body>
+	</file>
+</xliff>

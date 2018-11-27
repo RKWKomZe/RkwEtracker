@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2017-03-15T07:47:15Z" product-name="rkw_etracker">
+		<header/>
+		<body>
+
+            <!-- tx_rkwetracker_domain_model_report -->
+			<trans-unit id="tx_rkwetracker_domain_model_report">
+				<source>RKW eTracker: Report</source>
+			</trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_report.name">
+                <source>Name</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_report.description">
+                <source>Description</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_report.recipient">
+                <source>Recipient (E-Mails, commaseparated)</source>
+            </trans-unit>
+			<trans-unit id="tx_rkwetracker_domain_model_report.groups">
+				<source>Groups</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwetracker_domain_model_report.groups">
+				<source>Groups Fetch</source>
+			</trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_report.type">
+                <source>Type</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_report.type.I.0">
+                <source>Yearly</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_report.type.I.1">
+                <source>Quarterly</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_report.type.I.2">
+                <source>Monthly</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_report.status">
+                <source>Status</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_report.status.I.0">
+                <source>Ready</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_report.status.I.1">
+                <source>Fetching data for current period</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_report.status.I.2">
+                <source>Sending Report</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_report.status.I.89">
+                <source>Reset / New Fetch for current period</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_report.status.I.99">
+                <source>Error</source>
+            </trans-unit>            
+            <trans-unit id="tx_rkwetracker_domain_model_report.fetch_counter">
+                <source>Fetch Counter</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_report.last_fetch_tstamp">
+                <source>Last Fetch Timestamp</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_report.last_mail_tstamp">
+                <source>Last Mail Timestamp</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_report.last_start_tstamp">
+                <source>Last Start Timestamp</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_report.last_end_tstamp">
+                <source>Last End Timestamp</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_report.month">
+                <source>Month</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_report.quarter">
+                <source>Quarter</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_report.year">
+                <source>Year</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_report.link_to_api">
+                <source>Link to eTracker</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_report.link_to_api.I.enable">
+                <source>Enable</source>
+            </trans-unit>
+
+
+
+            <!-- tx_rkwetracker_domain_model_reportfilter -->
+            <trans-unit id="tx_rkwetracker_domain_model_reportfilter">
+				<source>RKW eTracker: Filter</source>
+			</trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportfilter.domain">
+                <source>Domain</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportfilter.domain_free">
+                <source>Domain (Custom Text, overrides Dropdowns)</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportfilter.domain_required">
+                <source>Domain Required</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportfilter.domain_required.I.enabled">
+                <source>Domain Is Required</source>
+            </trans-unit>
+            <trans-unit id="tab.categories">
+                <source>Categories</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportfilter.category_level1">
+                <source>Category Level 1</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportfilter.category_level2">
+                <source>Category Level 2</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportfilter.category_level3">
+                <source>Category Level 3</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportfilter.category_level4">
+                <source>Category Level 4</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportfilter.category_level5">
+                <source>Category Level 5</source>
+            </trans-unit>            
+            <trans-unit id="tx_rkwetracker_domain_model_reportfilter.category_free_level1">
+				<source>Category Level 1 (Custom Text, overrides Dropdowns)</source>
+			</trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportfilter.category_free_level2">
+                <source>Category Level 2 (Custom Text, overrides Dropdowns)</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportfilter.category_free_level3">
+                <source>Category Level 3 (Custom Text, overrides Dropdowns)</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportfilter.category_free_level4">
+                <source>Category Level 4 (Custom Text, overrides Dropdowns)</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportfilter.category_free_level5">
+                <source>Category Level 5 (Custom Text, overrides Dropdowns)</source>
+            </trans-unit>
+            <trans-unit id="tab.download">
+                <source>Downloads</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportfilter.download_filter1">
+                <source>Download 1</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportfilter.download_filter2">
+                <source>Download 2</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportfilter.download_filter3">
+                <source>Download 3</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportfilter.download_free_filter1">
+                <source>Download (Custom Text)</source>
+            </trans-unit>
+
+
+            <!-- tx_rkwetracker_domain_model_reportgroup -->
+			<trans-unit id="tx_rkwetracker_domain_model_reportgroup">
+				<source>RKW eTracker: Report Filter Set</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwetracker_domain_model_reportgroup.name">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwetracker_domain_model_reportgroup.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwetracker_domain_model_reportgroup.filter">
+				<source>Filter</source>
+			</trans-unit>
+
+
+            <!-- tx_rkwetracker_domain_model_areadata -->
+            <trans-unit id="tx_rkwetracker_domain_model_areadata">
+                <source>RKW eTracker: Area Data</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_areadata.visits">
+                <source>Visits</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_areadata.visitors">
+                <source>Visitors</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_areadata.page_impressions">
+                <source>Page Impressions</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_areadata.bounces_per_visit">
+                <source>Bounces per Visit</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_areadata.time_per_visit">
+                <source>Time Per Visit</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_areadata.report">
+                <source>Report</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_areadata.report_group">
+                <source>Report Group</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_areadata.report_filter">
+                <source>Report Filter</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_areadata.report_fetch_counter">
+                <source>Report Fetch Counter</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_areadata.month">
+                <source>Month</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_areadata.quarter">
+                <source>Quarter</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_areadata.year">
+                <source>Year</source>
+            </trans-unit>
+
+
+            <!-- tx_rkwetracker_domain_model_downloaddata -->            
+            <trans-unit id="tx_rkwetracker_domain_model_downloaddata">
+                <source>RKW eTracker: Download Data</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_downloaddata.action">
+                <source>Action</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_downloaddata.category">
+                <source>Category</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_downloaddata.time_per_event">
+                <source>Time Per Event</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_downloaddata.events">
+                <source>Events</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_downloaddata.unique_events">
+                <source>Unique Events</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_downloaddata.report">
+                <source>Report</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_downloaddata.report_group">
+                <source>Report Group</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_downloaddata.report_filter">
+                <source>Report Filter</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_downloaddata.report_fetch_counter">
+                <source>Report Fetch Counter</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_downloaddata.month">
+                <source>Month</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_downloaddata.quarter">
+                <source>Quarter</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_downloaddata.year">
+                <source>Year</source>
+            </trans-unit>
+
+            <!-- tx_rkwetracker_domain_model_areasum -->
+            <trans-unit id="tx_rkwetracker_domain_model_areasum">
+                <source>RKW eTracker: Area Sum</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_areasum.visits">
+                <source>Visits</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_areasum.visitors">
+                <source>Visitors</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_areasum.page_impressions">
+                <source>Page Impressions</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_areasum.page_impressions_per_visit">
+                <source>Page Impression Per Visit</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_areasum.time_per_visit">
+                <source>Time Per Visit</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_areasum.report">
+                <source>Report</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_areasum.report_group">
+                <source>Report Group</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_areasum.report_fetch_counter">
+                <source>Report Fetch Counter</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_areasum.month">
+                <source>Month</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_areasum.quarter">
+                <source>Quarter</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_areasum.year">
+                <source>Year</source>
+            </trans-unit>
+
+
+            <!-- tx_rkwetracker_domain_model_downloadsum -->
+            <trans-unit id="tx_rkwetracker_domain_model_downloadsum">
+                <source>RKW eTracker: Download Sum</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_downloadsum.time_per_event">
+                <source>Time Per Event</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_downloadsum.events">
+                <source>Events</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_downloadsum.unique_events">
+                <source>Unique Events</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_downloadsum.report">
+                <source>Report</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_downloadsum.report_group">
+                <source>Report Group</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_downloadsum.report_fetch_counter">
+                <source>Report Fetch Counter</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_downloadsum.month">
+                <source>Month</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_downloadsum.quarter">
+                <source>Quarter</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_downloadsum.year">
+                <source>Year</source>
+            </trans-unit>
+
+
+            <!-- tx_rkwetracker_domain_model_reportareasum -->
+            <trans-unit id="tx_rkwetracker_domain_model_reportareasum">
+                <source>RKW eTracker: Report Area Sum</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportareasum.visits">
+                <source>Visits</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportareasum.visitors">
+                <source>Visitors</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportareasum.page_impressions">
+                <source>Page Impressions</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportareasum.page_impressions_per_visit">
+                <source>Page Impression Per Visit</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportareasum.time_per_visit">
+                <source>Time Per Visit</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportareasum.report">
+                <source>Report</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportareasum.report_group">
+                <source>Report Group</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportareasum.report_fetch_counter">
+                <source>Report Fetch Counter</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportareasum.month">
+                <source>Month</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportareasum.quarter">
+                <source>Quarter</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportareasum.year">
+                <source>Year</source>
+            </trans-unit>
+
+
+
+            <!-- tx_rkwetracker_domain_model_reportdownloadsum -->
+            <trans-unit id="tx_rkwetracker_domain_model_reportdownloadsum">
+                <source>RKW eTracker: Report Download Sum</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportdownloadsum.time_per_event">
+                <source>Time Per Event</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportdownloadsum.events">
+                <source>Events</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportdownloadsum.unique_events">
+                <source>Unique Events</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportdownloadsum.report">
+                <source>Report</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportdownloadsum.report_group">
+                <source>Report Group</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportdownloadsum.report_fetch_counter">
+                <source>Report Fetch Counter</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportdownloadsum.month">
+                <source>Month</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportdownloadsum.quarter">
+                <source>Quarter</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwetracker_domain_model_reportdownloadsum.year">
+                <source>Year</source>
+            </trans-unit>            
+
+
+            <!-- pages -->
+            <trans-unit id="pages.tabs.etracker">
+                <source>eTracker</source>
+            </trans-unit>
+            <trans-unit id="pages.tx_rkwetracker_category_level1">
+                <source>Category Level 1</source>
+            </trans-unit>
+            <trans-unit id="pages.tx_rkwetracker_category_level2">
+                <source>Category Level 2</source>
+            </trans-unit>
+            <trans-unit id="pages.tx_rkwetracker_category_level3">
+                <source>Category Level 3</source>
+            </trans-unit>
+            <trans-unit id="pages.tx_rkwetracker_category_level4">
+                <source>Category Level 4</source>
+            </trans-unit>
+            <trans-unit id="pages.tx_rkwetracker_category_level5">
+                <source>Category Level 5</source>
+            </trans-unit>
+		</body>
+	</file>
+</xliff>
