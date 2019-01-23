@@ -23,7 +23,7 @@
     },
     "autoload": {
         "psr-4": {
-            "RKW\\Etracker\\": "Classes/"
+            "RKW\\RkwEtracker\\": "Classes/"
         }
     },
     "extra": {
