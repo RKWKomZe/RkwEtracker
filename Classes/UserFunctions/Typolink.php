@@ -38,8 +38,6 @@ class Typolink
     public function getParsedLink($data = '', $conf = array())
     {
 
-        var_dump($data, $conf);
-        die();
         $fileIdentifier = null;
         $projectName = '';
         if ($data['TYPE'] == 'file') {
