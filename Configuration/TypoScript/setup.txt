@@ -189,8 +189,7 @@ module.tx_rkwetracker < plugin.tx_rkwetracker
     page.includeJSFooter.rkwEtrackerScript = EXT:rkw_etracker/Resources/Public/Js/eTracker.js
 
     # Include Link-Parser
-    includeLibs.user_typolink = EXT:rkw_etracker/Classes/UserFunctions/Typolink.php
-    lib.parseFunc_RTE.tags.link.typolink.userFunc = Typolink->getParsedLink
+    lib.parseFunc_RTE.tags.link.typolink.userFunc =  RKW\RkwEtracker\UserFunctions\Typolink->getParsedLink
     lib.stdheader.10.setCurrent.typolink.userFunc < lib.parseFunc_RTE.tags.link.typolink.userFunc
     tt_content {
         image.20.1.imageLinkWrap.typolink.userFunc < lib.parseFunc_RTE.tags.link.typolink.userFunc
