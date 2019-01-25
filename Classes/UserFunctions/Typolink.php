@@ -1,4 +1,5 @@
 <?php
+namespace RKW\RkwEtracker\UserFunctions;
 
 use RKW\RkwEtracker\Helpers\CategoryHelper;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -37,6 +38,8 @@ class Typolink
     public function getParsedLink($data = '', $conf = array())
     {
 
+        var_dump($data, $conf);
+        die();
         $fileIdentifier = null;
         $projectName = '';
         if ($data['TYPE'] == 'file') {
