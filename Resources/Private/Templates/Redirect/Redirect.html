@@ -1,4 +1,10 @@
 
-<f:flashMessages renderMode="div" />
+<f:flashMessages as="flashMessages">
+    <ul class="myFlashMessages">
+        <f:for each="{flashMessages}" as="flashMessage">
+            <li>{flashMessage.message}</li>
+        </f:for>
+    </ul>
+</f:flashMessages>
 
 <a href="<f:format.raw>{redirectUrl}</f:format.raw>"><f:translate key="templates_redirect_redirect.info" /></a>
