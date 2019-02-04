@@ -1,10 +1,18 @@
 
 <f:flashMessages as="flashMessages">
-    <ul class="myFlashMessages">
-        <f:for each="{flashMessages}" as="flashMessage">
-            <li>{flashMessage.message}</li>
-        </f:for>
-    </ul>
+    <f:for each="{flashMessages}" as="flashMessage">
+        <div class="typo3-messages">
+            <div class="alert alert-{flashMessage.class}">
+                <div class="media">
+                    <div class="media-body">
+                        <div class="alert-message">
+                            {flashMessage.message}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </f:for>
 </f:flashMessages>
 
 <a href="<f:format.raw>{redirectUrl}</f:format.raw>"><f:translate key="templates_redirect_redirect.info" /></a>
