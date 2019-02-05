@@ -24,9 +24,9 @@ $EM_CONF[$_EXTKEY] = array(
 	'version' => '8.7.0',
 	'constraints' => array(
 		'depends' => array(
-            'extbase' => '6.2.0-8.7.99',
-            'fluid' => '6.2.0-8.7.99',
-            'typo3' => '6.2.0-8.7.99',
+            'extbase' => '7.6.0-8.7.99',
+            'fluid' => '7.6.0-8.7.99',
+            'typo3' => '7.6.0-8.7.99',
             'rkw_basics' => '8.7.0-8.7.99',
             'rkw_mailer' => '8.7.0-8.7.99',
 		),
