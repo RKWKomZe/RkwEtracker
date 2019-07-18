@@ -1,5 +1,6 @@
 <?php
-namespace RKW\RkwEtracker\UserFunctions;
+
+namespace RKW\RkwEtracker\ViewHelpers\Link;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -18,25 +19,29 @@ use RKW\RkwEtracker\Utility\TypolinkUtility;
  */
 
 /**
- * Class Typolink
+ * Class AndNotViewHelper
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
  * @copyright Rkw Kompetenzzentrum
  * @package RKW_RkwEtracker
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Typolink
+class TypolinkViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Link\TypolinkViewHelper
 {
 
-
     /**
-     * Add data-attribute to Typolink
+     * Render
      *
-     * @param array $data
-     * @param array $conf
+     * @param string $parameter stdWrap.typolink style parameter string
+     * @param string $target
+     * @param string $class
+     * @param string $title
+     * @param string $additionalParams
+     * @param array $additionalAttributes
+     *
      * @return string
      */
-    public function getParsedLinkWithDataAttributes($data = [], $conf = [])
+    public function render($parameter, $target = '', $class = '', $title = '', $additionalParams = '', $additionalAttributes = [])
     {
 
         /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
@@ -46,33 +51,19 @@ class Typolink
         $typolinkUtility = $objectManager->get(TypolinkUtility::class);
 
         // get data attributes for given handle
-        $dataAttributes = $typolinkUtility->getDataAttributes($data['url'], $data['TYPE']);
-        $dataAttributeString = '';
+        $dataAttributes = $typolinkUtility->getDataAttributes($parameter);
 
-        // build attributes as string
-        foreach ($dataAttributes as $dataAttributeName => $dataAttributeValue) {
-            $dataAttributeString .= $dataAttributeName .'="' . htmlspecialchars($dataAttributeValue) . '" ';
-        }
-
-        // add attributes
-        $data['TAG'] = str_replace('href=', $dataAttributeString . ' href=', $data['TAG']);
-
-        return $data['TAG'];
+        return static::renderStatic(
+            [
+                'parameter' => $parameter,
+                'target' => $target,
+                'class' => $class,
+                'title' => $title,
+                'additionalParams' => $additionalParams,
+                'additionalAttributes' => array_merge($additionalAttributes, $dataAttributes)
+            ],
+            $this->buildRenderChildrenClosure(),
+            $this->renderingContext
+        );
     }
-
-
-
-    /**
-     * Add data-attribute to Typolink
-     *
-     * @param string $data
-     * @param array $conf
-     * @return string
-     * @deprecated since 2019-07-18
-     */
-    public function getParsedLink($data = '', $conf = array())
-    {
-        return $this->getParsedLinkWithDataAttributes($data, $conf);
-    }
-
 }
