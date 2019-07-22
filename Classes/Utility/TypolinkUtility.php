@@ -31,6 +31,13 @@ use RKW\RkwEtracker\Helpers\CategoryHelper;
 class TypolinkUtility extends \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
 {
 
+
+    /**
+     * @var \TYPO3\CMS\Core\Log\Logger
+     */
+    protected $logger;
+
+
     /**
      * Get data-attributes for files
      *
@@ -62,7 +69,7 @@ class TypolinkUtility extends \TYPO3\CMS\Frontend\ContentObject\ContentObjectRen
 
         // define dataTags array
         $dataTags = [
-            'data-etracker-action' => $linkType,
+            'data-etracker-action' => ($linkType ? $linkType : 'Default'),
             'data-etracker-category' => GeneralUtility::getIndpEnv('TYPO3_HOST_ONLY')
         ];
 
@@ -99,6 +106,8 @@ class TypolinkUtility extends \TYPO3\CMS\Frontend\ContentObject\ContentObjectRen
             }
         }
 
+
+        $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::DEBUG, sprintf('Resulting data-attributes of typolink "%s": %s.', $typolink, str_replace("\n", '', print_r($dataTags, true))));
         return $dataTags;
     }
 
@@ -132,5 +141,21 @@ class TypolinkUtility extends \TYPO3\CMS\Frontend\ContentObject\ContentObjectRen
         return null;
     }
 
+
+    /**
+     * Returns logger instance
+     *
+     * @return \TYPO3\CMS\Core\Log\Logger
+     */
+    protected function getLogger()
+    {
+
+        if (!$this->logger instanceof \TYPO3\CMS\Core\Log\Logger) {
+            $this->logger = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Log\LogManager')->getLogger(__CLASS__);
+        }
+
+        return $this->logger;
+        //===
+    }
 
 }
