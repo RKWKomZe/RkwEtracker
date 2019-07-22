@@ -4,7 +4,9 @@ namespace RKW\RkwEtracker\ViewHelpers\Link;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface;
 use RKW\RkwEtracker\Utility\TypolinkUtility;
+
 /*
  * This file is part of the TYPO3 CMS project.
  *
@@ -29,19 +31,16 @@ use RKW\RkwEtracker\Utility\TypolinkUtility;
 class TypolinkViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Link\TypolinkViewHelper
 {
 
+
     /**
-     * Render
-     *
-     * @param string $parameter stdWrap.typolink style parameter string
-     * @param string $target
-     * @param string $class
-     * @param string $title
-     * @param string $additionalParams
-     * @param array $additionalAttributes
-     *
-     * @return string
+     * @param array $arguments
+     * @param callable $renderChildrenClosure
+     * @param RenderingContextInterface $renderingContext
+     * @return mixed|string
+     * @throws \InvalidArgumentException
+     * @throws \UnexpectedValueException
      */
-    public function render($parameter, $target = '', $class = '', $title = '', $additionalParams = '', $additionalAttributes = [])
+    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext)
     {
 
         /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
@@ -51,19 +50,11 @@ class TypolinkViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Link\TypolinkViewH
         $typolinkUtility = $objectManager->get(TypolinkUtility::class);
 
         // get data attributes for given handle
-        $dataAttributes = $typolinkUtility->getDataAttributes($parameter);
+        $dataAttributes = $typolinkUtility->getDataAttributes($arguments['parameter']);
+        $arguments['additionalAttributes'] = array_merge($arguments['additionalAttributes'], $dataAttributes);
 
-        return static::renderStatic(
-            [
-                'parameter' => $parameter,
-                'target' => $target,
-                'class' => $class,
-                'title' => $title,
-                'additionalParams' => $additionalParams,
-                'additionalAttributes' => array_merge($additionalAttributes, $dataAttributes)
-            ],
-            $this->buildRenderChildrenClosure(),
-            $this->renderingContext
-        );
+        return parent::renderStatic($arguments, $renderChildrenClosure, $renderingContext);
+
     }
+
 }
