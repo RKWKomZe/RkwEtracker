@@ -14,7 +14,7 @@ return array(
 
 		),
 		'searchFields' => 'name,description,filter,',
-		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('rkw_etracker') . 'Resources/Public/Icons/tx_rkwetracker_domain_model_reportgroup.gif'
+		'iconfile' => 'EXT:rkw_etracker/Resources/Public/Icons/tx_rkwetracker_domain_model_reportgroup.gif'
 	),
 	'interface' => array(
 		'showRecordFieldList' => 'name, description',

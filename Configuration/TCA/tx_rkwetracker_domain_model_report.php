@@ -15,13 +15,13 @@ return array(
 			'endtime' => 'endtime',
 		),
 		'searchFields' => 'name, description,groups,',
-		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('rkw_etracker') . 'Resources/Public/Icons/tx_rkwetracker_domain_model_report.gif'
+		'iconfile' => 'EXT:rkw_etracker/Resources/Public/Icons/tx_rkwetracker_domain_model_report.gif'
 	),
 	'interface' => array(
 		'showRecordFieldList' => 'hidden, name, description, link_to_api, recipient, groups, type, status, last_fetch_tstamp, last_start_tstamp, last_end_tstamp,  month, quarter, year',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'hidden;;1, name, description, link_to_api, recipient, type, status, last_start_tstamp, last_end_tstamp, last_fetch_tstamp, last_mail_tstamp, groups, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
+		'1' => array('showitem' => 'hidden,--palette--;;1, name, description, link_to_api, recipient, type, status, last_start_tstamp, last_end_tstamp, last_fetch_tstamp, last_mail_tstamp, groups, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -96,6 +96,7 @@ return array(
 			'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_report.groups',
 			'config' => array(
 				'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
 				'foreign_table' => 'tx_rkwetracker_domain_model_reportgroup',
                 'foreign_table_where' =>  'ORDER BY tx_rkwetracker_domain_model_reportgroup.name ASC',
 				'maxitems' => 9999,
@@ -118,6 +119,7 @@ return array(
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_report.type',
             'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
@@ -140,6 +142,7 @@ return array(
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_report.status',
             'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'size' => 1,
                 'default' => 0,
                 'items' => array(
