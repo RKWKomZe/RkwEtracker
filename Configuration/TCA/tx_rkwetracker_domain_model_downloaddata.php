@@ -13,7 +13,7 @@ return array(
 
 		),
 		'searchFields' => 'action,category,time_per_event,events,unique_events,month,quarter,year,',
-		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('rkw_etracker') . 'Resources/Public/Icons/tx_rkwetracker_domain_model_downloaddata.gif'
+		'iconfile' => 'EXT:rkw_etracker/Resources/Public/Icons/tx_rkwetracker_domain_model_downloaddata.gif'
 	),
 	'interface' => array(
 		'showRecordFieldList' => 'action, category, time_per_event, events, unique_events, report, report_fetch_counter, month, quarter, year',
@@ -31,6 +31,7 @@ return array(
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_downloaddata.report',
             'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_rkwetracker_domain_model_report',
                 'foreign_table_where' => ' ORDER BY tx_rkwetracker_domain_model_report.name ASC',
                 'maxitems'      => 1,
@@ -43,6 +44,7 @@ return array(
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_downloaddata.report_group',
             'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_rkwetracker_domain_model_reportgroup',
                 'foreign_table_where' => ' ORDER BY tx_rkwetracker_domain_model_reportgroup.name ASC',
                 'maxitems'      => 1,
@@ -55,6 +57,7 @@ return array(
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_downloaddata.report_filter',
             'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_rkwetracker_domain_model_reportfilter',
                 'foreign_table_where' => ' ORDER BY tx_rkwetracker_domain_model_reportfilter.domain ASC, tx_rkwetracker_domain_model_reportfilter.domain_free ASC',
                 'maxitems'      => 1,

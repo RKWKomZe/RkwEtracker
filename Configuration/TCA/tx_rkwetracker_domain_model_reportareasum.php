@@ -13,7 +13,7 @@ return array(
 
 		),
 		'searchFields' => 'report_group,visitors,page_impressions,page_impressions_per_visitor,time_per_visitor,time_per_page,report,report_fetch_counter,month,quarter,year,',
-		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('rkw_etracker') . 'Resources/Public/Icons/tx_rkwetracker_domain_model_reportareasum.gif'
+		'iconfile' => 'EXT:rkw_etracker/Resources/Public/Icons/tx_rkwetracker_domain_model_reportareasum.gif'
 	),
 	'interface' => array(
 		'showRecordFieldList' => 'report_group, visitors, page_impressions, page_impressions_per_visitor, time_per_visitor, time_per_page, report, report_group, report_fetch_counter, month, quarter, year',
@@ -76,6 +76,7 @@ return array(
 			'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_reportareasum.report',
 			'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_rkwetracker_domain_model_report',
                 'foreign_table_where' => ' ORDER BY tx_rkwetracker_domain_model_report.name ASC',
                 'maxitems'      => 1,
@@ -88,6 +89,7 @@ return array(
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_reportareasum.report_group',
             'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_rkwetracker_domain_model_reportgroup',
                 'foreign_table_where' => ' ORDER BY tx_rkwetracker_domain_model_reportgroup.name ASC',
                 'maxitems'      => 1,

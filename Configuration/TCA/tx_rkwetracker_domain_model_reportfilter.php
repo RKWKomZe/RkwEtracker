@@ -19,7 +19,7 @@ return array(
 
 		),
 		'searchFields' => 'domain, domain_free, domain_required, category_level1, category_level2, category_level3, category_level4, category_level5, category_free_level1, category_free_level2, category_free_level3, category_free_level4, category_free_level5, download_filter1, download_filter2, download_filter3, download_free_filter1',
-		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('rkw_etracker') . 'Resources/Public/Icons/tx_rkwetracker_domain_model_reportfilter.gif'
+		'iconfile' => 'EXT:rkw_etracker/Resources/Public/Icons/tx_rkwetracker_domain_model_reportfilter.gif'
 	),
 	'interface' => array(
         'showRecordFieldList' => 'domain, domain_free, category_level1, category_level2, category_level3, category_level4, category_level5, category_free_level1, category_free_level2, category_free_level3, category_free_level4, category_free_level5, download_filter1, download_filter2, download_filter3, download_free_filter1',
@@ -39,6 +39,7 @@ return array(
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_reportfilter.domain',
             'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'items' => array (
                     array('-', 0),
                 ),
@@ -65,6 +66,7 @@ return array(
 			'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_reportfilter.category_level1',
 			'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'items' => array (
                     array('-', 0),
                 ),
@@ -81,6 +83,7 @@ return array(
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_reportfilter.category_level2',
             'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'items' => array (
                     array('-', 0),
                 ),
@@ -96,6 +99,7 @@ return array(
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_reportfilter.category_level3',
             'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'items' => array (
                     array('-', 0),
                 ),
@@ -111,6 +115,7 @@ return array(
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_reportfilter.category_level4',
             'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'items' => array (
                     array('-', 0),
                 ),
@@ -126,6 +131,7 @@ return array(
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_reportfilter.category_level5',
             'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'items' => array (
                     array('-', 0),
                 ),
@@ -185,6 +191,7 @@ return array(
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_reportfilter.download_filter1',
             'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'items' => array (
                     array('-', 0),
                 ),
@@ -199,6 +206,7 @@ return array(
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_reportfilter.download_filter2',
             'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'items' => array (
                     array('-', 0),
                 ),
@@ -213,6 +221,7 @@ return array(
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_reportfilter.download_filter3',
             'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'items' => array (
                     array('-', 0),
                 ),
