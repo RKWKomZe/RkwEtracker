@@ -1,10 +1,6 @@
 <?php
-if (!defined ('TYPO3_MODE')) {
-	die ('Access denied.');
-}
 
 $tempColumnsPages = [
-
 
 	'tx_rkwetracker_category_level1' => [
 		'exclude' => 1,
@@ -55,8 +51,7 @@ $tempColumnsPages = [
             'eval' => 'trim'
         ],
     ],
-
-);
+];
 
 
 //===========================================================================
