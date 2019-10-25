@@ -3,58 +3,58 @@ if (!defined ('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 
-$tempColumnsPages = array(
+$tempColumnsPages = [
 
 
-	'tx_rkwetracker_category_level1' => array (
+	'tx_rkwetracker_category_level1' => [
 		'exclude' => 1,
 		'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:pages.tx_rkwetracker_category_level1',
-		'config' => array (
+		'config' => [
             'type' => 'input',
             'size' => '30',
             'eval' => 'trim'
-		)
-	),
+		],
+	],
 
-    'tx_rkwetracker_category_level2' => array (
+    'tx_rkwetracker_category_level2' => [
         'exclude' => 1,
         'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:pages.tx_rkwetracker_category_level2',
-        'config' => array (
+        'config' => [
             'type' => 'input',
             'size' => '30',
             'eval' => 'trim'
-        )
-    ),
+        ],
+    ],
 
-    'tx_rkwetracker_category_level3' => array (
+    'tx_rkwetracker_category_level3' => [
         'exclude' => 1,
         'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:pages.tx_rkwetracker_category_level3',
-        'config' => array (
+        'config' => [
             'type' => 'input',
             'size' => '30',
             'eval' => 'trim'
-        )
-    ),
+        ],
+    ],
 
-    'tx_rkwetracker_category_level4' => array (
+    'tx_rkwetracker_category_level4' => [
         'exclude' => 1,
         'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:pages.tx_rkwetracker_category_level4',
-        'config' => array (
+        'config' => [
             'type' => 'input',
             'size' => '30',
             'eval' => 'trim'
-        )
-    ),
+        ],
+    ],
 
-    'tx_rkwetracker_category_level5' => array (
+    'tx_rkwetracker_category_level5' => [
         'exclude' => 1,
         'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:pages.tx_rkwetracker_category_level5',
-        'config' => array (
+        'config' => [
             'type' => 'input',
             'size' => '30',
             'eval' => 'trim'
-        )
-    ),
+        ],
+    ],
 
 );
 

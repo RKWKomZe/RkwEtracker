@@ -1,6 +1,6 @@
 <?php
-return array(
-	'ctrl' => array(
+return [
+	'ctrl' => [
 		'title'	=> 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_downloaddata',
 		'label' => 'action',
 		'tstamp' => 'tstamp',
@@ -9,27 +9,27 @@ return array(
 		'dividers2tabs' => true,
         'hideTable' => true,
 
-		'enablecolumns' => array(
+		'enablecolumns' => [
 
-		),
+		],
 		'searchFields' => 'action,category,time_per_event,events,unique_events,month,quarter,year,',
 		'iconfile' => 'EXT:rkw_etracker/Resources/Public/Icons/tx_rkwetracker_domain_model_downloaddata.gif'
-	),
-	'interface' => array(
+	],
+	'interface' => [
 		'showRecordFieldList' => 'action, category, time_per_event, events, unique_events, report, report_fetch_counter, month, quarter, year',
-	),
-	'types' => array(
-		'1' => array('showitem' => 'action, category, time_per_event, events, unique_events, report, report_fetch_counter, month, quarter, year'),
-	),
-	'palettes' => array(
-		'1' => array('showitem' => ''),
-	),
-	'columns' => array(
+	],
+	'types' => [
+		'1' => ['showitem' => 'action, category, time_per_event, events, unique_events, report, report_fetch_counter, month, quarter, year'],
+	],
+	'palettes' => [
+		'1' => ['showitem' => ''],
+	],
+	'columns' => [
 
-        'report' => array(
+        'report' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_downloaddata.report',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_rkwetracker_domain_model_report',
@@ -37,12 +37,12 @@ return array(
                 'maxitems'      => 1,
                 'minitems'      => 1,
                 'size'          => 5,
-            ),
-        ),
-        'report_group' => array(
+            ],
+        ],
+        'report_group' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_downloaddata.report_group',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_rkwetracker_domain_model_reportgroup',
@@ -50,12 +50,12 @@ return array(
                 'maxitems'      => 1,
                 'minitems'      => 1,
                 'size'          => 5,
-            ),
-        ),
-        'report_filter' => array(
+            ],
+        ],
+        'report_filter' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_downloaddata.report_filter',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_rkwetracker_domain_model_reportfilter',
@@ -63,90 +63,90 @@ return array(
                 'maxitems'      => 1,
                 'minitems'      => 1,
                 'size'          => 5,
-            ),
-        ),
-        'report_fetch_counter' => array(
+            ],
+        ],
+        'report_fetch_counter' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_downloaddata.report_fetch_counter',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 13,
                 'max' => 20,
                 'eval' => 'int',
                 'readOnly' => true,
-            ),
-        ),
-		'action' => array(
+            ],
+        ],
+		'action' => [
 			'exclude' => 0,
 			'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_downloaddata.action',
-			'config' => array(
+			'config' => [
 				'type' => 'input',
 				'size' => 30,
 				'eval' => 'trim'
-			),
-		),
-		'category' => array(
+			],
+		],
+		'category' => [
 			'exclude' => 0,
 			'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_downloaddata.category',
-			'config' => array(
+			'config' => [
 				'type' => 'input',
 				'size' => 30,
 				'eval' => 'trim'
-			),
-		),
-		'time_per_event' => array(
+			],
+		],
+		'time_per_event' => [
 			'exclude' => 0,
 			'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_downloaddata.time_per_event',
-			'config' => array(
+			'config' => [
 				'type' => 'input',
 				'size' => 30,
 				'eval' => 'int'
-			),
-		),
-		'events' => array(
+			],
+		],
+		'events' => [
 			'exclude' => 0,
 			'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_downloaddata.events',
-			'config' => array(
+			'config' => [
 				'type' => 'input',
 				'size' => 30,
 				'eval' => 'int'
-			),
-		),
-		'unique_events' => array(
+			],
+		],
+		'unique_events' => [
 			'exclude' => 0,
 			'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_downloaddata.unique_events',
-			'config' => array(
+			'config' => [
 				'type' => 'input',
 				'size' => 30,
 				'eval' => 'int'
-			),
-		),
-        'month' => array(
+			],
+		],
+        'month' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_downloaddata.month',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 4,
                 'eval' => 'int'
-            )
-        ),
-        'quarter' => array(
+            ],
+        ],
+        'quarter' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_downloaddata.quarter',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'int'
-            ),
-        ),
-        'year' => array(
+            ],
+        ],
+        'year' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_downloaddata.year',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'int'
-            ),
-        ),		
-	),
-);
+            ],
+        ],
+	],
+];

@@ -1,6 +1,6 @@
 <?php
-return array(
-	'ctrl' => array(
+return [
+	'ctrl' => [
 		'title'	=> 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_areasum',
 		'label' => 'report_group',
 		'tstamp' => 'tstamp',
@@ -9,81 +9,81 @@ return array(
 		'dividers2tabs' => true,
         'hideTable' => true,
 
-		'enablecolumns' => array(
+		'enablecolumns' => [
 
-		),
+		],
 		'searchFields' => 'report_group,visitors,page_impressions,page_impressions_per_visitor,time_per_visitor,time_per_page,report,report_fetch_counter,month,quarter,year,',
 		'iconfile' => 'EXT:rkw_etracker/Resources/Public/Icons/tx_rkwetracker_domain_model_areasum.gif'
-	),
-	'interface' => array(
+	],
+	'interface' => [
 		'showRecordFieldList' => 'visits, visitors, page_impressions, page_impressions_per_visit, time_per_visit, time_per_page, report, report_group, report_fetch_counter, month, quarter, year',
-	),
-	'types' => array(
-		'1' => array('showitem' => 'visits, visitors, page_impressions, page_impressions_per_visit, time_per_visit, time_per_page, report, report_group, report_fetch_counter, month, quarter, year, '),
-	),
-	'palettes' => array(
-		'1' => array('showitem' => ''),
-	),
-	'columns' => array(
+	],
+	'types' => [
+		'1' => ['showitem' => 'visits, visitors, page_impressions, page_impressions_per_visit, time_per_visit, time_per_page, report, report_group, report_fetch_counter, month, quarter, year, '],
+	],
+	'palettes' => [
+		'1' => ['showitem' => ''],
+	],
+	'columns' => [
 
-        'visits' => array(
+        'visits' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_areasum.visits',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 4,
                 'eval' => 'int'
-            )
-        ),
-		'visitors' => array(
+            ],
+        ],
+		'visitors' => [
 			'exclude' => 0,
 			'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_areasum.visitors',
-			'config' => array(
+			'config' => [
 				'type' => 'input',
 				'size' => 4,
 				'eval' => 'int'
-			)
-		),
-		'page_impressions' => array(
+			],
+		],
+		'page_impressions' => [
 			'exclude' => 0,
 			'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_areasum.page_impressions',
-			'config' => array(
+			'config' => [
 				'type' => 'input',
 				'size' => 4,
 				'eval' => 'int'
-			)
-		),
-		'page_impressions_per_visit' => array(
+			],
+		],
+		'page_impressions_per_visit' => [
 			'exclude' => 0,
 			'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_areasum.page_impressions_per_visit',
-			'config' => array(
+			'config' => [
 				'type' => 'input',
 				'size' => 30,
 				'eval' => 'double2'
-			)
-		),
-		'time_per_visitor' => array(
+			],
+		],
+		'time_per_visitor' => [
 			'exclude' => 0,
 			'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_areasum.time_per_visit',
-			'config' => array(
+			'config' => [
 				'type' => 'input',
 				'size' => 4,
 				'eval' => 'int'
-			)
-		),
-		'time_per_page' => array(
+			],
+		],
+		'time_per_page' => [
 			'exclude' => 0,
 			'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_areasum.time_per_page',
-			'config' => array(
+			'config' => [
 				'type' => 'input',
 				'size' => 30,
 				'eval' => 'int'
-			)
-		),
-		'report' => array(
+			],
+		],
+		'report' => [
 			'exclude' => 0,
 			'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_areasum.report',
-			'config' => array(
+			'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_rkwetracker_domain_model_report',
@@ -91,12 +91,12 @@ return array(
                 'maxitems'      => 1,
                 'minitems'      => 1,
                 'size'          => 5,
-			)
-		),
-        'report_group' => array(
+			],
+		],
+        'report_group' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_areasum.report_group',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_rkwetracker_domain_model_reportgroup',
@@ -104,45 +104,44 @@ return array(
                 'maxitems'      => 1,
                 'minitems'      => 1,
                 'size'          => 5,
-            ),
-        ),
-		'report_fetch_counter' => array(
+            ],
+        ],
+		'report_fetch_counter' => [
 			'exclude' => 0,
 			'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_areasum.report_fetch_counter',
-			'config' => array(
+			'config' => [
 				'type' => 'input',
 				'size' => 4,
 				'eval' => 'int',
                 'readOnly' => true,
-			)
-		),
-		'month' => array(
+			],
+		],
+		'month' => [
 			'exclude' => 0,
 			'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_areasum.month',
-			'config' => array(
+			'config' => [
 				'type' => 'input',
 				'size' => 30,
 				'eval' => 'double2'
-			)
-		),
-		'quarter' => array(
+			],
+		],
+		'quarter' => [
 			'exclude' => 0,
 			'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_areasum.quarter',
-			'config' => array(
+			'config' => [
 				'type' => 'input',
 				'size' => 30,
 				'eval' => 'double2'
-			)
-		),
-		'year' => array(
+			],
+		],
+		'year' => [
 			'exclude' => 0,
 			'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_areasum.year',
-			'config' => array(
+			'config' => [
 				'type' => 'input',
 				'size' => 30,
 				'eval' => 'double2'
-			)
-		),
-		
-	),
-);
+			],
+		],
+	],
+];

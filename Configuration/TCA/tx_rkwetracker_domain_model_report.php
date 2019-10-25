@@ -1,6 +1,6 @@
 <?php
-return array(
-	'ctrl' => array(
+return [
+	'ctrl' => [
 		'title'	=> 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_report',
 		'label' => 'name',
 		'tstamp' => 'tstamp',
@@ -9,169 +9,169 @@ return array(
 		'dividers2tabs' => TRUE,
 
 		'delete' => 'deleted',
-		'enablecolumns' => array(
+		'enablecolumns' => [
 			'disabled' => 'hidden',
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
-		),
+		],
 		'searchFields' => 'name, description,groups,',
 		'iconfile' => 'EXT:rkw_etracker/Resources/Public/Icons/tx_rkwetracker_domain_model_report.gif'
-	),
-	'interface' => array(
+	],
+	'interface' => [
 		'showRecordFieldList' => 'hidden, name, description, link_to_api, recipient, groups, type, status, last_fetch_tstamp, last_start_tstamp, last_end_tstamp,  month, quarter, year',
-	),
-	'types' => array(
-		'1' => array('showitem' => 'hidden,--palette--;;1, name, description, link_to_api, recipient, type, status, last_start_tstamp, last_end_tstamp, last_fetch_tstamp, last_mail_tstamp, groups, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
-	),
-	'palettes' => array(
-		'1' => array('showitem' => ''),
-	),
-	'columns' => array(
+	],
+	'types' => [
+		'1' => ['showitem' => 'hidden,--palette--;;1, name, description, link_to_api, recipient, type, status, last_start_tstamp, last_end_tstamp, last_fetch_tstamp, last_mail_tstamp, groups, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'],
+	],
+	'palettes' => [
+		'1' => ['showitem' => ''],
+	],
+	'columns' => [
 
-		'hidden' => array(
+		'hidden' => [
 			'exclude' => 1,
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
-			'config' => array(
+			'config' => [
 				'type' => 'check',
-			),
-		),
-		'starttime' => array(
+			],
+		],
+		'starttime' => [
 			'exclude' => 1,
 			'l10n_mode' => 'mergeIfNotBlank',
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.starttime',
-			'config' => array(
+			'config' => [
 				'type' => 'input',
 				'size' => 13,
 				'max' => 20,
 				'eval' => 'datetime',
 				'checkbox' => 0,
 				'default' => 0,
-			),
-		),
-		'endtime' => array(
+			],
+		],
+		'endtime' => [
 			'exclude' => 1,
 			'l10n_mode' => 'mergeIfNotBlank',
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.endtime',
-			'config' => array(
+			'config' => [
 				'type' => 'input',
 				'size' => 13,
 				'max' => 20,
 				'eval' => 'datetime',
 				'checkbox' => 0,
 				'default' => 0,
-			),
-		),
-        'name' => array(
+			],
+		],
+        'name' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_report.name',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim,required'
-            ),
-        ),
-        'description' => array(
+            ],
+        ],
+        'description' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_report.description',
-            'config' => array(
+            'config' => [
                 'type' => 'text',
                 'size' => 30,
                 'eval' => 'trim',
                 'cols' => 30,
                 'rows' => 10
-            ),
-        ),
-        'recipient' => array(
+            ],
+        ],
+        'recipient' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_report.recipient',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim,required'
-            ),
-        ),
+            ],
+        ],
 
-		'groups' => array(
+		'groups' => [
 			'exclude' => 0,
 			'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_report.groups',
-			'config' => array(
+			'config' => [
 				'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
 				'foreign_table' => 'tx_rkwetracker_domain_model_reportgroup',
                 'foreign_table_where' =>  'ORDER BY tx_rkwetracker_domain_model_reportgroup.name ASC',
 				'maxitems' => 9999,
-				'appearance' => array(
+				'appearance' => [
 					'collapseAll' => 1,
 					'levelLinksPosition' => 'top',
 					'showSynchronizationLink' => 1,
 					'showPossibleLocalizationRecords' => 1,
 					'showAllLocalizationLink' => 1
-				),
-			),
+				],
+			],
 
-		),
-        'groups_fetch' => array(
+		],
+        'groups_fetch' => [
             'type' => 'passthrough'
-        ),
+        ],
 
-        'type' => array(
+        'type' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_report.type',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
                 'default' => 0,
-                'items' => array(
-                    array(
+                'items' => [
+                    [
                         'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_report.type.I.0', 0
-                    ),
-                    array(
+                    ],
+                    [
                         'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_report.type.I.1', 1
-                    ),
-                    array(
+                    ],
+                    [
                         'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_report.type.I.2', 2
-                    ),
-                ),
-            ),
-        ),
-        'status' => array(
+                    ],
+                ],
+            ],
+        ],
+        'status' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_report.status',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'size' => 1,
                 'default' => 0,
-                'items' => array(
-                    array(
+                'items' => [
+                    [
                         'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_report.status.I.0', 0
-                    ),
-                    array(
+                    ],
+                    [
                         'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_report.status.I.1', 1
-                    ),
-                    array(
+                    ],
+                    [
                         'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_report.status.I.2', 2
-                    ),
-                    array(
+                    ],
+                    [
                         'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_report.status.I.89', 89
-                    ),
-                    array(
+                    ],
+                    [
                         'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_report.status.I.99', 99
-                    ),
-                ),
-            ),
-        ),
-        'fetch_counter' => array(
+                    ],
+                ],
+            ],
+        ],
+        'fetch_counter' => [
             'type' => 'passthrough'
-        ),
+        ],
 
-        'last_fetch_tstamp' => array(
+        'last_fetch_tstamp' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_report.last_fetch_tstamp',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 13,
                 'max' => 20,
@@ -179,15 +179,15 @@ return array(
                 'checkbox' => 0,
                 'readOnly' => true,
                 'default' => 0,
-                'range' => array(
-                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
-                ),
-            ),
-        ),
-        'last_mail_tstamp' => array(
+                'range' => [
+                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y')),
+                ],
+            ],
+        ],
+        'last_mail_tstamp' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_report.last_mail_tstamp',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 13,
                 'max' => 20,
@@ -195,15 +195,15 @@ return array(
                 'checkbox' => 0,
                 'readOnly' => true,
                 'default' => 0,
-                'range' => array(
-                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
-                ),
-            ),
-        ),
-        'last_start_tstamp' => array(
+                'range' => [
+                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y')),
+                ],
+            ],
+        ],
+        'last_start_tstamp' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_report.last_start_tstamp',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 13,
                 'max' => 20,
@@ -211,15 +211,15 @@ return array(
                 'readOnly' => true,
                 'checkbox' => 0,
                 'default' => 0,
-                'range' => array(
-                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
-                ),
-            ),
-        ),
-        'last_end_tstamp' => array(
+                'range' => [
+                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y')),
+                ],
+            ],
+        ],
+        'last_end_tstamp' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_report.last_end_tstamp',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 13,
                 'max' => 20,
@@ -227,57 +227,56 @@ return array(
                 'readOnly' => true,
                 'checkbox' => 0,
                 'default' => 0,
-                'range' => array(
-                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
-                ),
-            ),
-        ),
-        'month' => array(
+                'range' => [
+                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y')),
+                ],
+            ],
+        ],
+        'month' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_report.month',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 13,
                 'max' => 20,
                 'eval' => 'int',
                 'readOnly' => true,
-            ),
-        ),
-        'quarter' => array(
+            ],
+        ],
+        'quarter' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_report.quarter',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 13,
                 'max' => 20,
                 'eval' => 'int',
                 'readOnly' => true,
-            ),
-        ),
-        'year' => array(
+            ],
+        ],
+        'year' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_report.year',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 13,
                 'max' => 20,
                 'eval' => 'int',
                 'readOnly' => true,
-            ),
-        ),
-        'link_to_api' => array(
+            ],
+        ],
+        'link_to_api' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_report.link_to_api',
-            'config' => array(
+            'config' => [
                 'type' => 'check',
                 'default' => 1,
-                'items' => array(
-                    '1' => array(
+                'items' => [
+                    '1' => [
                         '0' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_report.link_to_api.I.enable'
-                    )
-                )
-            ),
-        ),
-
-    ),
-);
+                    ],
+                ],
+            ],
+        ],
+    ],
+];
