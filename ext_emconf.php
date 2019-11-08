@@ -10,9 +10,9 @@
  * "version" and "dependencies" must not be touched!
  ***************************************************************/
 
-$EM_CONF[$_EXTKEY] = array(
+$EM_CONF[$_EXTKEY] = [
 	'title' => 'RKW eTracker',
-	'description' => 'Extension for reportings based on eTracker (see https://etracker.de)',
+	'description' => 'Extension for reportings based on eTracker (see https://etracker.de]',
 	'category' => 'plugin',
 	'author' => 'Steffen Kroggel',
 	'author_email' => 'developer@steffenkroggel,de',
@@ -22,17 +22,15 @@ $EM_CONF[$_EXTKEY] = array(
 	'createDirs' => '',
 	'clearCacheOnLoad' => 0,
 	'version' => '8.7.5',
-	'constraints' => array(
-		'depends' => array(
-            'extbase' => '7.6.0-8.7.99',
-            'fluid' => '7.6.0-8.7.99',
+	'constraints' => [
+		'depends' => [
             'typo3' => '7.6.0-8.7.99',
             'rkw_basics' => '8.7.0-8.7.99',
             'rkw_mailer' => '8.7.0-8.7.99',
-		),
-		'conflicts' => array(
-		),
-		'suggests' => array(
-		),
-	),
-);
+		],
+		'conflicts' => [
+		],
+		'suggests' => [
+		],
+	],
+];
