@@ -6,7 +6,7 @@ return [
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',
-		'dividers2tabs' => TRUE,
+		'dividers2tabs' => true,
         'default_sortby' => 'name',
 
 		'delete' => 'deleted',

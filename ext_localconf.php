@@ -40,7 +40,9 @@ call_user_func(
         //=================================================================
         // Add rootline fields
         //=================================================================
-        $GLOBALS['TYPO3_CONF_VARS']['FE']['addRootLineFields'] .= ',tx_rkwetracker_category_level1,tx_rkwetracker_category_level2,tx_rkwetracker_category_level3,tx_rkwetracker_category_level4,tx_rkwetracker_category_level5';
+        $rootlineFields = &$GLOBALS['TYPO3_CONF_VARS']['FE']['addRootLineFields'];
+        $newRootlineFields = 'tx_rkwetracker_category_level1,tx_rkwetracker_category_level2,tx_rkwetracker_category_level3,tx_rkwetracker_category_level4,tx_rkwetracker_category_level5';
+        $rootlineFields .= (empty($rootlineFields))? $newRootlineFields : ',' . $newRootlineFields;
 
         //=================================================================
         // Configure Logger
