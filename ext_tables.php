@@ -1,20 +1,35 @@
 <?php
-if (!defined('TYPO3_MODE')) {
-	die('Access denied.');
-}
+defined('TYPO3_MODE') || die('Access denied.');
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'RKW eTracker');
+call_user_func(
+    function($extKey)
+    {
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    $_EXTKEY,
-    'Pi1',
-    'RKW eTracker Tracklet'
+        //=================================================================
+        // Register Plugins
+        //=================================================================
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+            $extKey,
+            'Pi1',
+            'RKW eTracker Tracklet'
+        );
+
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+            $extKey,
+            'Pi2',
+            'RKW eTracker Redirect'
+        );
+
+
+        //=================================================================
+        // Add TypoScript
+        //=================================================================
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
+            $extKey,
+            'Configuration/TypoScript',
+            'RKW eTracker'
+        );
+
+    },
+    $_EXTKEY
 );
-
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    $_EXTKEY,
-    'Pi2',
-    'RKW eTracker Redirect'
-);
-
-

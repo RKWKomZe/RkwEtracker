@@ -1,6 +1,6 @@
 <?php
-return array(
-	'ctrl' => array(
+return [
+	'ctrl' => [
 		'title'	=> 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_reportfilter',
 		'label' => 'uid',
         'label_userFunc' => 'RKW\RkwEtracker\Hook\FilterSelector->getCombinedFilterLabels',
@@ -9,232 +9,241 @@ return array(
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',
-		'dividers2tabs' => TRUE,
+		'dividers2tabs' => true,
 		// 'sortby' => 'sorting',
         'hideTable' => true,
         'requestUpdate' => 'domain_free, category_free_level1, category_free_level2, category_free_level3, category_free_level4, category_free_level5',
 
 		'delete' => 'deleted',
-		'enablecolumns' => array(
+		'enablecolumns' => [
 
-		),
+		],
 		'searchFields' => 'domain, domain_free, domain_required, category_level1, category_level2, category_level3, category_level4, category_level5, category_free_level1, category_free_level2, category_free_level3, category_free_level4, category_free_level5, download_filter1, download_filter2, download_filter3, download_free_filter1',
-		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('rkw_etracker') . 'Resources/Public/Icons/tx_rkwetracker_domain_model_reportfilter.gif'
-	),
-	'interface' => array(
+		'iconfile' => 'EXT:rkw_etracker/Resources/Public/Icons/tx_rkwetracker_domain_model_reportfilter.gif'
+	],
+	'interface' => [
         'showRecordFieldList' => 'domain, domain_free, category_level1, category_level2, category_level3, category_level4, category_level5, category_free_level1, category_free_level2, category_free_level3, category_free_level4, category_free_level5, download_filter1, download_filter2, download_filter3, download_free_filter1',
 
-    ),
-	'types' => array(
-        '1' => array('showitem' => 'domain, domain_free, --div--;LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tab.categories, category_level1, category_free_level1, category_level2, category_free_level2, category_level3, category_free_level3, category_level4, category_free_level4, category_level5, category_free_level5, --div--;LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tab.download, download_free_filter1, download_filter1, download_filter2, download_filter3'),
-    ),
-	'palettes' => array(
-		'1' => array('showitem' => ''),
-	),
-	'columns' => array(
+    ],
+	'types' => [
+        '1' => ['showitem' => 'domain, domain_free, --div--;LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tab.categories, category_level1, category_free_level1, category_level2, category_free_level2, category_level3, category_free_level3, category_level4, category_free_level4, category_level5, category_free_level5, --div--;LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tab.download, download_free_filter1, download_filter1, download_filter2, download_filter3'],
+    ],
+	'palettes' => [
+		'1' => ['showitem' => ''],
+	],
+	'columns' => [
 
-        'domain' => array(
+        'domain' => [
             'displayCond' =>  'FIELD:domain_free:REQ:false',
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_reportfilter.domain',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
-                'items' => array (
-                    array('-', 0),
-                ),
+                'renderType' => 'selectSingle',
+                'items' => [
+                    ['-', 0],
+                ],
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
                 'default' => 0,
                 'itemsProcFunc' => 'RKW\RkwEtracker\Hook\FilterSelector->getDomainLabels',
-            ),
-        ),
-        'domain_free' => array(
+            ],
+        ],
+        'domain_free' => [
             'displayCond' =>  'FIELD:domain:REQ:0',
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_reportfilter.domain_free',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim'
-            ),
-        ),
-		'category_level1' => array(
+            ],
+        ],
+		'category_level1' => [
             'displayCond' =>  'FIELD:category_free_level1:REQ:false',
             'exclude' => 0,
 			'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_reportfilter.category_level1',
-			'config' => array(
+			'config' => [
                 'type' => 'select',
-                'items' => array (
-                    array('-', 0),
-                ),
+                'renderType' => 'selectSingle',
+                'items' => [
+                    ['-', 0],
+                ],
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
                 'default' => 0,
                 'itemsProcFunc' => 'RKW\RkwEtracker\Hook\FilterSelector->getCategoryLabelsLevel1',
-			),
-		),
-        'category_level2' => array(
+			],
+		],
+        'category_level2' => [
             'displayCond' =>  'FIELD:category_free_level2:REQ:false',
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_reportfilter.category_level2',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
-                'items' => array (
-                    array('-', 0),
-                ),
+                'renderType' => 'selectSingle',
+                'items' => [
+                    ['-', 0],
+                ],
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
                 'itemsProcFunc' => 'RKW\RkwEtracker\Hook\FilterSelector->getCategoryLabelsLevel2',
-            ),
-        ),
-        'category_level3' => array(
+            ],
+        ],
+        'category_level3' => [
             'displayCond' =>  'FIELD:category_free_level3:REQ:false',
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_reportfilter.category_level3',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
-                'items' => array (
-                    array('-', 0),
-                ),
+                'renderType' => 'selectSingle',
+                'items' => [
+                    ['-', 0],
+                ],
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
                 'itemsProcFunc' => 'RKW\RkwEtracker\Hook\FilterSelector->getCategoryLabelsLevel3',
-            ),
-        ),
-        'category_level4' => array(
+            ],
+        ],
+        'category_level4' => [
             'displayCond' =>  'FIELD:category_free_level4:REQ:false',
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_reportfilter.category_level4',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
-                'items' => array (
-                    array('-', 0),
-                ),
+                'renderType' => 'selectSingle',
+                'items' => [
+                    ['-', 0],
+                ],
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
                 'itemsProcFunc' => 'RKW\RkwEtracker\Hook\FilterSelector->getCategoryLabelsLevel4',
-            ),
-        ),
-        'category_level5' => array(
+            ],
+        ],
+        'category_level5' => [
             'displayCond' =>  'FIELD:category_free_level5:REQ:false',
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_reportfilter.category_level5',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
-                'items' => array (
-                    array('-', 0),
-                ),
+                'renderType' => 'selectSingle',
+                'items' => [
+                    ['-', 0],
+                ],
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
                 'itemsProcFunc' => 'RKW\RkwEtracker\Hook\FilterSelector->getCategoryLabelsLevel5',
-            ),
-        ),
-        'category_free_level1' => array(
+            ],
+        ],
+        'category_free_level1' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_reportfilter.category_free_level1',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim'
-            ),
-        ),
-        'category_free_level2' => array(
+            ],
+        ],
+        'category_free_level2' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_reportfilter.category_free_level2',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim'
-            ),
-        ),
-        'category_free_level3' => array(
+            ],
+        ],
+        'category_free_level3' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_reportfilter.category_free_level3',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim'
-            ),
-        ),
-        'category_free_level4' => array(
+            ],
+        ],
+        'category_free_level4' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_reportfilter.category_free_level4',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim'
-            ),
-        ),
-        'category_free_level5' => array(
+            ],
+        ],
+        'category_free_level5' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_reportfilter.category_free_level5',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim'
-            ),
-        ),        
-        'download_filter1' => array(
+            ],
+        ],
+        'download_filter1' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_reportfilter.download_filter1',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
-                'items' => array (
-                    array('-', 0),
-                ),
+                'renderType' => 'selectSingle',
+                'items' => [
+                    ['-', 0],
+                ],
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
                 'itemsProcFunc' => 'RKW\RkwEtracker\Hook\FilterSelector->getDownloadLabels',
-            ),
-        ),
-        'download_filter2' => array(
+            ],
+        ],
+        'download_filter2' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_reportfilter.download_filter2',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
-                'items' => array (
-                    array('-', 0),
-                ),
+                'renderType' => 'selectSingle',
+                'items' => [
+                    ['-', 0],
+                ],
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
                 'itemsProcFunc' => 'RKW\RkwEtracker\Hook\FilterSelector->getDownloadLabels',
-            ),
-        ),
-        'download_filter3' => array(
+            ],
+        ],
+        'download_filter3' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_reportfilter.download_filter3',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
-                'items' => array (
-                    array('-', 0),
-                ),
+                'renderType' => 'selectSingle',
+                'items' => [
+                    ['-', 0],
+                ],
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
                 'itemsProcFunc' => 'RKW\RkwEtracker\Hook\FilterSelector->getDownloadLabels',
-            ),
-        ),
-        'download_free_filter1' => array(
+            ],
+        ],
+        'download_free_filter1' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_reportfilter.download_free_filter1',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim'
-            ),
-        ),
-        'reportgroup' => array(
-			'config' => array(
+            ],
+        ],
+        'reportgroup' => [
+			'config' => [
 				'type' => 'passthrough',
-			),
-		),
-	),
-);
+			],
+		],
+	],
+];
