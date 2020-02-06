@@ -20,6 +20,11 @@ call_user_func(
             'RKW eTracker Redirect'
         );
 
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+            $extKey,
+            'Pi3',
+            'RKW eTracker OptOut'
+        );
 
         //=================================================================
         // Add TypoScript
