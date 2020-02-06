@@ -11,25 +11,35 @@ call_user_func(
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
             'RKW.' . $extKey,
             'Pi1',
-            array(
-                'Code' => 'show',
-            ),
+            [
+                'Code' => 'show'
+            ],
             // non-cacheable actions
-            array(
+           [
                 'Code' => 'show',
-            )
+           ]
         );
 
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
             'RKW.' . $extKey,
             'Pi2',
-            array(
+            [
                 'Redirect' => 'redirect',
-            ),
+            ],
             // non-cacheable actions
-            array(
+            [
                 'Redirect' => 'redirect',
-            )
+            ]
+        );
+
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'RKW.' . $extKey,
+            'Pi3',
+            [
+                'Code' => 'optOut'
+            ],
+            // non-cacheable actions
+            []
         );
 
         //=================================================================

@@ -35,8 +35,27 @@ class CodeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     public function showAction()
     {
-
+        $this->view->assignMultiple(
+            [
+                'blockCookies' => $this->settings['blockCookiesOnPageLoad'] ? 'true' : 'false',
+                'domain' => getenv('HTTP_HOST')
+            ]
+        );
     }
 
+
+    /**
+     * action optOut
+     * shows the eTracker privacy notice with opt-out
+     *
+     * @return void
+     */
+    public function optOutAction()
+    {
+
+        $this->view->assign(
+            'domain', getenv('HTTP_HOST')
+        );
+    }
 
 }
