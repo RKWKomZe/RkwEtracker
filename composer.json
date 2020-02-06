@@ -20,7 +20,8 @@
         "php": ">=5.6",
         "typo3/cms-core": "~7.6.0 || ~8.7.0",
         "rkw/rkw-basics": "~8.7.0",
-        "rkw/rkw-mailer": "~8.7.0"
+        "rkw/rkw-mailer": "~8.7.0",
+        "jeremykendall/php-domain-parser": "*"
     },
     "autoload": {
         "psr-4": {
