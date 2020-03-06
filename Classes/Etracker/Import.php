@@ -48,61 +48,21 @@ class Import
 
 
     /**
-     * @var resource A stream context resource
-     */
-    protected $streamContext;
-
-    /**
      * Construct
      * Builds streamContext for API authentification
      *
      * @throws \RKW\RkwEtracker\Exception
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
     public function __construct()
     {
-
         $this->getSettings();
-        if (
-            ($this->configuration['apiEmail'])
-            && (\TYPO3\CMS\Core\Utility\GeneralUtility::validEmail($this->configuration['apiEmail']))
-            && ($this->configuration['apiToken'])
-            && ($this->configuration['apiAccountId'])
-            && ($this->configuration['apiPassword'])
-        ) {
 
-            // login header for etracker
-            $opts = array(
-                'http' => array(
-                    'method' => 'GET',
-                    'header' =>
-                        'X-ET-email: ' . $this->configuration['apiEmail'] . "\r\n" .
-                        'X-ET-developerToken: ' . $this->configuration['apiToken'] . "\r\n" .
-                        'X-ET-accountId: ' . $this->configuration['apiAccountId'] . "\r\n" .
-                        'X-ET-password: ' . $this->configuration['apiPassword'] . "\r\n",
-                ),
-            );
-
-            // optional: proxy configuration
-            if ($this->configuration['proxy']) {
-
-                $optsProxy = array(
-                    'http' => array(
-                        'proxy'           => $this->configuration['proxy'],
-                        'request_fulluri' => true,
-                    ),
-                );
-
-                if ($this->configuration['proxyUsername']) {
-                    $auth = base64_encode($this->configuration['proxyUsername'] . ':' . $this->configuration['proxyPassword']);
-                    $optsProxy['http']['header'] = 'Proxy-Authorization: Basic ' . $auth;
-                }
-                $opts = array_merge_recursive($opts, $optsProxy);
-            }
-            $this->streamContext = stream_context_create($opts);
-
-        } else {
-            throw new \RKW\RkwEtracker\Exception('Configuration for API-Login incomplete.', 1489562529);
-            //===
+        if (!extension_loaded('curl')) {
+            throw new \RKW\RkwEtracker\Exception('The cURL PHP Extension is required by rkw_etracker.');
+        }
+        if (!extension_loaded('json')) {
+            throw new \RKW\RkwEtracker\Exception('The JSON PHP Extension is required by rkw_etracker.');
         }
     }
 
@@ -139,8 +99,8 @@ class Import
                 //===
             }
 
-            //===================
-            // quarterly reports
+        //===================
+        // quarterly reports
         } elseif ($report->getType() == 1) {
 
             // define quarters
@@ -183,8 +143,8 @@ class Import
             }
 
 
-            //===================
-            // monthly reports
+        //===================
+        // monthly reports
         } else {
             if ($report->getType() == 2) {
 
@@ -217,7 +177,6 @@ class Import
         $report->setStatus(89);
 
         return true;
-        //===
     }
 
 
@@ -244,7 +203,7 @@ class Import
             $paramsArray = $this->getDateParams($report);
             $params = array(
                 'attributes=area_level_1',
-                'figures=unique_visits,unique_visitors,page_impressions,bounces_per_visit,staytime_per_unique_visits',
+                'figures=unique_visits,unique_visitors,page_impressions,bounces_per_visit,staytime_per_unique_visits_v2',
                 'displayType=grouped',
                 'startDate=' . $paramsArray['startDate'],
                 'endDate=' . $paramsArray['endDate'],
@@ -307,10 +266,8 @@ class Import
 
                 // get data from API
                 $completeUrl = $this::ApiUrl . 'report/EAArea/data?' . implode('&', array_merge($params)) . '&attributeFilter=' . urlencode('[' . implode(',', $categoryFilter) . ']');
-                $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::DEBUG, sprintf('Request to eTracker API with following params: %s', $completeUrl));
                 if (
-                    ($jsonData = file_get_contents($completeUrl, false, $this->streamContext))
-                    && ($rawData = json_decode($jsonData))
+                    ($rawData = $this->getJsonData($completeUrl))
                     && (is_array($rawData))
                 ) {
                     $this->mappingAreaData($rawData, $areaData);
@@ -324,7 +281,6 @@ class Import
 
         } catch (\Exception $e) {
             throw new \RKW\RkwEtracker\Exception(sprintf('Error while trying to fetch area data for reportGroup "%s" (id=%s) from API: %s.', $reportGroup->getName(), $reportGroup->getUid(), $e->getMessage()), 1489562530);
-            //===
         }
     }
 
@@ -421,10 +377,8 @@ class Import
 
                     // get data from API
                     $completeUrl = $this::ApiUrl . 'report/EAEvents/data?' . implode('&', array_merge($params)) . '&attributeFilter=' . urlencode('[' . implode(',', $categoryFilter) . ']');
-                    $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::DEBUG, sprintf('Request to eTracker API with following params: %s', $completeUrl));
                     if (
-                        ($jsonData = file_get_contents($completeUrl, false, $this->streamContext))
-                        && ($rawData = json_decode($jsonData))
+                        ($rawData = $this->getJsonData($completeUrl))
                         && (is_array($rawData))
                     ) {
 
@@ -462,14 +416,97 @@ class Import
                         $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Received no download data for reportGroup "%s" (id=%s) with filter "%s" (id=%s) from eTracker API.', $reportGroup->getName(), $reportGroup->getUid(), $categoryFilterString, $reportFilter->getUid()));
                     }
                 }
-
-
             }
 
         } catch (\Exception $e) {
             throw new \RKW\RkwEtracker\Exception(sprintf('Error while trying to fetch download data for reportGroup "%s" (id=%s) from API: %s.', $reportGroup->getName(), $reportGroup->getUid(), $e->getMessage()), 1489562530);
-            //===
         }
+    }
+
+
+    /**
+     * Get the JSON data
+     *
+     * @param string $url
+     * @return array|null
+     * @throws \RKW\RkwEtracker\Exception
+     */
+    protected function getJsonData ($url)
+    {
+
+        $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::DEBUG, sprintf ('API-Request: %s',  $url));
+        if (
+            ($this->configuration['apiEmail'])
+            && (\TYPO3\CMS\Core\Utility\GeneralUtility::validEmail($this->configuration['apiEmail']))
+            && ($this->configuration['apiToken'])
+            && ($this->configuration['apiAccountId'])
+            && ($this->configuration['apiPassword'])
+        ) {
+
+
+            // init curl
+            $curlHandle = curl_init();
+            curl_setopt($curlHandle , CURLOPT_RETURNTRANSFER, true); // Do not output result directly on screen.
+            curl_setopt($curlHandle, CURLOPT_FOLLOWLOCATION, true);  // If url has redirects then go to the final redirected URL.
+            curl_setopt($curlHandle, CURLOPT_HEADER, false);   // If you want header information of response
+
+            // login header for etracker
+            $headers = [
+                'X-ET-email: ' . $this->configuration['apiEmail'],
+                'X-ET-developerToken: ' . $this->configuration['apiToken'],
+                'X-ET-accountId: ' . $this->configuration['apiAccountId'],
+                'X-ET-password: ' . $this->configuration['apiPassword'],
+            ];
+            curl_setopt($curlHandle, CURLOPT_HTTPHEADER, $headers);
+
+
+            // optional: proxy configuration
+            if ($this->configuration['proxy']) {
+
+                curl_setopt($curlHandle, CURLOPT_PROXY, $this->configuration['proxy']);
+                if ($this->configuration['proxyUsername']) {
+                    curl_setopt($curlHandle, CURLOPT_PROXYUSERPWD, $this->configuration['proxyUsername'] . ':' . $this->configuration['proxyPassword']);
+                }
+            }
+
+            // set url and get data
+            curl_setopt($curlHandle, CURLOPT_URL, $url);
+
+            $requestResult = curl_exec($curlHandle);
+            $connectCode = curl_getinfo($curlHandle, CURLINFO_HTTP_CONNECTCODE);
+            curl_close($curlHandle);
+
+            // check result and HTTP-status code
+            if (
+                ($requestResult)
+                && (200 == $connectCode)
+            ){
+
+                // check if there is some data
+                if ($jsonData = json_decode($requestResult)) {
+
+                    if (
+                        ($jsonData->errorCode)
+                        && (($jsonData->msg))
+                    ) {
+                        $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::ERROR, sprintf('Error code %s while trying to receive data from eTracker API: %s.', $jsonData->errorCode, $jsonData->msg));
+                        throw new \RKW\RkwEtracker\Exception($jsonData->msg, 1583494777);
+                    }
+
+                    $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::DEBUG, sprintf ('API-Result: %s',  str_replace("\n", '', print_r($requestResult, true))));
+                    return $jsonData;
+                }
+
+            } else {
+                throw new \RKW\RkwEtracker\Exception('Got no valid response from API. HTTP-Status-Code: ' . $connectCode, 1583494777);
+            }
+
+        } else {
+            throw new \RKW\RkwEtracker\Exception('Configuration for API-Login incomplete.', 1489562529);
+        }
+
+        return null;
+
     }
 
 
@@ -582,8 +619,8 @@ class Import
                 'endDate'   => ($currentTime['year'] - 1) . '-12-31',
             );
 
-            //===================
-            // quarterly reports
+        //===================
+        // quarterly reports
         } elseif ($report->getType() == 1) {
 
             // define quarters
@@ -640,8 +677,8 @@ class Import
                 'endDate'   => $quartersStartEnd[$quarter]['endDate'],
             );
 
-            //===================
-            // monthly reports
+        //===================
+        // monthly reports
         } else {
             if ($report->getType() == 2) {
 
@@ -677,7 +714,6 @@ class Import
         $report->setLastEndTstamp(strtotime($returnValues['endDate']));
 
         return $returnValues;
-        //===
     }
 
 
@@ -686,6 +722,7 @@ class Import
      *
      * @param string $which
      * @return void
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
     protected function getSettings($which = ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS)
     {
@@ -693,7 +730,6 @@ class Import
         if (!$this->configuration) {
             $this->configuration = Common::getTyposcriptConfiguration('Rkwetracker', $which);
         }
-
     }
 
 
@@ -710,6 +746,5 @@ class Import
         }
 
         return $this->logger;
-        //===
     }
 }
