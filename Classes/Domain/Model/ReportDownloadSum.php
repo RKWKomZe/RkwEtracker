@@ -44,9 +44,9 @@ class ReportDownloadSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * uniqueEvents
      *
-     * @var string
+     * @var int
      */
-    protected $uniqueEvents = '';
+    protected $uniqueEvents = 0;
 
     /**
      * report
