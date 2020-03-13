@@ -4,7 +4,7 @@ namespace RKW\RkwEtracker\ViewHelpers\Link;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
-use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use RKW\RkwEtracker\Utility\TypolinkUtility;
 
 /*
@@ -33,8 +33,10 @@ class TypolinkViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Link\TypolinkViewH
 
 
     /**
+     * Render
+     *
      * @param array $arguments
-     * @param callable $renderChildrenClosure
+     * @param \Closure $renderChildrenClosure
      * @param RenderingContextInterface $renderingContext
      * @return mixed|string
      * @throws \InvalidArgumentException

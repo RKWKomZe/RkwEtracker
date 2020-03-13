@@ -6,6 +6,9 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use RKW\RkwEtracker\Helpers\CategoryHelper;
+use TYPO3\CMS\Core\LinkHandling\LinkService;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
+
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -48,66 +51,92 @@ class TypolinkUtility extends \TYPO3\CMS\Frontend\ContentObject\ContentObjectRen
     public function getDataAttributes($typolink, $linkType = '')
     {
 
-        // if no link type is given we have to detect it on our own
-        if (! $linkType) {
-
-            // detect link type based on core method
-            $linkType = $this->detectLinkTypeFromLinkParameter($typolink);
-
-            /**
-             * in case the FAL is used, we need a separate handling
-             * @see \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer->resolveMixedLinkParameter
-             */
-            if (
-                (strpos($typolink, 'file:') !== false)
-                && (strpos($typolink, 'file://') == false)
-            ) {
-                $linkType = 'file';
-            }
-        }
-
+        // determine version
+        $currentVersion = VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version);
 
         // define dataTags array
-        $dataTags = [
-            'data-etracker-action' => ($linkType ? $linkType : 'Default'),
-            'data-etracker-category' => GeneralUtility::getIndpEnv('TYPO3_HOST_ONLY')
-        ];
+        $fileLinkType = 'file';
+        if ($currentVersion >= 8000000) {
+            $fileLinkType = LinkService::TYPE_FILE;
+        }
 
+        try {
 
-        // only do this on files!
-        if ($linkType == 'file') {
+            // if no link type is given, we need to detect it
+            if (! $linkType) {
 
-            /** @var \TYPO3\CMS\Core\Resource\File $file */
-            if ($file = $this->getFileObject($typolink)) {
+                 // For TYPO3 >= 8.0
+                if ($currentVersion >= 8000000) {
 
-                // add filename
-                $dataTags['data-etracker-object'] = $file->getName();
+                    // Detecting kind of link and resolve all necessary parameters
+                    /** @var \TYPO3\CMS\Core\LinkHandling\LinkService $linkService*/
+                    $linkService = GeneralUtility::makeInstance(LinkService::class);
+                    $linkDetails = $linkService->resolve($typolink);
+                    $linkType = $linkDetails['type'];
 
-                // check for project-extension and get project data
-                if (ExtensionManagementUtility::isLoaded('rkw_projects')) {
+                // For TYPO3 < 8.0
+                } else {
 
-                    if ($projectId = $file->getProperty('tx_rkwprojects_project_uid')) {
+                    // detect link type based on core method
+                    $linkType = $this->detectLinkTypeFromLinkParameter($typolink);
 
-                        /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
-                        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+                    /**
+                     * in case the FAL is used, we need a separate handling
+                     * @see \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer->resolveMixedLinkParameter
+                     */
+                    if (
+                        (strpos($typolink, 'file:') !== false)
+                        && (strpos($typolink, 'file://') == false)
+                    ) {
+                        $linkType = 'file';
+                    }
+                }
+            }
 
-                        /** @var \RKW\RkwProjects\Domain\Repository\ProjectsRepository $projectsRepository */
-                        $projectsRepository = $objectManager->get(\RKW\RkwProjects\Domain\Repository\ProjectsRepository::class);
+            // set defaults
+            $dataTags = [
+                'data-etracker-action' => ($linkType ? $linkType : 'Default'),
+                'data-etracker-category' => GeneralUtility::getIndpEnv('TYPO3_HOST_ONLY')
+            ];
 
-                        /** @var \RKW\RkwProjects\Domain\Model\Projects $project */
-                        if ($project = $projectsRepository->findByIdentifier($projectId)) {
+            // only do this on files!
+            if ($linkType == $fileLinkType) {
 
-                            // add project name to category
-                            $projectName = ($project->getInternalName() ? $project->getInternalName() : ($project->getShortName() ? $project->getShortName() : $project->getName()));
-                            $dataTags['data-etracker-category'] .= '/' . CategoryHelper::cleanUp($projectName);
+                /** @var \TYPO3\CMS\Core\Resource\File $file */
+                if ($file = $this->getFileObject($typolink)) {
+
+                    // add filename
+                    $dataTags['data-etracker-object'] = $file->getName();
+
+                    // check for project-extension and get project data
+                    if (ExtensionManagementUtility::isLoaded('rkw_projects')) {
+
+                        if ($projectId = $file->getProperty('tx_rkwprojects_project_uid')) {
+
+                            /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
+                            $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+
+                            /** @var \RKW\RkwProjects\Domain\Repository\ProjectsRepository $projectsRepository */
+                            $projectsRepository = $objectManager->get(\RKW\RkwProjects\Domain\Repository\ProjectsRepository::class);
+
+                            /** @var \RKW\RkwProjects\Domain\Model\Projects $project */
+                            if ($project = $projectsRepository->findByIdentifier($projectId)) {
+
+                                // add project name to category
+                                $projectName = ($project->getInternalName() ? $project->getInternalName() : ($project->getShortName() ? $project->getShortName() : $project->getName()));
+                                $dataTags['data-etracker-category'] .= '/' . CategoryHelper::cleanUp($projectName);
+                            }
                         }
                     }
                 }
             }
+
+            $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::DEBUG, sprintf('Resulting data-attributes of typolink "%s": %s.', $typolink, str_replace("\n", '', print_r($dataTags, true))));
+
+        } catch (\Exception $e) {
+            $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::ERROR, $e->getMessage());
         }
 
-
-        $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::DEBUG, sprintf('Resulting data-attributes of typolink "%s": %s.', $typolink, str_replace("\n", '', print_r($dataTags, true))));
         return $dataTags;
     }
 
