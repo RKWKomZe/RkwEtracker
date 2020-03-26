@@ -2,6 +2,7 @@
 
 namespace RKW\RkwEtracker\ViewHelpers\Link;
 
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
@@ -20,43 +21,94 @@ use RKW\RkwEtracker\Utility\TypolinkUtility;
  * The TYPO3 project - inspiring people to share!
  */
 
-/**
- * Class AndNotViewHelper
- *
- * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
- * @package RKW_RkwEtracker
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- */
-class TypolinkViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Link\TypolinkViewHelper
-{
+$currentVersion = VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version);
+if ($currentVersion <= 7000000) {
+
+    /**
+     * Class TypolinkViewHelper
+     *
+     * @author Steffen Kroggel <developer@steffenkroggel.de>
+     * @copyright Rkw Kompetenzzentrum
+     * @package RKW_RkwEtracker
+     * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+     */
+    class TypolinkViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Link\TypolinkViewHelper
+    {
+
+        /**
+         * Render
+         *
+         * @param array $arguments
+         * @param \Closure $renderChildrenClosure
+         * @param \TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface $renderingContext
+         * @return mixed|string
+         * @throws \InvalidArgumentException
+         * @throws \UnexpectedValueException
+         */
+        public static function renderStatic(
+            array $arguments,
+            \Closure $renderChildrenClosure,
+            \TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface $renderingContext
+        ){
+
+            /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
+            $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+
+            /** @var \RKW\RkwEtracker\Utility\TypolinkUtility $typolinkUtility */
+            $typolinkUtility = $objectManager->get(TypolinkUtility::class);
+
+            // get data attributes for given handle
+            $dataAttributes = $typolinkUtility->getDataAttributes($arguments['parameter']);
+            $arguments['additionalAttributes'] = array_merge($arguments['additionalAttributes'], $dataAttributes);
+
+            return parent::renderStatic($arguments, $renderChildrenClosure, $renderingContext);
+
+        }
+    }
+
+} else {
 
 
     /**
-     * Render
+     * Class TypolinkViewHelper
      *
-     * @param array $arguments
-     * @param \Closure $renderChildrenClosure
-     * @param RenderingContextInterface $renderingContext
-     * @return mixed|string
-     * @throws \InvalidArgumentException
-     * @throws \UnexpectedValueException
+     * @author Steffen Kroggel <developer@steffenkroggel.de>
+     * @copyright Rkw Kompetenzzentrum
+     * @package RKW_RkwEtracker
+     * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
      */
-    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext)
+    class TypolinkViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Link\TypolinkViewHelper
     {
 
-        /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
-        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+        /**
+         * Render
+         *
+         * @param array $arguments
+         * @param \Closure $renderChildrenClosure
+         * @param RenderingContextInterface $renderingContext
+         * @return mixed|string
+         * @throws \InvalidArgumentException
+         * @throws \UnexpectedValueException
+         */
+        public static function renderStatic(
+            array $arguments,
+            \Closure $renderChildrenClosure,
+            RenderingContextInterface $renderingContext
+        ) {
 
-        /** @var \RKW\RkwEtracker\Utility\TypolinkUtility $typolinkUtility */
-        $typolinkUtility = $objectManager->get(TypolinkUtility::class);
+            /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
+            $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
 
-        // get data attributes for given handle
-        $dataAttributes = $typolinkUtility->getDataAttributes($arguments['parameter']);
-        $arguments['additionalAttributes'] = array_merge($arguments['additionalAttributes'], $dataAttributes);
+            /** @var \RKW\RkwEtracker\Utility\TypolinkUtility $typolinkUtility */
+            $typolinkUtility = $objectManager->get(TypolinkUtility::class);
 
-        return parent::renderStatic($arguments, $renderChildrenClosure, $renderingContext);
+            // get data attributes for given handle
+            $dataAttributes = $typolinkUtility->getDataAttributes($arguments['parameter']);
+            $arguments['additionalAttributes'] = array_merge($arguments['additionalAttributes'], $dataAttributes);
 
+            return parent::renderStatic($arguments, $renderChildrenClosure, $renderingContext);
+        }
     }
 
 }
+
