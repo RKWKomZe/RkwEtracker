@@ -40,7 +40,7 @@ if ($currentVersion <= 7000000) {
          *
          * @param array $arguments
          * @param \Closure $renderChildrenClosure
-         * @param RenderingContextInterface $renderingContext
+         * @param \TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface $renderingContext
          * @return mixed|string
          * @throws \InvalidArgumentException
          * @throws \UnexpectedValueException
