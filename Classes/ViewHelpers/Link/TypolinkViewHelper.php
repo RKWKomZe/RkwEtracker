@@ -2,12 +2,6 @@
 
 namespace RKW\RkwEtracker\ViewHelpers\Link;
 
-use TYPO3\CMS\Core\Utility\VersionNumberUtility;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
-use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
-use RKW\RkwEtracker\Utility\TypolinkUtility;
-
 /*
  * This file is part of the TYPO3 CMS project.
  *
@@ -21,8 +15,14 @@ use RKW\RkwEtracker\Utility\TypolinkUtility;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+use RKW\RkwEtracker\Utility\TypolinkUtility;
+
 $currentVersion = VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version);
-if ($currentVersion <= 7000000) {
+if ($currentVersion < 8000000) {
 
     /**
      * Class TypolinkViewHelper
