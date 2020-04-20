@@ -479,7 +479,10 @@ class Import
             // check result and HTTP-status code
             if (
                 ($requestResult)
-                && (200 == $connectCode)
+                && (
+                    (false == $connectCode)
+                    || (200 == $connectCode)
+                )
             ){
 
                 // check if there is some data
