@@ -31,6 +31,7 @@ if ($currentVersion < 8000000) {
      * @copyright Rkw Kompetenzzentrum
      * @package RKW_RkwEtracker
      * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+     * @deprecated
      */
     class TypolinkViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Link\TypolinkViewHelper
     {
