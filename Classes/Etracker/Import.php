@@ -733,6 +733,7 @@ class Import
         if (!$this->configuration) {
             $this->configuration = Common::getTyposcriptConfiguration('Rkwetracker', $which);
         }
+
     }
 
 
