@@ -41,6 +41,7 @@ plugin.tx_rkwetracker {
 
         secureCode = {$plugin.tx_rkwetracker.settings.secureCode}
         blockCookiesOnPageLoad = {$plugin.tx_rkwetracker.settings.blockCookiesOnPageLoad}
+        respectDoNotTrack = {$plugin.tx_rkwetracker.settings.respectDoNotTrack}
 
         singleSignOnAccountId = {$plugin.tx_rkwetracker.settings.singleSignOnAccountId}
         singleSignOnPassword = {$plugin.tx_rkwetracker.settings.singleSignOnPassword}

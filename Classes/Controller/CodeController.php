@@ -38,6 +38,7 @@ class CodeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $this->view->assignMultiple(
             [
                 'blockCookies' => $this->settings['blockCookiesOnPageLoad'] ? 'true' : 'false',
+                'respectDoNotTrack' => $this->settings['respectDoNotTrack'] ? 'true' : 'false',
                 'domain' => getenv('HTTP_HOST')
             ]
         );
