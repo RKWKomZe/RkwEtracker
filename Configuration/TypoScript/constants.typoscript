@@ -30,6 +30,9 @@ plugin.tx_rkwetracker {
         # cat=plugin.tx_rkwetracker; type=string; Secure Code for tracklet
         secureCode =
 
+        # cat=plugin.tx_rkwetracker; type=boolean; Disables tracking with eTracker completely
+        disable = 0
+
         # cat=plugin.tx_rkwetracker; type=boolean; If set cookies are not set in page load (GDPR compliance)
         blockCookiesOnPageLoad = 1
 
