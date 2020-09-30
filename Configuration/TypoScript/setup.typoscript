@@ -40,6 +40,7 @@ plugin.tx_rkwetracker {
         apiAccountId = {$plugin.tx_rkwetracker.settings.apiAccountId}
 
         secureCode = {$plugin.tx_rkwetracker.settings.secureCode}
+        disable = {$plugin.tx_rkwetracker.settings.disable}
         blockCookiesOnPageLoad = {$plugin.tx_rkwetracker.settings.blockCookiesOnPageLoad}
         respectDoNotTrack = {$plugin.tx_rkwetracker.settings.respectDoNotTrack}
 
@@ -179,57 +180,60 @@ module.tx_rkwetracker < plugin.tx_rkwetracker
 #===============================================================
 
 # Add jquery if not disabled
-[globalVar = LIT:1 = {$plugin.tx_rkwetracker.settings.includeJquery}]
+[globalVar = LIT:1 = {$plugin.tx_rkwetracker.settings.includeJquery}] && [globalVar = LIT:0 = {$plugin.tx_rkwetracker.settings.disable}]
     page.includeJSFooterlibs.jquery = EXT:rkw_etracker/Resources/Public/Js/jquery-1.11.3.min.js
 [global]
 
 
 # Add tracking for links if enabled
-[globalVar = LIT:1 = {$plugin.tx_rkwetracker.settings.trackLinks}]
+[globalVar = LIT:1 = {$plugin.tx_rkwetracker.settings.trackLinks}] && [globalVar = LIT:0 = {$plugin.tx_rkwetracker.settings.disable}]
 
     # Inlcude JS
     page.includeJSFooter.rkwEtrackerScript = EXT:rkw_etracker/Resources/Public/Js/eTracker.js
-
-    # Include Link-Parser
-    lib.parseFunc_RTE.tags.link.typolink.userFunc =  RKW\RkwEtracker\UserFunctions\Typolink->getParsedLinkWithDataAttributes
-    lib.parseFunc_RTE.tags.a.typolink.userFunc = RKW\RkwEtracker\UserFunctions\Typolink->getParsedLinkWithDataAttributes
-
-    # Old version for CssStyledContents
-    lib.stdheader.10.setCurrent.typolink.userFunc < lib.parseFunc_RTE.tags.link.typolink.userFunc
-    tt_content {
-        image.20.1.imageLinkWrap.typolink.userFunc < lib.parseFunc_RTE.tags.link.typolink.userFunc
-        uploads.20.renderObj.10.stdWrap.typolink.userFunc < lib.parseFunc_RTE.tags.link.typolink.userFunc
-        search.20.renderObj.10.typolink.typolink.userFunc < lib.parseFunc_RTE.tags.link.typolink.userFunc
-        menu.20.default {
-            stdWrap.prepend.20.renderObj.typolink.userFunc < lib.parseFunc_RTE.tags.link.typolink.userFunc
-            categorized_content.conf.tt_content.typolink.userFunc < lib.parseFunc_RTE.tags.link.typolink.userFunc
-        }
-    }
-
 [global]
 
-# Include tracking code in header of page
-page.headerData {
 
-    1490340885 = USER
-    1490340885 {
+# Include Link-Parser
+lib.parseFunc_RTE.tags.link.typolink.userFunc =  RKW\RkwEtracker\UserFunctions\Typolink->getParsedLinkWithDataAttributes
+lib.parseFunc_RTE.tags.a.typolink.userFunc = RKW\RkwEtracker\UserFunctions\Typolink->getParsedLinkWithDataAttributes
 
-        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
-        extensionName = RkwEtracker
-        pluginName = Pi1
-        vendorName = RKW
-        controller = Code
-        switchableControllerActions {
-
-            # Again: Controller-Name and Action
-            Code {
-                1 = show
-            }
-        }
-
-        view =< plugin.tx_rkwetracker.view
-        persistence =< plugin.tx_rkwetracker.persistence
-        settings =< plugin.tx_rkwetracker.settings
-
+# Old version for CssStyledContents
+lib.stdheader.10.setCurrent.typolink.userFunc < lib.parseFunc_RTE.tags.link.typolink.userFunc
+tt_content {
+    image.20.1.imageLinkWrap.typolink.userFunc < lib.parseFunc_RTE.tags.link.typolink.userFunc
+    uploads.20.renderObj.10.stdWrap.typolink.userFunc < lib.parseFunc_RTE.tags.link.typolink.userFunc
+    search.20.renderObj.10.typolink.typolink.userFunc < lib.parseFunc_RTE.tags.link.typolink.userFunc
+    menu.20.default {
+        stdWrap.prepend.20.renderObj.typolink.userFunc < lib.parseFunc_RTE.tags.link.typolink.userFunc
+        categorized_content.conf.tt_content.typolink.userFunc < lib.parseFunc_RTE.tags.link.typolink.userFunc
     }
 }
+
+
+[globalVar = LIT:0 = {$plugin.tx_rkwetracker.settings.disable}]
+    # Include tracking code in header of page
+    page.headerData {
+
+        1490340885 = USER
+        1490340885 {
+
+            userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+            extensionName = RkwEtracker
+            pluginName = Pi1
+            vendorName = RKW
+            controller = Code
+            switchableControllerActions {
+
+                # Again: Controller-Name and Action
+                Code {
+                    1 = show
+                }
+            }
+
+            view =< plugin.tx_rkwetracker.view
+            persistence =< plugin.tx_rkwetracker.persistence
+            settings =< plugin.tx_rkwetracker.settings
+
+        }
+    }
+[GLOBAL]
