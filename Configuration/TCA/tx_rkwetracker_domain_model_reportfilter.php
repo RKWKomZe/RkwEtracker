@@ -13,7 +13,6 @@ return [
 		// 'sortby' => 'sorting',
         'hideTable' => true,
         'requestUpdate' => 'domain_free, category_free_level1, category_free_level2, category_free_level3, category_free_level4, category_free_level5',
-
 		'delete' => 'deleted',
 		'enablecolumns' => [
 
@@ -59,6 +58,7 @@ return [
                 'size' => 30,
                 'eval' => 'trim'
             ],
+            'onChange' => 'reload'
         ],
 		'category_level1' => [
             'displayCond' =>  'FIELD:category_free_level1:REQ:false',
@@ -149,6 +149,7 @@ return [
                 'size' => 30,
                 'eval' => 'trim'
             ],
+            'onChange' => 'reload'
         ],
         'category_free_level2' => [
             'exclude' => 0,
@@ -158,6 +159,7 @@ return [
                 'size' => 30,
                 'eval' => 'trim'
             ],
+            'onChange' => 'reload'
         ],
         'category_free_level3' => [
             'exclude' => 0,
@@ -167,6 +169,7 @@ return [
                 'size' => 30,
                 'eval' => 'trim'
             ],
+            'onChange' => 'reload'
         ],
         'category_free_level4' => [
             'exclude' => 0,
@@ -176,6 +179,7 @@ return [
                 'size' => 30,
                 'eval' => 'trim'
             ],
+            'onChange' => 'reload'
         ],
         'category_free_level5' => [
             'exclude' => 0,
@@ -185,6 +189,7 @@ return [
                 'size' => 30,
                 'eval' => 'trim'
             ],
+            'onChange' => 'reload'
         ],
         'download_filter1' => [
             'exclude' => 0,
