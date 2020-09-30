@@ -12,7 +12,7 @@ return [
 		'dividers2tabs' => true,
 		// 'sortby' => 'sorting',
         'hideTable' => true,
-        'requestUpdate' => 'domain_free, category_free_level1, category_free_level2, category_free_level3, category_free_level4, category_free_level5',
+        //'requestUpdate' => 'domain_free, category_free_level1, category_free_level2, category_free_level3, category_free_level4, category_free_level5',
 		'delete' => 'deleted',
 		'enablecolumns' => [
 
