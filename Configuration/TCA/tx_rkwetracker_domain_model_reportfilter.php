@@ -12,8 +12,7 @@ return [
 		'dividers2tabs' => true,
 		// 'sortby' => 'sorting',
         'hideTable' => true,
-        'requestUpdate' => 'domain_free, category_free_level1, category_free_level2, category_free_level3, category_free_level4, category_free_level5',
-
+        //'requestUpdate' => 'domain_free, category_free_level1, category_free_level2, category_free_level3, category_free_level4, category_free_level5',
 		'delete' => 'deleted',
 		'enablecolumns' => [
 
@@ -51,7 +50,7 @@ return [
             ],
         ],
         'domain_free' => [
-            'displayCond' =>  'FIELD:domain:REQ:0',
+            'displayCond' => 'FIELD:domain:REQ:false',
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_reportfilter.domain_free',
             'config' => [
@@ -59,6 +58,7 @@ return [
                 'size' => 30,
                 'eval' => 'trim'
             ],
+            'onChange' => 'reload'
         ],
 		'category_level1' => [
             'displayCond' =>  'FIELD:category_free_level1:REQ:false',
@@ -149,6 +149,7 @@ return [
                 'size' => 30,
                 'eval' => 'trim'
             ],
+            'onChange' => 'reload'
         ],
         'category_free_level2' => [
             'exclude' => 0,
@@ -158,6 +159,7 @@ return [
                 'size' => 30,
                 'eval' => 'trim'
             ],
+            'onChange' => 'reload'
         ],
         'category_free_level3' => [
             'exclude' => 0,
@@ -167,6 +169,7 @@ return [
                 'size' => 30,
                 'eval' => 'trim'
             ],
+            'onChange' => 'reload'
         ],
         'category_free_level4' => [
             'exclude' => 0,
@@ -176,6 +179,7 @@ return [
                 'size' => 30,
                 'eval' => 'trim'
             ],
+            'onChange' => 'reload'
         ],
         'category_free_level5' => [
             'exclude' => 0,
@@ -185,6 +189,7 @@ return [
                 'size' => 30,
                 'eval' => 'trim'
             ],
+            'onChange' => 'reload'
         ],
         'download_filter1' => [
             'exclude' => 0,
