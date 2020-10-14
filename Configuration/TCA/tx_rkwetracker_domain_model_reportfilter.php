@@ -51,7 +51,7 @@ return [
             ],
         ],
         'domain_free' => [
-            'displayCond' =>  'FIELD:domain:REQ:0',
+            'displayCond' => 'FIELD:domain:REQ:false',
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_reportfilter.domain_free',
             'config' => [
