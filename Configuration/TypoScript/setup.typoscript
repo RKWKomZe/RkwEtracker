@@ -181,7 +181,7 @@ module.tx_rkwetracker < plugin.tx_rkwetracker
 
 # Add jquery if not disabled
 [globalVar = LIT:1 = {$plugin.tx_rkwetracker.settings.includeJquery}] && [globalVar = LIT:0 = {$plugin.tx_rkwetracker.settings.disable}]
-    page.includeJSFooterlibs.jquery = EXT:rkw_etracker/Resources/Public/Js/jquery-1.11.3.min.js
+    page.includeJSFooterlibs.jquery = EXT:rkw_etracker/Resources/Public/Js/jquery-3.4.1.min.js
 [global]
 
 
