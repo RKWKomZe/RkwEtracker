@@ -105,7 +105,11 @@ if ($currentVersion < 8000000) {
 
             // get data attributes for given handle
             $dataAttributes = $typolinkUtility->getDataAttributes($arguments['parameter']);
-            $arguments['additionalAttributes'] = array_merge($arguments['additionalAttributes'], $dataAttributes);
+            if (is_array($arguments['additionalAttributes'])) {
+                $arguments['additionalAttributes'] = array_merge($arguments['additionalAttributes'], $dataAttributes);
+            } else {
+                $arguments['additionalAttributes'] = $dataAttributes;
+            }
 
             return parent::renderStatic($arguments, $renderChildrenClosure, $renderingContext);
         }
