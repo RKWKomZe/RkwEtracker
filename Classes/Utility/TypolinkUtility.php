@@ -53,6 +53,8 @@ class TypolinkUtility extends \TYPO3\CMS\Frontend\ContentObject\ContentObjectRen
 
         // determine version
         $currentVersion = VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version);
+        $dataTags = [];
+        $linkDetails = [];
 
         // define dataTags array
         $fileLinkType = 'file';
@@ -103,7 +105,13 @@ class TypolinkUtility extends \TYPO3\CMS\Frontend\ContentObject\ContentObjectRen
             if ($linkType == $fileLinkType) {
 
                 /** @var \TYPO3\CMS\Core\Resource\File $file */
-                if ($file = $this->getFileObject($typolink)) {
+                if (
+                    (
+                        ($file = $linkDetails['file'])
+                        || ($file = $this->getFileObject($typolink))
+                    )
+                    && ($linkDetails['file'] instanceof \TYPO3\CMS\Core\Resource\File)
+                ) {
 
                     // add filename
                     $dataTags['data-etracker-object'] = $file->getName();
