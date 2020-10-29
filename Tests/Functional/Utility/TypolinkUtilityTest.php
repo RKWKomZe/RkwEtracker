@@ -224,7 +224,7 @@ class LinkUtilityTest extends FunctionalTestCase
     {
 
         $assert = [
-            'data-etracker-action' => 'mailto',
+            'data-etracker-action' => 'email',
             'data-etracker-category' => 'testing.com'
         ];
 
@@ -249,11 +249,11 @@ class LinkUtilityTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getDataAttributesGivenNonFalFileReturnsArrayWithActionFile()
+    public function getDataAttributesGivenNonFalFileReturnsArrayWithActionUnknown()
     {
 
         $assert = [
-            'data-etracker-action' => 'file',
+            'data-etracker-action' => 'unknown',
             'data-etracker-category' => 'testing.com'
         ];
 
@@ -263,10 +263,10 @@ class LinkUtilityTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getDataAttributesGivenNonExistingFalFileWithoutProjectSetReturnsArrayWithActionLink()
+    public function getDataAttributesGivenNonExistingFalFileWithoutProjectSetReturnsArrayWithActionUnknown()
     {
         $assert = [
-            'data-etracker-action' => 'file',
+            'data-etracker-action' => 'Unknown',
             'data-etracker-category' => 'testing.com'
         ];
 

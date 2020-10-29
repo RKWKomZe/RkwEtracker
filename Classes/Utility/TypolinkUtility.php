@@ -104,13 +104,14 @@ class TypolinkUtility extends \TYPO3\CMS\Frontend\ContentObject\ContentObjectRen
             // only do this on files!
             if ($linkType == $fileLinkType) {
 
+
                 /** @var \TYPO3\CMS\Core\Resource\File $file */
                 if (
                     (
                         ($file = $linkDetails['file'])
                         || ($file = $this->getFileObject($typolink))
                     )
-                    && ($linkDetails['file'] instanceof \TYPO3\CMS\Core\Resource\File)
+                    && ($file instanceof \TYPO3\CMS\Core\Resource\File)
                 ) {
 
                     // add filename
