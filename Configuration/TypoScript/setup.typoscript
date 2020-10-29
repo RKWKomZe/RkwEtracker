@@ -187,8 +187,6 @@ module.tx_rkwetracker < plugin.tx_rkwetracker
 
 # Add tracking for links if enabled
 [globalVar = LIT:1 = {$plugin.tx_rkwetracker.settings.trackLinks}] && [globalVar = LIT:0 = {$plugin.tx_rkwetracker.settings.disable}]
-
-    # Inlcude JS
     page.includeJSFooter.rkwEtrackerScript = EXT:rkw_etracker/Resources/Public/Js/eTracker.js
 [global]
 
