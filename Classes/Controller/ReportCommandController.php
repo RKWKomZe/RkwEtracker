@@ -387,7 +387,6 @@ class ReportCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
         }
 
         return $this->logger;
-        //===
     }
 
 
@@ -402,8 +401,5 @@ class ReportCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
     {
 
         return Common::getTyposcriptConfiguration('Rkwetracker', $which);
-        //===
     }
 }
-
-?>
