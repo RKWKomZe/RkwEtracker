@@ -131,9 +131,10 @@ class ReportCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
     /**
      * Fetch data from API
      *
+     * @param float $sleep how many seconds the script should sleep after each data import in the filter groups
      * @return void
      */
-    public function fetchReportDataCommand()
+    public function fetchReportDataCommand($sleep = 1.0)
     {
 
         try {
@@ -177,11 +178,13 @@ class ReportCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
                         /** @var \RKW\RkwEtracker\Domain\Model\ReportGroup $reportGroup */
                         foreach ($report->getGroupsFetch() as $reportGroup) {
                             $import->importAreaData($report, $reportGroup);
+                            usleep(intval($sleep * 1000000));
+
                             $import->importDownloadData($report, $reportGroup);
+                            usleep(intval($sleep * 1000000));
 
                             $report->removeGroupFetch($reportGroup);
                             break;
-                            //===
                         }
 
                         // if all groups have been fetched, we go over to
