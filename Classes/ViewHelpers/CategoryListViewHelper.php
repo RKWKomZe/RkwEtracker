@@ -3,7 +3,7 @@
 namespace RKW\RkwEtracker\ViewHelpers;
 
 use RKW\RkwBasics\Helper\Common;
-use RKW\RkwEtracker\Helpers\CategoryHelper;
+use RKW\RkwEtracker\Utility\CategoryUtility;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
@@ -46,23 +46,23 @@ class CategoryListViewHelper extends AbstractViewHelper
         $categories = array('.+', '.+', '.+', '.+', '.+', '.+');
         $spliceEnd = 1;
         if ($areaData->getCategoryLevel1()) {
-            $categories[1] = CategoryHelper::cleanUp($areaData->getCategoryLevel1());
+            $categories[1] = CategoryUtility::cleanUpCategoryName($areaData->getCategoryLevel1());
             $spliceEnd = -4;
         }
         if ($areaData->getCategoryLevel2()) {
-            $categories[2] = CategoryHelper::cleanUp($areaData->getCategoryLevel2());
+            $categories[2] = CategoryUtility::cleanUpCategoryName($areaData->getCategoryLevel2());
             $spliceEnd = -3;
         }
         if ($areaData->getCategoryLevel3()) {
-            $categories[3] = CategoryHelper::cleanUp($areaData->getCategoryLevel3());
+            $categories[3] = CategoryUtility::cleanUpCategoryName($areaData->getCategoryLevel3());
             $spliceEnd = -2;
         }
         if ($areaData->getCategoryLevel4()) {
-            $categories[4] = CategoryHelper::cleanUp($areaData->getCategoryLevel4());
+            $categories[4] = CategoryUtility::cleanUpCategoryName($areaData->getCategoryLevel4());
             $spliceEnd = -1;
         }
         if ($areaData->getCategoryLevel5()) {
-            $categories[5] = CategoryHelper::cleanUp($areaData->getCategoryLevel5());
+            $categories[5] = CategoryUtility::cleanUpCategoryName($areaData->getCategoryLevel5());
             $spliceEnd = 0;
         }
 

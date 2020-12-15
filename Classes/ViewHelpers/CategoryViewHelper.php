@@ -3,7 +3,7 @@
 namespace RKW\RkwEtracker\ViewHelpers;
 
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
-use RKW\RkwEtracker\Helpers\CategoryHelper;
+use RKW\RkwEtracker\Utility\CategoryUtility;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -44,19 +44,19 @@ class CategoryViewHelper extends AbstractViewHelper
 
         $categories = array();
         if ($category1) {
-            $categories[] = CategoryHelper::cleanUp($category1);
+            $categories[] = CategoryUtility::cleanUpCategoryName($category1);
         }
         if ($category2) {
-            $categories[] = CategoryHelper::cleanUp($category2);
+            $categories[] = CategoryUtility::cleanUpCategoryName($category2);
         }
         if ($category3) {
-            $categories[] = CategoryHelper::cleanUp($category3);
+            $categories[] = CategoryUtility::cleanUpCategoryName($category3);
         }
         if ($category4) {
-            $categories[] = CategoryHelper::cleanUp($category4);
+            $categories[] = CategoryUtility::cleanUpCategoryName($category4);
         }
         if ($category5) {
-            $categories[] = CategoryHelper::cleanUp($category5);
+            $categories[] = CategoryUtility::cleanUpCategoryName($category5);
         }
 
         return implode('/', $categories);

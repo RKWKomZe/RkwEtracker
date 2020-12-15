@@ -3,6 +3,7 @@
 namespace RKW\RkwEtracker\Etracker;
 
 use \RKW\RkwBasics\Helper\Common;
+use RKW\RkwEtracker\Utility\CategoryUtility;
 use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 /*
@@ -237,9 +238,9 @@ class Import
                     $getterFreetext = 'get' . ucfirst($property) . 'Free';
 
                     // get values
-                    $filterString = $reportFilter->$getterDefault();
+                    $filterString = CategoryUtility::cleanUpCategoryName($reportFilter->$getterDefault());
                     if ($reportFilter->$getterFreetext()) {
-                        $filterString = $reportFilter->$getterFreetext();
+                        $filterString = CategoryUtility::cleanUpCategoryName($reportFilter->$getterFreetext());
                     }
 
                     // build category filter for API
@@ -331,7 +332,7 @@ class Import
 
                     // build getter and get values
                     $getterDefault = 'get' . ucfirst($property);
-                    $filterString = $reportFilter->$getterDefault();
+                    $filterString = CategoryUtility::cleanUpCategoryName($reportFilter->$getterDefault());
 
                     if (
                         ($filterString)

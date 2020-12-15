@@ -493,11 +493,11 @@ class LinkUtilityTest extends FunctionalTestCase
          * Given there is an existing page
          * When getDataAttributes is called with the id of the page
          * Then "page" is is returned as action
-         * Then the domain of the rootpage is is returned as category
+         * Then the domain of the rootpage with "Default" as subcategory is returned as category
          */
         $assert = [
             'data-etracker-action' => 'page',
-            'data-etracker-category' => 'testing.com'
+            'data-etracker-category' => 'testing.com/Default'
         ];
 
         static::assertEquals($assert, $this->subject->getDataAttributes('t3://page?uid=1'));
@@ -515,11 +515,11 @@ class LinkUtilityTest extends FunctionalTestCase
          * Given there is an email-address
          * When getDataAttributes is called with that email-address
          * Then "email" is is returned as action
-         * Then the domain of the rootpage is is returned as category
+         * Then the domain of the rootpage with "Default" as subcategory is returned as category
          */
         $assert = [
             'data-etracker-action' => 'email',
-            'data-etracker-category' => 'testing.com'
+            'data-etracker-category' => 'testing.com/Default'
         ];
 
         static::assertEquals($assert, $this->subject->getDataAttributes('t3://email?email=mailto:kroggel@test.de'));
@@ -537,11 +537,11 @@ class LinkUtilityTest extends FunctionalTestCase
          * Given there is an external weblink
          * When getDataAttributes is called with that weblink
          * Then "url" is is returned as action
-         * Then the domain of the rootpage is is returned as category
+         * Then the domain of the rootpage with "Default" as subcategory is returned as category
          */
         $assert = [
             'data-etracker-action' => 'url',
-            'data-etracker-category' => 'testing.com'
+            'data-etracker-category' => 'testing.com/Default'
         ];
 
         static::assertEquals($assert, $this->subject->getDataAttributes('t3://url?url=https://www.google.de'));
@@ -562,11 +562,11 @@ class LinkUtilityTest extends FunctionalTestCase
          * When getDataAttributes is called with that file-id
          * Then "file" is is returned as action
          * Then filename is is returned as object
-         * Then the domain of the rootpage is is returned as category
+         * Then the domain of the rootpage with "Default" as subcategory is returned as category
          */
         $assert = [
             'data-etracker-action' => 'file',
-            'data-etracker-category' => 'testing.com',
+            'data-etracker-category' => 'testing.com/Default',
             'data-etracker-object' => 'file-placeholder-1.pdf'
         ];
 
