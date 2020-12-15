@@ -5,7 +5,7 @@ namespace RKW\RkwEtracker\Utility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
-use RKW\RkwEtracker\Helpers\CategoryHelper;
+use RKW\RkwEtracker\Utility\CategoryUtility;
 use TYPO3\CMS\Core\LinkHandling\LinkService;
 use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
@@ -71,7 +71,7 @@ class TypolinkUtility extends \TYPO3\CMS\Frontend\ContentObject\ContentObjectRen
             // set defaults
             $dataTags = [
                 'data-etracker-action' => ($linkType ? $linkType : 'Default'),
-                'data-etracker-category' => GeneralUtility::getIndpEnv('TYPO3_HOST_ONLY')
+                'data-etracker-category' => GeneralUtility::getIndpEnv('TYPO3_HOST_ONLY') . '/Default'
             ];
 
             // only do this on files!
@@ -100,9 +100,9 @@ class TypolinkUtility extends \TYPO3\CMS\Frontend\ContentObject\ContentObjectRen
                             /** @var \RKW\RkwProjects\Domain\Model\Projects $project */
                             if ($project = $projectsRepository->findByIdentifier($projectId)) {
 
-                                // add project name to category
+                                // override category with project-name
                                 $projectName = ($project->getInternalName() ? $project->getInternalName() : ($project->getShortName() ? $project->getShortName() : $project->getName()));
-                                $dataTags['data-etracker-category'] .= '/' . CategoryHelper::cleanUp($projectName);
+                                $dataTags['data-etracker-category'] = GeneralUtility::getIndpEnv('TYPO3_HOST_ONLY')  . '/' . CategoryUtility::cleanUpCategoryName($projectName);
                             }
                         }
                     }

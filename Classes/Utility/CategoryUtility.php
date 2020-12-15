@@ -1,6 +1,6 @@
 <?php
 
-namespace RKW\RkwEtracker\Helpers;
+namespace RKW\RkwEtracker\Utility;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -15,18 +15,15 @@ namespace RKW\RkwEtracker\Helpers;
  * The TYPO3 project - inspiring people to share!
  */
 
-use RKW\RkwEtracker\Utility\CategoryUtility;
-
 /**
- * Class CategoryHelper
+ * Class CategoryUtility
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
  * @copyright Rkw Kompetenzzentrum
  * @package RKW_RkwEtracker
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- * @deprecated This class will be removed soon. Do not use it any more.
  */
-class CategoryHelper
+class CategoryUtility
 {
 
     /**
@@ -36,11 +33,17 @@ class CategoryHelper
      * @param $string
      * @return string
      */
-    public static function cleanUp($string)
+    public static function cleanUpCategoryName($string)
     {
 
-        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__  . ' will be removed soon. Do not use it any more.');
-        return CategoryUtility::cleanUpCategoryName($string);
+        $replacements = array(
+            ' ',
+            '_',
+            '"',
+            '.',
+        );
+
+        return ucfirst(str_replace($replacements, '', ucwords(str_replace('/', '-', $string))));
 
     }
 

@@ -3,7 +3,7 @@ return [
 	'ctrl' => [
 		'title'	=> 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_reportfilter',
 		'label' => 'uid',
-        'label_userFunc' => 'RKW\RkwEtracker\Hook\FilterSelector->getCombinedFilterLabels',
+        'label_userFunc' => 'RKW\RkwEtracker\TCA\FilterSelector->getCombinedFilterLabels',
         //'label_alt' => 'category_level2, category_level3, category_level4, category_levelfive',
         //'label_alt_force' => 1,
 		'tstamp' => 'tstamp',
@@ -46,7 +46,7 @@ return [
                 'minitems' => 0,
                 'maxitems' => 1,
                 'default' => 0,
-                'itemsProcFunc' => 'RKW\RkwEtracker\Hook\FilterSelector->getDomainLabels',
+                'itemsProcFunc' => 'RKW\RkwEtracker\TCA\FilterSelector->getDomainLabels',
             ],
         ],
         'domain_free' => [
@@ -74,7 +74,7 @@ return [
                 'minitems' => 0,
                 'maxitems' => 1,
                 'default' => 0,
-                'itemsProcFunc' => 'RKW\RkwEtracker\Hook\FilterSelector->getCategoryLabelsLevel1',
+                'itemsProcFunc' => 'RKW\RkwEtracker\TCA\FilterSelector->getCategoryLabelsLevel1',
 			],
 		],
         'category_level2' => [
@@ -90,7 +90,7 @@ return [
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
-                'itemsProcFunc' => 'RKW\RkwEtracker\Hook\FilterSelector->getCategoryLabelsLevel2',
+                'itemsProcFunc' => 'RKW\RkwEtracker\TCA\FilterSelector->getCategoryLabelsLevel2',
             ],
         ],
         'category_level3' => [
@@ -106,7 +106,7 @@ return [
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
-                'itemsProcFunc' => 'RKW\RkwEtracker\Hook\FilterSelector->getCategoryLabelsLevel3',
+                'itemsProcFunc' => 'RKW\RkwEtracker\TCA\FilterSelector->getCategoryLabelsLevel3',
             ],
         ],
         'category_level4' => [
@@ -122,7 +122,7 @@ return [
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
-                'itemsProcFunc' => 'RKW\RkwEtracker\Hook\FilterSelector->getCategoryLabelsLevel4',
+                'itemsProcFunc' => 'RKW\RkwEtracker\TCA\FilterSelector->getCategoryLabelsLevel4',
             ],
         ],
         'category_level5' => [
@@ -138,7 +138,7 @@ return [
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
-                'itemsProcFunc' => 'RKW\RkwEtracker\Hook\FilterSelector->getCategoryLabelsLevel5',
+                'itemsProcFunc' => 'RKW\RkwEtracker\TCA\FilterSelector->getCategoryLabelsLevel5',
             ],
         ],
         'category_free_level1' => [
@@ -203,7 +203,7 @@ return [
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
-                'itemsProcFunc' => 'RKW\RkwEtracker\Hook\FilterSelector->getDownloadLabels',
+                'itemsProcFunc' => 'RKW\RkwEtracker\TCA\FilterSelector->getDownloadLabels',
             ],
         ],
         'download_filter2' => [
@@ -218,7 +218,7 @@ return [
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
-                'itemsProcFunc' => 'RKW\RkwEtracker\Hook\FilterSelector->getDownloadLabels',
+                'itemsProcFunc' => 'RKW\RkwEtracker\TCA\FilterSelector->getDownloadLabels',
             ],
         ],
         'download_filter3' => [
@@ -233,7 +233,7 @@ return [
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
-                'itemsProcFunc' => 'RKW\RkwEtracker\Hook\FilterSelector->getDownloadLabels',
+                'itemsProcFunc' => 'RKW\RkwEtracker\TCA\FilterSelector->getDownloadLabels',
             ],
         ],
         'download_free_filter1' => [

@@ -1,8 +1,8 @@
 <?php
 
-namespace RKW\RkwEtracker\Hook;
+namespace RKW\RkwEtracker\TCA;
 
-use \RKW\RkwEtracker\Helpers\CategoryHelper;
+use \RKW\RkwEtracker\Utility\CategoryUtility;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -195,7 +195,7 @@ class FilterSelector
             /** @var \RKW\RkwBasics\Domain\Model\Department $department */
             foreach ($result as $department) {
                 if ($department->getName()) {
-                    $params['items'][] = array(($department->getInternalName() ? CategoryHelper::cleanUp($department->getInternalName()) : CategoryHelper::cleanUp($department->getName())), ($department->getInternalName() ? CategoryHelper::cleanUp($department->getInternalName()) : CategoryHelper::cleanUp($department->getName())));
+                    $params['items'][] = array(($department->getInternalName() ? CategoryUtility::cleanUpCategoryName($department->getInternalName()) : CategoryUtility::cleanUpCategoryName($department->getName())), ($department->getInternalName() ? CategoryUtility::cleanUpCategoryName($department->getInternalName()) : CategoryUtility::cleanUpCategoryName($department->getName())));
                 }
             }
         }
@@ -226,7 +226,7 @@ class FilterSelector
             /** @var \RKW\RkwProjects\Domain\Model\Projects $project */
             foreach ($result as $project) {
                 if ($project->getName()) {
-                    $params['items'][] = array(($project->getInternalName() ? CategoryHelper::cleanUp($project->getInternalName()) : CategoryHelper::cleanUp($project->getName())), ($project->getInternalName() ? CategoryHelper::cleanUp($project->getInternalName()) : CategoryHelper::cleanUp($project->getName())));
+                    $params['items'][] = array(($project->getInternalName() ? CategoryUtility::cleanUpCategoryName($project->getInternalName()) : CategoryUtility::cleanUpCategoryName($project->getName())), ($project->getInternalName() ? CategoryUtility::cleanUpCategoryName($project->getInternalName()) : CategoryUtility::cleanUpCategoryName($project->getName())));
                 }
             }
         }
@@ -255,7 +255,7 @@ class FilterSelector
             /** @var \RKW\RkwBasics\Domain\Model\DocumentType $documentType */
             foreach ($result as $documentType) {
                 if ($documentType->getName()) {
-                    $params['items'][] = array(($documentType->getInternalName() ? CategoryHelper::cleanUp($documentType->getInternalName()) : CategoryHelper::cleanUp($documentType->getName())), ($documentType->getInternalName() ? CategoryHelper::cleanUp($documentType->getInternalName()) : CategoryHelper::cleanUp($documentType->getName())));
+                    $params['items'][] = array(($documentType->getInternalName() ? CategoryUtility::cleanUpCategoryName($documentType->getInternalName()) : CategoryUtility::cleanUpCategoryName($documentType->getName())), ($documentType->getInternalName() ? CategoryUtility::cleanUpCategoryName($documentType->getInternalName()) : CategoryUtility::cleanUpCategoryName($documentType->getName())));
                 }
             }
         }
@@ -310,7 +310,7 @@ class FilterSelector
             /** @var \RKW\RkwProjects\Domain\Model\Projects $project */
             foreach ($result as $project) {
                 if ($project->getName()) {
-                    $params['items'][] = array(($project->getInternalName() ? CategoryHelper::cleanUp($project->getInternalName()) : CategoryHelper::cleanUp($project->getName())), ($project->getInternalName() ? CategoryHelper::cleanUp($project->getInternalName()) : CategoryHelper::cleanUp($project->getName())));
+                    $params['items'][] = array(($project->getInternalName() ? CategoryUtility::cleanUpCategoryName($project->getInternalName()) : CategoryUtility::cleanUpCategoryName($project->getName())), ($project->getInternalName() ? CategoryUtility::cleanUpCategoryName($project->getInternalName()) : CategoryUtility::cleanUpCategoryName($project->getName())));
                 }
             }
         }
