@@ -24,6 +24,7 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
  * @copyright Rkw Kompetenzzentrum
  * @package RKW_RkwEtracker
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @deprecated This class will be removed soon. Do not use it any more.
  */
 class AreaDataRedirectLinkViewHelper extends AbstractViewHelper
 {
@@ -37,6 +38,8 @@ class AreaDataRedirectLinkViewHelper extends AbstractViewHelper
      */
     public function render(\RKW\RkwEtracker\Domain\Model\Report $report, \RKW\RkwEtracker\Domain\Model\AreaData $areaData)
     {
+
+        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . ' is deprecated and will be removed soon.');
 
         $levels = range(1, 5);
         $categories = array();

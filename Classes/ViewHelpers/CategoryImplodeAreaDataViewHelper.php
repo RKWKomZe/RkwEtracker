@@ -15,36 +15,51 @@ namespace RKW\RkwEtracker\ViewHelpers;
  * The TYPO3 project - inspiring people to share!
  */
 
-
 use RKW\RkwEtracker\Utility\CategoryUtility;
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
+
 /**
- * Class CategoryListViewHelper
+ * Class CategoryImplodeAreaDataViewHelper
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
  * @copyright Rkw Kompetenzzentrum
  * @package RKW_RkwEtracker
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- * @deprecated This class will be removed soon. Do not use it any more.
  */
-class CategoryListViewHelper extends AbstractViewHelper
+class CategoryImplodeAreaDataViewHelper extends AbstractViewHelper
 {
+
+    /**
+     * Initialize arguments
+     */
+    public function initializeArguments()
+    {
+        $this->registerArgument('areaData', '\RKW\RkwEtracker\Domain\Model\AreaData', 'The AreaData-object to get the categories from.', true);
+    }
+
 
     /**
      * Returns the filtered and combined categories
      *
-     * @param \RKW\RkwEtracker\Domain\Model\AreaData $areaData
+     * @param array $arguments
+     * @param \Closure  $renderChildrenClosure
+     * @param RenderingContextInterface $renderingContext
      * @return string
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
-    public function render(\RKW\RkwEtracker\Domain\Model\AreaData $areaData)
-    {
+    public static function renderStatic(
+        array $arguments,
+        \Closure $renderChildrenClosure,
+        RenderingContextInterface $renderingContext
+    ): string {
 
-        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . ' is deprecated and will be removed soon. Use CategoryImplodeViewHelper instead.');
-        $settings = $this->getSettings();
+
+        $areaData = $arguments['areaData'];
+        $settings = self::getSettings();
 
         $categories = [];
         foreach(range(1,5) as $level) {
@@ -67,6 +82,7 @@ class CategoryListViewHelper extends AbstractViewHelper
 
     }
 
+
     /**
      * Loads TypoScript configuration into $this->configuration
      *
@@ -74,10 +90,8 @@ class CategoryListViewHelper extends AbstractViewHelper
      * @return array
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
-    protected function getSettings($which = ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS)
+    public static function getSettings($which = ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS)
     {
-
         return \RKW\RkwBasics\Utility\GeneralUtility::getTyposcriptConfiguration('Rkwetracker', $which);
     }
-
 }

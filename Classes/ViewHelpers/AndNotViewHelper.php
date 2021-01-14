@@ -21,6 +21,7 @@ namespace RKW\RkwEtracker\ViewHelpers;
  * @copyright Rkw Kompetenzzentrum
  * @package RKW_RkwEtracker
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @deprecated This class will be removed soon. Do not use it any more.
  */
 class AndNotViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
@@ -35,6 +36,7 @@ class AndNotViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelp
     public function render($and, $not)
     {
 
+        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . ' is deprecated and will be removed soon. Use natively supported logical operators supported since TYPO3 8.7.');
         if ($and && (!$not)) {
             return true;
             //===
