@@ -1,36 +1,38 @@
-{namespace rkwEtracker=RKW\RkwEtracker\ViewHelpers}
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:rkwEtracker="http://typo3.org/ns/RKW/RkwEtracker/ViewHelpers"
+    data-namespace-typo3-fluid="true">
 
+    <p>Der Anbieter dieser Website verwendet Dienste der etracker GmbH aus Hamburg, Deutschland (<a href="https://www.etracker.com">www.etracker.com</a>) zur Analyse von Nutzungsdaten.
+        Es werden dabei Cookies eingesetzt, die eine statistische Analyse der Nutzung dieser Website durch ihre Besucher sowie die Anzeige nutzungsbezogener Inhalte oder Werbung ermöglichen.
+        Cookies sind kleine Textdateien, die vom Internet Browser auf dem Endgerät des Nutzers gespeichert werden. etracker Cookies enthalten keine Informationen, die eine Identifikation eines
+        Nutzers ermöglichen.
+    </p>
+    <p>Wenn Sie der Speicherung von Cookies zustimmen, erlauben Sie es uns, Ihr Nutzungsverhalten auf dieser Website u. a. durch Cookies zu erfassen. Stimmen Sie dem Setzen von Cookies nicht zu,
+        erfolgt die Erfassung des Nutzungsverhaltens auf dieser Website ausschließlich ohne Cookies (Cookie-less).
+    </p>
+    <p>Beim Cookie-less Session-Tracking mit etracker erfolgt weder eine Speicherung von Informationen noch ein Zugriff auf Informationen, die bereits im Endgerät eines  Nutzers gespeichert sind.
+        Es werden lediglich die Webseiten-Daten von Webservern genutzt sowie bestimmte Informationen, die der Webbrowser zum Abruf von Webseiten an den Webserver überträgt.
+        Diese Informationen ermöglichen es, einzelne Seitenaufrufe zu zusammenhängenden Sessions zu verbinden. Durch die Verknüpfung mit einem Zeitstempel wird dabei ausgeschlossen, dass Seitenaufrufe
+        jenseits eines 24-stündigen Zeitfensters zu Customer Journeys beziehungsweise Profilen verknüpft werden können. Es handelt sich dem nach nicht um DeviceFingerprinting gemäß der
+        &quot;Stellungnahme 9/2014 zur Anwendung der Richtlinie 2002/58/EG auf die Nutzung des virtuellen Fingerabdrucks&quot;.
+        Es besteht weder eine Verknüpfung über einen längeren Zeitraum hinweg noch eine eindeutige Zuordnung zu Nutzern bzw. Geräten. Aufgrund der wenigen Informationselemente sowie der expliziten
+        zeitlichen Limitierung ist es beim Cookie-less Session-Tracking von etracker ausgeschlossen, dass eine Einzelperson mit diesem virtuellen Fingerabdruck verknüpft und somit identifiziert oder
+        identifizierbar gemacht werden kann. Weiterhin werden die Informationen nicht Dritten zugänglich gemacht, das eingesetzte Hash-Verfahren ebenso wie die Einzel-Informationen nicht offen gelegt.
+        Auch dient es nicht dem Zweck der Verarbeitung für die Bereitstellung personalisierter Inhalte und Werbung, d.h. zur direkten Kommunikation mit einer bestimmten Person, sondern der aggregierten
+        statistischen Auswertung der Website-Nutzung.
+    </p>
+    <p>Die mit etracker erzeugten Daten werden im Auftrag des Anbieters dieser Website von etracker ausschließlich in Deutschland verarbeitet und gespeichert und unterliegen damit den
+        strengen deutschen und europäischen Datenschutzgesetzen und -standards. etracker wurde diesbezüglich unabhängig geprüft, zertifiziert und mit dem Datenschutz-Gütesiegel
+        <a href="https://www.eprivacy.eu/kunden/vergebene-siegel/firma/etracker-gmbh/">ePrivacyseal</a> ausgezeichnet.
+    </p>
+    <p>Die Datenverarbeitung erfolgt auf der Rechtsgrundlage des Art. 6 Abs .1 lit f (berechtigtes Interesse) der EU-Datenschutzgrundverordnung (EU-DSGVO).
+        Unser berechtigtes Interesse besteht in der Optimierung unseres Online-Angebotes und unseres Webauftritts. Da uns die Privatsphäre unserer Besucher besonders wichtig ist, wird die
+        IP-Adresse bei etracker frühestmöglich anonymisiert und Anmelde- oder Gerätekennungen bei etracker zu einem eindeutigen, aber nicht einer Person zugeordneten Schlüssel umgewandelt.
+        Eine andere Verwendung, Zusammenführung mit anderen Daten oder eine Weitergabe an Dritte erfolgt durch etracker nicht.
+    </p>
+    <p>Sie können der vorbeschriebenen Datenverarbeitung jederzeit widersprechen, soweit sie personenbezogen erfolgt. Ihr Widerspruch hat für Sie keine nachteiligen Folgen.</p>
 
-<p>Der Anbieter dieser Website verwendet Dienste der etracker GmbH aus Hamburg, Deutschland (<a href="https://www.etracker.com">www.etracker.com</a>) zur Analyse von Nutzungsdaten.
-    Es werden dabei Cookies eingesetzt, die eine statistische Analyse der Nutzung dieser Website durch ihre Besucher sowie die Anzeige nutzungsbezogener Inhalte oder Werbung ermöglichen.
-    Cookies sind kleine Textdateien, die vom Internet Browser auf dem Endgerät des Nutzers gespeichert werden. etracker Cookies enthalten keine Informationen, die eine Identifikation eines
-    Nutzers ermöglichen.
-</p>
-<p>Wenn Sie der Speicherung von Cookies zustimmen, erlauben Sie es uns, Ihr Nutzungsverhalten auf dieser Website u. a. durch Cookies zu erfassen. Stimmen Sie dem Setzen von Cookies nicht zu,
-    erfolgt die Erfassung des Nutzungsverhaltens auf dieser Website ausschließlich ohne Cookies (Cookie-less).
-</p>
-<p>Beim Cookie-less Session-Tracking mit etracker erfolgt weder eine Speicherung von Informationen noch ein Zugriff auf Informationen, die bereits im Endgerät eines  Nutzers gespeichert sind.
-    Es werden lediglich die Webseiten-Daten von Webservern genutzt sowie bestimmte Informationen, die der Webbrowser zum Abruf von Webseiten an den Webserver überträgt.
-    Diese Informationen ermöglichen es, einzelne Seitenaufrufe zu zusammenhängenden Sessions zu verbinden. Durch die Verknüpfung mit einem Zeitstempel wird dabei ausgeschlossen, dass Seitenaufrufe
-    jenseits eines 24-stündigen Zeitfensters zu Customer Journeys beziehungsweise Profilen verknüpft werden können. Es handelt sich dem nach nicht um DeviceFingerprinting gemäß der
-    &quot;Stellungnahme 9/2014 zur Anwendung der Richtlinie 2002/58/EG auf die Nutzung des virtuellen Fingerabdrucks&quot;.
-    Es besteht weder eine Verknüpfung über einen längeren Zeitraum hinweg noch eine eindeutige Zuordnung zu Nutzern bzw. Geräten. Aufgrund der wenigen Informationselemente sowie der expliziten
-    zeitlichen Limitierung ist es beim Cookie-less Session-Tracking von etracker ausgeschlossen, dass eine Einzelperson mit diesem virtuellen Fingerabdruck verknüpft und somit identifiziert oder
-    identifizierbar gemacht werden kann. Weiterhin werden die Informationen nicht Dritten zugänglich gemacht, das eingesetzte Hash-Verfahren ebenso wie die Einzel-Informationen nicht offen gelegt.
-    Auch dient es nicht dem Zweck der Verarbeitung für die Bereitstellung personalisierter Inhalte und Werbung, d.h. zur direkten Kommunikation mit einer bestimmten Person, sondern der aggregierten
-    statistischen Auswertung der Website-Nutzung.
-</p>
-<p>Die mit etracker erzeugten Daten werden im Auftrag des Anbieters dieser Website von etracker ausschließlich in Deutschland verarbeitet und gespeichert und unterliegen damit den
-    strengen deutschen und europäischen Datenschutzgesetzen und -standards. etracker wurde diesbezüglich unabhängig geprüft, zertifiziert und mit dem Datenschutz-Gütesiegel
-    <a href="https://www.eprivacy.eu/kunden/vergebene-siegel/firma/etracker-gmbh/">ePrivacyseal</a> ausgezeichnet.
-</p>
-<p>Die Datenverarbeitung erfolgt auf der Rechtsgrundlage des Art. 6 Abs .1 lit f (berechtigtes Interesse) der EU-Datenschutzgrundverordnung (EU-DSGVO).
-    Unser berechtigtes Interesse besteht in der Optimierung unseres Online-Angebotes und unseres Webauftritts. Da uns die Privatsphäre unserer Besucher besonders wichtig ist, wird die
-    IP-Adresse bei etracker frühestmöglich anonymisiert und Anmelde- oder Gerätekennungen bei etracker zu einem eindeutigen, aber nicht einer Person zugeordneten Schlüssel umgewandelt.
-    Eine andere Verwendung, Zusammenführung mit anderen Daten oder eine Weitergabe an Dritte erfolgt durch etracker nicht.
-</p>
-<p>Sie können der vorbeschriebenen Datenverarbeitung jederzeit widersprechen, soweit sie personenbezogen erfolgt. Ihr Widerspruch hat für Sie keine nachteiligen Folgen.</p>
+    <p><a href="#" data-tld="{domain}" id="et-opt-out">Tracking deaktivieren</a> </p>
 
-<p><a href="#" data-tld="{domain}" id="et-opt-out">Tracking deaktivieren</a> </p>
-
-<p>Weitere Informationen zum Datenschutz bei etracker finden Sie <a href="https://www.etracker.com/datenschutz/">hier</a>. </p>
+    <p>Weitere Informationen zum Datenschutz bei etracker finden Sie <a href="https://www.etracker.com/datenschutz/">hier</a>. </p>
+</html>
