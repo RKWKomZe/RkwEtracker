@@ -25,6 +25,7 @@ use RKW\RkwEtracker\Utility\CategoryUtility;
  * @copyright Rkw Kompetenzzentrum
  * @package RKW_RkwEtracker
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @deprecated This class will be removed soon. Do not use it any more.
  */
 class CategoryViewHelper extends AbstractViewHelper
 {
@@ -42,25 +43,15 @@ class CategoryViewHelper extends AbstractViewHelper
     public function render($category1 = '', $category2 = '', $category3 = '', $category4 = '', $category5 = '')
     {
 
-        $categories = array();
-        if ($category1) {
-            $categories[] = CategoryUtility::cleanUpCategoryName($category1);
-        }
-        if ($category2) {
-            $categories[] = CategoryUtility::cleanUpCategoryName($category2);
-        }
-        if ($category3) {
-            $categories[] = CategoryUtility::cleanUpCategoryName($category3);
-        }
-        if ($category4) {
-            $categories[] = CategoryUtility::cleanUpCategoryName($category4);
-        }
-        if ($category5) {
-            $categories[] = CategoryUtility::cleanUpCategoryName($category5);
-        }
-
-        return implode('/', $categories);
-        //===
+        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . ' is deprecated and will be removed soon. Use CategoryImplodeViewHelper instead.');
+        $categories = [
+            $category1,
+            $category2,
+            $category3,
+            $category4,
+            $category5
+        ];
+        return CategoryUtility::implodeCategories('', $categories);
 
     }
 

@@ -24,6 +24,7 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
  * @copyright Rkw Kompetenzzentrum
  * @package RKW_RkwEtracker
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @deprecated This class will be removed soon. Do not use it any more.
  */
 class DownloadDataRedirectLinkViewHelper extends AbstractViewHelper
 {
@@ -34,10 +35,12 @@ class DownloadDataRedirectLinkViewHelper extends AbstractViewHelper
      * @param \RKW\RkwEtracker\Domain\Model\Report $report
      * @param \RKW\RkwEtracker\Domain\Model\DownloadData $downloadData
      * @return array
+     * @deprecated
      */
     public function render(\RKW\RkwEtracker\Domain\Model\Report $report, \RKW\RkwEtracker\Domain\Model\DownloadData $downloadData)
     {
 
+        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . ' is deprecated and will be removed soon.');
         // build link
         $link = '/report/EAEvents' .
             //   '&filterString=' . urlencode($downloadData->getCategory()) .

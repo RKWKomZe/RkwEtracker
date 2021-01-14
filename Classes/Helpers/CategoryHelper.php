@@ -38,10 +38,8 @@ class CategoryHelper
      */
     public static function cleanUp($string)
     {
-
         \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__  . ' will be removed soon. Do not use it any more.');
         return CategoryUtility::cleanUpCategoryName($string);
-
     }
 
 

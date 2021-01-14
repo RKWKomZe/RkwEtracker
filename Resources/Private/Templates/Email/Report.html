@@ -1,313 +1,315 @@
-{namespace vh=RKW\RkwMailer\ViewHelpers}
-{namespace vh1=RKW\RkwEtracker\ViewHelpers}
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:rkwMailer="http://typo3.org/ns/RKW/RkwMailer/ViewHelpers"
+    xmlns:rkwEtracker="http://typo3.org/ns/RKW/RkwEtracker/ViewHelpers"
+    data-namespace-typo3-fluid="true">
 
-<f:layout name="Email/{mailType}" />
+    <f:layout name="Email/{mailType}" />
+
+    <!-- PLAINTEXT -->
+    <f:section name="Plaintext">
 
 
-<!-- PLAINTEXT -->
-<f:section name="Plaintext">
+    </f:section>
 
+    <!-- HTML -->
+    <f:section name="Html">
 
-</f:section>
-
-<!-- HTML -->
-<f:section name="Html">
-
-    <!-- report title -->
-    <h1>{report.name}</h1>
-    <f:if condition="{report.description}">
-        <p><f:format.nl2br>{report.description}</f:format.nl2br></p>
-    </f:if>
-
-    <h2><vh:frontend.translate key="templates_email_report.summary" languageKey="{languageKey}" extensionName="rkwEtracker"  /></h2>
-
-    <!-- area data -->
-    <f:if condition="{reportAreaSum}">
-        <f:if condition="{reportAreaSum.visitors}">
-            <h3> <vh:frontend.translate key="templates_email_report.headline1" languageKey="{languageKey}" extensionName="rkwEtracker"  /></h3>
-            <table border="0" cellpadding="0" cellspacing="0" class="colored-table">
-                <tbody>
-                <tr>
-                    <th>
-                        <nobr><vh:frontend.translate key="templates_email_report.groups" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
-                    </th>
-                    <th>
-                        <nobr><vh:frontend.translate key="templates_email_report.pageImpressions" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
-                    </th>
-                    <th>
-                        <nobr><vh:frontend.translate key="templates_email_report.visits" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
-                    </th>
-                    <th>
-                        <nobr><vh:frontend.translate key="templates_email_report.pageImpressionsPerVisit" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
-                    </th>
-                    <th>
-                        <nobr><vh:frontend.translate key="templates_email_report.timePerVisit" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
-                    </th>
-                    <th>
-                        <nobr><vh:frontend.translate key="templates_email_report.bouncesPerVisit" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
-                    </th>
-                </tr>
-                <f:for each="{reportData}" as="item" iteration="iterator">
-                    <tr {f:if(condition:iterator.isEven, then:' class="even"')}>
-                        <td>
-                            {item.areaSum.reportGroup.name}
-                        </td>
-                        <td class="align-right">
-                            <f:format.number decimals="0" thousandsSeparator=".">{item.areaSum.pageImpressions}</f:format.number>
-                        </td>
-                        <td class="align-right">
-                            <f:format.number decimals="0" thousandsSeparator=".">{item.areaSum.visits}</f:format.number>
-                        </td>
-                        <td class="align-right">
-                            <f:format.number decimals="2" decimalSeparator=",">{item.areaSum.pageImpressionsPerVisit}</f:format.number>
-                        </td>
-                        <td class="align-right">
-                            <f:format.date date="{item.areaSum.timePerVisit}" format="i:s" />
-                        </td>
-                        <td class="align-right">
-                            <f:format.number decimals="1" decimalSeparator=",">{item.areaSum.bouncesPerVisit}</f:format.number> %
-                        </td>
-                    </tr>
-
-                </f:for>
-                <tr class="sum">
-                    <td>&nbsp;</td>
-                    <td class="align-right">
-                        <f:format.number decimals="0" thousandsSeparator=".">{reportAreaSum.pageImpressions}</f:format.number>
-                    </td>
-                    <td class="align-right">
-                        <f:format.number decimals="0" thousandsSeparator=".">{reportAreaSum.visits}</f:format.number>
-                    </td>
-                    <td class="align-right">
-                        <f:format.number decimals="2" decimalSeparator=",">{reportAreaSum.pageImpressionsPerVisit}</f:format.number>
-                    </td>
-                    <td class="align-right">
-                        <f:format.date date="{reportAreaSum.TimePerVisit}" format="i:s" />
-                    </td>
-                    <td class="align-right">
-                        <f:format.number decimals="1" decimalSeparator=",">{reportAreaSum.bouncesPerVisit}</f:format.number> %
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="6" class="footer">
-                        <f:format.raw><vh:frontend.translate key="templates_email_report.legendAreaData" languageKey="{languageKey}" extensionName="rkwEtracker"  /></f:format.raw>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <p></p>
+        <!-- report title -->
+        <h1>{report.name}</h1>
+        <f:if condition="{report.description}">
+            <p><f:format.nl2br>{report.description}</f:format.nl2br></p>
         </f:if>
-    </f:if>
 
-    <!-- download data -->
-    <f:if condition="{reportDownloadSum}">
-        <f:if condition="{reportDownloadSum.events}">
-            <h3> <vh:frontend.translate key="templates_email_report.headline2" languageKey="{languageKey}" extensionName="rkwEtracker"  /></h3>
-            <table border="0" cellpadding="0" cellspacing="0" class="colored-table">
-                <tbody>
-                <tr>
-                    <th>
-                        <nobr><vh:frontend.translate key="templates_email_report.groups" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
-                    </th>
-                    <th>
-                        <nobr><vh:frontend.translate key="templates_email_report.events" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
-                    </th>
-                </tr>
-                <f:for each="{reportData}" as="item" iteration="iterator">
-                        <tr {f:if(condition:iterator.isEven, then:' class="even"')}>
-                            <td width="80%">
-                                {item.downloadSum.reportGroup.name}
-                            </td>
-                            <td class="align-right">
-                                <f:format.number decimals="0" thousandsSeparator=".">{item.downloadSum.events}</f:format.number>
-                            </td>
-                        </tr>
-                </f:for>
-                <tr class="sum">
-                    <td>&nbsp;</td>
-                    <!-- <td class="align-right">
-                        <f:format.number decimals="0" thousandsSeparator=".">{reportDownloadSum.events}</f:format.number>
-                    </td>-->
-                    <td class="align-right">
-                        <f:format.number decimals="0" thousandsSeparator=".">{reportDownloadSum.events}</f:format.number>
-                    </td>
-                </tr>
-                <!--
-                <tr>
-                    <td colspan="2" class="footer">
-                        <vh:frontend.translate key="templates_email_report.legendDownloadData" languageKey="{languageKey}" extensionName="rkwEtracker"  />
-                    </td>
-                </tr>
-                -->
-                </tbody>
-            </table>
-        </f:if>
-    </f:if>
-
-
-    <!-- ===================================================================================== -->
-    <!-- report groups -->
-    <f:for each="{reportData}" as="item" >
-        <f:if condition="{item.reportGroup.name}">
-            <h2>{item.reportGroup.name}</h2>
-        </f:if>
-        <f:if condition="{item.reportGroup.description}">
-            <p><f:format.nl2br>{item.reportGroup.description}</f:format.nl2br></p>
-        </f:if>
+        <h2><rkwMailer:frontend.translate key="templates_email_report.summary" languageKey="{languageKey}" extensionName="rkwEtracker"  /></h2>
 
         <!-- area data -->
-        <f:if condition="{item.areaData}">
-            <f:then>
-                <f:if condition="{item.areaSum.visits}">
-                    <f:then>
-                        <h3><vh:frontend.translate key="templates_email_report.headline1" languageKey="{languageKey}" extensionName="rkwEtracker"  /></h3>
-                        <table border="0" cellpadding="0" cellspacing="0" class="colored-table">
-                            <tbody>
+        <f:if condition="{reportAreaSum}">
+            <f:if condition="{reportAreaSum.visitors}">
+                <h3> <rkwMailer:frontend.translate key="templates_email_report.headline1" languageKey="{languageKey}" extensionName="rkwEtracker"  /></h3>
+                <table border="0" cellpadding="0" cellspacing="0" class="colored-table">
+                    <tbody>
+                    <tr>
+                        <th>
+                            <nobr><rkwMailer:frontend.translate key="templates_email_report.groups" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
+                        </th>
+                        <th>
+                            <nobr><rkwMailer:frontend.translate key="templates_email_report.pageImpressions" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
+                        </th>
+                        <th>
+                            <nobr><rkwMailer:frontend.translate key="templates_email_report.visits" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
+                        </th>
+                        <th>
+                            <nobr><rkwMailer:frontend.translate key="templates_email_report.pageImpressionsPerVisit" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
+                        </th>
+                        <th>
+                            <nobr><rkwMailer:frontend.translate key="templates_email_report.timePerVisit" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
+                        </th>
+                        <th>
+                            <nobr><rkwMailer:frontend.translate key="templates_email_report.bouncesPerVisit" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
+                        </th>
+                    </tr>
+                    <f:for each="{reportData}" as="item" iteration="iterator">
+                        <tr {f:if(condition:iterator.isEven, then:' class="even"')}>
+                            <td>
+                                {item.areaSum.reportGroup.name}
+                            </td>
+                            <td class="align-right">
+                                <f:format.number decimals="0" thousandsSeparator=".">{item.areaSum.pageImpressions}</f:format.number>
+                            </td>
+                            <td class="align-right">
+                                <f:format.number decimals="0" thousandsSeparator=".">{item.areaSum.visits}</f:format.number>
+                            </td>
+                            <td class="align-right">
+                                <f:format.number decimals="2" decimalSeparator=",">{item.areaSum.pageImpressionsPerVisit}</f:format.number>
+                            </td>
+                            <td class="align-right">
+                                <f:format.date date="{item.areaSum.timePerVisit}" format="i:s" />
+                            </td>
+                            <td class="align-right">
+                                <f:format.number decimals="1" decimalSeparator=",">{item.areaSum.bouncesPerVisit}</f:format.number> %
+                            </td>
+                        </tr>
+
+                    </f:for>
+                    <tr class="sum">
+                        <td>&nbsp;</td>
+                        <td class="align-right">
+                            <f:format.number decimals="0" thousandsSeparator=".">{reportAreaSum.pageImpressions}</f:format.number>
+                        </td>
+                        <td class="align-right">
+                            <f:format.number decimals="0" thousandsSeparator=".">{reportAreaSum.visits}</f:format.number>
+                        </td>
+                        <td class="align-right">
+                            <f:format.number decimals="2" decimalSeparator=",">{reportAreaSum.pageImpressionsPerVisit}</f:format.number>
+                        </td>
+                        <td class="align-right">
+                            <f:format.date date="{reportAreaSum.TimePerVisit}" format="i:s" />
+                        </td>
+                        <td class="align-right">
+                            <f:format.number decimals="1" decimalSeparator=",">{reportAreaSum.bouncesPerVisit}</f:format.number> %
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" class="footer">
+                            <f:format.raw><rkwMailer:frontend.translate key="templates_email_report.legendAreaData" languageKey="{languageKey}" extensionName="rkwEtracker"  /></f:format.raw>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <p></p>
+            </f:if>
+        </f:if>
+
+        <!-- download data -->
+        <f:if condition="{reportDownloadSum}">
+            <f:if condition="{reportDownloadSum.events}">
+                <h3> <rkwMailer:frontend.translate key="templates_email_report.headline2" languageKey="{languageKey}" extensionName="rkwEtracker"  /></h3>
+                <table border="0" cellpadding="0" cellspacing="0" class="colored-table">
+                    <tbody>
+                    <tr>
+                        <th>
+                            <nobr><rkwMailer:frontend.translate key="templates_email_report.groups" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
+                        </th>
+                        <th>
+                            <nobr><rkwMailer:frontend.translate key="templates_email_report.events" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
+                        </th>
+                    </tr>
+                    <f:for each="{reportData}" as="item" iteration="iterator">
+                            <tr {f:if(condition:iterator.isEven, then:' class="even"')}>
+                                <td width="80%">
+                                    {item.downloadSum.reportGroup.name}
+                                </td>
+                                <td class="align-right">
+                                    <f:format.number decimals="0" thousandsSeparator=".">{item.downloadSum.events}</f:format.number>
+                                </td>
+                            </tr>
+                    </f:for>
+                    <tr class="sum">
+                        <td>&nbsp;</td>
+                        <!-- <td class="align-right">
+                            <f:format.number decimals="0" thousandsSeparator=".">{reportDownloadSum.events}</f:format.number>
+                        </td>-->
+                        <td class="align-right">
+                            <f:format.number decimals="0" thousandsSeparator=".">{reportDownloadSum.events}</f:format.number>
+                        </td>
+                    </tr>
+                    <!--
+                    <tr>
+                        <td colspan="2" class="footer">
+                            <rkwMailer:frontend.translate key="templates_email_report.legendDownloadData" languageKey="{languageKey}" extensionName="rkwEtracker"  />
+                        </td>
+                    </tr>
+                    -->
+                    </tbody>
+                </table>
+            </f:if>
+        </f:if>
+
+
+        <!-- ===================================================================================== -->
+        <!-- report groups -->
+        <f:for each="{reportData}" as="item" >
+            <f:if condition="{item.reportGroup.name}">
+                <h2>{item.reportGroup.name}</h2>
+            </f:if>
+            <f:if condition="{item.reportGroup.description}">
+                <p><f:format.nl2br>{item.reportGroup.description}</f:format.nl2br></p>
+            </f:if>
+
+            <!-- area data -->
+            <f:if condition="{item.areaData}">
+                <f:then>
+                    <f:if condition="{item.areaSum.visits}">
+                        <f:then>
+                            <h3><rkwMailer:frontend.translate key="templates_email_report.headline1" languageKey="{languageKey}" extensionName="rkwEtracker"  /></h3>
+                            <table border="0" cellpadding="0" cellspacing="0" class="colored-table">
+                                <tbody>
+                                <tr>
+                                    <th>
+                                        <nobr><rkwMailer:frontend.translate key="templates_email_report.categories" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
+                                    </th>
+                                    <th>
+                                        <nobr><rkwMailer:frontend.translate key="templates_email_report.pageImpressions" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
+                                    </th>
+                                    <th>
+                                        <nobr><rkwMailer:frontend.translate key="templates_email_report.visits" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
+                                    </th>
+                                    <th>
+                                        <nobr><rkwMailer:frontend.translate key="templates_email_report.pageImpressionsPerVisit" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
+                                    </th>
+                                    <th>
+                                        <nobr><rkwMailer:frontend.translate key="templates_email_report.timePerVisit" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
+                                    </th>
+                                    <th>
+                                        <nobr><rkwMailer:frontend.translate key="templates_email_report.bouncesPerVisit" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
+                                    </th>
+                                </tr>
+                                <f:for each="{item.areaData}" as="data" iteration="iterator">
+                                    <tr {f:if(condition:iterator.isEven, then:' class="even"')}>
+                                        <td>
+                                            <f:if condition="{report.linkToApi}">
+                                                <f:then>
+                                                    <a href="<rkwMailer:frontend.link absolute='TRUE' pageUid='{singleSignOnPid}' noCacheHash='true' />">
+                                                        <rkwEtracker:categoryImplodeAreaData areaData="{data}" />
+                                                    </a>
+                                                </f:then>
+                                                <f:else>
+                                                    <rkwEtracker:categoryImplodeAreaData areaData="{data}" />
+                                                </f:else>
+                                            </f:if>
+                                        </td>
+                                        <td class="align-right">
+                                            <f:format.number decimals="0" thousandsSeparator=".">{data.pageImpressions}</f:format.number>
+                                        </td>
+                                        <td class="align-right">
+                                            <f:format.number decimals="0" thousandsSeparator=".">{data.visits}</f:format.number>
+                                        </td>
+                                        <td class="align-right">
+                                            <f:format.number decimals="2" decimalSeparator=",">{data.pageImpressionsPerVisit}</f:format.number>
+                                        </td>
+                                        <td class="align-right">
+                                            <f:format.date date="{data.timePerVisit}" format="i:s" />
+                                        </td>
+                                        <td class="align-right">
+                                            <f:format.number decimals="1" decimalSeparator=",">{data.bouncesPerVisit}</f:format.number> %
+                                        </td>
+                                    </tr>
+                                </f:for>
+                                <tr class="sum">
+                                    <td>&nbsp;</td>
+                                    <td class="align-right">
+                                        <f:format.number decimals="0" thousandsSeparator=".">{item.areaSum.pageImpressions}</f:format.number>
+                                    </td>
+                                    <td class="align-right">
+                                        <f:format.number decimals="0" thousandsSeparator=".">{item.areaSum.visits}</f:format.number>
+                                    </td>
+                                    <td class="align-right">
+                                        <f:format.number decimals="2" decimalSeparator=",">{item.areaSum.pageImpressionsPerVisit}</f:format.number>
+                                    </td>
+                                    <td class="align-right">
+                                        <f:format.date date="{item.areaSum.TimePerVisit}" format="i:s" />
+                                    </td>
+                                    <td class="align-right">
+                                        <f:format.number decimals="1" decimalSeparator=",">{item.areaSum.bouncesPerVisit}</f:format.number> %
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7" class="footer">
+                                        <f:format.raw><rkwMailer:frontend.translate key="templates_email_report.legendAreaData" languageKey="{languageKey}" extensionName="rkwEtracker"  /></f:format.raw>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </f:then>
+                        <f:else>
+                            <h3><rkwMailer:frontend.translate key="templates_email_report.noData" languageKey="{languageKey}" extensionName="rkwEtracker"  /></h3>
+                        </f:else>
+                    </f:if>
+                </f:then>
+                <f:else>
+                    <h3><rkwMailer:frontend.translate key="templates_email_report.noData" languageKey="{languageKey}" extensionName="rkwEtracker"  /></h3>
+                </f:else>
+            </f:if>
+
+            <!-- download data -->
+            <f:if condition="{item.downloadData}">
+                <f:if condition="{item.downloadSum.events}">
+                    <h3> <rkwMailer:frontend.translate key="templates_email_report.headline2" languageKey="{languageKey}" extensionName="rkwEtracker"  /></h3>
+                    <table border="0" cellpadding="0" cellspacing="0" class="colored-table">
+                        <tbody>
                             <tr>
                                 <th>
-                                    <nobr><vh:frontend.translate key="templates_email_report.categories" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
+                                    <nobr><rkwMailer:frontend.translate key="templates_email_report.action" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
                                 </th>
                                 <th>
-                                    <nobr><vh:frontend.translate key="templates_email_report.pageImpressions" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
+                                    <nobr><rkwMailer:frontend.translate key="templates_email_report.category" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
                                 </th>
                                 <th>
-                                    <nobr><vh:frontend.translate key="templates_email_report.visits" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
-                                </th>
-                                <th>
-                                    <nobr><vh:frontend.translate key="templates_email_report.pageImpressionsPerVisit" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
-                                </th>
-                                <th>
-                                    <nobr><vh:frontend.translate key="templates_email_report.timePerVisit" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
-                                </th>
-                                <th>
-                                    <nobr><vh:frontend.translate key="templates_email_report.bouncesPerVisit" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
+                                    <nobr><rkwMailer:frontend.translate key="templates_email_report.events" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
                                 </th>
                             </tr>
-                            <f:for each="{item.areaData}" as="data" iteration="iterator">
+                            <f:for each="{item.downloadData}" as="data" iteration="iterator">
                                 <tr {f:if(condition:iterator.isEven, then:' class="even"')}>
                                     <td>
+                                        {data.action}
+                                    </td>
+                                    <td width="70%">
                                         <f:if condition="{report.linkToApi}">
                                             <f:then>
-                                                <a href="<vh:frontend.link absolute='TRUE' pageUid='{singleSignOnPid}' noCacheHash='true' additionalParams='<vh1:areaDataRedirectLink report=\'{report}\' areaData=\'{data}\' />' />">
-                                                    <vh1:categoryList areaData="{data}" />
+                                                <a href="<rkwMailer:frontend.link absolute='TRUE' pageUid='{singleSignOnPid}' noCacheHash='true' />">
+                                                    {data.category}
                                                 </a>
                                             </f:then>
                                             <f:else>
-                                                <vh1:categoryList areaData="{data}" />
+                                                {data.category}
                                             </f:else>
                                         </f:if>
+
                                     </td>
                                     <td class="align-right">
-                                        <f:format.number decimals="0" thousandsSeparator=".">{data.pageImpressions}</f:format.number>
-                                    </td>
-                                    <td class="align-right">
-                                        <f:format.number decimals="0" thousandsSeparator=".">{data.visits}</f:format.number>
-                                    </td>
-                                    <td class="align-right">
-                                        <f:format.number decimals="2" decimalSeparator=",">{data.pageImpressionsPerVisit}</f:format.number>
-                                    </td>
-                                    <td class="align-right">
-                                        <f:format.date date="{data.timePerVisit}" format="i:s" />
-                                    </td>
-                                    <td class="align-right">
-                                        <f:format.number decimals="1" decimalSeparator=",">{data.bouncesPerVisit}</f:format.number> %
+                                        <f:format.number decimals="0" thousandsSeparator=".">{data.events}</f:format.number>
                                     </td>
                                 </tr>
                             </f:for>
                             <tr class="sum">
                                 <td>&nbsp;</td>
+                                <td>&nbsp;</td>
                                 <td class="align-right">
-                                    <f:format.number decimals="0" thousandsSeparator=".">{item.areaSum.pageImpressions}</f:format.number>
-                                </td>
-                                <td class="align-right">
-                                    <f:format.number decimals="0" thousandsSeparator=".">{item.areaSum.visits}</f:format.number>
-                                </td>
-                                <td class="align-right">
-                                    <f:format.number decimals="2" decimalSeparator=",">{item.areaSum.pageImpressionsPerVisit}</f:format.number>
-                                </td>
-                                <td class="align-right">
-                                    <f:format.date date="{item.areaSum.TimePerVisit}" format="i:s" />
-                                </td>
-                                <td class="align-right">
-                                    <f:format.number decimals="1" decimalSeparator=",">{item.areaSum.bouncesPerVisit}</f:format.number> %
+                                    <f:format.number decimals="0" thousandsSeparator=".">{item.downloadSum.events}</f:format.number>
                                 </td>
                             </tr>
+                            <!--
                             <tr>
-                                <td colspan="7" class="footer">
-                                    <f:format.raw><vh:frontend.translate key="templates_email_report.legendAreaData" languageKey="{languageKey}" extensionName="rkwEtracker"  /></f:format.raw>
+                                <td colspan="3" class="footer">
+                                    <rkwMailer:frontend.translate key="templates_email_report.legendDownloadData" languageKey="{languageKey}" extensionName="rkwEtracker"  />
                                 </td>
                             </tr>
-                            </tbody>
-                        </table>
-                    </f:then>
-                    <f:else>
-                        <h3><vh:frontend.translate key="templates_email_report.noData" languageKey="{languageKey}" extensionName="rkwEtracker"  /></h3>
-                    </f:else>
+                            -->
+                        </tbody>
+                    </table>
                 </f:if>
-            </f:then>
-            <f:else>
-                <h3><vh:frontend.translate key="templates_email_report.noData" languageKey="{languageKey}" extensionName="rkwEtracker"  /></h3>
-            </f:else>
-        </f:if>
-
-        <!-- download data -->
-        <f:if condition="{item.downloadData}">
-            <f:if condition="{item.downloadSum.events}">
-                <h3> <vh:frontend.translate key="templates_email_report.headline2" languageKey="{languageKey}" extensionName="rkwEtracker"  /></h3>
-                <table border="0" cellpadding="0" cellspacing="0" class="colored-table">
-                    <tbody>
-                        <tr>
-                            <th>
-                                <nobr><vh:frontend.translate key="templates_email_report.action" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
-                            </th>
-                            <th>
-                                <nobr><vh:frontend.translate key="templates_email_report.category" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
-                            </th>
-                            <th>
-                                <nobr><vh:frontend.translate key="templates_email_report.events" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
-                            </th>
-                        </tr>
-                        <f:for each="{item.downloadData}" as="data" iteration="iterator">
-                            <tr {f:if(condition:iterator.isEven, then:' class="even"')}>
-                                <td>
-                                    {data.action}
-                                </td>
-                                <td width="70%">
-                                    <f:if condition="{report.linkToApi}">
-                                        <f:then>
-                                            <a href="<vh:frontend.link absolute='TRUE' pageUid='{singleSignOnPid}' noCacheHash='true' additionalParams='<vh1:downloadDataRedirectLink report=\'{report}\' downloadData=\'{data}\' />' />">
-                                                {data.category}
-                                            </a>
-                                        </f:then>
-                                        <f:else>
-                                            {data.category}
-                                        </f:else>
-                                    </f:if>
-
-                                </td>
-                                <td class="align-right">
-                                    <f:format.number decimals="0" thousandsSeparator=".">{data.events}</f:format.number>
-                                </td>
-                            </tr>
-                        </f:for>
-                        <tr class="sum">
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td class="align-right">
-                                <f:format.number decimals="0" thousandsSeparator=".">{item.downloadSum.events}</f:format.number>
-                            </td>
-                        </tr>
-                        <!--
-                        <tr>
-                            <td colspan="3" class="footer">
-                                <vh:frontend.translate key="templates_email_report.legendDownloadData" languageKey="{languageKey}" extensionName="rkwEtracker"  />
-                            </td>
-                        </tr>
-                        -->
-                    </tbody>
-                </table>
             </f:if>
-        </f:if>
-    </f:for>
+        </f:for>
 
-</f:section>
+    </f:section>
+</html>

@@ -1,4 +1,7 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    data-namespace-typo3-fluid="true">
 
-<f:render partial="FlashMessages" arguments="{_all}" />
+    <f:render partial="FlashMessages" arguments="{_all}" />
+    <a href="<f:format.raw>{redirectUrl}</f:format.raw>"><f:translate key="templates_redirect_redirect.info" /></a>
 
-<a href="<f:format.raw>{redirectUrl}</f:format.raw>"><f:translate key="templates_redirect_redirect.info" /></a>
+</html>

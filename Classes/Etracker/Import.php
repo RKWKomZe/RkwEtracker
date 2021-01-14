@@ -4,6 +4,7 @@ namespace RKW\RkwEtracker\Etracker;
 
 use \RKW\RkwBasics\Helper\Common;
 use RKW\RkwEtracker\Utility\CategoryUtility;
+use RKW\RkwEtracker\Utility\DateUtility;
 use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 /*
@@ -237,10 +238,21 @@ class Import
                     $setterDefault = 'set' . ucfirst($property);
                     $getterFreetext = 'get' . ucfirst($property) . 'Free';
 
-                    // get values
-                    $filterString = CategoryUtility::cleanUpCategoryName($reportFilter->$getterDefault());
-                    if ($reportFilter->$getterFreetext()) {
-                        $filterString = CategoryUtility::cleanUpCategoryName($reportFilter->$getterFreetext());
+                    if ($property == 'domain') {
+
+                        // get values
+                        $filterString = CategoryUtility::cleanUpDomainName($reportFilter->$getterDefault());
+                        if ($reportFilter->$getterFreetext()) {
+                            $filterString = CategoryUtility::cleanUpDomainName($reportFilter->$getterFreetext());
+                        }
+
+                    } else {
+
+                        // get values
+                        $filterString = CategoryUtility::cleanUpCategoryName($reportFilter->$getterDefault());
+                        if ($reportFilter->$getterFreetext()) {
+                            $filterString = CategoryUtility::cleanUpCategoryName($reportFilter->$getterFreetext());
+                        }
                     }
 
                     // build category filter for API
@@ -249,7 +261,6 @@ class Import
                         && (!is_numeric($filterString))
                     ) {
 
-                        $categoryFilterString = $filterString;
                         $categoryFilter[] = preg_replace("/\s/", '', '
                             {
                                 "input":"' . $filterString . '",
@@ -273,10 +284,10 @@ class Import
                 ) {
                     $this->mappingAreaData($rawData, $areaData);
                     $areaDataRepository->add($areaData);
-                    $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Import of eTracker area data for reportGroup "%s" (id=%s) with filter "%s" (id=%s) successfull.', $reportGroup->getName(), $reportGroup->getUid(), $categoryFilterString, $reportFilter->getUid()));
+                    $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Import of eTracker area data for reportGroup "%s" (id=%s) with filter "%s" (id=%s) successful.', $reportGroup->getName(), $reportGroup->getUid(), implode(',', $categoryFilter), $reportFilter->getUid()));
 
                 } else {
-                    $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Received no area data for reportGroup "%s" (id=%s) with filter "%s" (id=%s) from eTracker API.', $reportGroup->getName(), $reportGroup->getUid(), $categoryFilterString, $reportFilter->getUid()));
+                    $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Received no area data for reportGroup "%s" (id=%s) with filter "%s" (id=%s) from eTracker API.', $reportGroup->getName(), $reportGroup->getUid(), implode(',', $categoryFilter), $reportFilter->getUid()));
                 }
             }
 
@@ -603,121 +614,41 @@ class Import
      *
      * @param \RKW\RkwEtracker\Domain\Model\Report $report
      * @return array
+     * @throws \Exception
      */
     protected function getDateParams($report)
     {
-        $currentTime = getdate();
-        $returnValues = array();
 
-        //===================
-        // yearly reports
-        if ($report->getType() == 0) {
+        $date = new \DateTime();
 
-            $report->setMonth(0);
-            $report->setQuarter(0);
-            $report->setYear(($currentTime['year'] - 1));#
+        // check if we have an accountStartDate
+        $dateLimit = null;
+        if ($this->configuration['accountStartDate']) {
+            $dateLimit = new \DateTime(date('Y-m-d', strtotime($this->configuration['accountStartDate'])));
+        }
 
-            // set params
-            $returnValues = array(
-                'startDate' => ($currentTime['year'] - 1) . '-01-01',
-                'endDate'   => ($currentTime['year'] - 1) . '-12-31',
-            );
+        $dateArray = DateUtility::getStartEndLAstYear($date, $dateLimit);
 
         //===================
         // quarterly reports
-        } elseif ($report->getType() == 1) {
+        if ($report->getType() == 1) {
 
-            // define quarters
-            $quarters = array(
-                1  => 1,
-                2  => 1,
-                3  => 1,
-                4  => 2,
-                5  => 2,
-                6  => 2,
-                7  => 3,
-                8  => 3,
-                9  => 3,
-                10 => 4,
-                11 => 4,
-                12 => 4,
-            );
-
-            // define quarter and year
-            $quarter = ($quarters[$currentTime['mon']] - 1);
-            $year = $currentTime['year'];
-            if ($quarter == 0) {
-                $quarter = 4;
-                $year--;
-            }
-
-            // get start and end dates for quarters
-            $quartersStartEnd = array(
-                1 => array(
-                    'startDate' => $year . '-01-01',
-                    'endDate'   => date('Y-m-t', strtotime($year . '-03-01')),
-                ),
-                2 => array(
-                    'startDate' => $year . '-04-01',
-                    'endDate'   => date('Y-m-t', strtotime($year . '-06-01')),
-                ),
-                3 => array(
-                    'startDate' => $year . '-07-01',
-                    'endDate'   => date('Y-m-t', strtotime($year . '-09-01')),
-                ),
-                4 => array(
-                    'startDate' => $year . '-10-01',
-                    'endDate'   => date('Y-m-t', strtotime($year . '-12-01')),
-                ),
-            );
-
-            $report->setMonth(0);
-            $report->setQuarter($quarter);
-            $report->setYear($year);
-
-            // set params
-            $returnValues = array(
-                'startDate' => $quartersStartEnd[$quarter]['startDate'],
-                'endDate'   => $quartersStartEnd[$quarter]['endDate'],
-            );
+            $dateArray = DateUtility::getStartEndLastQuarter($date, $dateLimit);
 
         //===================
         // monthly reports
-        } else {
-            if ($report->getType() == 2) {
+        } else if ($report->getType() == 2) {
 
-                // define quarter and year
-                $month = ($currentTime['mon'] - 1);
-                $year = $currentTime['year'];
-                if ($month == 0) {
-                    $month = 12;
-                    $year--;
-                }
-
-                $report->setMonth($month);
-                $report->setQuarter(0);
-                $report->setYear($year);
-
-                // set params
-                $returnValues = array(
-                    'startDate' => date('Y-m-d', strtotime($year . '-' . $month . '-01')),
-                    'endDate'   => date('Y-m-t', strtotime($year . '-' . $month . '-01')),
-                );
-            }
+            $dateArray = DateUtility::getStartEndLastMonth($date, $dateLimit);
         }
 
-        // check if startdate lies before account start
-        if ($this->configuration['accountStartDate']) {
+        $report->setMonth(intval($dateArray['month']));
+        $report->setQuarter(intval($dateArray['quarter']));
+        $report->setYear(intval($dateArray['year']));
+        $report->setLastStartTstamp(strtotime($dateArray['startDate']));
+        $report->setLastEndTstamp(strtotime($dateArray['endDate']));
 
-            if (strtotime($returnValues['startDate']) < strtotime($this->configuration['accountStartDate'])) {
-                $returnValues['startDate'] = date('Y-m-d', strtotime($this->configuration['accountStartDate']));
-            }
-        }
-
-        $report->setLastStartTstamp(strtotime($returnValues['startDate']));
-        $report->setLastEndTstamp(strtotime($returnValues['endDate']));
-
-        return $returnValues;
+        return $dateArray;
     }
 
 
