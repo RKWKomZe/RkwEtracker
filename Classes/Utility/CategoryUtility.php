@@ -28,24 +28,74 @@ class CategoryUtility
 
     /**
      * Cleans up category strings
-     * Removes slashes and sets string to UpperCamelcase
+     * Removes non-alphanumeric signs and sets string to UpperCamelcase
      *
-     * @param $string
+     * @param string $string
      * @return string
      */
-    public static function cleanUpCategoryName($string)
+    public static function cleanUpCategoryName(string $string): string
     {
 
-        $replacements = array(
-            ' ',
-            '_',
-            '"',
-            '.',
-        );
+        // replace slashes with hyphens for backwards compatibility
+        $string = str_replace('/', '-', $string);
 
-        return ucfirst(str_replace($replacements, '', ucwords(str_replace('/', '-', $string))));
-
+        return ucfirst(preg_replace('#[^a-zA-Z0-9\-äÄüÜöÖß]#', '', ucwords($string)));
     }
 
 
+    /**
+     * Cleans up domain strings
+     * Removes all signs not allowed in domain names
+     *
+     * @param string $string
+     * @return string
+     */
+    public static function cleanUpDomainName(string $string): string
+    {
+        return strtolower(preg_replace('#[^a-zA-Z0-9\-\.äÄüÜöÖß]#', '', $string));
+    }
+
+
+    /**
+     * Implodes categories
+     *
+     * @param string $domain
+     * @param array $categories
+     * @param string $defaultValue
+     * @param bool $sanitizeDefaultValue
+     * @return string
+     */
+    public static function implodeCategories(
+        string $domain = '',
+        array $categories = [],
+        string $defaultValue = 'Default',
+        bool $sanitizeDefaultValue = true): string
+    {
+
+        $cleanedCategories = [];
+        if ($sanitizeDefaultValue) {
+            $defaultValue = self::cleanUpCategoryName($defaultValue);
+        }
+
+        // add domain
+        if ($domain) {
+            $cleanedCategories[] = self::cleanUpDomainName($domain);
+        }
+
+        // add categories
+        foreach ($categories as $category) {
+            if (! $category) {
+                $cleanedCategories[] = $defaultValue;
+            } else {
+                $cleanedCategories[] = self::cleanUpCategoryName($category);
+            }
+        }
+
+        // remove default categories from the end
+        while ($defaultValue === end($cleanedCategories)) {
+            array_pop($cleanedCategories);
+        }
+
+        return implode('/', $cleanedCategories);
+    }
 }

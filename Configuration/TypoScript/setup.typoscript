@@ -81,13 +81,6 @@ plugin.tx_rkwetracker {
         // set categories via TypoScript - this way we can use levelfield-slide AND we
         // have the possibility to override the values via TypoScript without having to
         // change the template files!
-        categoryDomainPrefix = TEXT
-        categoryDomainPrefix {
-            data = getIndpEnv:HTTP_HOST
-            noTrimWrap = ||/|
-        }
-
-        // Default-Setup
         #=================================================================
         categoryLevel1 = TEXT
         categoryLevel1.data = levelfield:-1, tx_rkwetracker_category_level1, slide
@@ -103,77 +96,89 @@ plugin.tx_rkwetracker {
 
         categoryLevel5 = TEXT
         categoryLevel5.data = levelfield:-1, tx_rkwetracker_category_level5, slide
-
-        // Setup with rkw_projects installed
-        #=================================================================
-        categoryLevel1 = COA
-        categoryLevel1 {
-            30 = RECORDS
-            30 {
-                source.data = levelfield: -1 , tx_rkwbasics_department, slide
-                tables = tx_rkwbasics_domain_model_department
-                conf.tx_rkwbasics_domain_model_department = TEXT
-                conf.tx_rkwbasics_domain_model_department {
-                    field = name
-                    override.field = internal_name
-                }
-
-                // Default value if empty
-                stdWrap.ifEmpty.cObject = COA
-                stdWrap.ifEmpty.cObject {
-                    10 = TEXT
-                    10.value = Default
-                }
-            }
-        }
-
-        categoryLevel2 = COA
-        categoryLevel2 {
-            10 = RECORDS
-            10 {
-                source.data = levelfield: -1 , tx_rkwprojects_project_uid, slide
-                tables = tx_rkwprojects_domain_model_projects
-                conf.tx_rkwprojects_domain_model_projects = TEXT
-                conf.tx_rkwprojects_domain_model_projects {
-                    field = short_name
-                    override.field = internal_name
-                }
-
-                // Default value if empty
-                stdWrap.ifEmpty.cObject = COA
-                stdWrap.ifEmpty.cObject {
-                    10 = TEXT
-                    10.value = Default
-                }
-            }
-        }
-
-        categoryLevel3 = COA
-        categoryLevel3 {
-            30 = RECORDS
-            30 {
-                source.data = levelfield: -1, tx_rkwbasics_document_type, slide
-                tables = tx_rkwbasics_domain_model_documenttype
-                conf.tx_rkwbasics_domain_model_documenttype = TEXT
-                conf.tx_rkwbasics_domain_model_documenttype {
-                    field = short_name
-                    override.field = internal_name
-                }
-
-                // Default value if empty
-                stdWrap.ifEmpty.cObject = COA
-                stdWrap.ifEmpty.cObject {
-                    10 = TEXT
-                    10.value = Default
-                }
-            }
-        }
     }
 }
 
 
 # needed for backend context (cronjobs)
 module.tx_rkwetracker < plugin.tx_rkwetracker
+
+
+#===============================================================
+# Override configuration when rkw_projects installed
+#===============================================================
+[userFunc = TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_projects')]
+
+    plugin.tx_rkwetracker {
+
+        lib {
+
+            categoryLevel1 = COA
+            categoryLevel1 {
+                30 = RECORDS
+                30 {
+                    source.data = levelfield: -1 , tx_rkwbasics_department, slide
+                    tables = tx_rkwbasics_domain_model_department
+                    conf.tx_rkwbasics_domain_model_department = TEXT
+                    conf.tx_rkwbasics_domain_model_department {
+                        field = name
+                        override.field = internal_name
+                    }
+
+                    // Default value if empty
+                    stdWrap.ifEmpty.cObject = COA
+                    stdWrap.ifEmpty.cObject {
+                        10 = TEXT
+                        10.value = Default
+                    }
+                }
+            }
+
+            categoryLevel2 = COA
+            categoryLevel2 {
+                10 = RECORDS
+                10 {
+                    source.data = levelfield: -1 , tx_rkwprojects_project_uid, slide
+                    tables = tx_rkwprojects_domain_model_projects
+                    conf.tx_rkwprojects_domain_model_projects = TEXT
+                    conf.tx_rkwprojects_domain_model_projects {
+                        field = short_name
+                        override.field = internal_name
+                    }
+
+                    // Default value if empty
+                    stdWrap.ifEmpty.cObject = COA
+                    stdWrap.ifEmpty.cObject {
+                        10 = TEXT
+                        10.value = Default
+                    }
+                }
+            }
+
+            categoryLevel3 = COA
+            categoryLevel3 {
+                30 = RECORDS
+                30 {
+                    source.data = levelfield: -1, tx_rkwbasics_document_type, slide
+                    tables = tx_rkwbasics_domain_model_documenttype
+                    conf.tx_rkwbasics_domain_model_documenttype = TEXT
+                    conf.tx_rkwbasics_domain_model_documenttype {
+                        field = short_name
+                        override.field = internal_name
+                    }
+
+                    // Default value if empty
+                    stdWrap.ifEmpty.cObject = COA
+                    stdWrap.ifEmpty.cObject {
+                        10 = TEXT
+                        10.value = Default
+                    }
+                }
+            }
+        }
+    }
+[global]
+
 
 #===============================================================
 # Insert Tracking
