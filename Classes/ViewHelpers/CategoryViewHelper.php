@@ -43,7 +43,7 @@ class CategoryViewHelper extends AbstractViewHelper
     public function render($category1 = '', $category2 = '', $category3 = '', $category4 = '', $category5 = '')
     {
 
-        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . ' is deprecated and will be removed soon. Use CategoryImplodeViewHelper instead.');
+        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . ' is deprecated and will be removed soon. Use ImplodeCategoriesViewHelper instead.');
         $categories = [
             $category1,
             $category2,

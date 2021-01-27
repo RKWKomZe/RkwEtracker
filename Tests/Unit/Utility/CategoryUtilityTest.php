@@ -15,7 +15,10 @@ namespace RKW\RkwEtracker\Tests\Unit\Utility;
  */
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use RKW\RkwEtracker\Domain\Model\AreaData;
+use RKW\RkwEtracker\Domain\Model\ReportFilter;
 use RKW\RkwEtracker\Utility\CategoryUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 
 /**
@@ -319,7 +322,706 @@ class CategoryUtilityTest extends UnitTestCase
         static::assertEquals($expected, CategoryUtility::implodeCategories($domain, $categoryArray, $defaultValue, false));
 
     }
+
+
+
     //=============================================
+
+    /**
+     * @test
+     */
+    public function reportFilterCategoriesToArrayReturnsAllCategories()
+    {
+
+        /**
+         * Scenario:
+         *
+         * Given a reportFilter is set as param
+         * Given that reportFilter has a filter by domain
+         * Given that reportFilter has four of five category filters set
+         * Given that the third category filter is empty
+         * When I call reportFilterCategoriesToArray
+         * Then the domain is not included in the returned array
+         * Then all five category filters are returned
+         * Then the empty third category filter is returned as empty value
+         * Then all category filters are sanitized
+         */
+
+        /** @var ReportFilter $reportFilter */
+        $reportFilter = GeneralUtility::makeInstance(ReportFilter::class);
+        $reportFilter->setDomain('meine dolle domäne.com');
+        $reportFilter->setCategoryLevel1('Pferde_Stärken');
+        $reportFilter->setCategoryLevel2('Hasen Schwächen');
+        $reportFilter->setCategoryLevel3('');
+        $reportFilter->setCategoryLevel4('Testen Mit den Besten');
+        $reportFilter->setCategoryLevel5('Ganz/Toll');
+
+        $result = CategoryUtility::reportFilterCategoriesToArray($reportFilter);
+
+        $expected = [
+            0 => 'PferdeStärken',
+            1 => 'HasenSchwächen',
+            2 => '',
+            3 => 'TestenMitDenBesten',
+            4 => 'Ganz-Toll'
+        ];
+
+        static::assertInternalType('array', $result);
+        static::assertEquals($expected, $result);
+    }
+
+
+    /**
+     * @test
+     */
+    public function reportFilterCategoriesToArrayTreatsNumericCategoriesAsEmpty()
+    {
+
+        /**
+         * Scenario:
+         *
+         * Given a reportFilter is set as param
+         * Given that reportFilter has a filter by domain
+         * Given that reportFilter has four of five category filters set
+         * Given that the third category filter is numeric
+         * When I call reportFilterCategoriesToArray
+         * Then the domain is not included in the returned array
+         * Then all five category filters are returned
+         * Then the third category filter is returned as empty value
+         * Then all category filters are sanitized
+         */
+
+        /** @var ReportFilter $reportFilter */
+        $reportFilter = GeneralUtility::makeInstance(ReportFilter::class);
+        $reportFilter->setDomain('meine dolle domäne.com');
+        $reportFilter->setCategoryLevel1('Pferde_Stärken');
+        $reportFilter->setCategoryLevel2('Hasen Schwächen');
+        $reportFilter->setCategoryLevel3('15');
+        $reportFilter->setCategoryLevel4('Testen Mit den Besten');
+        $reportFilter->setCategoryLevel5('Ganz/Toll');
+
+        $result = CategoryUtility::reportFilterCategoriesToArray($reportFilter);
+
+        $expected = [
+            0 => 'PferdeStärken',
+            1 => 'HasenSchwächen',
+            2 => '',
+            3 => 'TestenMitDenBesten',
+            4 => 'Ganz-Toll'
+        ];
+
+        static::assertInternalType('array', $result);
+        static::assertEquals($expected, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function reportFilterCategoriesToArrayReturnsEmptyArrayIfAllCategoriesEmpty()
+    {
+
+        /**
+         * Scenario:
+         *
+         * Given a reportFilter is set as param
+         * Given that reportFilter no category filters are set
+         * When I call reportFilterCategoriesToArray
+         * Then an empty array is returned
+         */
+
+        /** @var ReportFilter $reportFilter */
+        $reportFilter = GeneralUtility::makeInstance(ReportFilter::class);
+
+        $result = CategoryUtility::reportFilterCategoriesToArray($reportFilter);
+
+        static::assertInternalType('array', $result);
+        static::assertEmpty($result);
+    }
+
+
+    /**
+     * @test
+     */
+    public function reportFilterCategoriesToArrayDomainFilterIfAllCategoriesEmptyAndDomainSet()
+    {
+
+        /**
+         * Scenario:
+         *
+         * Given a reportFilter is set as param
+         * Given that reportFilter has a filter by domain
+         * Given that reportFilter no category filters set
+         * Given the includeDomain param is set to true
+         * When I call reportFilterCategoriesToArray
+         * Then the domain is returned as only entry in the array
+         */
+
+        /** @var ReportFilter $reportFilter */
+        $reportFilter = GeneralUtility::makeInstance(ReportFilter::class);
+        $reportFilter->setDomain('meine dolle domäne.com');
+
+        $result = CategoryUtility::reportFilterCategoriesToArray($reportFilter, true);
+
+        $expected = [
+            0 => 'meinedolledomäne.com',
+        ];
+
+        static::assertInternalType('array', $result);
+        static::assertEquals($expected, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function reportFilterCategoriesToArrayReturnsAllCategoriesIncludingDomain()
+    {
+
+        /**
+         * Scenario:
+         *
+         * Given a reportFilter is set as param
+         * Given that reportFilter has a filter by domain
+         * Given that reportFilter has four of five category filters set
+         * Given that the third category filter is empty
+         * Given the includeDomain param is set to true
+         * When I call reportFilterCategoriesToArray
+         * Then the domain is included in the returned array as first value
+         * Then all five category filters are returned after the domain
+         * Then the empty third category filter is returned as empty value
+         * Then the domain is sanitized
+         * Then all category filters are sanitized
+         */
+
+        /** @var ReportFilter $reportFilter */
+        $reportFilter = GeneralUtility::makeInstance(ReportFilter::class);
+        $reportFilter->setDomain('meine doLLe Domäne.com');
+        $reportFilter->setCategoryLevel1('Pferde_Stärken');
+        $reportFilter->setCategoryLevel2('Hasen Schwächen');
+        $reportFilter->setCategoryLevel3('');
+        $reportFilter->setCategoryLevel4('Testen Mit den Besten');
+        $reportFilter->setCategoryLevel5('Ganz/Toll');
+
+        $result = CategoryUtility::reportFilterCategoriesToArray($reportFilter, true);
+
+        $expected = [
+            0 => 'meinedolledomäne.com',
+            1 => 'PferdeStärken',
+            2 => 'HasenSchwächen',
+            3 => '',
+            4 => 'TestenMitDenBesten',
+            5 => 'Ganz-Toll'
+        ];
+
+        static::assertInternalType('array', $result);
+        static::assertEquals($expected, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function reportFilterCategoriesToArrayIsOverridenByFreetextCategoriesIncludingDomain()
+    {
+
+        /**
+         * Scenario:
+         *
+         * Given a reportFilter is set as param
+         * Given that reportFilter has a filter by domain
+         * Given that reportFilter has a freetext filter by domain
+         * Given that reportFilter has five category filters set
+         * Given that reportFilter has five freetext category filters set
+         * Given the $includeDomain param is set to true
+         * When I call reportFilterCategoriesToArray
+         * Then the freetext domain is included in the returned array as first value
+         * Then all five freetext category filters are returned after the domain
+         * Then the domain is sanitized
+         * Then all category filters are sanitized
+         */
+
+        /** @var ReportFilter $reportFilter */
+        $reportFilter = GeneralUtility::makeInstance(ReportFilter::class);
+        $reportFilter->setDomainFree('meine doLLe Domäne.com');
+        $reportFilter->setDomain('this is da domain.net');
+
+        $reportFilter->setCategoryFreeLevel1('Pferde_Stärken');
+        $reportFilter->setCategoryLevel1('Stärken_Pferde');
+
+        $reportFilter->setCategoryFreeLevel2('Hasen Schwächen');
+        $reportFilter->setCategoryLevel2('Schwächen Hasen');
+
+        $reportFilter->setCategoryFreeLevel3('Zucker Schnute');
+        $reportFilter->setCategoryLevel3('Schnute Zucker');
+
+        $reportFilter->setCategoryFreeLevel4('Testen Mit den Besten');
+        $reportFilter->setCategoryLevel4('Besten Mit dem Testen');
+
+        $reportFilter->setCategoryFreeLevel5('Ganz/Toll');
+        $reportFilter->setCategoryLevel5('Toll/Ganz');
+
+        $result = CategoryUtility::reportFilterCategoriesToArray($reportFilter, true);
+
+        $expected = [
+            0 => 'meinedolledomäne.com',
+            1 => 'PferdeStärken',
+            2 => 'HasenSchwächen',
+            3 => 'ZuckerSchnute',
+            4 => 'TestenMitDenBesten',
+            5 => 'Ganz-Toll'
+        ];
+
+        static::assertInternalType('array', $result);
+        static::assertEquals($expected, $result);
+    }
+
+    //=============================================
+
+    /**
+     * @test
+     */
+    public function reportFilterEventsToStringReturnsAllFilters()
+    {
+
+        /**
+         * Scenario:
+         *
+         * Given a reportFilter is set as param
+         * Given that reportFilter has a filter by domain
+         * Given that reportFilter has an event filter set
+         * When I call reportFilterEventsToString
+         * Then the domain is not included in the returned array
+         * Then the the event filter is returned
+         * Then the event filter is sanitized
+         */
+
+        /** @var ReportFilter $reportFilter */
+        $reportFilter = GeneralUtility::makeInstance(ReportFilter::class);
+        $reportFilter->setDomain('meine dolle domäne.com');
+        $reportFilter->setDownloadFilter1('Pferde_Stärken');
+
+        $result = CategoryUtility::reportFilterEventsToString($reportFilter);
+        $expected = 'PferdeStärken';
+
+        static::assertInternalType('string', $result);
+        static::assertEquals($expected, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function reportFilterEventsToStringIgnoresEmptyFilters()
+    {
+
+        /**
+         * Scenario:
+         *
+         * Given a reportFilter is set as param
+         * Given that reportFilter has no filter by name
+         * When I call reportFilterEventsToString
+         * Then an empty string is returned
+         */
+
+        /** @var ReportFilter $reportFilter */
+        $reportFilter = GeneralUtility::makeInstance(ReportFilter::class);
+        $reportFilter->setDownloadFilter1('');
+
+        $result = CategoryUtility::reportFilterEventsToString($reportFilter);
+
+        static::assertInternalType('string', $result);
+        static::assertEmpty($result);
+    }
+
+    /**
+     * @test
+     */
+    public function reportFilterEventsToStringReturnsEmptyArrayIfAllFiltersEmptyAndDomainSet()
+    {
+
+        /**
+         * Scenario:
+         *
+         * Given a reportFilter is set as param
+         * Given that reportFilter has a filter by domain
+         * Given that reportFilter has no filter by name
+         * Given that includeDomain is set to true
+         * When I call reportFilterEventsToString
+         * Then an empty array is returned
+         */
+
+        /** @var ReportFilter $reportFilter */
+        $reportFilter = GeneralUtility::makeInstance(ReportFilter::class);
+        $reportFilter->setDomain('meine dolle domäne.com');
+        $reportFilter->setDownloadFilter1('');
+
+        $result = CategoryUtility::reportFilterEventsToString($reportFilter, true);
+
+        static::assertInternalType('string', $result);
+        static::assertEmpty($result);
+    }
+
+    /**
+     * @test
+     */
+    public function reportFilterEventsToStringTreatsNumericFiltersAsEmpty()
+    {
+
+        /**
+         * Scenario:
+         *
+         * Given a reportFilter is set as param
+         * Given that reportFilter has an numeric filter by name
+         * When I call reportFilterEventsToString
+         * Then an empty array is returned
+         */
+
+        /** @var ReportFilter $reportFilter */
+        $reportFilter = GeneralUtility::makeInstance(ReportFilter::class);
+        $reportFilter->setDownloadFilter1('15');
+
+        $result = CategoryUtility::reportFilterEventsToString($reportFilter);
+
+        static::assertInternalType('string', $result);
+        static::assertEmpty($result);
+    }
+
+    /**
+     * @test
+     */
+    public function reportFilterEventsToStringReturnsAllFiltersIncludingDomain()
+    {
+
+        /**
+         * Scenario:
+         *
+         * Given a reportFilter is set as param
+         * Given that reportFilter has a filter by domain
+         * Given that reportFilter an event filters set
+         * Given the includeDomain param is set to true
+         * When I call reportFilterEventsToString
+         * Then the domain is included in the returned array as first part o  the event filter
+         * Then the the event filter is returned
+         * Then the domain is sanitized
+         * Then the event filter is sanitized
+         */
+
+        /** @var ReportFilter $reportFilter */
+        $reportFilter = GeneralUtility::makeInstance(ReportFilter::class);
+        $reportFilter->setDomain('meine dolle domäne.com');
+        $reportFilter->setDownloadFilter1('Pferde_Stärken');
+
+        $result = CategoryUtility::reportFilterEventsToString($reportFilter, true);
+        $expected = 'meinedolledomäne.com/PferdeStärken';
+
+        static::assertInternalType('string', $result);
+        static::assertEquals($expected, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function reportFilterEventsToStringIsOverridenByFreetextFilterAndDomain()
+    {
+
+        /**
+         * Scenario:
+         *
+         * Given a reportFilter is set as param
+         * Given that reportFilter has a filter by domain
+         * Given that reportFilter has a freetext filter by domain
+         * Given the includeDomain param is set to true
+         * When I call reportFilterEventsToString
+         * Then the domain is included as first part of the event filter
+         * Then the freetext filter is returned
+         * Then the domain is sanitized
+         * Then the event filter is sanitized
+         */
+
+        /** @var ReportFilter $reportFilter */
+        $reportFilter = GeneralUtility::makeInstance(ReportFilter::class);
+        $reportFilter->setDomain('meine doLLe Domäne.com');
+        $reportFilter->setDomainFree('this is da domain.net');
+
+        $reportFilter->setDownloadFilter1('Pferde_Stärken');
+        $reportFilter->setDownloadFreeFilter1('Zucker Schnute');
+
+        $result = CategoryUtility::reportFilterEventsToString($reportFilter, true);
+        $expected = 'thisisdadomain.net/ZuckerSchnute';
+
+        static::assertInternalType('string', $result);
+        static::assertEquals($expected, $result);
+    }
+
+    //=============================================
+
+
+    /**
+     * @test
+     */
+    public function reportFilterCategoriesToJsonReturnsJsonFilterString()
+    {
+
+        /**
+         * Scenario:
+         *
+         * Given a reportFilter filters by domain
+         * Given that reportFilter filters by the first category
+         * Given that reportFilter filters by the second category
+         * When I call reportFilterCategoriesToJson with that reportFilter
+         * Then the filter criteria are sanitized
+         * Then a JSON filter string according to that filter criteria is returned
+         * Then the domain is not included in that filter string
+         */
+
+        /** @var ReportFilter $reportFilter */
+        $reportFilter = GeneralUtility::makeInstance(ReportFilter::class);
+        $reportFilter->setDomain('meine dolle domäne.com');
+        $reportFilter->setCategoryLevel1('Pferde_Stärken');
+        $reportFilter->setCategoryLevel2('Hasen Schwächen');
+
+        $expected = '[{"input":"PferdeStärken","type":"exact","attributeId":"area_level_1","filterType":"extended","filter":"include"}' .
+            ',{"input":"HasenSchwächen","type":"exact","attributeId":"area_level_2","filterType":"extended","filter":"include"}]';
+
+
+        $result = CategoryUtility::reportFilterCategoriesToJson($reportFilter);
+        static::assertEquals($expected, $result);
+    }
+
+
+    /**
+     * @test
+     */
+    public function reportFilterCategoriesToJsonSkipsEmptyAndNumericCategoryLevels()
+    {
+
+        /**
+         * Scenario:
+         *
+         * Given a reportFilter filters by domain
+         * Given that reportFilter filters by the first category
+         * Given that reportFilter has no filters by the second category
+         * Given that reportFilter has a numeric filters by the third category
+         * Given that reportFilter filters by the fourth category
+         * When I call reportFilterCategoriesToJson with that reportFilter
+         * Then the filter criteria are sanitized
+         * Then a JSON filter string according to that filter criteria is returned
+         * Then the area level two is skipped
+         * Then the area level three is skipped
+         * Then the domain is not included in that filter string
+         */
+
+        /** @var ReportFilter $reportFilter */
+        $reportFilter = GeneralUtility::makeInstance(ReportFilter::class);
+        $reportFilter->setDomain('meine dolle domäne.com');
+        $reportFilter->setCategoryLevel1('Pferde_Stärken');
+        $reportFilter->setCategoryLevel3('15');
+        $reportFilter->setCategoryLevel4('Hasen Schwächen');
+
+        $expected = '[{"input":"PferdeStärken","type":"exact","attributeId":"area_level_1","filterType":"extended","filter":"include"}' .
+            ',{"input":"HasenSchwächen","type":"exact","attributeId":"area_level_4","filterType":"extended","filter":"include"}]';
+
+
+        $result = CategoryUtility::reportFilterCategoriesToJson($reportFilter);
+        static::assertEquals($expected, $result);
+    }
+
+
+    /**
+     * @test
+     */
+    public function reportFilterCategoriesToJsonReturnsJsonFilterStringIncludingDomain()
+    {
+
+        /**
+         * Scenario:
+         *
+         * Given a reportFilter filters by domain
+         * Given that reportFilter filters by the first category
+         * Given that reportFilter filters by the second category
+         * Given that includeDomain is true
+         * When I call reportFilterCategoriesToJson with that reportFilter
+         * Then the filter criteria are sanitized
+         * Then a JSON filter string according to that filter criteria is returned
+         * Then the domain is included in that filter string
+         */
+
+        /** @var ReportFilter $reportFilter */
+        $reportFilter = GeneralUtility::makeInstance(ReportFilter::class);
+        $reportFilter->setDomain('meine dolle domäne.com');
+        $reportFilter->setCategoryLevel1('Pferde_Stärken');
+        $reportFilter->setCategoryLevel2('Hasen Schwächen');
+
+        $expected = '[{"input":"meinedolledomäne.com","type":"exact","attributeId":"area_level_1","filterType":"extended","filter":"include"}' .
+            ',{"input":"PferdeStärken","type":"exact","attributeId":"area_level_2","filterType":"extended","filter":"include"}' .
+            ',{"input":"HasenSchwächen","type":"exact","attributeId":"area_level_3","filterType":"extended","filter":"include"}]';
+
+
+        $result = CategoryUtility::reportFilterCategoriesToJson( $reportFilter, true);
+        static::assertEquals($expected, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function reportFilterCategoriesToJsonReturnsEmptyStringIfNothingSet()
+    {
+
+        /**
+         * Scenario:
+         *
+         * Given a reportFilter does not filter by domain
+         * Given that reportFilter has no filters set
+         * When I call reportFilterCategoriesToJson with that reportFilter
+         * Then an empty string is returned
+         */
+
+        /** @var ReportFilter $reportFilter */
+        $reportFilter = GeneralUtility::makeInstance(ReportFilter::class);
+
+        $result = CategoryUtility::reportFilterCategoriesToJson($reportFilter);
+        static::assertEmpty($result);
+    }
+
+    //=============================================
+
+
+    /**
+     * @test
+     */
+    public function reportFilterEventsToJsonReturnsJsonFilterString()
+    {
+
+        /**
+         * Scenario:
+         *
+         * Given a reportFilter filters by domain
+         * Given that reportFilter has an event filters set
+         * When I call reportFilterEventsToJson with that reportFilter
+         * Then the filter criteria are sanitized
+         * Then a JSON filter string according to that filter criteria is returned
+         * Then the domain is not included in that filter string
+         */
+
+        /** @var ReportFilter $reportFilter */
+        $reportFilter = GeneralUtility::makeInstance(ReportFilter::class);
+        $reportFilter->setDomain('meine dolle domäne.com');
+        $reportFilter->setDownloadFilter1('Pferde_Stärken');
+
+
+        $expected = '[{"input":"file","type":"exact","attributeId":"action","filterType":"extended","filter":"include"},' .
+            '{"input":["PferdeStärken"],"type":"exact","attributeId":"category","filterType":"extended","filter":"include"}]';
+
+        $result = CategoryUtility::reportFilterEventsToJson($reportFilter);
+        static::assertEquals($expected, $result);
+    }
+
+
+
+    /**
+     * @test
+     */
+    public function reportFilterEventsToJsonReturnsEmptyStringIfEmptyFilter()
+    {
+
+        /**
+         * Scenario:
+         *
+         * Given a reportFilter filters by domain
+         * Given that reportFilter has no event filter set
+         * When I call reportFilterEventsToJson with that reportFilter
+         * Then the filter criteria are sanitized
+         * Then an empty string is returned
+         */
+
+        /** @var ReportFilter $reportFilter */
+        $reportFilter = GeneralUtility::makeInstance(ReportFilter::class);
+        $reportFilter->setDomain('meine dolle domäne.com');
+        $reportFilter->setDownloadFilter1('');
+
+
+        $result = CategoryUtility::reportFilterEventsToJson($reportFilter);
+        static::assertEmpty($result);
+    }
+
+
+    /**
+     * @test
+     */
+    public function reportFilterEventsToJsonReturnsEmptyStringIfEmptyFilterButDomain()
+    {
+        /**
+         * Scenario:
+         *
+         * Given a reportFilter filters by domain
+         * Given that reportFilter has no event filter set
+         * Given that includeDomain is true
+         * When I call reportFilterEventsToJson with that reportFilter
+         * Then an empty string is returned
+         */
+
+        /** @var ReportFilter $reportFilter */
+        $reportFilter = GeneralUtility::makeInstance(ReportFilter::class);
+        $reportFilter->setDomain('meine dolle domäne.com');
+
+        $result = CategoryUtility::reportFilterEventsToJson($reportFilter, true);
+        static::assertEmpty($result);
+    }
+
+
+
+    /**
+     * @test
+     */
+    public function reportFilterEventsToJsonReturnsEmptyStringIfNumericFilter()
+    {
+
+        /**
+         * Scenario:
+         *
+         * Given a reportFilter filters by domain
+         * Given that reportFilter has a numeric  event filter set
+         * When I call reportFilterEventsToJson with that reportFilter
+         * Then the filter criteria are sanitized
+         * Then an empty string is returned
+
+         */
+
+        /** @var ReportFilter $reportFilter */
+        $reportFilter = GeneralUtility::makeInstance(ReportFilter::class);
+        $reportFilter->setDomain('meine dolle domäne.com');
+        $reportFilter->setDownloadFilter1('');
+
+        $result = CategoryUtility::reportFilterEventsToJson($reportFilter);
+        static::assertEmpty($result);
+    }
+
+    /**
+     * @test
+     */
+    public function reportFilterEventsToJsonReturnsJsonFilterStringIncludingDomain()
+    {
+        /**
+         * Scenario:
+         *
+         * Given a reportFilter filters by domain
+         * Given that reportFilter has an event filter set
+         * Given that includeDomain is true
+         * When I call reportFilterEventsToJson with that reportFilter
+         * Then the filter criteria are sanitized
+         * Then a JSON filter string according to that filter criteria is returned
+         * Then the domain is not included in that filter string
+         */
+
+        /** @var ReportFilter $reportFilter */
+        $reportFilter = GeneralUtility::makeInstance(ReportFilter::class);
+        $reportFilter->setDomain('meine dolle domäne.com');
+        $reportFilter->setDownloadFilter1('Pferde_Stärken');
+
+
+        $expected = '[{"input":"file","type":"exact","attributeId":"action","filterType":"extended","filter":"include"},' .
+            '{"input":["meinedolledomäne.com/PferdeStärken"],"type":"exact","attributeId":"category","filterType":"extended","filter":"include"}]';
+
+        $result = CategoryUtility::reportFilterEventsToJson($reportFilter, true);
+        static::assertEquals($expected, $result);
+    }
 
 
     /**

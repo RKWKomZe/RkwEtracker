@@ -2,6 +2,7 @@
 
 namespace RKW\RkwEtracker\Controller;
 
+use RKW\RkwEtracker\Utility\DateUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use \RKW\RkwMailer\Helper\FrontendLocalization;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
@@ -131,28 +132,63 @@ class ReportCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
     /**
      * Fetch data from API
      *
-     * @param float $sleep how many seconds the script should sleep after each data import in the filter groups
+     * @param string $apiMail E-Mail-Address for access to eTracker API
+     * @param string $apiToken Token for access to eTracker API
+     * @param string $apiAccountId Account-ID for access to eTracker API
+     * @param string $apiPassword Password for access to eTracker API
+     * @param string $proxy Proxy-Name or Proxy-IP/Port for access to eTracker API (optional)
+     * @param string $proxyUsername Proxy-Username for access to eTracker API (optional)
+     * @param string $proxyPassword Proxy-Password for access to eTracker API (optional)
+     * @param float $sleep how many seconds the script should sleep after each data import in the filter groups (default = 1.0)
+     * @param int $groupLimit Maximum number of filter-groups to fetch at each call (default = 1)
      * @return void
      */
-    public function fetchReportDataCommand($sleep = 1.0)
-    {
+    public function fetchReportDataCommand(
+        string $apiMail,
+        string $apiToken,
+        string $apiAccountId,
+        string $apiPassword,
+        string $proxy,
+        string $proxyUsername,
+        string $proxyPassword,
+        float $sleep = 1.0,
+        int $groupLimit = 1
+    ) {
 
         try {
 
             if ($report = $this->reportRepository->findOneByStatus(array(0, 1, 89))) {
                 try {
 
+                    // build credentials array
+                    $credentials = [
+                        'apiEmail' => $apiMail,
+                        'apiToken' => $apiToken,
+                        'apiAccountId' => $apiAccountId,
+                        'apiPassword' => $apiPassword,
+                        'proxy' => $proxy,
+                        'proxyUsername' => $proxyUsername,
+                        'proxyPassword' => $proxyPassword
+                    ];
+
                     /** @var \RKW\RkwEtracker\Etracker\Import $import */
                     $import = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\RkwEtracker\Etracker\Import');
 
                     // check if there is something to fetch at all - but only if status is not manually set to "reset" or "fetch running"
                     if ($report->getStatus() == 0) {
-                        $import->checkForImport($report);
+                        if (DateUtility::isReportImportNeeded($report)) {
+                            $report->setStatus(89);
+                            $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Data-fetch from eTracker API for report with id=%s has been initiated.', $report->getUid()));
+                        }
                     }
 
                     // this is only to be done for reports with status "reset"
                     // we need to set this values BEFORE we do the real fetch!
                     if ($report->getStatus() == 89) {
+
+                        // set new start and end point for report
+                        DateUtility::setStartEndForReport($report, $this->settings);
+
                         $report->setFetchCounter($report->getFetchCounter() + 1);
                         $report->setStatus(1);
 
@@ -176,15 +212,20 @@ class ReportCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
 
                         // fetch data - one group at once
                         /** @var \RKW\RkwEtracker\Domain\Model\ReportGroup $reportGroup */
+                        $cnt = 0;
                         foreach ($report->getGroupsFetch() as $reportGroup) {
-                            $import->importAreaData($report, $reportGroup);
+                            $import->importAreaData($report, $reportGroup, $credentials);
                             usleep(intval($sleep * 1000000));
 
-                            $import->importDownloadData($report, $reportGroup);
+                            $import->importDownloadData($report, $reportGroup, $credentials);
                             usleep(intval($sleep * 1000000));
 
                             $report->removeGroupFetch($reportGroup);
-                            break;
+                            $cnt++;
+
+                            if ($cnt >= $groupLimit) {
+                                break;
+                            }
                         }
 
                         // if all groups have been fetched, we go over to

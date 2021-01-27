@@ -34,11 +34,6 @@ plugin.tx_rkwetracker {
 
     settings {
 
-        apiEmail = {$plugin.tx_rkwetracker.settings.apiEmail}
-        apiPassword = {$plugin.tx_rkwetracker.settings.apiPassword}
-        apiToken = {$plugin.tx_rkwetracker.settings.apiToken}
-        apiAccountId = {$plugin.tx_rkwetracker.settings.apiAccountId}
-
         secureCode = {$plugin.tx_rkwetracker.settings.secureCode}
         disable = {$plugin.tx_rkwetracker.settings.disable}
         blockCookiesOnPageLoad = {$plugin.tx_rkwetracker.settings.blockCookiesOnPageLoad}

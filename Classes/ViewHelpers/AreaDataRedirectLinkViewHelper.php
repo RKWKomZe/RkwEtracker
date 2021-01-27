@@ -45,8 +45,8 @@ class AreaDataRedirectLinkViewHelper extends AbstractViewHelper
         $categories = array();
 
         // add domain
-        if ($areaData->getDomain()) {
-            $categories[] = $areaData->getDomain();
+        if ($areaData->getReportFilter()->getDomain()) {
+            $categories[] = $areaData->getReportFilter()->getDomain();
         }
 
         // add categories
@@ -54,8 +54,8 @@ class AreaDataRedirectLinkViewHelper extends AbstractViewHelper
 
             $getter = 'getCategoryLevel' . $level;
             if (method_exists($areaData, $getter)) {
-                if ($areaData->$getter()) {
-                    $categories[] = $areaData->$getter();
+                if ($areaData->getReportFilter()->$getter()) {
+                    $categories[] = $areaData->getReportFilter()->$getter();
                 }
             }
         }

@@ -125,13 +125,6 @@ CREATE TABLE tx_rkwetracker_domain_model_areadata (
 	bounces_per_visit double DEFAULT '0' NOT NULL,
 	time_per_visit int(11) DEFAULT '0' NOT NULL,
 
-	domain varchar(255) DEFAULT '' NOT NULL,
-	category_level1 varchar(255) DEFAULT '' NOT NULL,
-	category_level2 varchar(255) DEFAULT '' NOT NULL,
-	category_level3 varchar(255) DEFAULT '' NOT NULL,
-	category_level4 varchar(255) DEFAULT '' NOT NULL,
-	category_level5 varchar(255) DEFAULT '' NOT NULL,
-
     report int(11) DEFAULT '0' NOT NULL,
     report_group int(11) DEFAULT '0' NOT NULL,
     report_filter int(11) DEFAULT '0' NOT NULL,
@@ -159,7 +152,6 @@ CREATE TABLE tx_rkwetracker_domain_model_downloaddata (
 	pid int(11) DEFAULT '0' NOT NULL,
 
 	action varchar(255) DEFAULT '' NOT NULL,
-	category varchar(255) DEFAULT '' NOT NULL,
 	time_per_event int(11) DEFAULT '0' NOT NULL,
 	events int(11) DEFAULT '0' NOT NULL,
 	unique_events int(11) DEFAULT '0' NOT NULL,
@@ -179,7 +171,6 @@ CREATE TABLE tx_rkwetracker_domain_model_downloaddata (
 	PRIMARY KEY (uid),
 	KEY parent (pid),
     KEY action (action),
-    KEY category (category),
 
 );
 

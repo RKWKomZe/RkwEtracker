@@ -1,6 +1,6 @@
 <?php
 
-namespace RKW\RkwEtracker\ViewHelpers;
+namespace RKW\RkwEtracker\ViewHelpers\Report;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -15,6 +15,8 @@ namespace RKW\RkwEtracker\ViewHelpers;
  * The TYPO3 project - inspiring people to share!
  */
 
+use RKW\RkwEtracker\Domain\Model\DownloadData;
+use RKW\RkwEtracker\Domain\Model\ReportFilter;
 use RKW\RkwEtracker\Utility\CategoryUtility;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
@@ -23,14 +25,14 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 
 /**
- * Class CategoryImplodeAreaDataViewHelper
+ * Class EventsToStringViewHelper
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
  * @copyright Rkw Kompetenzzentrum
  * @package RKW_RkwEtracker
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class CategoryImplodeAreaDataViewHelper extends AbstractViewHelper
+class EventsToStringViewHelper extends AbstractViewHelper
 {
 
     /**
@@ -38,7 +40,7 @@ class CategoryImplodeAreaDataViewHelper extends AbstractViewHelper
      */
     public function initializeArguments()
     {
-        $this->registerArgument('areaData', '\RKW\RkwEtracker\Domain\Model\AreaData', 'The AreaData-object to get the categories from.', true);
+        $this->registerArgument('downloadData', '\RKW\RkwEtracker\Domain\Model\DownloadData', 'The DownloadData-object to get the categories from.', true);
     }
 
 
@@ -57,31 +59,29 @@ class CategoryImplodeAreaDataViewHelper extends AbstractViewHelper
         RenderingContextInterface $renderingContext
     ): string {
 
-
-        $areaData = $arguments['areaData'];
+        /** @var DownloadData $downloadData */
+        $downloadData = $arguments['downloadData'];
         $settings = self::getSettings();
 
-        $categories = [];
-        foreach(range(1,5) as $level) {
+        $events = '';
 
-            $getter = 'getCategoryLevel' . $level;
-            if ($areaData->$getter()) {
-                $categories[] = $areaData->$getter();
+        /** @var ReportFilter $reportFilter */
+        if ($reportFilter =  $downloadData->getReportFilter()) {
+
+            // get events
+            $events = CategoryUtility::reportFilterEventsToString($reportFilter, true);
+
+            // check domain and remove it if domain is in exclude list
+            foreach (GeneralUtility::trimExplode(',', $settings['reportDomainExcludeList']) as $domain) {
+
+                if (strpos($events, $domain) === 0) {
+                    $events = substr($events, strlen($domain) +1);
+                }
             }
         }
 
-        // check domain at last end remove it if domain is in exclude list
-        $domain = '';
-        if ($areaData->getDomain()) {
-            if (!in_array($areaData->getDomain(), GeneralUtility::trimExplode(',', $settings['reportDomainExcludeList']))) {
-                $domain = $areaData->getDomain();
-            }
-        }
-
-        return CategoryUtility::implodeCategories($domain, $categories, '.+', false);
-
+        return $events;
     }
-
 
     /**
      * Loads TypoScript configuration into $this->configuration
