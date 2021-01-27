@@ -99,7 +99,7 @@ class FilterSelector
                 }
 
                 // add download labels
-                $levels = range(1, 3);
+                $levels = range(1, 1);
                 foreach ($levels as $level) {
 
                     $fieldName = 'downloadFilter' . strval(intval($level));

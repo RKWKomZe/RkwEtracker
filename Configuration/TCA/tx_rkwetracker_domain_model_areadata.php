@@ -12,11 +12,11 @@ return [
 		'enablecolumns' => [
 
 		],
-		'searchFields' => 'external_id,last_access_tstamp,visitors,page_impressions,page_impression_per_visitor,time_per_visitor,time_per_page,category_level1,category_level2,category_level3,category_level4,category_level5,month,quarter,year,',
+		'searchFields' => 'external_id,last_access_tstamp,visitors,page_impressions,page_impression_per_visitor,time_per_visitor,time_per_page,month,quarter,year,',
 		'iconfile' => 'EXT:rkw_etracker/Resources/Public/Icons/tx_rkwetracker_domain_model_areadata.gif'
 	],
 	'interface' => [
-		'showRecordFieldList' => 'visit, visitors, page_impressions, bounces_per_visit, time_per_visit, domain, category_level1, category_level2, category_level3, category_level4, category_level5, report, report_group, report_filter, report_fetch_counter, month, quarter, year',
+		'showRecordFieldList' => 'visit, visitors, page_impressions, bounces_per_visit, time_per_visit, report, report_group, report_filter, report_fetch_counter, month, quarter, year',
 	],
 	'types' => [
 		'1' => ['showitem' => 'visit, visitors, page_impressions, bounces_per_visit, time_per_visit,domain, category_level1, category_level2, category_level3, category_level4, category_level5, report, report_group, report_filter, report_fetch_counter, month, quarter, year, '],
@@ -71,60 +71,6 @@ return [
 				'eval' => 'trim'
 			],
 		],
-        'domain' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_areadata.domain',
-            'config' => [
-                'type' => 'input',
-                'size' => 30,
-                'eval' => 'trim'
-            ],
-        ],
-        'category_level1' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_areadata.category_level1',
-            'config' => [
-                'type' => 'input',
-                'size' => 30,
-                'eval' => 'trim'
-            ],
-        ],
-        'category_level2' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_areadata.category_level2',
-            'config' => [
-                'type' => 'input',
-                'size' => 30,
-                'eval' => 'trim'
-            ],
-        ],
-        'category_level3' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_areadata.category_level3',
-            'config' => [
-                'type' => 'input',
-                'size' => 30,
-                'eval' => 'trim'
-            ],
-        ],
-        'category_level4' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_areadata.category_level4',
-            'config' => [
-                'type' => 'input',
-                'size' => 30,
-                'eval' => 'trim'
-            ],
-        ],
-        'category_level5' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_areadata.category_level5',
-            'config' => [
-                'type' => 'input',
-                'size' => 30,
-                'eval' => 'trim'
-            ],
-        ],
         'report' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_areadata.report',

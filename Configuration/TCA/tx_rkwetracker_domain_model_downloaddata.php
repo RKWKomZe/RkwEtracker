@@ -16,10 +16,10 @@ return [
 		'iconfile' => 'EXT:rkw_etracker/Resources/Public/Icons/tx_rkwetracker_domain_model_downloaddata.gif'
 	],
 	'interface' => [
-		'showRecordFieldList' => 'action, category, time_per_event, events, unique_events, report, report_fetch_counter, month, quarter, year',
+		'showRecordFieldList' => 'action, time_per_event, events, unique_events, report, report_fetch_counter, month, quarter, year',
 	],
 	'types' => [
-		'1' => ['showitem' => 'action, category, time_per_event, events, unique_events, report, report_fetch_counter, month, quarter, year'],
+		'1' => ['showitem' => 'action, time_per_event, events, unique_events, report, report_fetch_counter, month, quarter, year'],
 	],
 	'palettes' => [
 		'1' => ['showitem' => ''],
@@ -79,15 +79,6 @@ return [
 		'action' => [
 			'exclude' => 0,
 			'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_downloaddata.action',
-			'config' => [
-				'type' => 'input',
-				'size' => 30,
-				'eval' => 'trim'
-			],
-		],
-		'category' => [
-			'exclude' => 0,
-			'label' => 'LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tx_rkwetracker_domain_model_downloaddata.category',
 			'config' => [
 				'type' => 'input',
 				'size' => 30,

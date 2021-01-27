@@ -20,14 +20,13 @@ use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
- * Class CategoryImplodeViewHelper
- *
+ * Class ImplodeCategoriesViewHelper
  * @author Steffen Kroggel <developer@steffenkroggel.de>
  * @copyright Rkw Kompetenzzentrum
  * @package RKW_RkwEtracker
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class CategoryImplodeViewHelper extends AbstractViewHelper
+class ImplodeCategoriesViewHelper extends AbstractViewHelper
 {
 
     /**

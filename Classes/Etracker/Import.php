@@ -3,9 +3,14 @@
 namespace RKW\RkwEtracker\Etracker;
 
 use \RKW\RkwBasics\Helper\Common;
+use RKW\RkwEtracker\Domain\Model\AreaData;
+use RKW\RkwEtracker\Domain\Model\DownloadData;
+use RKW\RkwEtracker\Domain\Repository\AreaDataRepository;
+use RKW\RkwEtracker\Domain\Repository\DownloadDataRepository;
 use RKW\RkwEtracker\Utility\CategoryUtility;
 use RKW\RkwEtracker\Utility\DateUtility;
 use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -70,153 +75,44 @@ class Import
 
 
     /**
-     * check if there is something to fetch
-     *
-     * @param \RKW\RkwEtracker\Domain\Model\Report $report
-     * @return boolean
-     */
-    public function checkForImport($report)
-    {
-
-        $currentTime = getdate();
-
-        //===================
-        // yearly reports
-        if ($report->getType() == 0) {
-
-            // check if we had no fetch this year
-            if (date('Y', $report->getLastFetchTstamp()) >= $currentTime['year']) {
-                $report->setStatus(0);
-
-                return false;
-                //===
-            }
-
-
-            // check if report has started recently
-            if (date('Y', $report->getStarttime()) >= $currentTime['year']) {
-                $report->setStatus(0);
-
-                return false;
-                //===
-            }
-
-        //===================
-        // quarterly reports
-        } elseif ($report->getType() == 1) {
-
-            // define quarters
-            $quarters = array(
-                1  => 1,
-                2  => 1,
-                3  => 1,
-                4  => 2,
-                5  => 2,
-                6  => 2,
-                7  => 3,
-                8  => 3,
-                9  => 3,
-                10 => 4,
-                11 => 4,
-                12 => 4,
-            );
-
-            // check if we had no fetch this quarter
-            if (
-                ($quarters[date('n', $report->getLastFetchTstamp())] >= $quarters[$currentTime['mon']])
-                && (date('Y', $report->getLastFetchTstamp()) >= $currentTime['year'])
-            ) {
-                $report->setStatus(0);
-
-                return false;
-                //===
-            }
-
-
-            // check if report has started recently
-            if (
-                ($quarters[date('n', $report->getStarttime())] >= $quarters[$currentTime['mon']])
-                && (date('Y', $report->getStarttime()) >= $currentTime['year'])
-            ) {
-                $report->setStatus(0);
-
-                return false;
-                //===
-            }
-
-
-        //===================
-        // monthly reports
-        } else {
-            if ($report->getType() == 2) {
-
-                // check if we had no fetch this year
-                if (
-                    (date('m', $report->getLastFetchTstamp()) >= $currentTime['mon'])
-                    && (date('Y', $report->getLastFetchTstamp()) >= $currentTime['year'])
-                ) {
-                    $report->setStatus(0);
-
-                    return false;
-                    //===
-                }
-
-
-                // check if report has started recently
-                if (
-                    (date('m', $report->getStarttime()) >= $currentTime['mon'])
-                    && (date('Y', $report->getStarttime()) >= $currentTime['year'])
-                ) {
-                    $report->setStatus(0);
-
-                    return false;
-                    //===
-                }
-            }
-        }
-
-        // set status to reset-value
-        $report->setStatus(89);
-
-        return true;
-    }
-
-
-    /**
      * Imports area report data
      *
      * @param \RKW\RkwEtracker\Domain\Model\Report $report
      * @param \RKW\RkwEtracker\Domain\Model\ReportGroup $reportGroup
+     * @param array $credentials
      * @param int $limit
      * @return void
-     * @throws  \RKW\RkwEtracker\Exception
+     * @throws \RKW\RkwEtracker\Exception
      */
-    public function importAreaData($report, $reportGroup, $limit = 0)
-    {
+    public function importAreaData(
+        \RKW\RkwEtracker\Domain\Model\Report $report,
+        \RKW\RkwEtracker\Domain\Model\ReportGroup $reportGroup,
+        array $credentials,
+        int $limit = 0
+    ) {
 
         try {
 
-            /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
-            $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Object\ObjectManager');
-
-            /** @var \RKW\RkwEtracker\Domain\Repository\AreaDataRepository $areaDataRepository */
-            $areaDataRepository = $objectManager->get('RKW\RkwEtracker\Domain\Repository\AreaDataRepository');
-
-            $paramsArray = $this->getDateParams($report);
             $params = array(
                 'attributes=area_level_1',
                 'figures=unique_visits,unique_visitors,page_impressions,bounces_per_visit,staytime_per_unique_visits_v2',
                 'displayType=grouped',
-                'startDate=' . $paramsArray['startDate'],
-                'endDate=' . $paramsArray['endDate'],
+                'startDate=' . date('Y-m-d', $report->getLastStartTstamp()),
+                'endDate=' . date('Y-m-d', $report->getLastEndTstamp()),
                 'limit=' . ($limit ? intval($limit) : 2000),
             );
+
+            /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
+            $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(ObjectManager::class);
+
+            /** @var \RKW\RkwEtracker\Domain\Repository\AreaDataRepository $areaDataRepository */
+            $areaDataRepository = $objectManager->get(AreaDataRepository::class);
 
             /** @var  \RKW\RkwEtracker\Domain\Model\ReportFilter $reportFilter */
             foreach ($reportGroup->getFilter() as $reportFilter) {
 
                 /** @var \RKW\RkwEtracker\Domain\Model\AreaData $areaData */
-                $areaData = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\RkwEtracker\Domain\Model\AreaData');
+                $areaData = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(AreaData::class);
 
                 // set basic values
                 $areaData->setReport($report);
@@ -227,67 +123,22 @@ class Import
                 $areaData->setQuarter($report->getQuarter());
                 $areaData->setYear($report->getYear());
 
-                // define filter properties
-                $categoryFilter = array();
-                $categoryFilterString = null;
-                $properties = array('domain', 'categoryLevel1', 'categoryLevel2', 'categoryLevel3', 'categoryLevel4');
-                foreach ($properties as $level => $property) {
+                // get filter properties
+                if ($filter = CategoryUtility::reportFilterCategoriesToJson($reportFilter, true)) {
 
-                    // build getters
-                    $getterDefault = 'get' . ucfirst($property);
-                    $setterDefault = 'set' . ucfirst($property);
-                    $getterFreetext = 'get' . ucfirst($property) . 'Free';
-
-                    if ($property == 'domain') {
-
-                        // get values
-                        $filterString = CategoryUtility::cleanUpDomainName($reportFilter->$getterDefault());
-                        if ($reportFilter->$getterFreetext()) {
-                            $filterString = CategoryUtility::cleanUpDomainName($reportFilter->$getterFreetext());
-                        }
+                    // get data from API
+                    $completeUrl = $this::ApiUrl . 'report/EAArea/data?' . implode('&', array_merge($params)) . '&attributeFilter=' . urlencode($filter);
+                    if (
+                        ($rawData = $this->getJsonData($completeUrl, $credentials))
+                        && (is_array($rawData))
+                    ) {
+                        $this->mappingAreaData($rawData, $areaData);
+                        $areaDataRepository->add($areaData);
+                        $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Import of eTracker area data for reportGroup "%s" (id=%s) with filter "%s" (id=%s) successful.', $reportGroup->getName(), $reportGroup->getUid(), $filter, $reportFilter->getUid()));
 
                     } else {
-
-                        // get values
-                        $filterString = CategoryUtility::cleanUpCategoryName($reportFilter->$getterDefault());
-                        if ($reportFilter->$getterFreetext()) {
-                            $filterString = CategoryUtility::cleanUpCategoryName($reportFilter->$getterFreetext());
-                        }
+                        $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Received no area data for reportGroup "%s" (id=%s) with filter "%s" (id=%s) from eTracker API.', $reportGroup->getName(), $reportGroup->getUid(), $filter, $reportFilter->getUid()));
                     }
-
-                    // build category filter for API
-                    if (
-                        ($filterString)
-                        && (!is_numeric($filterString))
-                    ) {
-
-                        $categoryFilter[] = preg_replace("/\s/", '', '
-                            {
-                                "input":"' . $filterString . '",
-                                "type":"exact",
-                                "attributeId":"area_level_' . intval($level + 1) . '",
-                                "filterType":"extended",
-                                "filter":"include"
-                            }
-                        ');
-
-                        // set filter-string to final object
-                        $areaData->$setterDefault($filterString);
-                    }
-                }
-
-                // get data from API
-                $completeUrl = $this::ApiUrl . 'report/EAArea/data?' . implode('&', array_merge($params)) . '&attributeFilter=' . urlencode('[' . implode(',', $categoryFilter) . ']');
-                if (
-                    ($rawData = $this->getJsonData($completeUrl))
-                    && (is_array($rawData))
-                ) {
-                    $this->mappingAreaData($rawData, $areaData);
-                    $areaDataRepository->add($areaData);
-                    $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Import of eTracker area data for reportGroup "%s" (id=%s) with filter "%s" (id=%s) successful.', $reportGroup->getName(), $reportGroup->getUid(), implode(',', $categoryFilter), $reportFilter->getUid()));
-
-                } else {
-                    $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Received no area data for reportGroup "%s" (id=%s) with filter "%s" (id=%s) from eTracker API.', $reportGroup->getName(), $reportGroup->getUid(), implode(',', $categoryFilter), $reportFilter->getUid()));
                 }
             }
 
@@ -302,130 +153,65 @@ class Import
      *
      * @param \RKW\RkwEtracker\Domain\Model\Report $report
      * @param \RKW\RkwEtracker\Domain\Model\ReportGroup $reportGroup
+     * @param array $credentials
      * @param int $limit
      * @return void
      * @throws \RKW\RkwEtracker\Exception
      */
-    public function importDownloadData($report, $reportGroup, $limit = 0)
-    {
+    public function importDownloadData(
+        \RKW\RkwEtracker\Domain\Model\Report $report,
+        \RKW\RkwEtracker\Domain\Model\ReportGroup $reportGroup,
+        array $credentials,
+        $limit = 0
+    ) {
 
         try {
 
-            /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
-            $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Object\ObjectManager');
-
-            /** @var \RKW\RkwEtracker\Domain\Repository\DownloadDataRepository $downloadDataRepository * */
-            $downloadDataRepository = $objectManager->get('RKW\RkwEtracker\Domain\Repository\DownloadDataRepository');
-
-            $paramsArray = $this->getDateParams($report);
             $params = array(
                 'attributes=category,action,object',
                 'displayType=grouped',
-                'startDate=' . $paramsArray['startDate'],
-                'endDate=' . $paramsArray['endDate'],
+                'startDate=' . date('Y-m-d', $report->getLastStartTstamp()),
+                'endDate=' . date('Y-m-d', $report->getLastEndTstamp()),
                 'limit=' . ($limit ? intval($limit) : 2000),
             );
+
+            /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
+            $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(ObjectManager::class);
+
+            /** @var \RKW\RkwEtracker\Domain\Repository\DownloadDataRepository $downloadDataRepository * */
+            $downloadDataRepository = $objectManager->get(DownloadDataRepository::class);
 
             /** @var  \RKW\RkwEtracker\Domain\Model\ReportFilter $reportFilter */
             foreach ($reportGroup->getFilter() as $reportFilter) {
 
+                /** @var \RKW\RkwEtracker\Domain\Model\DownloadData $downloadData */
+                $downloadData = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(DownloadData::class);
 
-                // get domain
-                $domain = $reportFilter->getDomain();
-                if ($reportFilter->getDomainFree()) {
-                    $domain = $reportFilter->getDomainFree();
-                }
-
-                // get other filters
-                $filterArray = array();
-                $properties = array('downloadFilter1', 'downloadFilter2', 'downloadFilter3', 'downloadFreeFilter1');
-                foreach ($properties as $property) {
-
-                    // build getter and get values
-                    $getterDefault = 'get' . ucfirst($property);
-                    $filterString = CategoryUtility::cleanUpCategoryName($reportFilter->$getterDefault());
-
-                    if (
-                        ($filterString)
-                        && (!is_numeric($filterString))
-                    ) {
-
-                        /** @toDo: remove version without domain-prefix. Is included here for backwards-compatibility */
-                        if (strtolower($filterString) == 'default') {
-                            $filterArray[] = 'default';
-                            $filterArray[] = 'Default';
-                            $filterArray[] = ($domain ? $domain . '/' : '') . 'default';
-                            $filterArray[] = ($domain ? $domain . '/' : '') . 'Default';
-
-                        } else {
-                            $filterArray[] = $filterString;
-                            $filterArray[] = ($domain ? $domain . '/' : '') . $filterString;
-                        }
-                    }
-                }
+                // set basic values
+                $downloadData->setReport($report);
+                $downloadData->setReportGroup($reportGroup);
+                $downloadData->setReportFilter($reportFilter);
+                $downloadData->setReportFetchCounter($report->getFetchCounter());
+                $downloadData->setMonth($report->getMonth());
+                $downloadData->setQuarter($report->getQuarter());
+                $downloadData->setYear($report->getYear());
 
                 // only if something is set!
-                if (count($filterArray) > 0) {
-
-                    // define filter properties - combine filter-strings to "or"-Array
-                    $categoryFilter = array();
-                    $categoryFilterString = implode(',', $filterArray);
-                    $categoryFilter[] = preg_replace("/\s/", '', '
-                        {
-                            "input":"file",
-                            "type":"exact",
-                            "attributeId":"action",
-                            "filterType":"extended",
-                            "filter":"include"
-                        },
-                        {
-                            "input":["' . implode('","', $filterArray) . '"],
-                            "type":"exact",
-                            "attributeId":"category",
-                            "filterType":"extended",
-                            "filter":"include"
-                        }
-                    ');
+                if ($filter = CategoryUtility::reportFilterEventsToJson($reportFilter, true)) {
 
                     // get data from API
-                    $completeUrl = $this::ApiUrl . 'report/EAEvents/data?' . implode('&', array_merge($params)) . '&attributeFilter=' . urlencode('[' . implode(',', $categoryFilter) . ']');
+                    $completeUrl = $this::ApiUrl . 'report/EAEvents/data?' . implode('&', array_merge($params)) . '&attributeFilter=' . urlencode($filter);
                     if (
-                        ($rawData = $this->getJsonData($completeUrl))
+                        ($rawData = $this->getJsonData($completeUrl, $credentials))
                         && (is_array($rawData))
                     ) {
 
-                        // since we are using an or-request we have to go through all the lines
-                        foreach ($rawData as $line => $rawDataItem) {
-
-                            // ignore first sum-line
-                            if ($line == 0) {
-                                continue;
-                                //===
-                            }
-
-                            /** @var \RKW\RkwEtracker\Domain\Model\DownloadData $downloadData */
-                            $downloadData = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\RkwEtracker\Domain\Model\DownloadData');
-
-                            // set basic values
-                            $downloadData->setReport($report);
-                            $downloadData->setReportGroup($reportGroup);
-                            $downloadData->setReportFilter($reportFilter);
-                            $downloadData->setReportFetchCounter($report->getFetchCounter());
-                            $downloadData->setMonth($report->getMonth());
-                            $downloadData->setQuarter($report->getQuarter());
-                            $downloadData->setYear($report->getYear());
-
-                            $this->mappingDownloadData($rawDataItem, $downloadData);
-
-                            $downloadDataRepository->add($downloadData);
-
-
-                        }
-
-                        $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Import of eTracker download data for reportGroup "%s" (id=%s) with filter "%s" (id=%s) successfull.', $reportGroup->getName(), $reportGroup->getUid(), $categoryFilterString, $reportFilter->getUid()));
+                        $this->mappingDownloadData($rawData, $downloadData);
+                        $downloadDataRepository->add($downloadData);
+                        $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Import of eTracker download data for reportGroup "%s" (id=%s) with filter "%s" (id=%s) successful.', $reportGroup->getName(), $reportGroup->getUid(), $filter, $reportFilter->getUid()));
 
                     } else {
-                        $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Received no download data for reportGroup "%s" (id=%s) with filter "%s" (id=%s) from eTracker API.', $reportGroup->getName(), $reportGroup->getUid(), $categoryFilterString, $reportFilter->getUid()));
+                        $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Received no download data for reportGroup "%s" (id=%s) with filter "%s" (id=%s) from eTracker API.', $reportGroup->getName(), $reportGroup->getUid(), $filter, $reportFilter->getUid()));
                     }
                 }
             }
@@ -440,21 +226,24 @@ class Import
      * Get the JSON data
      *
      * @param string $url
-     * @return array|null
+     * @param array $credentials
+     * @return array
      * @throws \RKW\RkwEtracker\Exception
      */
-    protected function getJsonData ($url)
-    {
+    protected function getJsonData (
+        string $url,
+        array $credentials
+    ): array {
 
         $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::DEBUG, sprintf ('API-Request: %s',  $url));
-        if (
-            ($this->configuration['apiEmail'])
-            && (\TYPO3\CMS\Core\Utility\GeneralUtility::validEmail($this->configuration['apiEmail']))
-            && ($this->configuration['apiToken'])
-            && ($this->configuration['apiAccountId'])
-            && ($this->configuration['apiPassword'])
-        ) {
 
+        if (
+            ($credentials['apiEmail'])
+            && (\TYPO3\CMS\Core\Utility\GeneralUtility::validEmail($credentials['apiEmail']))
+            && ($credentials['apiToken'])
+            && ($credentials['apiAccountId'])
+            && ($credentials['apiPassword'])
+        ) {
 
             // init curl
             $curlHandle = curl_init();
@@ -464,20 +253,23 @@ class Import
 
             // login header for etracker
             $headers = [
-                'X-ET-email: ' . $this->configuration['apiEmail'],
-                'X-ET-developerToken: ' . $this->configuration['apiToken'],
-                'X-ET-accountId: ' . $this->configuration['apiAccountId'],
-                'X-ET-password: ' . $this->configuration['apiPassword'],
+                'X-ET-email: ' . $credentials['apiEmail'],
+                'X-ET-developerToken: ' . $credentials['apiToken'],
+                'X-ET-accountId: ' . $credentials['apiAccountId'],
+                'X-ET-password: ' . $credentials['apiPassword'],
             ];
             curl_setopt($curlHandle, CURLOPT_HTTPHEADER, $headers);
 
 
             // optional: proxy configuration
-            if ($this->configuration['proxy']) {
+            if ($credentials['proxy']) {
 
-                curl_setopt($curlHandle, CURLOPT_PROXY, $this->configuration['proxy']);
-                if ($this->configuration['proxyUsername']) {
-                    curl_setopt($curlHandle, CURLOPT_PROXYUSERPWD, $this->configuration['proxyUsername'] . ':' . $this->configuration['proxyPassword']);
+                curl_setopt($curlHandle, CURLOPT_PROXY, $credentials['proxy']);
+                if ($credentials['proxyUsername']) {
+                    curl_setopt(
+                        $curlHandle,
+                        CURLOPT_PROXYUSERPWD,
+                        $credentials['proxyUsername'] . ':' . $credentials['proxyPassword']);
                 }
             }
 
@@ -520,7 +312,7 @@ class Import
             throw new \RKW\RkwEtracker\Exception('Configuration for API-Login incomplete.', 1489562529);
         }
 
-        return null;
+        return [];
 
     }
 
@@ -592,7 +384,7 @@ class Import
             );
 
             // ignore everything else but the first line
-            foreach ($rawData as $key => $value) {
+            foreach ($rawData[0] as $key => $value) {
 
                 if (!$mapping[$key]) {
                     continue;
@@ -600,7 +392,6 @@ class Import
                 }
 
                 $downloadData->setAction('file');
-                $downloadData->setCategory($rawData[2]);
 
                 $setter = 'set' . ucfirst($mapping[$key]);
                 $downloadData->$setter($value);
@@ -608,48 +399,6 @@ class Import
         }
     }
 
-
-    /**
-     * Gets the date params
-     *
-     * @param \RKW\RkwEtracker\Domain\Model\Report $report
-     * @return array
-     * @throws \Exception
-     */
-    protected function getDateParams($report)
-    {
-
-        $date = new \DateTime();
-
-        // check if we have an accountStartDate
-        $dateLimit = null;
-        if ($this->configuration['accountStartDate']) {
-            $dateLimit = new \DateTime(date('Y-m-d', strtotime($this->configuration['accountStartDate'])));
-        }
-
-        $dateArray = DateUtility::getStartEndLastYear($date, $dateLimit);
-
-        //===================
-        // quarterly reports
-        if ($report->getType() == 1) {
-
-            $dateArray = DateUtility::getStartEndLastQuarter($date, $dateLimit);
-
-        //===================
-        // monthly reports
-        } else if ($report->getType() == 2) {
-
-            $dateArray = DateUtility::getStartEndLastMonth($date, $dateLimit);
-        }
-
-        $report->setMonth(intval($dateArray['month']));
-        $report->setQuarter(intval($dateArray['quarter']));
-        $report->setYear(intval($dateArray['year']));
-        $report->setLastStartTstamp(strtotime($dateArray['startDate']));
-        $report->setLastEndTstamp(strtotime($dateArray['endDate']));
-
-        return $dateArray;
-    }
 
 
     /**

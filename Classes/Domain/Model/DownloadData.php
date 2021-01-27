@@ -33,12 +33,6 @@ class DownloadData extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected $action = '';
 
-    /**
-     * category
-     *
-     * @var string
-     */
-    protected $category = '';
 
     /**
      * timePerEvent
@@ -134,26 +128,6 @@ class DownloadData extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->action = $action;
     }
 
-    /**
-     * Returns the category
-     *
-     * @return string $category
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
-    /**
-     * Sets the category
-     *
-     * @param string $category
-     * @return void
-     */
-    public function setCategory($category)
-    {
-        $this->category = $category;
-    }
 
     /**
      * Returns the timePerEvent

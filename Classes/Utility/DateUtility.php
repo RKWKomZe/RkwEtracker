@@ -34,8 +34,10 @@ class DateUtility
      * @return array
      * @throws \Exception
      */
-    public static function getStartEndLastYear(\DateTime $date = null, \DateTime $dateLimit = null): array
-    {
+    public static function getStartEndLastYear(
+        \DateTime $date = null,
+        \DateTime $dateLimit = null
+    ): array {
 
         if (! $date) {
             $date = new \DateTime();
@@ -70,8 +72,10 @@ class DateUtility
      * @return array
      * @throws \Exception
      */
-    public static function getStartEndLastQuarter(\DateTime $date = null, \DateTime $dateLimit = null): array
-    {
+    public static function getStartEndLastQuarter(
+        \DateTime $date = null,
+        \DateTime $dateLimit = null
+    ): array {
 
         if (! $date) {
             $date = new \DateTime();
@@ -131,8 +135,10 @@ class DateUtility
      * @return array
      * @throws \Exception
      */
-    public static function getStartEndLastMonth(\DateTime $date = null, \DateTime $dateLimit = null): array
-    {
+    public static function getStartEndLastMonth(
+        \DateTime $date = null,
+        \DateTime $dateLimit = null
+    ): array {
 
         if (! $date) {
             $date = new \DateTime();
@@ -157,6 +163,106 @@ class DateUtility
             'quarter' => 0,
             'year' => $startDate->format('Y')
         ];
+    }
+    /**
+     * Gets the date params for the given report
+     *
+     * @param \RKW\RkwEtracker\Domain\Model\Report $report
+     * @param array $configuration
+     * @param \DateTime $date
+     * @return array
+     * @throws \Exception
+     */
+    public static function getStartEndForReport(
+        \RKW\RkwEtracker\Domain\Model\Report $report,
+        array $configuration = [],
+        \DateTime $date = null
+    ): array {
+
+        if (! $date) {
+            $date = new \DateTime();
+        }
+
+        // check if we have an accountStartDate
+        $dateLimit = null;
+        if ($configuration['accountStartDate']) {
+            $dateLimit = new \DateTime(date('Y-m-d', strtotime($configuration['accountStartDate'])));
+        }
+
+        // default: yearly reports
+        $dateArray = DateUtility::getStartEndLastYear($date, $dateLimit);
+
+        // quarterly reports
+        if ($report->getType() == 1) {
+            $dateArray = DateUtility::getStartEndLastQuarter($date, $dateLimit);
+
+        // monthly reports
+        } else if ($report->getType() == 2) {
+            $dateArray = DateUtility::getStartEndLastMonth($date, $dateLimit);
+        }
+
+        return $dateArray;
+
+    }
+
+
+    /**
+     * Sets the date params for the given report
+     *
+     * @param \RKW\RkwEtracker\Domain\Model\Report $report
+     * @param array $configuration
+     * @param \DateTime $date
+     * @return void
+     * @throws \Exception
+     */
+    public static function setStartEndForReport(
+        \RKW\RkwEtracker\Domain\Model\Report $report,
+        array $configuration = [],
+        \DateTime $date = null
+    ): void {
+
+        $dateArray = DateUtility::getStartEndForReport($report, $configuration, $date);
+
+        $report->setMonth(intval($dateArray['month']));
+        $report->setQuarter(intval($dateArray['quarter']));
+        $report->setYear(intval($dateArray['year']));
+        $report->setLastStartTstamp(strtotime($dateArray['startDate']));
+        $report->setLastEndTstamp(strtotime($dateArray['endDate']));
+
+    }
+
+
+
+    /**
+     * Sets the date params for the given report
+     *
+     * @param \RKW\RkwEtracker\Domain\Model\Report $report
+     * @param array $configuration
+     * @param \DateTime $date
+     * @return bool
+     * @throws \Exception
+     */
+    public static function isReportImportNeeded (
+        \RKW\RkwEtracker\Domain\Model\Report $report,
+        array $configuration = [],
+        \DateTime $date = null
+    ): bool {
+
+        if (! $date) {
+            $date = new \DateTime();
+        }
+
+        $dateArray = DateUtility::getStartEndForReport($report, $configuration, $date);
+
+        if ($report->getLastStartTstamp() >= strtotime($dateArray['startDate'])) {
+            return false;
+        }
+
+        if ($report->getStarttime() > intval($date->format('U'))) {
+            return false;
+        }
+
+        return true;
     }
 
 }

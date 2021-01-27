@@ -17,15 +17,15 @@ return [
 		'enablecolumns' => [
 
 		],
-		'searchFields' => 'domain, domain_free, domain_required, category_level1, category_level2, category_level3, category_level4, category_level5, category_free_level1, category_free_level2, category_free_level3, category_free_level4, category_free_level5, download_filter1, download_filter2, download_filter3, download_free_filter1',
+		'searchFields' => 'domain, domain_free, domain_required, category_level1, category_level2, category_level3, category_level4, category_level5, category_free_level1, category_free_level2, category_free_level3, category_free_level4, category_free_level5, download_filter1, download_free_filter1',
 		'iconfile' => 'EXT:rkw_etracker/Resources/Public/Icons/tx_rkwetracker_domain_model_reportfilter.gif'
 	],
 	'interface' => [
-        'showRecordFieldList' => 'domain, domain_free, category_level1, category_level2, category_level3, category_level4, category_level5, category_free_level1, category_free_level2, category_free_level3, category_free_level4, category_free_level5, download_filter1, download_filter2, download_filter3, download_free_filter1',
+        'showRecordFieldList' => 'domain, domain_free, category_level1, category_level2, category_level3, category_level4, category_level5, category_free_level1, category_free_level2, category_free_level3, category_free_level4, category_free_level5, download_filter1, download_free_filter1',
 
     ],
 	'types' => [
-        '1' => ['showitem' => 'domain, domain_free, --div--;LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tab.categories, category_level1, category_free_level1, category_level2, category_free_level2, category_level3, category_free_level3, category_level4, category_free_level4, category_level5, category_free_level5, --div--;LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tab.download, download_free_filter1, download_filter1, download_filter2, download_filter3'],
+        '1' => ['showitem' => 'domain, domain_free, --div--;LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tab.categories, category_level1, category_free_level1, category_level2, category_free_level2, category_level3, category_free_level3, category_level4, category_free_level4, category_level5, category_free_level5, --div--;LLL:EXT:rkw_etracker/Resources/Private/Language/locallang_db.xlf:tab.download, download_free_filter1, download_filter1'],
     ],
 	'palettes' => [
 		'1' => ['showitem' => ''],

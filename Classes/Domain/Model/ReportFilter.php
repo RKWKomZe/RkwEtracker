@@ -122,6 +122,7 @@ class ReportFilter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * downloadFilter2
      *
      * @var string
+     * @deprecated
      */
     protected $downloadFilter2 = '';
 
@@ -129,6 +130,7 @@ class ReportFilter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * downloadFilter3
      *
      * @var string
+     * @deprecated
      */
     protected $downloadFilter3 = '';
 
@@ -481,6 +483,7 @@ class ReportFilter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Returns the downloadFilter2
      *
      * @return string $downloadFilter2
+     * @deprecated
      */
     public function getDownloadFilter2()
     {
@@ -492,6 +495,7 @@ class ReportFilter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @param string $downloadFilter2
      * @return void
+     * @deprecated
      */
     public function setDownloadFilter2($downloadFilter2)
     {
@@ -502,6 +506,7 @@ class ReportFilter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Returns the downloadFilter3
      *
      * @return string $downloadFilter3
+     * @deprecated
      */
     public function getDownloadFilter3()
     {
@@ -513,6 +518,7 @@ class ReportFilter extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @param string $downloadFilter3
      * @return void
+     * @deprecated
      */
     public function setDownloadFilter3($downloadFilter3)
     {

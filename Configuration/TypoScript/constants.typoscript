@@ -15,18 +15,6 @@ plugin.tx_rkwetracker {
 
     settings {
 
-        # cat=plugin.tx_rkwetracker; type=string; Email for API-Login
-        apiEmail =
-
-        # cat=plugin.tx_rkwetracker; type=string; Password for API-Login
-        apiPassword =
-
-        # cat=plugin.tx_rkwetracker; type=string; Token for API-Login
-        apiToken =
-
-        # cat=plugin.tx_rkwetracker; type=string; Account-Id for API-Login
-        apiAccountId =
-
         # cat=plugin.tx_rkwetracker; type=string; Secure Code for tracklet
         secureCode =
 

@@ -189,12 +189,12 @@
                                         <td>
                                             <f:if condition="{report.linkToApi}">
                                                 <f:then>
-                                                    <a href="<rkwMailer:frontend.link absolute='TRUE' pageUid='{singleSignOnPid}' noCacheHash='true' />">
-                                                        <rkwEtracker:categoryImplodeAreaData areaData="{data}" />
+                                                    <a href="<rkwMailer:frontend.link absolute='true' pageUid='{singleSignOnPid}' noCacheHash='true' />">
+                                                        <rkwEtracker:report.implodeCategories areaData="{data}" />
                                                     </a>
                                                 </f:then>
                                                 <f:else>
-                                                    <rkwEtracker:categoryImplodeAreaData areaData="{data}" />
+                                                    <rkwEtracker:report.implodeCategories areaData="{data}" />
                                                 </f:else>
                                             </f:if>
                                         </td>
@@ -276,12 +276,12 @@
                                     <td width="70%">
                                         <f:if condition="{report.linkToApi}">
                                             <f:then>
-                                                <a href="<rkwMailer:frontend.link absolute='TRUE' pageUid='{singleSignOnPid}' noCacheHash='true' />">
-                                                    {data.category}
+                                                <a href="<rkwMailer:frontend.link absolute='true' pageUid='{singleSignOnPid}' noCacheHash='true' />">
+                                                    <rkwEtracker:report.eventsToString downloadData="{data}" />
                                                 </a>
                                             </f:then>
                                             <f:else>
-                                                {data.category}
+                                                <rkwEtracker:report.eventsToString downloadData="{data}" />
                                             </f:else>
                                         </f:if>
 
