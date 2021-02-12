@@ -215,10 +215,10 @@ class FilterSelector
         if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_projects')) {
 
             /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
-            $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Object\ObjectManager');
+            $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
 
             /** @var \RKW\RkwProjects\Domain\Repository\ProjectsRepository $projectRepository */
-            $projectRepository = $objectManager->get('RKW\RkwProjects\Domain\Repository\ProjectsRepository');
+            $projectRepository = $objectManager->get(\RKW\RkwProjects\Domain\Repository\ProjectsRepository::class);
             $result = $projectRepository->findAllSorted();
 
             $params['items'][] = array('- DEFAULT - ', 'Default');
@@ -226,7 +226,10 @@ class FilterSelector
             /** @var \RKW\RkwProjects\Domain\Model\Projects $project */
             foreach ($result as $project) {
                 if ($project->getName()) {
-                    $params['items'][] = array(($project->getInternalName() ? CategoryUtility::cleanUpCategoryName($project->getInternalName()) : CategoryUtility::cleanUpCategoryName($project->getName())), ($project->getInternalName() ? CategoryUtility::cleanUpCategoryName($project->getInternalName()) : CategoryUtility::cleanUpCategoryName($project->getName())));
+                    $params['items'][] = [
+                        \RKW\RkwProjects\TCA\OptionLabels::getExtendedProjectName($project),
+                        ($project->getInternalName() ? CategoryUtility::cleanUpCategoryName($project->getInternalName()) : CategoryUtility::cleanUpCategoryName($project->getName()))
+                    ];
                 }
             }
         }
