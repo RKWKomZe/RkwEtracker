@@ -307,9 +307,9 @@ class ReportCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
                             $downloadSum = $calculate->getDownloadSum($report, $reportGroup, $downloadData);
 
                             // 3. save results
-                            $this->areaSumRepository->add($areaSum);
+                            //$this->areaSumRepository->add($areaSum);
                             $areaSumObjectStorage->attach($areaSum);
-                            $this->downloadSumRepository->add($downloadSum);
+                            //$this->downloadSumRepository->add($downloadSum);
                             $downloadSumObjectStorage->attach($downloadSum);
 
                             $reportData[] = array(
@@ -323,10 +323,15 @@ class ReportCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
 
                         // 4. calculate complete report sums
                         $reportAreaSum = $calculate->getReportAreaSum($report, $areaSumObjectStorage);
-                        $this->reportAreaSumRepository->add($reportAreaSum);
+                        // $this->reportAreaSumRepository->add($reportAreaSum);
 
+                        /** @toDo: if we persist it, only the first recipient will get the report sums
+                         *  We should nevertheless check how to persist it, because the field in the database get to large
+                         *  with the serialized objects!
+                         */
                         $reportDownloadSum = $calculate->getReportDownloadSum($report, $downloadSumObjectStorage);
-                        $this->reportDownloadSumRepository->add($reportDownloadSum);
+                        //$this->reportDownloadSumRepository->add($reportDownloadSum);
+                        //$this->persistenceManager->persistAll();
 
                         // 5. prepare emails
                         foreach (GeneralUtility::trimExplode(',', $report->getRecipient()) as $recipientEmail) {

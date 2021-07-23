@@ -31,6 +31,7 @@ class ReportRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      *
      * @param  array $status
      * @return \RKW\RkwEtracker\Domain\Model\Report|object
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function findOneByStatus($status)
     {
