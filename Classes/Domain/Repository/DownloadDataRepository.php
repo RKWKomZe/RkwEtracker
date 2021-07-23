@@ -38,7 +38,7 @@ class DownloadDataRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      *
      * @param int $level
      * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-     */
+
     public function findAllDownloadsGrouped()
     {
 
@@ -50,7 +50,7 @@ class DownloadDataRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
         return $query->execute();
         //===
-    }
+    }*/
 
 
     /**
@@ -59,6 +59,7 @@ class DownloadDataRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEtracker\Domain\Model\ReportFilter> $reportFilters
      * @param  \RKW\RkwEtracker\Domain\Model\Report $report
      * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface|null
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function findAllByFilters($reportFilters, $report)
     {
@@ -72,16 +73,18 @@ class DownloadDataRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $constraints[] = $query->equals('action', 'file');
 
         $query->setOrderings(
-            array(
-                'category' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
-            )
+            [
+                'reportFilter.domain'         => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
+                'reportFilter.categoryLevel1' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
+                'reportFilter.categoryLevel2' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
+                'reportFilter.categoryLevel3' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
+                'reportFilter.categoryLevel4' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
+                'reportFilter.categoryLevel5' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
+            ]
         );
 
         $query->matching($query->logicalAnd($constraints));
-
         return $query->execute();
-        //===
-
     }
 
 }
