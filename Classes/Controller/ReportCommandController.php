@@ -4,7 +4,7 @@ namespace RKW\RkwEtracker\Controller;
 
 use RKW\RkwEtracker\Utility\DateUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use \RKW\RkwMailer\Helper\FrontendLocalization;
+use \RKW\RkwMailer\Utility\FrontendLocalizationUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use \RKW\RkwBasics\Helper\Common;
 
