@@ -37,7 +37,7 @@ class CategoryUtilityTest extends UnitTestCase
     /**
      * Setup
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
     }
@@ -366,7 +366,7 @@ class CategoryUtilityTest extends UnitTestCase
             4 => 'Ganz-Toll'
         ];
 
-        static::assertInternalType('array', $result);
+        static::assertIsArray( $result);
         static::assertEquals($expected, $result);
     }
 
@@ -410,7 +410,7 @@ class CategoryUtilityTest extends UnitTestCase
             4 => 'Ganz-Toll'
         ];
 
-        static::assertInternalType('array', $result);
+        static::assertIsArray( $result);
         static::assertEquals($expected, $result);
     }
 
@@ -434,7 +434,7 @@ class CategoryUtilityTest extends UnitTestCase
 
         $result = CategoryUtility::reportFilterCategoriesToArray($reportFilter);
 
-        static::assertInternalType('array', $result);
+        static::assertIsArray( $result);
         static::assertEmpty($result);
     }
 
@@ -466,7 +466,7 @@ class CategoryUtilityTest extends UnitTestCase
             0 => 'meinedolledomäne.com',
         ];
 
-        static::assertInternalType('array', $result);
+        static::assertIsArray( $result);
         static::assertEquals($expected, $result);
     }
 
@@ -512,7 +512,7 @@ class CategoryUtilityTest extends UnitTestCase
             5 => 'Ganz-Toll'
         ];
 
-        static::assertInternalType('array', $result);
+        static::assertIsArray( $result);
         static::assertEquals($expected, $result);
     }
 
@@ -569,7 +569,7 @@ class CategoryUtilityTest extends UnitTestCase
             5 => 'Ganz-Toll'
         ];
 
-        static::assertInternalType('array', $result);
+        static::assertIsArray( $result);
         static::assertEquals($expected, $result);
     }
 
@@ -601,7 +601,7 @@ class CategoryUtilityTest extends UnitTestCase
         $result = CategoryUtility::reportFilterEventsToString($reportFilter);
         $expected = 'PferdeStärken';
 
-        static::assertInternalType('string', $result);
+        static::assertIsString( $result);
         static::assertEquals($expected, $result);
     }
 
@@ -626,7 +626,7 @@ class CategoryUtilityTest extends UnitTestCase
 
         $result = CategoryUtility::reportFilterEventsToString($reportFilter);
 
-        static::assertInternalType('string', $result);
+        static::assertIsString( $result);
         static::assertEmpty($result);
     }
 
@@ -654,7 +654,7 @@ class CategoryUtilityTest extends UnitTestCase
 
         $result = CategoryUtility::reportFilterEventsToString($reportFilter, true);
 
-        static::assertInternalType('string', $result);
+        static::assertIsString( $result);
         static::assertEmpty($result);
     }
 
@@ -679,7 +679,7 @@ class CategoryUtilityTest extends UnitTestCase
 
         $result = CategoryUtility::reportFilterEventsToString($reportFilter);
 
-        static::assertInternalType('string', $result);
+        static::assertIsString( $result);
         static::assertEmpty($result);
     }
 
@@ -711,7 +711,7 @@ class CategoryUtilityTest extends UnitTestCase
         $result = CategoryUtility::reportFilterEventsToString($reportFilter, true);
         $expected = 'meinedolledomäne.com/PferdeStärken';
 
-        static::assertInternalType('string', $result);
+        static::assertIsString( $result);
         static::assertEquals($expected, $result);
     }
 
@@ -746,7 +746,7 @@ class CategoryUtilityTest extends UnitTestCase
         $result = CategoryUtility::reportFilterEventsToString($reportFilter, true);
         $expected = 'thisisdadomain.net/ZuckerSchnute';
 
-        static::assertInternalType('string', $result);
+        static::assertIsString( $result);
         static::assertEquals($expected, $result);
     }
 
@@ -1027,7 +1027,7 @@ class CategoryUtilityTest extends UnitTestCase
     /**
      * TearDown
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
     }

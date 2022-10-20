@@ -40,7 +40,8 @@ class ImplodeCategoriesViewHelper extends AbstractViewHelper
      */
     public function initializeArguments()
     {
-        $this->registerArgument('areaData', '\RKW\RkwEtracker\Domain\Model\AreaData', 'The AreaData-object to get the categories from.', true);
+        parent::initializeArguments();
+        $this->registerArgument('areaData', AreaData::class, 'The AreaData-object to get the categories from.', true);
     }
 
 

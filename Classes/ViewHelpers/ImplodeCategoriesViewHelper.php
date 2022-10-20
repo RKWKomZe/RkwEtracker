@@ -34,13 +34,13 @@ class ImplodeCategoriesViewHelper extends AbstractViewHelper
      */
     public function initializeArguments()
     {
+        parent::initializeArguments();
         $this->registerArgument('domain', 'string', 'The domain prefix.');
         $this->registerArgument('category1', 'string', 'First category for implode.');
         $this->registerArgument('category2', 'string', 'Second category for implode.');
         $this->registerArgument('category3', 'string', 'Third category for implode.');
         $this->registerArgument('category4', 'string', 'Fourth category for implode.');
         $this->registerArgument('category5', 'string', 'Fifth category for implode.');
-
     }
 
 

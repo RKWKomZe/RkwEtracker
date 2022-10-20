@@ -40,7 +40,8 @@ class EventsToStringViewHelper extends AbstractViewHelper
      */
     public function initializeArguments()
     {
-        $this->registerArgument('downloadData', '\RKW\RkwEtracker\Domain\Model\DownloadData', 'The DownloadData-object to get the categories from.', true);
+        parent::initializeArguments();
+        $this->registerArgument('downloadData', DownloadData::class, 'The DownloadData-object to get the categories from.', true);
     }
 
 

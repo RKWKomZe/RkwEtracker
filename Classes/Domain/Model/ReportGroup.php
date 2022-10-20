@@ -44,7 +44,7 @@ class ReportGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * filter
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEtracker\Domain\Model\ReportFilter>
-     * @cascade remove
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      */
     protected $filter = null;
 

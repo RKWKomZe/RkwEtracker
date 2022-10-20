@@ -71,7 +71,7 @@ class LinkUtilityTest extends FunctionalTestCase
      * Setup
      * @throws \Exception
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -81,15 +81,15 @@ class LinkUtilityTest extends FunctionalTestCase
         $this->subject = $this->objectManager->get(TypolinkUtility::class);
 
         // create folder for files
-        if (file_exists(PATH_site . '/fileadmin')) {
+        if (file_exists(\TYPO3\CMS\Core\Core\Environment::getPublicPath() . '/fileadmin')) {
 
-            if (! file_exists(PATH_site . '/fileadmin/media')) {
-                mkdir (PATH_site . '/fileadmin/media');
+            if (! file_exists(\TYPO3\CMS\Core\Core\Environment::getPublicPath() . '/fileadmin/media')) {
+                mkdir (\TYPO3\CMS\Core\Core\Environment::getPublicPath() . '/fileadmin/media');
             }
 
             foreach (range(1, 4) as $fileCount) {
-                if (! file_exists(PATH_site . '/fileadmin/media/file-placeholder-' . $fileCount . '.pdf')) {
-                    touch (PATH_site . '/fileadmin/media/file-placeholder-' . $fileCount . '.pdf');
+                if (! file_exists(\TYPO3\CMS\Core\Core\Environment::getPublicPath() . '/fileadmin/media/file-placeholder-' . $fileCount . '.pdf')) {
+                    touch (\TYPO3\CMS\Core\Core\Environment::getPublicPath() . '/fileadmin/media/file-placeholder-' . $fileCount . '.pdf');
                 }
             }
         }
@@ -660,21 +660,21 @@ class LinkUtilityTest extends FunctionalTestCase
     /**
      * TearDown
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
 
         // remove folders and files
-        if (file_exists(PATH_site . '/fileadmin')) {
+        if (file_exists(\TYPO3\CMS\Core\Core\Environment::getPublicPath() . '/fileadmin')) {
 
             foreach (range(1, 4) as $fileCount) {
-                if (file_exists(PATH_site . '/fileadmin/media/file-placeholder-' . $fileCount . '.pdf')) {
-                    unlink (PATH_site . '/fileadmin/media/file-placeholder-' . $fileCount . '.pdf');
+                if (file_exists(\TYPO3\CMS\Core\Core\Environment::getPublicPath() . '/fileadmin/media/file-placeholder-' . $fileCount . '.pdf')) {
+                    unlink (\TYPO3\CMS\Core\Core\Environment::getPublicPath() . '/fileadmin/media/file-placeholder-' . $fileCount . '.pdf');
                 }
             }
 
-            if (file_exists(PATH_site . '/fileadmin/media')) {
-                rmdir (PATH_site . '/fileadmin/media');
+            if (file_exists(\TYPO3\CMS\Core\Core\Environment::getPublicPath() . '/fileadmin/media')) {
+                rmdir (\TYPO3\CMS\Core\Core\Environment::getPublicPath() . '/fileadmin/media');
             }
         }
     }

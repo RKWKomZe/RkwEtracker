@@ -2,7 +2,7 @@
 
 namespace RKW\RkwEtracker\Etracker;
 
-use \RKW\RkwBasics\Helper\Common;
+use RKW\RkwBasics\Utility\GeneralUtility as Common;
 use RKW\RkwEtracker\Domain\Model\AreaData;
 use RKW\RkwEtracker\Domain\Model\DownloadData;
 use RKW\RkwEtracker\Domain\Repository\AreaDataRepository;

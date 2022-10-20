@@ -6,7 +6,7 @@ use RKW\RkwEtracker\Utility\DateUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use \RKW\RkwMailer\Helper\FrontendLocalization;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use \RKW\RkwBasics\Helper\Common;
+use RKW\RkwBasics\Utility\GeneralUtility as Common;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -36,7 +36,7 @@ class ReportCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
      * reportRepository
      *
      * @var \RKW\RkwEtracker\Domain\Repository\ReportRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $reportRepository = null;
 
@@ -44,7 +44,7 @@ class ReportCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
      * areaDataRepository
      *
      * @var \RKW\RkwEtracker\Domain\Repository\AreaDataRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $areaDataRepository = null;
 
@@ -52,7 +52,7 @@ class ReportCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
      * downloadDataRepository
      *
      * @var \RKW\RkwEtracker\Domain\Repository\DownloadDataRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $downloadDataRepository = null;
 
@@ -61,7 +61,7 @@ class ReportCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
      * areaSumRepository
      *
      * @var \RKW\RkwEtracker\Domain\Repository\AreaSumRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $areaSumRepository = null;
 
@@ -69,7 +69,7 @@ class ReportCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
      * downloadSumRepository
      *
      * @var \RKW\RkwEtracker\Domain\Repository\DownloadSumRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $downloadSumRepository = null;
 
@@ -78,7 +78,7 @@ class ReportCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
      * reportAreaSumRepository
      *
      * @var \RKW\RkwEtracker\Domain\Repository\ReportAreaSumRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $reportAreaSumRepository = null;
 
@@ -87,7 +87,7 @@ class ReportCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
      * reportDownloadSumRepository
      *
      * @var \RKW\RkwEtracker\Domain\Repository\ReportDownloadSumRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $reportDownloadSumRepository = null;
 
@@ -102,7 +102,7 @@ class ReportCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
      * persistenceManager
      *
      * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $persistenceManager;
 
@@ -325,7 +325,7 @@ class ReportCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
                         $reportAreaSum = $calculate->getReportAreaSum($report, $areaSumObjectStorage);
                         // $this->reportAreaSumRepository->add($reportAreaSum);
 
-                        /** @toDo: if we persist it, only the first recipient will get the report sums
+                        /** @todo if we persist it, only the first recipient will get the report sums
                          *  We should nevertheless check how to persist it, because the field in the database get to large
                          *  with the serialized objects!
                          */

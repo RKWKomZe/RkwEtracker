@@ -53,7 +53,7 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * groups
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEtracker\Domain\Model\ReportGroup>
-     * @cascade remove
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      */
     protected $groups = null;
 
@@ -61,7 +61,7 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * groupsFetch
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEtracker\Domain\Model\ReportGroup>
-     * @cascade remove
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      */
     protected $groupsFetch = null;
 
