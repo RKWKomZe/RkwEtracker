@@ -71,7 +71,7 @@ class DateUtilityTest extends UnitTestCase
             'year' => $lastYear,
         ];
 
-        static::assertEquals($expected, DateUtility::getStartEndLastYear());
+        self::assertEquals($expected, DateUtility::getStartEndLastYear());
 
     }
 
@@ -103,7 +103,7 @@ class DateUtilityTest extends UnitTestCase
             'year' => 1982,
         ];
 
-        static::assertEquals($expected, DateUtility::getStartEndLastYear($date));
+        self::assertEquals($expected, DateUtility::getStartEndLastYear($date));
 
     }
 
@@ -141,7 +141,7 @@ class DateUtilityTest extends UnitTestCase
             'year' => $checkYear,
         ];
 
-        static::assertEquals($expected, DateUtility::getStartEndLastYear($date, $dateLimit));
+        self::assertEquals($expected, DateUtility::getStartEndLastYear($date, $dateLimit));
 
     }
 
@@ -176,7 +176,7 @@ class DateUtilityTest extends UnitTestCase
         ];
 
 
-        static::assertEquals($expected, DateUtility::getStartEndLastQuarter($date));
+        self::assertEquals($expected, DateUtility::getStartEndLastQuarter($date));
 
     }
 
@@ -209,7 +209,7 @@ class DateUtilityTest extends UnitTestCase
         ];
 
 
-        static::assertEquals($expected, DateUtility::getStartEndLastQuarter($date));
+        self::assertEquals($expected, DateUtility::getStartEndLastQuarter($date));
 
     }
 
@@ -245,7 +245,7 @@ class DateUtilityTest extends UnitTestCase
             'year' => 1983,
         ];
 
-        static::assertEquals($expected, DateUtility::getStartEndLastQuarter($date, $dateLimit));
+        self::assertEquals($expected, DateUtility::getStartEndLastQuarter($date, $dateLimit));
 
     }
 
@@ -281,7 +281,7 @@ class DateUtilityTest extends UnitTestCase
         ];
 
 
-        static::assertEquals($expected, DateUtility::getStartEndLastMonth($date));
+        self::assertEquals($expected, DateUtility::getStartEndLastMonth($date));
 
 
     }
@@ -316,7 +316,7 @@ class DateUtilityTest extends UnitTestCase
         ];
 
 
-        static::assertEquals($expected, DateUtility::getStartEndLastMonth($date));
+        self::assertEquals($expected, DateUtility::getStartEndLastMonth($date));
 
     }
 
@@ -348,7 +348,7 @@ class DateUtilityTest extends UnitTestCase
             'year' => 1982,
         ];
 
-        static::assertEquals($expected, DateUtility::getStartEndLastMonth($date));
+        self::assertEquals($expected, DateUtility::getStartEndLastMonth($date));
     }
 
 
@@ -382,7 +382,7 @@ class DateUtilityTest extends UnitTestCase
             'year' => 1983,
         ];
 
-        static::assertEquals($expected, DateUtility::getStartEndLastMonth($date, $dateLimit));
+        self::assertEquals($expected, DateUtility::getStartEndLastMonth($date, $dateLimit));
 
     }
 
@@ -420,7 +420,7 @@ class DateUtilityTest extends UnitTestCase
             'year' => 1982,
         ];
 
-        static::assertEquals($expected, DateUtility::getStartEndForReport($report, [], $date));
+        self::assertEquals($expected, DateUtility::getStartEndForReport($report, [], $date));
 
     }
 
@@ -459,7 +459,7 @@ class DateUtilityTest extends UnitTestCase
             'year' => 1983,
         ];
 
-        static::assertEquals($expected, DateUtility::getStartEndForReport($report, [], $date));
+        self::assertEquals($expected, DateUtility::getStartEndForReport($report, [], $date));
     }
 
 
@@ -497,7 +497,7 @@ class DateUtilityTest extends UnitTestCase
             'year' => 1983,
         ];
 
-        static::assertEquals($expected, DateUtility::getStartEndForReport($report, [], $date));
+        self::assertEquals($expected, DateUtility::getStartEndForReport($report, [], $date));
      }
 
 
@@ -540,7 +540,7 @@ class DateUtilityTest extends UnitTestCase
             'year' => 1983,
         ];
 
-        static::assertEquals($expected, DateUtility::getStartEndForReport($report, $configuration, $date));
+        self::assertEquals($expected, DateUtility::getStartEndForReport($report, $configuration, $date));
 
     }
 
@@ -578,11 +578,11 @@ class DateUtilityTest extends UnitTestCase
         ];
 
         DateUtility::setStartEndForReport($report, [], $date);
-        static::assertEquals($report->getMonth(), $expected['month']);
-        static::assertEquals($report->getQuarter(), $expected['quarter']);
-        static::assertEquals($report->getYear(), $expected['year']);
-        static::assertEquals(date('Y-m-d', $report->getLastStartTstamp()), $expected['startDate']);
-        static::assertEquals(date('Y-m-d', $report->getLastEndTstamp()), $expected['endDate']);
+        self::assertEquals($report->getMonth(), $expected['month']);
+        self::assertEquals($report->getQuarter(), $expected['quarter']);
+        self::assertEquals($report->getYear(), $expected['year']);
+        self::assertEquals(date('Y-m-d', $report->getLastStartTstamp()), $expected['startDate']);
+        self::assertEquals(date('Y-m-d', $report->getLastEndTstamp()), $expected['endDate']);
 
     }
 
@@ -622,11 +622,11 @@ class DateUtilityTest extends UnitTestCase
         ];
 
         DateUtility::setStartEndForReport($report, [], $date);
-        static::assertEquals($report->getMonth(), $expected['month']);
-        static::assertEquals($report->getQuarter(), $expected['quarter']);
-        static::assertEquals($report->getYear(), $expected['year']);
-        static::assertEquals(date('Y-m-d', $report->getLastStartTstamp()), $expected['startDate']);
-        static::assertEquals(date('Y-m-d', $report->getLastEndTstamp()), $expected['endDate']);
+        self::assertEquals($report->getMonth(), $expected['month']);
+        self::assertEquals($report->getQuarter(), $expected['quarter']);
+        self::assertEquals($report->getYear(), $expected['year']);
+        self::assertEquals(date('Y-m-d', $report->getLastStartTstamp()), $expected['startDate']);
+        self::assertEquals(date('Y-m-d', $report->getLastEndTstamp()), $expected['endDate']);
     }
 
     /**
@@ -664,11 +664,11 @@ class DateUtilityTest extends UnitTestCase
         ];
 
         DateUtility::setStartEndForReport($report, [], $date);
-        static::assertEquals($report->getMonth(), $expected['month']);
-        static::assertEquals($report->getQuarter(), $expected['quarter']);
-        static::assertEquals($report->getYear(), $expected['year']);
-        static::assertEquals(date('Y-m-d', $report->getLastStartTstamp()), $expected['startDate']);
-        static::assertEquals(date('Y-m-d', $report->getLastEndTstamp()), $expected['endDate']);
+        self::assertEquals($report->getMonth(), $expected['month']);
+        self::assertEquals($report->getQuarter(), $expected['quarter']);
+        self::assertEquals($report->getYear(), $expected['year']);
+        self::assertEquals(date('Y-m-d', $report->getLastStartTstamp()), $expected['startDate']);
+        self::assertEquals(date('Y-m-d', $report->getLastEndTstamp()), $expected['endDate']);
     }
 
 
@@ -712,11 +712,11 @@ class DateUtilityTest extends UnitTestCase
         ];
 
         DateUtility::setStartEndForReport($report, $configuration, $date);
-        static::assertEquals($report->getMonth(), $expected['month']);
-        static::assertEquals($report->getQuarter(), $expected['quarter']);
-        static::assertEquals($report->getYear(), $expected['year']);
-        static::assertEquals(date('Y-m-d', $report->getLastStartTstamp()), $expected['startDate']);
-        static::assertEquals(date('Y-m-d', $report->getLastEndTstamp()), $expected['endDate']);
+        self::assertEquals($report->getMonth(), $expected['month']);
+        self::assertEquals($report->getQuarter(), $expected['quarter']);
+        self::assertEquals($report->getYear(), $expected['year']);
+        self::assertEquals(date('Y-m-d', $report->getLastStartTstamp()), $expected['startDate']);
+        self::assertEquals(date('Y-m-d', $report->getLastEndTstamp()), $expected['endDate']);
     }
 
 
@@ -746,7 +746,7 @@ class DateUtilityTest extends UnitTestCase
         $report = GeneralUtility::makeInstance(Report::class);
         $report->setLastStartTstamp(strtotime($date->format('Y-m-d')));
 
-        static::assertFalse(DateUtility::isReportImportNeeded($report, [], $currentDate));
+        self::assertFalse(DateUtility::isReportImportNeeded($report, [], $currentDate));
 
     }
 
@@ -775,7 +775,7 @@ class DateUtilityTest extends UnitTestCase
         $report = GeneralUtility::makeInstance(Report::class);
         $report->setLastStartTstamp(strtotime($date->format('Y-m-d')));
 
-        static::assertTrue(DateUtility::isReportImportNeeded($report, [], $currentDate));
+        self::assertTrue(DateUtility::isReportImportNeeded($report, [], $currentDate));
 
     }
 
@@ -810,7 +810,7 @@ class DateUtilityTest extends UnitTestCase
         $report->setLastStartTstamp(strtotime($date->format('Y-m-d')));
         $report->setStartime(strtotime($startDate->format('Y-m-d')));
 
-        static::assertFalse(DateUtility::isReportImportNeeded($report, [], $currentDate));
+        self::assertFalse(DateUtility::isReportImportNeeded($report, [], $currentDate));
 
     }
 
@@ -844,7 +844,7 @@ class DateUtilityTest extends UnitTestCase
         $report->setLastStartTstamp(strtotime($date->format('Y-m-d')));
         $report->setStartime(strtotime($startDate->format('Y-m-d')));
 
-        static::assertTrue(DateUtility::isReportImportNeeded($report, [], $currentDate));
+        self::assertTrue(DateUtility::isReportImportNeeded($report, [], $currentDate));
 
     }
 
@@ -873,7 +873,7 @@ class DateUtilityTest extends UnitTestCase
         $report->setType(1);
         $report->setLastStartTstamp(strtotime($date->format('Y-m-d')));
 
-        static::assertFalse(DateUtility::isReportImportNeeded($report, [], $currentDate));
+        self::assertFalse(DateUtility::isReportImportNeeded($report, [], $currentDate));
 
     }
 
@@ -902,7 +902,7 @@ class DateUtilityTest extends UnitTestCase
         $report->setType(1);
         $report->setLastStartTstamp(strtotime($date->format('Y-m-d')));
 
-        static::assertTrue(DateUtility::isReportImportNeeded($report, [], $currentDate));
+        self::assertTrue(DateUtility::isReportImportNeeded($report, [], $currentDate));
 
     }
 
@@ -934,7 +934,7 @@ class DateUtilityTest extends UnitTestCase
         $report->setLastStartTstamp(strtotime($date->format('Y-m-d')));
         $report->setStartime(strtotime($startDate->format('Y-m-d')));
 
-        static::assertFalse(DateUtility::isReportImportNeeded($report, [], $currentDate));
+        self::assertFalse(DateUtility::isReportImportNeeded($report, [], $currentDate));
 
     }
 
@@ -966,7 +966,7 @@ class DateUtilityTest extends UnitTestCase
         $report->setLastStartTstamp(strtotime($date->format('Y-m-d')));
         $report->setStartime(strtotime($startDate->format('Y-m-d')));
 
-        static::assertTrue(DateUtility::isReportImportNeeded($report, [], $currentDate));
+        self::assertTrue(DateUtility::isReportImportNeeded($report, [], $currentDate));
 
     }
 
@@ -996,7 +996,7 @@ class DateUtilityTest extends UnitTestCase
         $report->setType(2);
         $report->setLastStartTstamp(strtotime($date->format('Y-m-d')));
 
-        static::assertFalse(DateUtility::isReportImportNeeded($report, [], $currentDate));
+        self::assertFalse(DateUtility::isReportImportNeeded($report, [], $currentDate));
 
     }
 
@@ -1025,7 +1025,7 @@ class DateUtilityTest extends UnitTestCase
         $report->setType(2);
         $report->setLastStartTstamp(strtotime($date->format('Y-m-d')));
 
-        static::assertTrue(DateUtility::isReportImportNeeded($report, [], $currentDate));
+        self::assertTrue(DateUtility::isReportImportNeeded($report, [], $currentDate));
 
     }
 
@@ -1058,7 +1058,7 @@ class DateUtilityTest extends UnitTestCase
         $report->setLastStartTstamp(strtotime($date->format('Y-m-d')));
         $report->setStartime(strtotime($startDate->format('Y-m-d')));
 
-        static::assertFalse(DateUtility::isReportImportNeeded($report, [], $currentDate));
+        self::assertFalse(DateUtility::isReportImportNeeded($report, [], $currentDate));
 
     }
 
@@ -1090,7 +1090,7 @@ class DateUtilityTest extends UnitTestCase
         $report->setLastStartTstamp(strtotime($date->format('Y-m-d')));
         $report->setStartime(strtotime($startDate->format('Y-m-d')));
 
-        static::assertTrue(DateUtility::isReportImportNeeded($report, [], $currentDate));
+        self::assertTrue(DateUtility::isReportImportNeeded($report, [], $currentDate));
 
     }
     /**

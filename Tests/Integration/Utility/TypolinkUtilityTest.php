@@ -133,7 +133,7 @@ class LinkUtilityTest extends FunctionalTestCase
          * When getFileObject is called with that id
          * Then null is returned
          */
-        static::assertNull($this->subject->getFileObject(999));
+        self::assertNull($this->subject->getFileObject(999));
     }
 
 
@@ -149,7 +149,7 @@ class LinkUtilityTest extends FunctionalTestCase
          * When getFileObject is called with its id
          * Then the file-object is returned
          */
-        static::assertInstanceOf('\TYPO3\CMS\Core\Resource\File', $this->subject->getFileObject(2));
+        self::assertInstanceOf('\TYPO3\CMS\Core\Resource\File', $this->subject->getFileObject(2));
     }
 
     /**
@@ -165,7 +165,7 @@ class LinkUtilityTest extends FunctionalTestCase
          * When getFileObject is called with that id
          * Then the file-object is returned
          */
-        static::assertInstanceOf('\TYPO3\CMS\Core\Resource\File', $this->subject->getFileObject('file:2'));
+        self::assertInstanceOf('\TYPO3\CMS\Core\Resource\File', $this->subject->getFileObject('file:2'));
     }
 
     /**
@@ -180,7 +180,7 @@ class LinkUtilityTest extends FunctionalTestCase
          * When getFileObject is called with that path
          * Then null is returned
          */
-        static::assertNull($this->subject->getFileObject('fileadmin/non/existing.pdf'));
+        self::assertNull($this->subject->getFileObject('fileadmin/non/existing.pdf'));
     }
 
 
@@ -196,7 +196,7 @@ class LinkUtilityTest extends FunctionalTestCase
          * When getFileObject is called with that path
          * Then the file object is returned
          */
-        static::assertInstanceOf('\TYPO3\CMS\Core\Resource\File', $this->subject->getFileObject('fileadmin/media/file-placeholder-1.pdf'));
+        self::assertInstanceOf('\TYPO3\CMS\Core\Resource\File', $this->subject->getFileObject('fileadmin/media/file-placeholder-1.pdf'));
     }
 
     /**
@@ -212,7 +212,7 @@ class LinkUtilityTest extends FunctionalTestCase
          * When getFileObject is called with that path
          * Then the file object is returned
          */
-        static::assertInstanceOf('\TYPO3\CMS\Core\Resource\File', $this->subject->getFileObject('0:fileadmin/media/file-placeholder-1.pdf'));
+        self::assertInstanceOf('\TYPO3\CMS\Core\Resource\File', $this->subject->getFileObject('0:fileadmin/media/file-placeholder-1.pdf'));
     }
 
     //=============================================
@@ -230,7 +230,7 @@ class LinkUtilityTest extends FunctionalTestCase
          * When getLinkType is called with the id of the page
          * Then "page" is is returned
          */
-        static::assertEquals('page', $this->subject->getLinkType(99999));
+        self::assertEquals('page', $this->subject->getLinkType(99999));
     }
 
 
@@ -247,7 +247,7 @@ class LinkUtilityTest extends FunctionalTestCase
          * When getLinkType is called with the id of the page
          * Then "page" is is returned
          */
-        static::assertEquals('page', $this->subject->getLinkType(1));
+        self::assertEquals('page', $this->subject->getLinkType(1));
     }
 
 
@@ -265,7 +265,7 @@ class LinkUtilityTest extends FunctionalTestCase
          * When getLinkType is called with the id of the page
          * Then "page" is is returned
          */
-        static::assertEquals('page', $this->subject->getLinkType('t3://page?uid=1'));
+        self::assertEquals('page', $this->subject->getLinkType('t3://page?uid=1'));
     }
 
 
@@ -285,7 +285,7 @@ class LinkUtilityTest extends FunctionalTestCase
          * When getLinkType is called with this additional params
          * Then "page" is returned
          */
-        static::assertEquals('page', $this->subject->getLinkType('t3://page?uid=1 - - "zur Website"'));
+        self::assertEquals('page', $this->subject->getLinkType('t3://page?uid=1 - - "zur Website"'));
     }
 
     /**
@@ -300,7 +300,7 @@ class LinkUtilityTest extends FunctionalTestCase
          * When getLinkType is called with that email-address
          * Then "email" is returned
          */
-        static::assertEquals('email', $this->subject->getLinkType('mailto:kroggel@test.de'));
+        self::assertEquals('email', $this->subject->getLinkType('mailto:kroggel@test.de'));
     }
 
     /**
@@ -316,7 +316,7 @@ class LinkUtilityTest extends FunctionalTestCase
          * When getLinkType is called with that email-address
          * Then "email" is returned
          */
-        static::assertEquals('email', $this->subject->getLinkType('t3://email?email=mailto:kroggel@test.de'));
+        self::assertEquals('email', $this->subject->getLinkType('t3://email?email=mailto:kroggel@test.de'));
     }
 
     /**
@@ -333,7 +333,7 @@ class LinkUtilityTest extends FunctionalTestCase
          * When getLinkType is called with that email-address
          * Then "email" is returned
          */
-        static::assertEquals('email', $this->subject->getLinkType('t3://email?email=mailto:kroggel@test.de - - "zur Website"'));
+        self::assertEquals('email', $this->subject->getLinkType('t3://email?email=mailto:kroggel@test.de - - "zur Website"'));
     }
 
 
@@ -350,7 +350,7 @@ class LinkUtilityTest extends FunctionalTestCase
          * When getLinkType is called with that weblink
          * Then "url" is returned
          */
-        static::assertEquals('url', $this->subject->getLinkType('https://www.google.de'));
+        self::assertEquals('url', $this->subject->getLinkType('https://www.google.de'));
     }
 
     /**
@@ -366,7 +366,7 @@ class LinkUtilityTest extends FunctionalTestCase
          * When getLinkType is called with that weblink
          * Then "url" is returned
          */
-        static::assertEquals('url', $this->subject->getLinkType('t3://url?url=https://www.google.de'));
+        self::assertEquals('url', $this->subject->getLinkType('t3://url?url=https://www.google.de'));
     }
 
     /**
@@ -383,7 +383,7 @@ class LinkUtilityTest extends FunctionalTestCase
          * When getLinkType is called with that weblink
          * Then "url" is returned
          */
-        static::assertEquals('url', $this->subject->getLinkType('t3://url?url=https://www.google.de - - "zur Website"'));
+        self::assertEquals('url', $this->subject->getLinkType('t3://url?url=https://www.google.de - - "zur Website"'));
     }
 
 
@@ -402,7 +402,7 @@ class LinkUtilityTest extends FunctionalTestCase
          * Then "unknown" is returned
          */
 
-        static::assertEquals('unknown', $this->subject->getLinkType('fileadmin/media/file-placeholder.pdf'));
+        self::assertEquals('unknown', $this->subject->getLinkType('fileadmin/media/file-placeholder.pdf'));
     }
 
 
@@ -420,7 +420,7 @@ class LinkUtilityTest extends FunctionalTestCase
          * Then "unknown" is returned
          */
 
-        static::assertEquals('unknown', $this->subject->getLinkType('file:99999'));
+        self::assertEquals('unknown', $this->subject->getLinkType('file:99999'));
     }
 
 
@@ -438,7 +438,7 @@ class LinkUtilityTest extends FunctionalTestCase
          * Then "file" is returned
          */
 
-        static::assertEquals('file', $this->subject->getLinkType('file:1'));
+        self::assertEquals('file', $this->subject->getLinkType('file:1'));
     }
 
 
@@ -455,7 +455,7 @@ class LinkUtilityTest extends FunctionalTestCase
          * When getLinkType is called with that file-id
          * Then "file" is returned
          */
-        static::assertEquals('file', $this->subject->getLinkType('t3://file?uid=1'));
+        self::assertEquals('file', $this->subject->getLinkType('t3://file?uid=1'));
     }
 
     /**
@@ -472,7 +472,7 @@ class LinkUtilityTest extends FunctionalTestCase
          * When getLinkType is called with that file-id
          * Then "file" is returned
          */
-        static::assertEquals('file', $this->subject->getLinkType('t3://file?uid=1 - - "zur Website"'));
+        self::assertEquals('file', $this->subject->getLinkType('t3://file?uid=1 - - "zur Website"'));
     }
 
 
@@ -500,7 +500,7 @@ class LinkUtilityTest extends FunctionalTestCase
             'data-etracker-category' => 'testing.com/Default'
         ];
 
-        static::assertEquals($assert, $this->subject->getDataAttributes('t3://page?uid=1'));
+        self::assertEquals($assert, $this->subject->getDataAttributes('t3://page?uid=1'));
     }
 
 
@@ -522,7 +522,7 @@ class LinkUtilityTest extends FunctionalTestCase
             'data-etracker-category' => 'testing.com/Default'
         ];
 
-        static::assertEquals($assert, $this->subject->getDataAttributes('t3://email?email=mailto:kroggel@test.de'));
+        self::assertEquals($assert, $this->subject->getDataAttributes('t3://email?email=mailto:kroggel@test.de'));
     }
 
     /**
@@ -544,7 +544,7 @@ class LinkUtilityTest extends FunctionalTestCase
             'data-etracker-category' => 'testing.com/Default'
         ];
 
-        static::assertEquals($assert, $this->subject->getDataAttributes('t3://url?url=https://www.google.de'));
+        self::assertEquals($assert, $this->subject->getDataAttributes('t3://url?url=https://www.google.de'));
     }
 
 
@@ -570,7 +570,7 @@ class LinkUtilityTest extends FunctionalTestCase
             'data-etracker-object' => 'file-placeholder-1.pdf'
         ];
 
-        static::assertEquals($assert, $this->subject->getDataAttributes('t3://file?uid=1'));
+        self::assertEquals($assert, $this->subject->getDataAttributes('t3://file?uid=1'));
     }
 
 
@@ -598,7 +598,7 @@ class LinkUtilityTest extends FunctionalTestCase
             'data-etracker-object' => 'file-placeholder-2.pdf'
         ];
 
-        static::assertEquals($assert, $this->subject->getDataAttributes('t3://file?uid=2'));
+        self::assertEquals($assert, $this->subject->getDataAttributes('t3://file?uid=2'));
     }
 
     /**
@@ -624,7 +624,7 @@ class LinkUtilityTest extends FunctionalTestCase
             'data-etracker-object' => 'file-placeholder-3.pdf'
         ];
 
-        static::assertEquals($assert, $this->subject->getDataAttributes('t3://file?uid=3'));
+        self::assertEquals($assert, $this->subject->getDataAttributes('t3://file?uid=3'));
     }
 
     /**
@@ -651,7 +651,7 @@ class LinkUtilityTest extends FunctionalTestCase
             'data-etracker-object' => 'file-placeholder-4.pdf'
         ];
 
-        static::assertEquals($assert, $this->subject->getDataAttributes('t3://file?uid=4'));
+        self::assertEquals($assert, $this->subject->getDataAttributes('t3://file?uid=4'));
     }
 
     //=============================================
