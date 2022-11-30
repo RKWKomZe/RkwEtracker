@@ -17,7 +17,7 @@ namespace RKW\RkwEtracker\Controller;
  * Class RedirectController
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEtracker
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -89,7 +89,7 @@ class RedirectController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
                     array(
                         'http' => array(
                             'proxy' => $this->settings['proxy'],
-                            'request_fulluri' => TRUE,
+                            'request_fulluri' => true,
                         ),
                     )
                 );

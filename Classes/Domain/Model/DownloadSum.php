@@ -18,7 +18,7 @@ namespace RKW\RkwEtracker\Domain\Model;
  * Class DownloadSum
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEtracker
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -31,14 +31,14 @@ class DownloadSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var int
      */
     protected $timePerEvent = 0;
-    
+
     /**
      * events
      *
      * @var int
      */
     protected $events = 0;
-    
+
     /**
      * uniqueEvents
      *
@@ -67,28 +67,28 @@ class DownloadSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var string
      */
     protected $reportFetchCounter = '';
-    
+
     /**
      * month
      *
      * @var string
      */
     protected $month = '';
-    
+
     /**
      * quarter
      *
      * @var string
      */
     protected $quarter = '';
-    
+
     /**
      * year
      *
      * @var string
      */
     protected $year = '';
-    
+
     /**
      * Returns the timePerEvent
      *
@@ -98,7 +98,7 @@ class DownloadSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->timePerEvent;
     }
-    
+
     /**
      * Sets the timePerEvent
      *
@@ -109,7 +109,7 @@ class DownloadSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->timePerEvent = $timePerEvent;
     }
-    
+
     /**
      * Returns the events
      *
@@ -119,7 +119,7 @@ class DownloadSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->events;
     }
-    
+
     /**
      * Sets the events
      *
@@ -130,7 +130,7 @@ class DownloadSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->events = $events;
     }
-    
+
     /**
      * Returns the uniqueEvents
      *
@@ -140,7 +140,7 @@ class DownloadSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->uniqueEvents;
     }
-    
+
     /**
      * Sets the uniqueEvents
      *
@@ -203,7 +203,7 @@ class DownloadSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->reportFetchCounter;
     }
-    
+
     /**
      * Sets the reportFetchCounter
      *
@@ -214,7 +214,7 @@ class DownloadSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->reportFetchCounter = $reportFetchCounter;
     }
-    
+
     /**
      * Returns the month
      *
@@ -224,7 +224,7 @@ class DownloadSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->month;
     }
-    
+
     /**
      * Sets the month
      *
@@ -235,7 +235,7 @@ class DownloadSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->month = $month;
     }
-    
+
     /**
      * Returns the quarter
      *
@@ -245,7 +245,7 @@ class DownloadSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->quarter;
     }
-    
+
     /**
      * Sets the quarter
      *
@@ -256,7 +256,7 @@ class DownloadSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->quarter = $quarter;
     }
-    
+
     /**
      * Returns the year
      *
@@ -266,7 +266,7 @@ class DownloadSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->year;
     }
-    
+
     /**
      * Sets the year
      *
