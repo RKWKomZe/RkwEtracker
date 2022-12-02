@@ -6,7 +6,7 @@ use RKW\RkwEtracker\Utility\DateUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use \RKW\RkwMailer\Helper\FrontendLocalization;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use RKW\RkwBasics\Utility\GeneralUtility as Common;
+use Madj2k\CoreExtended\Utility\GeneralUtility as Common;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -449,6 +449,6 @@ class ReportCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
     protected function getSettings($which = ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK)
     {
 
-        return Common::getTyposcriptConfiguration('Rkwetracker', $which);
+        return Common::getTypoScriptConfiguration('Rkwetracker', $which);
     }
 }

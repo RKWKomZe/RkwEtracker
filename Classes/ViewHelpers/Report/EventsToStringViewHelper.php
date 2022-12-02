@@ -93,6 +93,6 @@ class EventsToStringViewHelper extends AbstractViewHelper
      */
     public static function getSettings($which = ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS)
     {
-        return \RKW\RkwBasics\Utility\GeneralUtility::getTyposcriptConfiguration('Rkwetracker', $which);
+        return \Madj2k\CoreExtended\Utility\GeneralUtility::getTypoScriptConfiguration('Rkwetracker', $which);
     }
 }
