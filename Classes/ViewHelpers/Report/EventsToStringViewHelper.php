@@ -28,7 +28,7 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
  * Class EventsToStringViewHelper
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEtracker
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -40,7 +40,8 @@ class EventsToStringViewHelper extends AbstractViewHelper
      */
     public function initializeArguments()
     {
-        $this->registerArgument('downloadData', '\RKW\RkwEtracker\Domain\Model\DownloadData', 'The DownloadData-object to get the categories from.', true);
+        parent::initializeArguments();
+        $this->registerArgument('downloadData', DownloadData::class, 'The DownloadData-object to get the categories from.', true);
     }
 
 
@@ -92,6 +93,6 @@ class EventsToStringViewHelper extends AbstractViewHelper
      */
     public static function getSettings($which = ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS)
     {
-        return \RKW\RkwBasics\Utility\GeneralUtility::getTyposcriptConfiguration('Rkwetracker', $which);
+        return \Madj2k\CoreExtended\Utility\GeneralUtility::getTypoScriptConfiguration('Rkwetracker', $which);
     }
 }

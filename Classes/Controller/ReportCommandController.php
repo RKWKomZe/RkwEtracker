@@ -1,12 +1,5 @@
 <?php
-
 namespace RKW\RkwEtracker\Controller;
-
-use RKW\RkwEtracker\Utility\DateUtility;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use \RKW\RkwMailer\Utility\FrontendLocalizationUtility;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use \RKW\RkwBasics\Helper\Common;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -21,11 +14,30 @@ use \RKW\RkwBasics\Helper\Common;
  * The TYPO3 project - inspiring people to share!
  */
 
+use RKW\RkwEtracker\Domain\Repository\AreaDataRepository;
+use RKW\RkwEtracker\Domain\Repository\AreaSumRepository;
+use RKW\RkwEtracker\Domain\Repository\DownloadDataRepository;
+use RKW\RkwEtracker\Domain\Repository\DownloadSumRepository;
+use RKW\RkwEtracker\Domain\Repository\ReportAreaSumRepository;
+use RKW\RkwEtracker\Domain\Repository\ReportDownloadSumRepository;
+use RKW\RkwEtracker\Domain\Repository\ReportRepository;
+use RKW\RkwEtracker\Etracker\Calculate;
+use RKW\RkwEtracker\Etracker\Import;
+use RKW\RkwEtracker\Utility\DateUtility;
+use RKW\RkwMailer\Service\MailService;
+use TYPO3\CMS\Core\Log\Logger;
+use TYPO3\CMS\Core\Log\LogManager;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use Madj2k\CoreExtended\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+
 /**
  * Class ReportCommandController
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEtracker
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -33,98 +45,86 @@ class ReportCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
 {
 
     /**
-     * reportRepository
-     *
      * @var \RKW\RkwEtracker\Domain\Repository\ReportRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $reportRepository = null;
+    protected ReportRepository $reportRepository;
+
 
     /**
-     * areaDataRepository
-     *
      * @var \RKW\RkwEtracker\Domain\Repository\AreaDataRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $areaDataRepository = null;
+    protected AreaDataRepository $areaDataRepository;
+
 
     /**
-     * downloadDataRepository
-     *
      * @var \RKW\RkwEtracker\Domain\Repository\DownloadDataRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $downloadDataRepository = null;
+    protected DownloadDataRepository $downloadDataRepository;
 
 
     /**
-     * areaSumRepository
-     *
      * @var \RKW\RkwEtracker\Domain\Repository\AreaSumRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $areaSumRepository = null;
+    protected AreaSumRepository $areaSumRepository;
+
 
     /**
-     * downloadSumRepository
-     *
      * @var \RKW\RkwEtracker\Domain\Repository\DownloadSumRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $downloadSumRepository = null;
+    protected DownloadSumRepository $downloadSumRepository;
 
 
     /**
-     * reportAreaSumRepository
-     *
      * @var \RKW\RkwEtracker\Domain\Repository\ReportAreaSumRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $reportAreaSumRepository = null;
+    protected ReportAreaSumRepository $reportAreaSumRepository;
 
 
     /**
-     * reportDownloadSumRepository
-     *
      * @var \RKW\RkwEtracker\Domain\Repository\ReportDownloadSumRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $reportDownloadSumRepository = null;
+    protected ReportDownloadSumRepository $reportDownloadSumRepository;
+
 
     /**
-     * configurationManager
-     *
-     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
+     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface|null
      */
-    protected $configurationManager;
+    protected ?ConfigurationManagerInterface $configurationManager = null;
+
 
     /**
-     * persistenceManager
-     *
      * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $persistenceManager;
+    protected PersistenceManager $persistenceManager;
+
 
     /**
-     * @var \TYPO3\CMS\Core\Log\Logger
+     * @var \TYPO3\CMS\Core\Log\Logger|null
      */
-    protected $logger;
+    protected ?Logger $logger = null;
+
 
     /**
-     * The settings.
-     *
      * @var array
      */
-    protected $settings = array();
+    protected array $settings = [];
 
 
     /**
      * Constructor
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
     public function __construct()
     {
-
+        parent::__construct();
         $this->settings = $this->getSettings();
     }
 
@@ -172,13 +172,19 @@ class ReportCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
                     ];
 
                     /** @var \RKW\RkwEtracker\Etracker\Import $import */
-                    $import = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\RkwEtracker\Etracker\Import');
+                    $import = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(Import::class);
 
                     // check if there is something to fetch at all - but only if status is not manually set to "reset" or "fetch running"
                     if ($report->getStatus() == 0) {
                         if (DateUtility::isReportImportNeeded($report)) {
                             $report->setStatus(89);
-                            $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Data-fetch from eTracker API for report with id=%s has been initiated.', $report->getUid()));
+                            $this->getLogger()->log(
+                                \TYPO3\CMS\Core\Log\LogLevel::INFO,
+                                sprintf(
+                                    'Data-fetch from eTracker API for report with id=%s has been initiated.',
+                                    $report->getUid()
+                                )
+                            );
                         }
                     }
 
@@ -204,7 +210,13 @@ class ReportCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
                             $report->addGroupFetch($reportGroup);
                         }
 
-                        $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Starting fetching data for report with id=%s from eTracker API.', $report->getUid()));
+                        $this->getLogger()->log(
+                            \TYPO3\CMS\Core\Log\LogLevel::INFO,
+                            sprintf(
+                                'Starting fetching data for report with id=%s from eTracker API.',
+                                $report->getUid()
+                            )
+                        );
                     }
 
                     // this is only to be done for reports with status "fetch running"
@@ -232,7 +244,13 @@ class ReportCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
                         if (count($report->getGroupsFetch()) < 1) {
                             $report->setLastFetchTstamp(time());
                             $report->setStatus(2);
-                            $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Successfully completed fetching data for report with id=%s from eTracker API.', $report->getUid()));
+                            $this->getLogger()->log(
+                                \TYPO3\CMS\Core\Log\LogLevel::INFO,
+                                sprintf(
+                                    'Successfully completed fetching data for report with id=%s from eTracker API.',
+                                    $report->getUid()
+                                )
+                            );
                         }
                     }
 
@@ -242,15 +260,30 @@ class ReportCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
                 } catch (\Exception $e) {
                     $report->setStatus(99);
                     $this->reportRepository->update($report);
-                    $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::ERROR, sprintf('An error occurred while trying to fetch data from eTracker API. Message: %s', str_replace(array("\n", "\r"), '', $e->getMessage())));
+                    $this->getLogger()->log(
+                        \TYPO3\CMS\Core\Log\LogLevel::ERROR,
+                        sprintf(
+                            'An error occurred while trying to fetch data from eTracker API. Message: %s',
+                            str_replace(array("\n", "\r"), '', $e->getMessage())
+                        )
+                    );
                 }
 
             } else {
-                $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Nothing to fetch from eTracker API.'));
+                $this->getLogger()->log(
+                    \TYPO3\CMS\Core\Log\LogLevel::INFO,
+                    'Nothing to fetch from eTracker API.'
+                );
             }
 
         } catch (\Exception $e) {
-            $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::ERROR, sprintf('An error occurred while trying to fetch data from eTracker API. Message: %s', str_replace(array("\n", "\r"), '', $e->getMessage())));
+            $this->getLogger()->log(
+                \TYPO3\CMS\Core\Log\LogLevel::ERROR,
+                sprintf(
+                    'An error occurred while trying to fetch data from eTracker API. Message: %s',
+                    str_replace(array("\n", "\r"), '', $e->getMessage())
+                )
+            );
         }
     }
 
@@ -272,7 +305,7 @@ class ReportCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
                 try {
 
                     /** @var \RKW\RkwMailer\Service\MailService $mailService */
-                    $mailService = GeneralUtility::makeInstance('RKW\\RkwMailer\\Service\\MailService');
+                    $mailService = GeneralUtility::makeInstance(MailService::class);
 
                     // get recipients
                     if ($report->getRecipient()) {
@@ -281,16 +314,16 @@ class ReportCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
                         $recipientCnt = 0;
 
                         /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
-                        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
+                        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(ObjectManager::class);
 
                         /** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $tempObjectStorage */
-                        $areaSumObjectStorage = $objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
+                        $areaSumObjectStorage = $objectManager->get(ObjectStorage::class);
 
                         /** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $tempObjectStorage */
-                        $downloadSumObjectStorage = $objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
+                        $downloadSumObjectStorage = $objectManager->get(ObjectStorage::class);
 
                         /** @var \RKW\RkwEtracker\Etracker\Calculate $calculate */
-                        $calculate = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\RkwEtracker\Etracker\Calculate');
+                        $calculate = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(Calculate::class);
 
                         // sort groups
                         $sortedGroups = $this->sortGroupsByName($report->getGroups());
@@ -325,7 +358,7 @@ class ReportCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
                         $reportAreaSum = $calculate->getReportAreaSum($report, $areaSumObjectStorage);
                         // $this->reportAreaSumRepository->add($reportAreaSum);
 
-                        /** @toDo: if we persist it, only the first recipient will get the report sums
+                        /** @todo if we persist it, only the first recipient will get the report sums
                          *  We should nevertheless check how to persist it, because the field in the database get to large
                          *  with the serialized objects!
                          */
@@ -347,7 +380,7 @@ class ReportCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
                                             'reportAreaSum'     => $reportAreaSum,
                                             'reportDownloadSum' => $reportDownloadSum,
                                             'reportData'        => $reportData,
-                                            'languageKey'       => $this->settings['settings']['defaultLanguageKey'] ? $this->settings['settings']['defaultLanguageKey'] : 'default',
+                                            'languageKey'       => $this->settings['settings']['defaultLanguageKey'] ?: 'default',
                                             'singleSignOnPid'   => intval($this->settings['settings']['singleSignOnPid']),
 
                                         ),
@@ -372,13 +405,32 @@ class ReportCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
                             $report->setStatus(0);
                             $this->reportRepository->update($report);
 
-                            $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Successfully send report with id=%s to %s recipients.', $report->getUid(), $recipientCnt));
+                            $this->getLogger()->log(
+                                \TYPO3\CMS\Core\Log\LogLevel::INFO,
+                                sprintf(
+                                    'Successfully send report with id=%s to %s recipients.',
+                                    $report->getUid(),
+                                    $recipientCnt
+                                )
+                            );
                         } else {
-                            $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::WARNING, sprintf('Could not send report with id=%s.', $report->getUid()));
+                            $this->getLogger()->log(
+                                \TYPO3\CMS\Core\Log\LogLevel::WARNING,
+                                sprintf(
+                                    'Could not send report with id=%s.',
+                                    $report->getUid()
+                                )
+                            );
                         }
 
                     } else {
-                        $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::WARNING, sprintf('Report with id=%s has no recipients.', $report->getUid()));
+                        $this->getLogger()->log(
+                            \TYPO3\CMS\Core\Log\LogLevel::WARNING,
+                            sprintf(
+                                'Report with id=%s has no recipients.',
+                                $report->getUid()
+                            )
+                        );
                     }
 
 
@@ -386,16 +438,35 @@ class ReportCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
 
                     $report->setStatus(99);
                     $this->reportRepository->update($report);
-                    $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::ERROR, sprintf('An error occurred while trying to send reports with id=%s Message: %s', $report->getUid(), str_replace(array("\n", "\r"), '', $e->getMessage())));
+                    $this->getLogger()->log(
+                        \TYPO3\CMS\Core\Log\LogLevel::ERROR,
+                        sprintf(
+                            'An error occurred while trying to send reports with id=%s Message: %s',
+                            $report->getUid(),
+                            str_replace(array("\n", "\r"),
+                                '',
+                                $e->getMessage()
+                            )
+                        )
+                    );
 
                 }
 
             } else {
-                $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('No report sent.'));
+                $this->getLogger()->log(
+                    \TYPO3\CMS\Core\Log\LogLevel::INFO,
+                    'No report sent.'
+                );
             }
 
         } catch (\Exception $e) {
-            $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::ERROR, sprintf('An error occurred while trying to send reports. Message: %s', str_replace(array("\n", "\r"), '', $e->getMessage())));
+            $this->getLogger()->log(
+                \TYPO3\CMS\Core\Log\LogLevel::ERROR,
+                sprintf(
+                    'An error occurred while trying to send reports. Message: %s',
+                    str_replace(array("\n", "\r"), '', $e->getMessage())
+                )
+            );
         }
     }
 
@@ -406,7 +477,7 @@ class ReportCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEtracker\Domain\Model\ReportGroup> $groups
      * @return array
      */
-    protected function sortGroupsByName($groups)
+    protected function sortGroupsByName(ObjectStorage $groups): array
     {
 
         $sorted = array();
@@ -419,7 +490,6 @@ class ReportCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
         sort($sorted);
 
         return $sorted;
-        //===
     }
 
 
@@ -428,11 +498,11 @@ class ReportCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
      *
      * @return \TYPO3\CMS\Core\Log\Logger
      */
-    protected function getLogger()
+    protected function getLogger(): Logger
     {
 
         if (!$this->logger instanceof \TYPO3\CMS\Core\Log\Logger) {
-            $this->logger = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Log\LogManager')->getLogger(__CLASS__);
+            $this->logger = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(LogManager::class)->getLogger(__CLASS__);
         }
 
         return $this->logger;
@@ -446,9 +516,8 @@ class ReportCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandC
      * @return array
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
-    protected function getSettings($which = ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK)
+    protected function getSettings(string $which = ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK): array
     {
-
-        return Common::getTyposcriptConfiguration('Rkwetracker', $which);
+        return GeneralUtility::getTypoScriptConfiguration('Rkwetracker', $which);
     }
 }

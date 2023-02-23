@@ -1,5 +1,4 @@
 <?php
-
 namespace RKW\RkwEtracker\Controller;
 
 /*
@@ -19,13 +18,12 @@ namespace RKW\RkwEtracker\Controller;
  * Class CodeController
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEtracker
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class CodeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
-
 
     /**
      * action show

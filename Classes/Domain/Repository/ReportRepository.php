@@ -19,7 +19,7 @@ namespace RKW\RkwEtracker\Domain\Repository;
  * Class ReportRepository
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEtracker
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -44,7 +44,7 @@ class ReportRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $query->setOrderings(
             array(
                 'status'          => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
-                'type'            => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
+//                'type'            => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
                 'lastFetchTstamp' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
             )
         );

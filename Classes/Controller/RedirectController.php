@@ -17,7 +17,7 @@ namespace RKW\RkwEtracker\Controller;
  * Class RedirectController
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEtracker
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -44,7 +44,7 @@ class RedirectController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
 	 */
-	public function redirectAction($redirectUrl = '/')
+	public function redirectAction(string $redirectUrl = '/')
     {
 
         $remoteAddress = filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP);
@@ -89,7 +89,7 @@ class RedirectController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
                     array(
                         'http' => array(
                             'proxy' => $this->settings['proxy'],
-                            'request_fulluri' => TRUE,
+                            'request_fulluri' => true,
                         ),
                     )
                 );
@@ -132,9 +132,10 @@ class RedirectController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * Returns RedirectUrl with encoded values
      *
      * @param string $rawUrl
+     * @param string $sessionId
      * @return string
      */
-	protected function getRedirectUrlEncoded ($rawUrl, $sessionId)
+	protected function getRedirectUrlEncoded (string $rawUrl, string $sessionId): string
     {
 
         $params = array ();
@@ -164,8 +165,6 @@ class RedirectController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 
         // build url
         return $urlArray[0] . '?' . implode('&', $params);
-        //===
-
     }
 
 

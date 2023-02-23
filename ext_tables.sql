@@ -59,7 +59,7 @@ CREATE TABLE tx_rkwetracker_domain_model_reportfilter (
 	category_free_level2 varchar(255) DEFAULT '' NOT NULL,
 	category_free_level3 varchar(255) DEFAULT '' NOT NULL,
 	category_free_level4 varchar(255) DEFAULT '' NOT NULL,
-	category_free_level5 varchar(255) DEFAULT '' NOT NULL,	
+	category_free_level5 varchar(255) DEFAULT '' NOT NULL,
 
 	download_filter1 varchar(255) DEFAULT '' NOT NULL,
 	download_filter2 varchar(255) DEFAULT '' NOT NULL,
@@ -193,7 +193,7 @@ CREATE TABLE tx_rkwetracker_domain_model_areasum (
 	report int(11) DEFAULT '0' NOT NULL,
 	report_group int(11) DEFAULT '0' NOT NULL,
 	report_fetch_counter int(11) DEFAULT '0' NOT NULL,
-    month int(11) DEFAULT '0' NOT NULL,
+  month int(11) DEFAULT '0' NOT NULL,
 	quarter int(11) DEFAULT '0' NOT NULL,
 	year int(11) DEFAULT '0' NOT NULL,
 
@@ -283,7 +283,7 @@ CREATE TABLE tx_rkwetracker_domain_model_reportdownloadsum (
 	report int(11) DEFAULT '0' NOT NULL,
 	report_group int(11) DEFAULT '0' NOT NULL,
 	report_fetch_counter varchar(255) DEFAULT '' NOT NULL,
-    month int(11) DEFAULT '0' NOT NULL,
+  month int(11) DEFAULT '0' NOT NULL,
 	quarter int(11) DEFAULT '0' NOT NULL,
 	year int(11) DEFAULT '0' NOT NULL,
 
