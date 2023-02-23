@@ -1,5 +1,4 @@
 <?php
-
 namespace RKW\RkwEtracker\Controller;
 
 /*
@@ -25,7 +24,6 @@ namespace RKW\RkwEtracker\Controller;
  */
 class CodeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
-
 
     /**
      * action show

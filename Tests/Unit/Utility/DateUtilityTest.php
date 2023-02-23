@@ -75,6 +75,7 @@ class DateUtilityTest extends UnitTestCase
 
     }
 
+
     /**
      * @test
      * @throws \Exception
@@ -106,6 +107,7 @@ class DateUtilityTest extends UnitTestCase
         self::assertEquals($expected, DateUtility::getStartEndLastYear($date));
 
     }
+
 
     /**
      * @test
@@ -142,7 +144,6 @@ class DateUtilityTest extends UnitTestCase
         ];
 
         self::assertEquals($expected, DateUtility::getStartEndLastYear($date, $dateLimit));
-
     }
 
     //=============================================
@@ -177,8 +178,8 @@ class DateUtilityTest extends UnitTestCase
 
 
         self::assertEquals($expected, DateUtility::getStartEndLastQuarter($date));
-
     }
+
 
     /**
      * @test
@@ -210,7 +211,6 @@ class DateUtilityTest extends UnitTestCase
 
 
         self::assertEquals($expected, DateUtility::getStartEndLastQuarter($date));
-
     }
 
 
@@ -249,7 +249,6 @@ class DateUtilityTest extends UnitTestCase
 
     }
 
-
     //=============================================
 
     /**
@@ -282,9 +281,8 @@ class DateUtilityTest extends UnitTestCase
 
 
         self::assertEquals($expected, DateUtility::getStartEndLastMonth($date));
-
-
     }
+
 
     /**
      * @test
@@ -315,10 +313,10 @@ class DateUtilityTest extends UnitTestCase
             'year' => 1984,
         ];
 
-
         self::assertEquals($expected, DateUtility::getStartEndLastMonth($date));
 
     }
+
 
     /**
      * @test
@@ -386,8 +384,8 @@ class DateUtilityTest extends UnitTestCase
 
     }
 
-
     //=============================================
+
     /**
      * @test
      * @throws \Exception
@@ -498,7 +496,7 @@ class DateUtilityTest extends UnitTestCase
         ];
 
         self::assertEquals($expected, DateUtility::getStartEndForReport($report, [], $date));
-     }
+    }
 
 
     /**
@@ -545,6 +543,7 @@ class DateUtilityTest extends UnitTestCase
     }
 
     //=============================================
+
     /**
      * @test
      * @throws \Exception
@@ -628,6 +627,7 @@ class DateUtilityTest extends UnitTestCase
         self::assertEquals(date('Y-m-d', $report->getLastStartTstamp()), $expected['startDate']);
         self::assertEquals(date('Y-m-d', $report->getLastEndTstamp()), $expected['endDate']);
     }
+
 
     /**
      * @test
@@ -719,8 +719,8 @@ class DateUtilityTest extends UnitTestCase
         self::assertEquals(date('Y-m-d', $report->getLastEndTstamp()), $expected['endDate']);
     }
 
-
     //=============================================
+
     /**
      * @test
      * @throws \Exception
@@ -749,6 +749,7 @@ class DateUtilityTest extends UnitTestCase
         self::assertFalse(DateUtility::isReportImportNeeded($report, [], $currentDate));
 
     }
+
 
     /**
      * @test
@@ -814,6 +815,7 @@ class DateUtilityTest extends UnitTestCase
 
     }
 
+
     /**
      * @test
      * @throws \Exception
@@ -845,8 +847,8 @@ class DateUtilityTest extends UnitTestCase
         $report->setStartime(strtotime($startDate->format('Y-m-d')));
 
         self::assertTrue(DateUtility::isReportImportNeeded($report, [], $currentDate));
-
     }
+
 
     /**
      * @test
@@ -877,6 +879,7 @@ class DateUtilityTest extends UnitTestCase
 
     }
 
+
     /**
      * @test
      * @throws \Exception
@@ -903,8 +906,8 @@ class DateUtilityTest extends UnitTestCase
         $report->setLastStartTstamp(strtotime($date->format('Y-m-d')));
 
         self::assertTrue(DateUtility::isReportImportNeeded($report, [], $currentDate));
-
     }
+
 
     /**
      * @test
@@ -935,8 +938,8 @@ class DateUtilityTest extends UnitTestCase
         $report->setStartime(strtotime($startDate->format('Y-m-d')));
 
         self::assertFalse(DateUtility::isReportImportNeeded($report, [], $currentDate));
-
     }
+
 
     /**
      * @test
@@ -1000,6 +1003,7 @@ class DateUtilityTest extends UnitTestCase
 
     }
 
+
     /**
      * @test
      * @throws \Exception
@@ -1062,6 +1066,7 @@ class DateUtilityTest extends UnitTestCase
 
     }
 
+
     /**
      * @test
      * @throws \Exception
@@ -1093,6 +1098,9 @@ class DateUtilityTest extends UnitTestCase
         self::assertTrue(DateUtility::isReportImportNeeded($report, [], $currentDate));
 
     }
+
+    //=============================================
+
     /**
      * TearDown
      */

@@ -27,89 +27,75 @@ class AreaData extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
     /**
-     * visits
-     *
      * @var int
      */
-    protected $visits = 0;
+    protected int $visits = 0;
+
 
     /**
-     * visitors
-     *
      * @var int
      */
-    protected $visitors = 0;
+    protected int $visitors = 0;
+
 
     /**
-     * pageImpressions
-     *
      * @var int
      */
-    protected $pageImpressions = 0;
+    protected int $pageImpressions = 0;
+
 
     /**
-     * bouncesPerVisit
-     *
      * @var float
      */
-    protected $bouncesPerVisit = 0.0;
+    protected float $bouncesPerVisit = 0.0;
+
 
     /**
-     * timePerVisit
-     *
      * @var int
      */
-    protected $timePerVisit = 0;
+    protected int $timePerVisit = 0;
+
 
     /**
-     * Report
-     *
-     * @var \RKW\RkwEtracker\Domain\Model\Report
+     * @var \RKW\RkwEtracker\Domain\Model\Report|null
      */
-    protected $report = null;
+    protected ?Report $report = null;
+
 
     /**
-     * ReportGroup
-     *
-     * @var \RKW\RkwEtracker\Domain\Model\ReportGroup
+     * @var \RKW\RkwEtracker\Domain\Model\ReportGroup|null
      */
-    protected $reportGroup = null;
+    protected ?ReportGroup $reportGroup = null;
 
 
     /**
-     * ReportFilter
-     *
-     * @var \RKW\RkwEtracker\Domain\Model\ReportFilter
+     * @var \RKW\RkwEtracker\Domain\Model\ReportFilter|null
      */
-    protected $reportFilter = null;
+    protected ?ReportFilter $reportFilter = null;
+
 
     /**
-     * ReportFetchCounter
-     *
      * @var int
      */
-    protected $reportFetchCounter = 0;
+    protected int $reportFetchCounter = 0;
+
 
     /**
-     * month
-     *
      * @var int
      */
-    protected $month = 0;
+    protected int $month = 0;
+
 
     /**
-     * quarter
-     *
      * @var int
      */
-    protected $quarter = 0;
+    protected int $quarter = 0;
+
 
     /**
-     * year
-     *
      * @var int
      */
-    protected $year = 0;
+    protected int $year = 0;
 
 
     /**
@@ -117,10 +103,11 @@ class AreaData extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return int $visits
      */
-    public function getVisits()
+    public function getVisits(): int
     {
         return $this->visits;
     }
+
 
     /**
      * Sets the visits
@@ -128,20 +115,22 @@ class AreaData extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param int $visits
      * @return void
      */
-    public function setVisits($visits)
+    public function setVisits(int $visits): void
     {
         $this->visits = $visits;
     }
 
+
     /**
      * Returns the visitors
      *
-     * @return int $visitors
+     * @return int
      */
-    public function getVisitors()
+    public function getVisitors(): int
     {
         return $this->visitors;
     }
+
 
     /**
      * Sets the visitors
@@ -149,20 +138,22 @@ class AreaData extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param int $visitors
      * @return void
      */
-    public function setVisitors($visitors)
+    public function setVisitors(int $visitors): void
     {
         $this->visitors = $visitors;
     }
 
+
     /**
      * Returns the pageImpressions
      *
-     * @return int $pageImpressions
+     * @return int
      */
-    public function getPageImpressions()
+    public function getPageImpressions(): int
     {
         return $this->pageImpressions;
     }
+
 
     /**
      * Sets the pageImpressions
@@ -170,7 +161,7 @@ class AreaData extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param int $pageImpressions
      * @return void
      */
-    public function setPageImpressions($pageImpressions)
+    public function setPageImpressions(int $pageImpressions): void
     {
         $this->pageImpressions = $pageImpressions;
     }
@@ -181,7 +172,7 @@ class AreaData extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return float $pageImpressionPerVisit
      */
-    public function getPageImpressionsPerVisit()
+    public function getPageImpressionsPerVisit(): float
     {
         if ($this->getVisits() > 0) {
             return $this->getPageImpressions() / $this->getVisits();
@@ -196,10 +187,11 @@ class AreaData extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return float $bouncesPerVisit
      */
-    public function getBouncesPerVisit()
+    public function getBouncesPerVisit(): float
     {
         return $this->bouncesPerVisit;
     }
+
 
     /**
      * Sets the bouncesPerVisit
@@ -207,20 +199,22 @@ class AreaData extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param float $bouncesPerVisit
      * @return void
      */
-    public function setBouncesPerVisit($bouncesPerVisit)
+    public function setBouncesPerVisit(float $bouncesPerVisit): void
     {
         $this->bouncesPerVisit = $bouncesPerVisit;
     }
 
+
     /**
      * Returns the timePerVisit
      *
-     * @return int $timePerVisit
+     * @return int
      */
-    public function getTimePerVisit()
+    public function getTimePerVisit(): int
     {
         return $this->timePerVisit;
     }
+
 
     /**
      * Sets the timePerVisit
@@ -228,7 +222,7 @@ class AreaData extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param int $timePerVisit
      * @return void
      */
-    public function setTimePerVisit($timePerVisit)
+    public function setTimePerVisit(int $timePerVisit): void
     {
         $this->timePerVisit = $timePerVisit;
     }
@@ -239,10 +233,11 @@ class AreaData extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return \RKW\RkwEtracker\Domain\Model\Report
      */
-    public function getReport()
+    public function getReport():? Report
     {
         return $this->report;
     }
+
 
     /**
      * Sets the report
@@ -250,20 +245,22 @@ class AreaData extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param \RKW\RkwEtracker\Domain\Model\Report $report
      * @return void
      */
-    public function setReport(\RKW\RkwEtracker\Domain\Model\Report $report)
+    public function setReport(Report $report): void
     {
         $this->report = $report;
     }
+
 
     /**
      * Returns the reportGroup
      *
      * @return \RKW\RkwEtracker\Domain\Model\ReportGroup
      */
-    public function getReportGroup()
+    public function getReportGroup(): ReportGroup
     {
         return $this->reportGroup;
     }
+
 
     /**
      * Sets the reportGroup
@@ -271,20 +268,22 @@ class AreaData extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param \RKW\RkwEtracker\Domain\Model\ReportGroup $reportGroup
      * @return void
      */
-    public function setReportGroup(\RKW\RkwEtracker\Domain\Model\ReportGroup $reportGroup)
+    public function setReportGroup(ReportGroup $reportGroup)
     {
         $this->reportGroup = $reportGroup;
     }
+
 
     /**
      * Returns the reportFilter
      *
      * @return \RKW\RkwEtracker\Domain\Model\ReportFilter
      */
-    public function getReportFilter()
+    public function getReportFilter(): ReportFilter
     {
         return $this->reportFilter;
     }
+
 
     /**
      * Sets the reportFilter
@@ -292,20 +291,22 @@ class AreaData extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param \RKW\RkwEtracker\Domain\Model\ReportFilter $reportFilter
      * @return void
      */
-    public function setReportFilter(\RKW\RkwEtracker\Domain\Model\ReportFilter $reportFilter)
+    public function setReportFilter(ReportFilter $reportFilter): void
     {
         $this->reportFilter = $reportFilter;
     }
+
 
     /**
      * Returns the reportFetchCounter
      *
      * @return int $reportFetchCounter
      */
-    public function getReportFetchCounter()
+    public function getReportFetchCounter(): int
     {
         return $this->reportFetchCounter;
     }
+
 
     /**
      * Sets the reportFetchCounter
@@ -313,20 +314,22 @@ class AreaData extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param int $reportFetchCounter
      * @return void
      */
-    public function setReportFetchCounter($reportFetchCounter)
+    public function setReportFetchCounter(int $reportFetchCounter): void
     {
         $this->reportFetchCounter = $reportFetchCounter;
     }
+
 
     /**
      * Returns the month
      *
      * @return int $month
      */
-    public function getMonth()
+    public function getMonth(): int
     {
         return $this->month;
     }
+
 
     /**
      * Sets the month
@@ -334,20 +337,22 @@ class AreaData extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param int $month
      * @return void
      */
-    public function setMonth($month)
+    public function setMonth(int $month): void
     {
         $this->month = $month;
     }
+
 
     /**
      * Returns the quarter
      *
      * @return int $quarter
      */
-    public function getQuarter()
+    public function getQuarter(): int
     {
         return $this->quarter;
     }
+
 
     /**
      * Sets the quarter
@@ -355,20 +360,22 @@ class AreaData extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param int $quarter
      * @return void
      */
-    public function setQuarter($quarter)
+    public function setQuarter(int $quarter): void
     {
         $this->quarter = $quarter;
     }
+
 
     /**
      * Returns the year
      *
      * @return int $year
      */
-    public function getYear()
+    public function getYear(): int
     {
         return $this->year;
     }
+
 
     /**
      * Sets the year
@@ -376,7 +383,7 @@ class AreaData extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param int $year
      * @return void
      */
-    public function setYear($year)
+    public function setYear(int $year): void
     {
         $this->year = $year;
     }

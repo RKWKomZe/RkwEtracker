@@ -28,78 +28,69 @@ class ReportDownloadSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
     /**
-     * timePerEvent
-     *
      * @var int
      */
-    protected $timePerEvent = 0;
+    protected int $timePerEvent = 0;
+
 
     /**
-     * events
-     *
      * @var int
      */
-    protected $events = 0;
+    protected int $events = 0;
+
 
     /**
-     * uniqueEvents
-     *
      * @var int
      */
-    protected $uniqueEvents = 0;
+    protected int $uniqueEvents = 0;
+
 
     /**
-     * report
-     *
-     * @var \RKW\RkwEtracker\Domain\Model\Report
+     * @var \RKW\RkwEtracker\Domain\Model\Report|null
      */
-    protected $report = null;
+    protected ?Report $report = null;
 
 
     /**
-     * reportGroup
-     *
-     * @var \RKW\RkwEtracker\Domain\Model\ReportGroup
+     * @var \RKW\RkwEtracker\Domain\Model\ReportGroup|null
      */
-    protected $reportGroup = null;
+    protected ?ReportGroup $reportGroup = null;
+
 
     /**
-     * reportFetchCounter
-     *
+     * @var int
+     */
+    protected int $reportFetchCounter = 0;
+
+
+    /**
+     * @var int
+     */
+    protected int $month = 0;
+
+
+    /**
+     * @var int
+     */
+    protected int $quarter = 0;
+
+
+    /**
      * @var string
      */
-    protected $reportFetchCounter = '';
+    protected int $year = 0;
 
-    /**
-     * month
-     *
-     * @var string
-     */
-    protected $month = '';
-
-    /**
-     * quarter
-     *
-     * @var string
-     */
-    protected $quarter = '';
-
-    /**
-     * year
-     *
-     * @var string
-     */
-    protected $year = '';
 
     /**
      * Returns the timePerEvent
      *
-     * @return int $timePerEvent
+     * @return int
      */
-    public function getTimePerEvent()
+    public function getTimePerEvent(): int
     {
         return $this->timePerEvent;
     }
+
 
     /**
      * Sets the timePerEvent
@@ -107,20 +98,22 @@ class ReportDownloadSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param int $timePerEvent
      * @return void
      */
-    public function setTimePerEvent($timePerEvent)
+    public function setTimePerEvent(int $timePerEvent): void
     {
         $this->timePerEvent = $timePerEvent;
     }
+
 
     /**
      * Returns the events
      *
      * @return int $events
      */
-    public function getEvents()
+    public function getEvents(): int
     {
         return $this->events;
     }
+
 
     /**
      * Sets the events
@@ -128,20 +121,22 @@ class ReportDownloadSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param int $events
      * @return void
      */
-    public function setEvents($events)
+    public function setEvents(int $events): void
     {
         $this->events = $events;
     }
 
+
     /**
      * Returns the uniqueEvents
      *
-     * @return int $uniqueEvents
+     * @return int
      */
-    public function getUniqueEvents()
+    public function getUniqueEvents(): int
     {
         return $this->uniqueEvents;
     }
+
 
     /**
      * Sets the uniqueEvents
@@ -149,20 +144,22 @@ class ReportDownloadSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param int $uniqueEvents
      * @return void
      */
-    public function setUniqueEvents($uniqueEvents)
+    public function setUniqueEvents(int $uniqueEvents): void
     {
         $this->uniqueEvents = $uniqueEvents;
     }
+
 
     /**
      * Returns the report
      *
      * @return \RKW\RkwEtracker\Domain\Model\Report $report
      */
-    public function getReport()
+    public function getReport():? Report
     {
         return $this->report;
     }
+
 
     /**
      * Sets the report
@@ -170,20 +167,22 @@ class ReportDownloadSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param \RKW\RkwEtracker\Domain\Model\Report $report
      * @return void
      */
-    public function setReport(\RKW\RkwEtracker\Domain\Model\Report $report)
+    public function setReport(Report $report): void
     {
         $this->report = $report;
     }
+
 
     /**
      * Returns the reportGroup
      *
      * @return \RKW\RkwEtracker\Domain\Model\ReportGroup $reportGroup
      */
-    public function getReportGroup()
+    public function getReportGroup():? ReportGroup
     {
         return $this->reportGroup;
     }
+
 
     /**
      * Sets the reportGroup
@@ -191,91 +190,99 @@ class ReportDownloadSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param \RKW\RkwEtracker\Domain\Model\ReportGroup $reportGroup
      * @return void
      */
-    public function setReportGroup(\RKW\RkwEtracker\Domain\Model\ReportGroup $reportGroup)
+    public function setReportGroup(ReportGroup $reportGroup): void
     {
         $this->reportGroup = $reportGroup;
     }
 
+
     /**
      * Returns the reportFetchCounter
      *
-     * @return string $reportFetchCounter
+     * @return int
      */
-    public function getReportFetchCounter()
+    public function getReportFetchCounter(): int
     {
         return $this->reportFetchCounter;
     }
 
+
     /**
      * Sets the reportFetchCounter
      *
-     * @param string $reportFetchCounter
+     * @param int $reportFetchCounter
      * @return void
      */
-    public function setReportFetchCounter($reportFetchCounter)
+    public function setReportFetchCounter(int $reportFetchCounter): void
     {
         $this->reportFetchCounter = $reportFetchCounter;
     }
 
+
     /**
      * Returns the month
      *
-     * @return string $month
+     * @return int
      */
-    public function getMonth()
+    public function getMonth(): int
     {
         return $this->month;
     }
 
+
     /**
      * Sets the month
      *
-     * @param string $month
+     * @param int $month
      * @return void
      */
-    public function setMonth($month)
+    public function setMonth(int $month): void
     {
         $this->month = $month;
     }
 
+
     /**
      * Returns the quarter
      *
-     * @return string $quarter
+     * @return int
      */
-    public function getQuarter()
+    public function getQuarter(): int
     {
         return $this->quarter;
     }
 
+
     /**
      * Sets the quarter
      *
-     * @param string $quarter
+     * @param int $quarter
      * @return void
      */
-    public function setQuarter($quarter)
+    public function setQuarter(int $quarter): void
     {
         $this->quarter = $quarter;
     }
 
+
     /**
      * Returns the year
      *
-     * @return string $year
+     * @return int
      */
-    public function getYear()
+    public function getYear(): int
     {
         return $this->year;
     }
 
+
     /**
      * Sets the year
      *
-     * @param string $year
+     * @param int $year
      * @return void
      */
-    public function setYear($year)
+    public function setYear(int $year): void
     {
         $this->year = $year;
     }

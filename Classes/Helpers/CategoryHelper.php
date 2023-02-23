@@ -33,10 +33,10 @@ class CategoryHelper
      * Cleans up category strings
      * Removes slashes and sets string to UpperCamelcase
      *
-     * @param $string
+     * @param string $string
      * @return string
      */
-    public static function cleanUp($string)
+    public static function cleanUp(string $string): string
     {
         trigger_error(__CLASS__  . ' will be removed soon. Do not use it any more.', E_USER_DEPRECATED);
         return CategoryUtility::cleanUpCategoryName($string);

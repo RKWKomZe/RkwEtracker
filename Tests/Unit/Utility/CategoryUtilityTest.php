@@ -20,7 +20,6 @@ use RKW\RkwEtracker\Domain\Model\ReportFilter;
 use RKW\RkwEtracker\Utility\CategoryUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-
 /**
  * CategoryUtilityTest
  *
@@ -31,8 +30,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class CategoryUtilityTest extends UnitTestCase
 {
-
-
 
     /**
      * Setup
@@ -110,9 +107,7 @@ class CategoryUtilityTest extends UnitTestCase
         foreach ($checkArray as $source => $expected) {
             self::assertEquals($expected, CategoryUtility::cleanUpDomainName($source));
         }
-
     }
-
 
 
     /**
@@ -148,6 +143,7 @@ class CategoryUtilityTest extends UnitTestCase
         self::assertEquals($expected, CategoryUtility::implodeCategories($domain, $categoryArray));
 
     }
+
 
     /**
      * @test
@@ -275,6 +271,7 @@ class CategoryUtilityTest extends UnitTestCase
 
     }
 
+
     /**
      * @test
      */
@@ -322,8 +319,6 @@ class CategoryUtilityTest extends UnitTestCase
         self::assertEquals($expected, CategoryUtility::implodeCategories($domain, $categoryArray, $defaultValue, false));
 
     }
-
-
 
     //=============================================
 
@@ -414,6 +409,7 @@ class CategoryUtilityTest extends UnitTestCase
         self::assertEquals($expected, $result);
     }
 
+
     /**
      * @test
      */
@@ -470,6 +466,7 @@ class CategoryUtilityTest extends UnitTestCase
         self::assertEquals($expected, $result);
     }
 
+
     /**
      * @test
      */
@@ -515,6 +512,7 @@ class CategoryUtilityTest extends UnitTestCase
         self::assertIsArray( $result);
         self::assertEquals($expected, $result);
     }
+
 
     /**
      * @test
@@ -605,6 +603,7 @@ class CategoryUtilityTest extends UnitTestCase
         self::assertEquals($expected, $result);
     }
 
+
     /**
      * @test
      */
@@ -629,6 +628,7 @@ class CategoryUtilityTest extends UnitTestCase
         self::assertIsString( $result);
         self::assertEmpty($result);
     }
+
 
     /**
      * @test
@@ -658,6 +658,7 @@ class CategoryUtilityTest extends UnitTestCase
         self::assertEmpty($result);
     }
 
+
     /**
      * @test
      */
@@ -682,6 +683,7 @@ class CategoryUtilityTest extends UnitTestCase
         self::assertIsString( $result);
         self::assertEmpty($result);
     }
+
 
     /**
      * @test
@@ -714,6 +716,7 @@ class CategoryUtilityTest extends UnitTestCase
         self::assertIsString( $result);
         self::assertEquals($expected, $result);
     }
+
 
     /**
      * @test
@@ -751,7 +754,6 @@ class CategoryUtilityTest extends UnitTestCase
     }
 
     //=============================================
-
 
     /**
      * @test
@@ -858,6 +860,7 @@ class CategoryUtilityTest extends UnitTestCase
         self::assertEquals($expected, $result);
     }
 
+
     /**
      * @test
      */
@@ -881,7 +884,6 @@ class CategoryUtilityTest extends UnitTestCase
     }
 
     //=============================================
-
 
     /**
      * @test
@@ -912,7 +914,6 @@ class CategoryUtilityTest extends UnitTestCase
         $result = CategoryUtility::reportFilterEventsToJson($reportFilter);
         self::assertEquals($expected, $result);
     }
-
 
 
     /**
@@ -966,7 +967,6 @@ class CategoryUtilityTest extends UnitTestCase
     }
 
 
-
     /**
      * @test
      */
@@ -992,6 +992,7 @@ class CategoryUtilityTest extends UnitTestCase
         $result = CategoryUtility::reportFilterEventsToJson($reportFilter);
         self::assertEmpty($result);
     }
+
 
     /**
      * @test
@@ -1023,6 +1024,7 @@ class CategoryUtilityTest extends UnitTestCase
         self::assertEquals($expected, $result);
     }
 
+    //=============================================
 
     /**
      * TearDown

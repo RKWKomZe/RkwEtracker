@@ -27,99 +27,87 @@ class AreaSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
     /**
-     * visits
-     *
      * @var int
      */
-    protected $visits = 0;
+    protected int $visits = 0;
+
 
     /**
-     * visitors
-     *
      * @var int
      */
-    protected $visitors = 0;
+    protected int $visitors = 0;
+
 
     /**
-     * pageImpressions
-     *
      * @var int
      */
-    protected $pageImpressions = 0;
+    protected int $pageImpressions = 0;
+
 
     /**
-     * pageImpressionsPerVisit
-     *
      * @var float
      */
-    protected $pageImpressionsPerVisit = 0.0;
+    protected float $pageImpressionsPerVisit = 0.0;
+
 
     /**
-     * bouncesPerVisit
-     *
      * @var float
      */
-    protected $bouncesPerVisit = 0.0;
+    protected float $bouncesPerVisit = 0.0;
+
 
     /**
-     * timePerVisit
-     *
      * @var int
      */
-    protected $timePerVisit = 0;
+    protected int $timePerVisit = 0;
+
 
     /**
-     * report
-     *
-     * @var \RKW\RkwEtracker\Domain\Model\Report
+     * @var \RKW\RkwEtracker\Domain\Model\Report|null
      */
-    protected $report = null;
+    protected ?Report $report = null;
 
 
     /**
-     * reportGroup
-     *
-     * @var \RKW\RkwEtracker\Domain\Model\ReportGroup
+     * @var \RKW\RkwEtracker\Domain\Model\ReportGroup|null
      */
-    protected $reportGroup = null;
+    protected ?ReportGroup $reportGroup = null;
+
 
     /**
-     * reportFetchCounter
-     *
      * @var int
      */
-    protected $reportFetchCounter = 0;
+    protected int $reportFetchCounter = 0;
+
 
     /**
-     * month
-     *
-     * @var float
+     * @var int
      */
-    protected $month = 0.0;
+    protected int $month = 0;
+
 
     /**
-     * quarter
-     *
-     * @var float
+     * @var int
      */
-    protected $quarter = 0.0;
+    protected int $quarter = 0;
+
 
     /**
-     * year
-     *
-     * @var float
+     * @var int
      */
-    protected $year = 0.0;
+    protected int $year = 0;
+
 
     /**
      * Returns the visits
      *
      * @return int $visits
      */
-    public function getVisits()
+    public function getVisits(): int
     {
         return $this->visits;
     }
+
 
     /**
      * Sets the visits
@@ -127,20 +115,22 @@ class AreaSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param int $visits
      * @return void
      */
-    public function setVisits($visits)
+    public function setVisits(int $visits): void
     {
         $this->visits = $visits;
     }
+
 
     /**
      * Returns the visitors
      *
      * @return int $visitors
      */
-    public function getVisitors()
+    public function getVisitors(): int
     {
         return $this->visitors;
     }
+
 
     /**
      * Sets the visitors
@@ -148,20 +138,22 @@ class AreaSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param int $visitors
      * @return void
      */
-    public function setVisitors($visitors)
+    public function setVisitors(int $visitors): void
     {
         $this->visitors = $visitors;
     }
+
 
     /**
      * Returns the pageImpressions
      *
      * @return int $pageImpressions
      */
-    public function getPageImpressions()
+    public function getPageImpressions(): int
     {
         return $this->pageImpressions;
     }
+
 
     /**
      * Sets the pageImpressions
@@ -169,20 +161,22 @@ class AreaSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param int $pageImpressions
      * @return void
      */
-    public function setPageImpressions($pageImpressions)
+    public function setPageImpressions(int $pageImpressions): void
     {
         $this->pageImpressions = $pageImpressions;
     }
+
 
     /**
      * Returns the pageImpressionsPerVisit
      *
      * @return float $pageImpressionPerVisit
      */
-    public function getPageImpressionsPerVisit()
+    public function getPageImpressionsPerVisit(): float
     {
         return $this->pageImpressionsPerVisit;
     }
+
 
     /**
      * Sets the pageImpressionsPerVisit
@@ -190,20 +184,22 @@ class AreaSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param float $pageImpressionsPerVisit
      * @return void
      */
-    public function setPageImpressionsPerVisit($pageImpressionsPerVisit)
+    public function setPageImpressionsPerVisit(float $pageImpressionsPerVisit): void
     {
         $this->pageImpressionsPerVisit = $pageImpressionsPerVisit;
     }
+
 
     /**
      * Returns the bouncesPerVisit
      *
      * @return float $bouncesPerVisit
      */
-    public function getBouncesPerVisit()
+    public function getBouncesPerVisit(): float
     {
         return $this->bouncesPerVisit;
     }
+
 
     /**
      * Sets the bouncesPerVisit
@@ -211,20 +207,22 @@ class AreaSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param float $bouncesPerVisit
      * @return void
      */
-    public function setBouncesPerVisit($bouncesPerVisit)
+    public function setBouncesPerVisit(float $bouncesPerVisit): void
     {
         $this->bouncesPerVisit = $bouncesPerVisit;
     }
+
 
     /**
      * Returns the timePerVisit
      *
      * @return int $timePerVisit
      */
-    public function getTimePerVisit()
+    public function getTimePerVisit(): int
     {
         return $this->timePerVisit;
     }
+
 
     /**
      * Sets the timePerVisit
@@ -232,20 +230,22 @@ class AreaSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param int $timePerVisit
      * @return void
      */
-    public function setTimePerVisit($timePerVisit)
+    public function setTimePerVisit(int $timePerVisit): void
     {
         $this->timePerVisit = $timePerVisit;
     }
+
 
     /**
      * Returns the report
      *
      * @return \RKW\RkwEtracker\Domain\Model\Report $report
      */
-    public function getReport()
+    public function getReport():? Report
     {
         return $this->report;
     }
+
 
     /**
      * Sets the report
@@ -253,20 +253,22 @@ class AreaSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param \RKW\RkwEtracker\Domain\Model\Report $report
      * @return void
      */
-    public function setReport($report)
+    public function setReport(Report $report): void
     {
         $this->report = $report;
     }
+
 
     /**
      * Returns the reportGroup
      *
      * @return \RKW\RkwEtracker\Domain\Model\ReportGroup $reportGroup
      */
-    public function getReportGroup()
+    public function getReportGroup(): ReportGroup
     {
         return $this->reportGroup;
     }
+
 
     /**
      * Sets the reportGroup
@@ -274,20 +276,22 @@ class AreaSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param \RKW\RkwEtracker\Domain\Model\ReportGroup $reportGroup
      * @return void
      */
-    public function setReportGroup($reportGroup)
+    public function setReportGroup(ReportGroup $reportGroup): void
     {
         $this->reportGroup = $reportGroup;
     }
+
 
     /**
      * Returns the reportFetchCounter
      *
      * @return int $reportFetchCounter
      */
-    public function getReportFetchCounter()
+    public function getReportFetchCounter(): int
     {
         return $this->reportFetchCounter;
     }
+
 
     /**
      * Sets the reportFetchCounter
@@ -295,28 +299,30 @@ class AreaSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param int $reportFetchCounter
      * @return void
      */
-    public function setReportFetchCounter($reportFetchCounter)
+    public function setReportFetchCounter(int $reportFetchCounter): void
     {
         $this->reportFetchCounter = $reportFetchCounter;
     }
 
+
     /**
      * Returns the month
      *
-     * @return float $month
+     * @return int $month
      */
-    public function getMonth()
+    public function getMonth(): int
     {
         return $this->month;
     }
 
+
     /**
      * Sets the month
      *
-     * @param float $month
+     * @param int $month
      * @return void
      */
-    public function setMonth($month)
+    public function setMonth(int $month): void
     {
         $this->month = $month;
     }
@@ -324,9 +330,9 @@ class AreaSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the quarter
      *
-     * @return float $quarter
+     * @return int
      */
-    public function getQuarter()
+    public function getQuarter(): int
     {
         return $this->quarter;
     }
@@ -337,7 +343,7 @@ class AreaSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param float $quarter
      * @return void
      */
-    public function setQuarter($quarter)
+    public function setQuarter(int $quarter): void
     {
         $this->quarter = $quarter;
     }
@@ -345,9 +351,9 @@ class AreaSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the year
      *
-     * @return float $year
+     * @return int
      */
-    public function getYear()
+    public function getYear(): int
     {
         return $this->year;
     }
@@ -355,10 +361,10 @@ class AreaSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the year
      *
-     * @param float $year
+     * @param int $year
      * @return void
      */
-    public function setYear($year)
+    public function setYear(int $year): void
     {
         $this->year = $year;
     }

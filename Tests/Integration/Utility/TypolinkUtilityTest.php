@@ -33,7 +33,6 @@ use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 class LinkUtilityTest extends FunctionalTestCase
 {
 
-
     /**
      * @var string[]
      */
@@ -44,6 +43,7 @@ class LinkUtilityTest extends FunctionalTestCase
         'typo3conf/ext/rkw_etracker',
     ];
 
+
     /**
      * @var string[]
      */
@@ -52,19 +52,23 @@ class LinkUtilityTest extends FunctionalTestCase
         'filemetadata'
     ];
 
-    /**
-     * @var \RKW\RkwEtracker\Utility\TypolinkUtility
-     */
-    private $subject = null;
-    /**
-     * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
-     */
-    private $persistenceManager = null;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManager
+     * @var \RKW\RkwEtracker\Utility\TypolinkUtility|null
      */
-    private $objectManager = null;
+    private ?TypolinkUtility $subject = null;
+
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager|null
+     */
+    private ?PersistenceManager $persistenceManager = null;
+
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Object\ObjectManager|null
+     */
+    private ?ObjectManager $objectManager = null;
 
 
     /**
@@ -117,7 +121,6 @@ class LinkUtilityTest extends FunctionalTestCase
         FrontendSimulatorUtility::simulateFrontendEnvironment(1);
     }
 
-
     //=============================================
 
     /**
@@ -152,6 +155,7 @@ class LinkUtilityTest extends FunctionalTestCase
         self::assertInstanceOf('\TYPO3\CMS\Core\Resource\File', $this->subject->getFileObject(2));
     }
 
+
     /**
      * @test
      */
@@ -167,6 +171,7 @@ class LinkUtilityTest extends FunctionalTestCase
          */
         self::assertInstanceOf('\TYPO3\CMS\Core\Resource\File', $this->subject->getFileObject('file:2'));
     }
+
 
     /**
      * @test
@@ -198,6 +203,7 @@ class LinkUtilityTest extends FunctionalTestCase
          */
         self::assertInstanceOf('\TYPO3\CMS\Core\Resource\File', $this->subject->getFileObject('fileadmin/media/file-placeholder-1.pdf'));
     }
+
 
     /**
      * @test
@@ -269,7 +275,6 @@ class LinkUtilityTest extends FunctionalTestCase
     }
 
 
-
     /**
      * @test
      */
@@ -288,6 +293,7 @@ class LinkUtilityTest extends FunctionalTestCase
         self::assertEquals('page', $this->subject->getLinkType('t3://page?uid=1 - - "zur Website"'));
     }
 
+
     /**
      * @test
      */
@@ -302,6 +308,7 @@ class LinkUtilityTest extends FunctionalTestCase
          */
         self::assertEquals('email', $this->subject->getLinkType('mailto:kroggel@test.de'));
     }
+
 
     /**
      * @test
@@ -318,6 +325,7 @@ class LinkUtilityTest extends FunctionalTestCase
          */
         self::assertEquals('email', $this->subject->getLinkType('t3://email?email=mailto:kroggel@test.de'));
     }
+
 
     /**
      * @test
@@ -353,6 +361,7 @@ class LinkUtilityTest extends FunctionalTestCase
         self::assertEquals('url', $this->subject->getLinkType('https://www.google.de'));
     }
 
+
     /**
      * @test
      */
@@ -368,6 +377,7 @@ class LinkUtilityTest extends FunctionalTestCase
          */
         self::assertEquals('url', $this->subject->getLinkType('t3://url?url=https://www.google.de'));
     }
+
 
     /**
      * @test
@@ -475,11 +485,7 @@ class LinkUtilityTest extends FunctionalTestCase
         self::assertEquals('file', $this->subject->getLinkType('t3://file?uid=1 - - "zur Website"'));
     }
 
-
-
-
     //=============================================
-
 
     /**
      * @test
@@ -524,6 +530,7 @@ class LinkUtilityTest extends FunctionalTestCase
 
         self::assertEquals($assert, $this->subject->getDataAttributes('t3://email?email=mailto:kroggel@test.de'));
     }
+
 
     /**
      * @test
@@ -601,6 +608,7 @@ class LinkUtilityTest extends FunctionalTestCase
         self::assertEquals($assert, $this->subject->getDataAttributes('t3://file?uid=2'));
     }
 
+
     /**
      * @test
      */
@@ -626,6 +634,7 @@ class LinkUtilityTest extends FunctionalTestCase
 
         self::assertEquals($assert, $this->subject->getDataAttributes('t3://file?uid=3'));
     }
+
 
     /**
      * @test
@@ -656,7 +665,6 @@ class LinkUtilityTest extends FunctionalTestCase
 
     //=============================================
 
-
     /**
      * TearDown
      */
@@ -678,10 +686,4 @@ class LinkUtilityTest extends FunctionalTestCase
             }
         }
     }
-
-
-
-
-
-
 }
