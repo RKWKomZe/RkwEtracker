@@ -134,7 +134,7 @@ jQuery(document).ready(function () {
     rkwEtrackerClass.init(jQuery(document));
 
     // for ajax
-    jQuery(document).on('rkw-ajax-api-content-changed', function(event, element) {
+    jQuery(document).on('tx-ajax-api-content-changed', function(event, element) {
         rkwEtrackerClass.init(element);
     });
 });

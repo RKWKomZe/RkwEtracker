@@ -28,7 +28,7 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
  * Class ImplodeCategoriesViewHelper
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEtracker
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -40,7 +40,8 @@ class ImplodeCategoriesViewHelper extends AbstractViewHelper
      */
     public function initializeArguments()
     {
-        $this->registerArgument('areaData', '\RKW\RkwEtracker\Domain\Model\AreaData', 'The AreaData-object to get the categories from.', true);
+        parent::initializeArguments();
+        $this->registerArgument('areaData', AreaData::class, 'The AreaData-object to get the categories from.', true);
     }
 
 
@@ -94,6 +95,6 @@ class ImplodeCategoriesViewHelper extends AbstractViewHelper
      */
     public static function getSettings($which = ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS)
     {
-        return \RKW\RkwBasics\Utility\GeneralUtility::getTyposcriptConfiguration('Rkwetracker', $which);
+        return \Madj2k\CoreExtended\Utility\GeneralUtility::getTypoScriptConfiguration('Rkwetracker', $which);
     }
 }

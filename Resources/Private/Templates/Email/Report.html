@@ -20,32 +20,32 @@
             <p><f:format.nl2br>{report.description}</f:format.nl2br></p>
         </f:if>
 
-        <h2><rkwMailer:frontend.translate key="templates_email_report.summary" languageKey="{languageKey}" extensionName="rkwEtracker"  /></h2>
+        <h2><rkwMailer:email.translate key="templates_email_report.summary" languageKey="{languageKey}" extensionName="rkwEtracker"  /></h2>
 
         <!-- area data -->
         <f:if condition="{reportAreaSum}">
             <f:if condition="{reportAreaSum.visitors}">
-                <h3> <rkwMailer:frontend.translate key="templates_email_report.headline1" languageKey="{languageKey}" extensionName="rkwEtracker"  /></h3>
+                <h3> <rkwMailer:email.translate key="templates_email_report.headline1" languageKey="{languageKey}" extensionName="rkwEtracker"  /></h3>
                 <table border="0" cellpadding="0" cellspacing="0" class="colored-table">
                     <tbody>
                     <tr>
                         <th>
-                            <nobr><rkwMailer:frontend.translate key="templates_email_report.groups" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
+                            <nobr><rkwMailer:email.translate key="templates_email_report.groups" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
                         </th>
                         <th>
-                            <nobr><rkwMailer:frontend.translate key="templates_email_report.pageImpressions" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
+                            <nobr><rkwMailer:email.translate key="templates_email_report.pageImpressions" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
                         </th>
                         <th>
-                            <nobr><rkwMailer:frontend.translate key="templates_email_report.visits" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
+                            <nobr><rkwMailer:email.translate key="templates_email_report.visits" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
                         </th>
                         <th>
-                            <nobr><rkwMailer:frontend.translate key="templates_email_report.pageImpressionsPerVisit" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
+                            <nobr><rkwMailer:email.translate key="templates_email_report.pageImpressionsPerVisit" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
                         </th>
                         <th>
-                            <nobr><rkwMailer:frontend.translate key="templates_email_report.timePerVisit" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
+                            <nobr><rkwMailer:email.translate key="templates_email_report.timePerVisit" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
                         </th>
                         <th>
-                            <nobr><rkwMailer:frontend.translate key="templates_email_report.bouncesPerVisit" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
+                            <nobr><rkwMailer:email.translate key="templates_email_report.bouncesPerVisit" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
                         </th>
                     </tr>
                     <f:for each="{reportData}" as="item" iteration="iterator">
@@ -91,7 +91,7 @@
                     </tr>
                     <tr>
                         <td colspan="6" class="footer">
-                            <f:format.raw><rkwMailer:frontend.translate key="templates_email_report.legendAreaData" languageKey="{languageKey}" extensionName="rkwEtracker"  /></f:format.raw>
+                            <f:format.raw><rkwMailer:email.translate key="templates_email_report.legendAreaData" languageKey="{languageKey}" extensionName="rkwEtracker"  /></f:format.raw>
                         </td>
                     </tr>
                     </tbody>
@@ -103,15 +103,15 @@
         <!-- download data -->
         <f:if condition="{reportDownloadSum}">
             <f:if condition="{reportDownloadSum.events}">
-                <h3> <rkwMailer:frontend.translate key="templates_email_report.headline2" languageKey="{languageKey}" extensionName="rkwEtracker"  /></h3>
+                <h3> <rkwMailer:email.translate key="templates_email_report.headline2" languageKey="{languageKey}" extensionName="rkwEtracker"  /></h3>
                 <table border="0" cellpadding="0" cellspacing="0" class="colored-table">
                     <tbody>
                     <tr>
                         <th>
-                            <nobr><rkwMailer:frontend.translate key="templates_email_report.groups" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
+                            <nobr><rkwMailer:email.translate key="templates_email_report.groups" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
                         </th>
                         <th>
-                            <nobr><rkwMailer:frontend.translate key="templates_email_report.events" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
+                            <nobr><rkwMailer:email.translate key="templates_email_report.events" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
                         </th>
                     </tr>
                     <f:for each="{reportData}" as="item" iteration="iterator">
@@ -136,7 +136,7 @@
                     <!--
                     <tr>
                         <td colspan="2" class="footer">
-                            <rkwMailer:frontend.translate key="templates_email_report.legendDownloadData" languageKey="{languageKey}" extensionName="rkwEtracker"  />
+                            <rkwMailer:email.translate key="templates_email_report.legendDownloadData" languageKey="{languageKey}" extensionName="rkwEtracker"  />
                         </td>
                     </tr>
                     -->
@@ -161,27 +161,27 @@
                 <f:then>
                     <f:if condition="{item.areaSum.visits}">
                         <f:then>
-                            <h3><rkwMailer:frontend.translate key="templates_email_report.headline1" languageKey="{languageKey}" extensionName="rkwEtracker"  /></h3>
+                            <h3><rkwMailer:email.translate key="templates_email_report.headline1" languageKey="{languageKey}" extensionName="rkwEtracker"  /></h3>
                             <table border="0" cellpadding="0" cellspacing="0" class="colored-table">
                                 <tbody>
                                 <tr>
                                     <th>
-                                        <nobr><rkwMailer:frontend.translate key="templates_email_report.categories" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
+                                        <nobr><rkwMailer:email.translate key="templates_email_report.categories" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
                                     </th>
                                     <th>
-                                        <nobr><rkwMailer:frontend.translate key="templates_email_report.pageImpressions" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
+                                        <nobr><rkwMailer:email.translate key="templates_email_report.pageImpressions" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
                                     </th>
                                     <th>
-                                        <nobr><rkwMailer:frontend.translate key="templates_email_report.visits" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
+                                        <nobr><rkwMailer:email.translate key="templates_email_report.visits" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
                                     </th>
                                     <th>
-                                        <nobr><rkwMailer:frontend.translate key="templates_email_report.pageImpressionsPerVisit" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
+                                        <nobr><rkwMailer:email.translate key="templates_email_report.pageImpressionsPerVisit" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
                                     </th>
                                     <th>
-                                        <nobr><rkwMailer:frontend.translate key="templates_email_report.timePerVisit" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
+                                        <nobr><rkwMailer:email.translate key="templates_email_report.timePerVisit" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
                                     </th>
                                     <th>
-                                        <nobr><rkwMailer:frontend.translate key="templates_email_report.bouncesPerVisit" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
+                                        <nobr><rkwMailer:email.translate key="templates_email_report.bouncesPerVisit" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
                                     </th>
                                 </tr>
                                 <f:for each="{item.areaData}" as="data" iteration="iterator">
@@ -189,7 +189,7 @@
                                         <td>
                                             <f:if condition="{report.linkToApi}">
                                                 <f:then>
-                                                    <a href="<rkwMailer:frontend.link absolute='true' pageUid='{singleSignOnPid}' noCacheHash='true' />">
+                                                    <a href="<rkwMailer:email.uri.action absolute='true' pageUid='{singleSignOnPid}' noCacheHash='true' />">
                                                         <rkwEtracker:report.implodeCategories areaData="{data}" />
                                                     </a>
                                                 </f:then>
@@ -235,37 +235,37 @@
                                 </tr>
                                 <tr>
                                     <td colspan="7" class="footer">
-                                        <f:format.raw><rkwMailer:frontend.translate key="templates_email_report.legendAreaData" languageKey="{languageKey}" extensionName="rkwEtracker"  /></f:format.raw>
+                                        <f:format.raw><rkwMailer:email.translate key="templates_email_report.legendAreaData" languageKey="{languageKey}" extensionName="rkwEtracker"  /></f:format.raw>
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
                         </f:then>
                         <f:else>
-                            <h3><rkwMailer:frontend.translate key="templates_email_report.noData" languageKey="{languageKey}" extensionName="rkwEtracker"  /></h3>
+                            <h3><rkwMailer:email.translate key="templates_email_report.noData" languageKey="{languageKey}" extensionName="rkwEtracker"  /></h3>
                         </f:else>
                     </f:if>
                 </f:then>
                 <f:else>
-                    <h3><rkwMailer:frontend.translate key="templates_email_report.noData" languageKey="{languageKey}" extensionName="rkwEtracker"  /></h3>
+                    <h3><rkwMailer:email.translate key="templates_email_report.noData" languageKey="{languageKey}" extensionName="rkwEtracker"  /></h3>
                 </f:else>
             </f:if>
 
             <!-- download data -->
             <f:if condition="{item.downloadData}">
                 <f:if condition="{item.downloadSum.events}">
-                    <h3> <rkwMailer:frontend.translate key="templates_email_report.headline2" languageKey="{languageKey}" extensionName="rkwEtracker"  /></h3>
+                    <h3> <rkwMailer:email.translate key="templates_email_report.headline2" languageKey="{languageKey}" extensionName="rkwEtracker"  /></h3>
                     <table border="0" cellpadding="0" cellspacing="0" class="colored-table">
                         <tbody>
                             <tr>
                                 <th>
-                                    <nobr><rkwMailer:frontend.translate key="templates_email_report.action" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
+                                    <nobr><rkwMailer:email.translate key="templates_email_report.action" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
                                 </th>
                                 <th>
-                                    <nobr><rkwMailer:frontend.translate key="templates_email_report.category" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
+                                    <nobr><rkwMailer:email.translate key="templates_email_report.category" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
                                 </th>
                                 <th>
-                                    <nobr><rkwMailer:frontend.translate key="templates_email_report.events" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
+                                    <nobr><rkwMailer:email.translate key="templates_email_report.events" languageKey="{languageKey}" extensionName="rkwEtracker"  /></nobr>
                                 </th>
                             </tr>
                             <f:for each="{item.downloadData}" as="data" iteration="iterator">
@@ -276,7 +276,7 @@
                                     <td width="70%">
                                         <f:if condition="{report.linkToApi}">
                                             <f:then>
-                                                <a href="<rkwMailer:frontend.link absolute='true' pageUid='{singleSignOnPid}' noCacheHash='true' />">
+                                                <a href="<rkwMailer:email.uri.action absolute='true' pageUid='{singleSignOnPid}' noCacheHash='true' />">
                                                     <rkwEtracker:report.eventsToString downloadData="{data}" />
                                                 </a>
                                             </f:then>
@@ -301,7 +301,7 @@
                             <!--
                             <tr>
                                 <td colspan="3" class="footer">
-                                    <rkwMailer:frontend.translate key="templates_email_report.legendDownloadData" languageKey="{languageKey}" extensionName="rkwEtracker"  />
+                                    <rkwMailer:email.translate key="templates_email_report.legendDownloadData" languageKey="{languageKey}" extensionName="rkwEtracker"  />
                                 </td>
                             </tr>
                             -->

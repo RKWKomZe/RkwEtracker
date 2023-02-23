@@ -1,7 +1,7 @@
 <f:flashMessages as="flashMessages">
     <f:for each="{flashMessages}" as="flashMessage">
         <div class="typo3-messages">
-            <div class="alert alert-{flashMessage.class}">
+            <div class="alert alert-severity-{flashMessage.severity}">
                 <div class="media">
                     <div class="media-body">
                         <div class="alert-message">

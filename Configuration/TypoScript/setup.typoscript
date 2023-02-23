@@ -66,10 +66,10 @@ plugin.tx_rkwetracker {
         pageDomain.data = getIndpEnv:HTTP_HOST
 
         pageUrl = TEXT
-        pageUrl < plugin.tx_rkwbasics.libs.canonical.10
+        pageUrl < lib.txCoreExtended.canonical.10
 
         pageUrlEncoded = TEXT
-        pageUrlEncoded < plugin.tx_rkwbasics.libs.canonical.10
+        pageUrlEncoded < lib.txCoreExtended.canonical.10
         pageUrlEncoded.stdWrap.rawUrlEncode = 1
 
         #=================================================================

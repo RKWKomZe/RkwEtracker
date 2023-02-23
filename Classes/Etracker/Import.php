@@ -2,7 +2,7 @@
 
 namespace RKW\RkwEtracker\Etracker;
 
-use \RKW\RkwBasics\Helper\Common;
+use Madj2k\CoreExtended\Utility\GeneralUtility as Common;
 use RKW\RkwEtracker\Domain\Model\AreaData;
 use RKW\RkwEtracker\Domain\Model\DownloadData;
 use RKW\RkwEtracker\Domain\Repository\AreaDataRepository;
@@ -29,7 +29,7 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
  * Class Import
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEtracker
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -412,7 +412,7 @@ class Import
     {
 
         if (!$this->configuration) {
-            $this->configuration = Common::getTyposcriptConfiguration('Rkwetracker', $which);
+            $this->configuration = Common::getTypoScriptConfiguration('Rkwetracker', $which);
         }
 
     }

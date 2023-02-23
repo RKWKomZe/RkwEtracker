@@ -15,11 +15,13 @@ namespace RKW\RkwEtracker\Domain\Model;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+
 /**
  * Class Report
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEtracker
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -27,137 +29,114 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
     /**
-     * name
-     *
      * @var string
      */
-    protected $name = '';
+    protected string $name = '';
 
     /**
-     * description
-     *
      * @var string
      */
-    protected $description = '';
+    protected string $description = '';
 
 
     /**
-     * recipient
-     *
      * @var string
      */
-    protected $recipient = '';
+    protected string $recipient = '';
 
 
     /**
      * groups
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEtracker\Domain\Model\ReportGroup>
-     * @cascade remove
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEtracker\Domain\Model\ReportGroup>|null
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      */
-    protected $groups = null;
+    protected ?ObjectStorage $groups = null;
+
 
     /**
-     * groupsFetch
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEtracker\Domain\Model\ReportGroup>
-     * @cascade remove
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEtracker\Domain\Model\ReportGroup>|null
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      */
-    protected $groupsFetch = null;
+    protected ?ObjectStorage $groupsFetch = null;
+
 
     /**
-     * type
-     *
      * @var int
      */
-    protected $type = 0;
+    protected int $type = 0;
+
 
     /**
-     * type
-     *
      * @var int
      */
-    protected $status = 0;
+    protected int $status = 0;
 
 
     /**
-     * fetchCounter
-     *
      * @var int
      */
-    protected $fetchCounter = 0;
+    protected int $fetchCounter = 0;
+
 
     /**
-     * lastFetchTstamp
-     *
      * @var int
      */
-    protected $lastFetchTstamp = 0;
+    protected int $lastFetchTstamp = 0;
 
 
     /**
-     * lastMailTstamp
-     *
      * @var int
      */
-    protected $lastMailTstamp = 0;
+    protected int $lastMailTstamp = 0;
+
 
     /**
-     * lastStartTstamp
-     *
      * @var int
      */
-    protected $lastStartTstamp = 0;
+    protected int $lastStartTstamp = 0;
+
 
     /**
-     * lastEndTstamp
-     *
      * @var int
      */
-    protected $lastEndTstamp = 0;
+    protected int $lastEndTstamp = 0;
+
 
     /**
-     * month
-     *
      * @var int
      */
-    protected $month = 0;
+    protected int $month = 0;
+
 
     /**
-     * quarter
-     *
      * @var int
      */
-    protected $quarter = 0;
+    protected int $quarter = 0;
+
 
     /**
-     * year
-     *
      * @var int
      */
-    protected $year = 0;
+    protected int $year = 0;
+
 
     /**
-     * starttime
-     *
      * @var int
      */
-    protected $starttime = 0;
+    protected int $starttime = 0;
 
 
     /**
-     * endtime
-     *
      * @var int
      */
-    protected $endtime = 0;
+    protected int $endtime = 0;
+
 
     /**
-     * linkToApi
-     *
      * @var boolean
      */
-    protected $linkToApi = true;
+    protected bool $linkToApi = true;
 
 
     /**
@@ -169,6 +148,7 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->initStorageObjects();
     }
 
+
     /**
      * Initializes all ObjectStorage properties
      * Do not modify this method!
@@ -177,7 +157,7 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return void
      */
-    protected function initStorageObjects()
+    protected function initStorageObjects(): void
     {
         $this->groups = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->groupsFetch = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
@@ -190,10 +170,11 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return string $name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
+
 
     /**
      * Sets the name
@@ -201,20 +182,22 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param string $name
      * @return void
      */
-    public function setName($name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
+
 
     /**
      * Returns the description
      *
      * @return string $description
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
+
 
     /**
      * Sets the description
@@ -222,7 +205,7 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param string $description
      * @return void
      */
-    public function setDescription($description)
+    public function setDescription(string $description): void
     {
         $this->description = $description;
     }
@@ -233,10 +216,11 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return string $recipient
      */
-    public function getRecipient()
+    public function getRecipient(): string
     {
         return $this->recipient;
     }
+
 
     /**
      * Sets the recipient
@@ -244,7 +228,7 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param string $recipient
      * @return void
      */
-    public function setRecipient($recipient)
+    public function setRecipient(string $recipient): void
     {
         $this->recipient = $recipient;
     }
@@ -256,31 +240,34 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param \RKW\RkwEtracker\Domain\Model\ReportGroup $group
      * @return void
      */
-    public function addGroup(\RKW\RkwEtracker\Domain\Model\ReportGroup $group)
+    public function addGroup(\RKW\RkwEtracker\Domain\Model\ReportGroup $group): void
     {
         $this->groups->attach($group);
     }
 
+
     /**
      * Removes a Group
      *
-     * @param \RKW\RkwEtracker\Domain\Model\ReportGroup $groupToRemove The Group to be removed
+     * @param \RKW\RkwEtracker\Domain\Model\ReportGroup $groupToRemove
      * @return void
      */
-    public function removeGroup(\RKW\RkwEtracker\Domain\Model\ReportGroup $groupToRemove)
+    public function removeGroup(\RKW\RkwEtracker\Domain\Model\ReportGroup $groupToRemove): void
     {
         $this->groups->detach($groupToRemove);
     }
+
 
     /**
      * Returns the groups
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEtracker\Domain\Model\ReportGroup> $groups
      */
-    public function getGroups()
+    public function getGroups(): ObjectStorage
     {
         return $this->groups;
     }
+
 
     /**
      * Sets the groups
@@ -288,7 +275,7 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEtracker\Domain\Model\ReportGroup> $groups
      * @return void
      */
-    public function setGroups(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $groups)
+    public function setGroups(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $groups): void
     {
         $this->groups = $groups;
     }
@@ -300,10 +287,11 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param \RKW\RkwEtracker\Domain\Model\ReportGroup $group
      * @return void
      */
-    public function addGroupFetch(\RKW\RkwEtracker\Domain\Model\ReportGroup $group)
+    public function addGroupFetch(\RKW\RkwEtracker\Domain\Model\ReportGroup $group): void
     {
         $this->groupsFetch->attach($group);
     }
+
 
     /**
      * Removes a GroupFetch
@@ -316,15 +304,17 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->groupsFetch->detach($groupToRemove);
     }
 
+
     /**
      * Returns the groupsFetch
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEtracker\Domain\Model\ReportGroup> $groupsFetch
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEtracker\Domain\Model\ReportGroup>
      */
-    public function getGroupsFetch()
+    public function getGroupsFetch(): ObjectStorage
     {
         return $this->groupsFetch;
     }
+
 
     /**
      * Sets the groupsFetch
@@ -332,7 +322,7 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEtracker\Domain\Model\ReportGroup> $groupsFetch
      * @return void
      */
-    public function setGroupsFetch(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $groupsFetch)
+    public function setGroupsFetch(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $groupsFetch): ObjectStorage
     {
         $this->groupsFetch = $groupsFetch;
     }
@@ -343,10 +333,11 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return int
      */
-    public function getType()
+    public function getType(): int
     {
         return $this->type;
     }
+
 
     /**
      * Sets the type
@@ -354,20 +345,22 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param int $type
      * @return void
      */
-    public function setType($type)
+    public function setType(int $type): void
     {
         $this->type = $type;
     }
+
 
     /**
      * Returns the status
      *
      * @return int
      */
-    public function getStatus()
+    public function getStatus(): int
     {
         return $this->status;
     }
+
 
     /**
      * Sets the status
@@ -375,7 +368,7 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param int $status
      * @return void
      */
-    public function setStatus($status)
+    public function setStatus(int $status): void
     {
         $this->status = $status;
     }
@@ -386,7 +379,7 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return int
      */
-    public function getFetchCounter()
+    public function getFetchCounter(): int
     {
         return $this->fetchCounter;
     }
@@ -398,7 +391,7 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param int $fetchCounter
      * @return void
      */
-    public function setFetchCounter($fetchCounter)
+    public function setFetchCounter(int $fetchCounter): void
     {
         $this->fetchCounter = $fetchCounter;
     }
@@ -409,7 +402,7 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return int
      */
-    public function getLastFetchTstamp()
+    public function getLastFetchTstamp(): int
     {
         return $this->lastFetchTstamp;
     }
@@ -421,7 +414,7 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param int $lastFetchTstamp
      * @return void
      */
-    public function setLastFetchTstamp($lastFetchTstamp)
+    public function setLastFetchTstamp(int $lastFetchTstamp): void
     {
         $this->lastFetchTstamp = $lastFetchTstamp;
     }
@@ -432,7 +425,7 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return int
      */
-    public function getLastMailTstamp()
+    public function getLastMailTstamp(): int
     {
         return $this->lastMailTstamp;
     }
@@ -444,7 +437,7 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param int $lastMailTstamp
      * @return void
      */
-    public function setLastMailTstamp($lastMailTstamp)
+    public function setLastMailTstamp(int $lastMailTstamp): void
     {
         $this->lastMailTstamp = $lastMailTstamp;
     }
@@ -455,7 +448,7 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return int
      */
-    public function getLastStartTstamp()
+    public function getLastStartTstamp(): int
     {
         return $this->lastStartTstamp;
     }
@@ -467,7 +460,7 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param int $lastStartTstamp
      * @return void
      */
-    public function setLastStartTstamp($lastStartTstamp)
+    public function setLastStartTstamp(int $lastStartTstamp): void
     {
         $this->lastStartTstamp = $lastStartTstamp;
     }
@@ -478,7 +471,7 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return int
      */
-    public function getLastEndTstamp()
+    public function getLastEndTstamp(): int
     {
         return $this->lastEndTstamp;
     }
@@ -490,7 +483,7 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param int $lastEndTstamp
      * @return void
      */
-    public function setLastEndTstamp($lastEndTstamp)
+    public function setLastEndTstamp(int $lastEndTstamp): void
     {
         $this->lastEndTstamp = $lastEndTstamp;
     }
@@ -501,10 +494,11 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return int $month
      */
-    public function getMonth()
+    public function getMonth(): int
     {
         return $this->month;
     }
+
 
     /**
      * Sets the month
@@ -512,20 +506,22 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param int $month
      * @return void
      */
-    public function setMonth($month)
+    public function setMonth(int $month): void
     {
         $this->month = $month;
     }
+
 
     /**
      * Returns the quarter
      *
      * @return int $quarter
      */
-    public function getQuarter()
+    public function getQuarter(): int
     {
         return $this->quarter;
     }
+
 
     /**
      * Sets the quarter
@@ -533,17 +529,18 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param int $quarter
      * @return void
      */
-    public function setQuarter($quarter)
+    public function setQuarter(int $quarter): void
     {
         $this->quarter = $quarter;
     }
+
 
     /**
      * Returns the year
      *
      * @return int $year
      */
-    public function getYear()
+    public function getYear(): int
     {
         return $this->year;
     }
@@ -554,20 +551,22 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param int $year
      * @return void
      */
-    public function setYear($year)
+    public function setYear(int $year): void
     {
         $this->year = $year;
     }
 
+
     /**
      * Returns the starttime
      *
-     * @return int $starttime
+     * @return int
      */
-    public function getStarttime()
+    public function getStarttime(): int
     {
         return $this->starttime;
     }
+
 
     /**
      * Sets the starttime
@@ -575,20 +574,22 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param int $starttime
      * @return void
      */
-    public function setStartime($starttime)
+    public function setStartime(int $starttime): void
     {
         $this->starttime = $starttime;
     }
 
+
     /**
      * Returns the endtime
      *
-     * @return int $endtime
+     * @return int
      */
-    public function getEndtime()
+    public function getEndtime(): int
     {
         return $this->endtime;
     }
+
 
     /**
      * Sets the endtime
@@ -596,7 +597,7 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param int $endtime
      * @return void
      */
-    public function setEndime($endtime)
+    public function setEndime(int $endtime): void
     {
         $this->endtime = $endtime;
     }
@@ -605,20 +606,21 @@ class Report extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the linkToApi
      *
-     * @return boolean $linkToApi
+     * @return bool $linkToApi
      */
-    public function getLinkToApi()
+    public function getLinkToApi(): bool
     {
         return $this->linkToApi;
     }
 
+
     /**
      * Sets the linkToApi
      *
-     * @param boolean $linkToApi
+     * @param bool $linkToApi
      * @return void
      */
-    public function setLinkToApi($linkToApi)
+    public function setLinkToApi(bool $linkToApi): void
     {
         $this->linkToApi = $linkToApi;
     }

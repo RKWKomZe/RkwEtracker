@@ -20,24 +20,21 @@ use RKW\RkwEtracker\Domain\Model\ReportFilter;
 use RKW\RkwEtracker\Utility\CategoryUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-
 /**
  * CategoryUtilityTest
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEtracker
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class CategoryUtilityTest extends UnitTestCase
 {
 
-
-
     /**
      * Setup
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
     }
@@ -76,7 +73,7 @@ class CategoryUtilityTest extends UnitTestCase
         ];
 
         foreach ($checkArray as $source => $expected) {
-            static::assertEquals($expected, CategoryUtility::cleanUpCategoryName($source));
+            self::assertEquals($expected, CategoryUtility::cleanUpCategoryName($source));
         }
 
     }
@@ -108,11 +105,9 @@ class CategoryUtilityTest extends UnitTestCase
         ];
 
         foreach ($checkArray as $source => $expected) {
-            static::assertEquals($expected, CategoryUtility::cleanUpDomainName($source));
+            self::assertEquals($expected, CategoryUtility::cleanUpDomainName($source));
         }
-
     }
-
 
 
     /**
@@ -145,9 +140,10 @@ class CategoryUtilityTest extends UnitTestCase
         ];
 
         $expected = 'steppdenbär.com/GründenMitErfahrung/StartupMeetsMittelstand/RG-Bau/APRODI/Leben-Sterben/DasHandwerk-WirtschaftsmachtVonNebenan';
-        static::assertEquals($expected, CategoryUtility::implodeCategories($domain, $categoryArray));
+        self::assertEquals($expected, CategoryUtility::implodeCategories($domain, $categoryArray));
 
     }
+
 
     /**
      * @test
@@ -178,7 +174,7 @@ class CategoryUtilityTest extends UnitTestCase
         ];
 
         $expected = 'GründenMitErfahrung/StartupMeetsMittelstand/RG-Bau/APRODI/Leben-Sterben/DasHandwerk-WirtschaftsmachtVonNebenan';
-        static::assertEquals($expected, CategoryUtility::implodeCategories($domain, $categoryArray));
+        self::assertEquals($expected, CategoryUtility::implodeCategories($domain, $categoryArray));
 
     }
 
@@ -223,7 +219,7 @@ class CategoryUtilityTest extends UnitTestCase
         ];
 
         $expected = 'steppdenbär.com/Default/GründenMitErfahrung/StartupMeetsMittelstand/RG-Bau/Default/APRODI/Leben-Sterben/DasHandwerk-WirtschaftsmachtVonNebenan';
-        static::assertEquals($expected, CategoryUtility::implodeCategories($domain, $categoryArray));
+        self::assertEquals($expected, CategoryUtility::implodeCategories($domain, $categoryArray));
 
     }
 
@@ -271,9 +267,10 @@ class CategoryUtilityTest extends UnitTestCase
         ];
 
         $expected = 'steppdenbär.com/MagicWünderLand/GründenMitErfahrung/StartupMeetsMittelstand/RG-Bau/MagicWünderLand/APRODI/Leben-Sterben/DasHandwerk-WirtschaftsmachtVonNebenan';
-        static::assertEquals($expected, CategoryUtility::implodeCategories($domain, $categoryArray, $defaultValue));
+        self::assertEquals($expected, CategoryUtility::implodeCategories($domain, $categoryArray, $defaultValue));
 
     }
+
 
     /**
      * @test
@@ -319,11 +316,9 @@ class CategoryUtilityTest extends UnitTestCase
         ];
 
         $expected = 'steppdenbär.com/magic Wün_der.+Land/GründenMitErfahrung/StartupMeetsMittelstand/RG-Bau/magic Wün_der.+Land/APRODI/Leben-Sterben/DasHandwerk-WirtschaftsmachtVonNebenan';
-        static::assertEquals($expected, CategoryUtility::implodeCategories($domain, $categoryArray, $defaultValue, false));
+        self::assertEquals($expected, CategoryUtility::implodeCategories($domain, $categoryArray, $defaultValue, false));
 
     }
-
-
 
     //=============================================
 
@@ -366,8 +361,8 @@ class CategoryUtilityTest extends UnitTestCase
             4 => 'Ganz-Toll'
         ];
 
-        static::assertInternalType('array', $result);
-        static::assertEquals($expected, $result);
+        self::assertIsArray( $result);
+        self::assertEquals($expected, $result);
     }
 
 
@@ -410,9 +405,10 @@ class CategoryUtilityTest extends UnitTestCase
             4 => 'Ganz-Toll'
         ];
 
-        static::assertInternalType('array', $result);
-        static::assertEquals($expected, $result);
+        self::assertIsArray( $result);
+        self::assertEquals($expected, $result);
     }
+
 
     /**
      * @test
@@ -434,8 +430,8 @@ class CategoryUtilityTest extends UnitTestCase
 
         $result = CategoryUtility::reportFilterCategoriesToArray($reportFilter);
 
-        static::assertInternalType('array', $result);
-        static::assertEmpty($result);
+        self::assertIsArray( $result);
+        self::assertEmpty($result);
     }
 
 
@@ -466,9 +462,10 @@ class CategoryUtilityTest extends UnitTestCase
             0 => 'meinedolledomäne.com',
         ];
 
-        static::assertInternalType('array', $result);
-        static::assertEquals($expected, $result);
+        self::assertIsArray( $result);
+        self::assertEquals($expected, $result);
     }
+
 
     /**
      * @test
@@ -512,9 +509,10 @@ class CategoryUtilityTest extends UnitTestCase
             5 => 'Ganz-Toll'
         ];
 
-        static::assertInternalType('array', $result);
-        static::assertEquals($expected, $result);
+        self::assertIsArray( $result);
+        self::assertEquals($expected, $result);
     }
+
 
     /**
      * @test
@@ -569,8 +567,8 @@ class CategoryUtilityTest extends UnitTestCase
             5 => 'Ganz-Toll'
         ];
 
-        static::assertInternalType('array', $result);
-        static::assertEquals($expected, $result);
+        self::assertIsArray( $result);
+        self::assertEquals($expected, $result);
     }
 
     //=============================================
@@ -601,9 +599,10 @@ class CategoryUtilityTest extends UnitTestCase
         $result = CategoryUtility::reportFilterEventsToString($reportFilter);
         $expected = 'PferdeStärken';
 
-        static::assertInternalType('string', $result);
-        static::assertEquals($expected, $result);
+        self::assertIsString( $result);
+        self::assertEquals($expected, $result);
     }
+
 
     /**
      * @test
@@ -626,9 +625,10 @@ class CategoryUtilityTest extends UnitTestCase
 
         $result = CategoryUtility::reportFilterEventsToString($reportFilter);
 
-        static::assertInternalType('string', $result);
-        static::assertEmpty($result);
+        self::assertIsString( $result);
+        self::assertEmpty($result);
     }
+
 
     /**
      * @test
@@ -654,9 +654,10 @@ class CategoryUtilityTest extends UnitTestCase
 
         $result = CategoryUtility::reportFilterEventsToString($reportFilter, true);
 
-        static::assertInternalType('string', $result);
-        static::assertEmpty($result);
+        self::assertIsString( $result);
+        self::assertEmpty($result);
     }
+
 
     /**
      * @test
@@ -679,9 +680,10 @@ class CategoryUtilityTest extends UnitTestCase
 
         $result = CategoryUtility::reportFilterEventsToString($reportFilter);
 
-        static::assertInternalType('string', $result);
-        static::assertEmpty($result);
+        self::assertIsString( $result);
+        self::assertEmpty($result);
     }
+
 
     /**
      * @test
@@ -711,9 +713,10 @@ class CategoryUtilityTest extends UnitTestCase
         $result = CategoryUtility::reportFilterEventsToString($reportFilter, true);
         $expected = 'meinedolledomäne.com/PferdeStärken';
 
-        static::assertInternalType('string', $result);
-        static::assertEquals($expected, $result);
+        self::assertIsString( $result);
+        self::assertEquals($expected, $result);
     }
+
 
     /**
      * @test
@@ -746,12 +749,11 @@ class CategoryUtilityTest extends UnitTestCase
         $result = CategoryUtility::reportFilterEventsToString($reportFilter, true);
         $expected = 'thisisdadomain.net/ZuckerSchnute';
 
-        static::assertInternalType('string', $result);
-        static::assertEquals($expected, $result);
+        self::assertIsString( $result);
+        self::assertEquals($expected, $result);
     }
 
     //=============================================
-
 
     /**
      * @test
@@ -782,7 +784,7 @@ class CategoryUtilityTest extends UnitTestCase
 
 
         $result = CategoryUtility::reportFilterCategoriesToJson($reportFilter);
-        static::assertEquals($expected, $result);
+        self::assertEquals($expected, $result);
     }
 
 
@@ -820,7 +822,7 @@ class CategoryUtilityTest extends UnitTestCase
 
 
         $result = CategoryUtility::reportFilterCategoriesToJson($reportFilter);
-        static::assertEquals($expected, $result);
+        self::assertEquals($expected, $result);
     }
 
 
@@ -855,8 +857,9 @@ class CategoryUtilityTest extends UnitTestCase
 
 
         $result = CategoryUtility::reportFilterCategoriesToJson( $reportFilter, true);
-        static::assertEquals($expected, $result);
+        self::assertEquals($expected, $result);
     }
+
 
     /**
      * @test
@@ -877,11 +880,10 @@ class CategoryUtilityTest extends UnitTestCase
         $reportFilter = GeneralUtility::makeInstance(ReportFilter::class);
 
         $result = CategoryUtility::reportFilterCategoriesToJson($reportFilter);
-        static::assertEmpty($result);
+        self::assertEmpty($result);
     }
 
     //=============================================
-
 
     /**
      * @test
@@ -910,9 +912,8 @@ class CategoryUtilityTest extends UnitTestCase
             '{"input":["PferdeStärken"],"type":"exact","attributeId":"category","filterType":"extended","filter":"include"}]';
 
         $result = CategoryUtility::reportFilterEventsToJson($reportFilter);
-        static::assertEquals($expected, $result);
+        self::assertEquals($expected, $result);
     }
-
 
 
     /**
@@ -938,7 +939,7 @@ class CategoryUtilityTest extends UnitTestCase
 
 
         $result = CategoryUtility::reportFilterEventsToJson($reportFilter);
-        static::assertEmpty($result);
+        self::assertEmpty($result);
     }
 
 
@@ -962,9 +963,8 @@ class CategoryUtilityTest extends UnitTestCase
         $reportFilter->setDomain('meine dolle domäne.com');
 
         $result = CategoryUtility::reportFilterEventsToJson($reportFilter, true);
-        static::assertEmpty($result);
+        self::assertEmpty($result);
     }
-
 
 
     /**
@@ -990,8 +990,9 @@ class CategoryUtilityTest extends UnitTestCase
         $reportFilter->setDownloadFilter1('');
 
         $result = CategoryUtility::reportFilterEventsToJson($reportFilter);
-        static::assertEmpty($result);
+        self::assertEmpty($result);
     }
+
 
     /**
      * @test
@@ -1020,14 +1021,15 @@ class CategoryUtilityTest extends UnitTestCase
             '{"input":["meinedolledomäne.com/PferdeStärken"],"type":"exact","attributeId":"category","filterType":"extended","filter":"include"}]';
 
         $result = CategoryUtility::reportFilterEventsToJson($reportFilter, true);
-        static::assertEquals($expected, $result);
+        self::assertEquals($expected, $result);
     }
 
+    //=============================================
 
     /**
      * TearDown
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
     }
