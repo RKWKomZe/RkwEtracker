@@ -43,11 +43,6 @@ call_user_func(
         );
 
         //=================================================================
-        // Register Command Controller
-        //=================================================================
-        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = 'RKW\\RkwEtracker\\Controller\\ReportCommandController';
-
-        //=================================================================
         // Add rootline fields
         //=================================================================
         $rootlineFields = &$GLOBALS['TYPO3_CONF_VARS']['FE']['addRootLineFields'];
