@@ -22,9 +22,9 @@
         "ext-curl": "*",
         "typo3/cms-core": "~9.5.0",
 		"madj2k/t3-core-extended": "~9.5.4",
-        "rkw/rkw-basics": "~9.5.0",
-        "rkw/rkw-mailer": "~9.5.0"
-    },
+        "madj2k/t3-postmaster": "~9.5.0",
+		"rkw/rkw-basics": "~9.5.0"
+	},
     "autoload": {
         "psr-4": {
             "RKW\\RkwEtracker\\": "Classes/"
