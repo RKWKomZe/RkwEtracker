@@ -21,7 +21,7 @@ use RKW\RkwEtracker\Domain\Repository\ReportRepository;
 use RKW\RkwEtracker\Etracker\Calculate;
 use RKW\RkwEtracker\Etracker\Import;
 use RKW\RkwEtracker\Utility\DateUtility;
-use RKW\RkwMailer\Service\MailService;
+use Madj2k\Postmaster\Service\MailService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
@@ -137,7 +137,7 @@ class SendCommand extends Command
 
                 try {
 
-                    /** @var \RKW\RkwMailer\Service\MailService $mailService */
+                    /** @var \Madj2k\Postmaster\Service\MailService $mailService */
                     $mailService = GeneralUtility::makeInstance(MailService::class);
 
                     // get recipients
