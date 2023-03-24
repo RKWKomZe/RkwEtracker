@@ -2,6 +2,7 @@
 
 namespace RKW\RkwEtracker\Etracker;
 
+use Madj2k\CoreExtended\Utility\GeneralUtility;
 use Madj2k\CoreExtended\Utility\GeneralUtility as Common;
 use RKW\RkwEtracker\Domain\Model\AreaData;
 use RKW\RkwEtracker\Domain\Model\DownloadData;
@@ -9,6 +10,8 @@ use RKW\RkwEtracker\Domain\Repository\AreaDataRepository;
 use RKW\RkwEtracker\Domain\Repository\DownloadDataRepository;
 use RKW\RkwEtracker\Utility\CategoryUtility;
 use RKW\RkwEtracker\Utility\DateUtility;
+use TYPO3\CMS\Core\Log\Logger;
+use TYPO3\CMS\Core\Log\LogManager;
 use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 
@@ -45,13 +48,13 @@ class Import
     /**
      * @var array Contains the configuration from TypoScript
      */
-    protected $configuration;
+    protected array $configuration = [];
 
 
     /**
-     * @var \TYPO3\CMS\Core\Log\Logger
+     * @var \TYPO3\CMS\Core\Log\Logger|null
      */
-    protected $logger;
+    protected ?Logger $logger = null;
 
 
     /**
@@ -89,7 +92,7 @@ class Import
         \RKW\RkwEtracker\Domain\Model\ReportGroup $reportGroup,
         array $credentials,
         int $limit = 0
-    ) {
+    ): void {
 
         try {
 
@@ -127,23 +130,52 @@ class Import
                 if ($filter = CategoryUtility::reportFilterCategoriesToJson($reportFilter, true)) {
 
                     // get data from API
-                    $completeUrl = $this::ApiUrl . 'report/EAArea/data?' . implode('&', array_merge($params)) . '&attributeFilter=' . urlencode($filter);
+                    $completeUrl = $this::ApiUrl . 'report/EAArea/data?'
+                        . implode('&', array_merge($params))
+                        . '&attributeFilter=' . urlencode($filter);
+
                     if (
                         ($rawData = $this->getJsonData($completeUrl, $credentials))
                         && (is_array($rawData))
                     ) {
                         $this->mappingAreaData($rawData, $areaData);
                         $areaDataRepository->add($areaData);
-                        $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Import of eTracker area data for reportGroup "%s" (id=%s) with filter "%s" (id=%s) successful.', $reportGroup->getName(), $reportGroup->getUid(), $filter, $reportFilter->getUid()));
+                        $this->getLogger()->log(
+                            \TYPO3\CMS\Core\Log\LogLevel::INFO,
+                            sprintf(
+                                'Import of eTracker area data for reportGroup "%s" (id=%s) with filter "%s" (id=%s) successful.',
+                                $reportGroup->getName(),
+                                $reportGroup->getUid(),
+                                $filter,
+                                $reportFilter->getUid()
+                            )
+                        );
 
                     } else {
-                        $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Received no area data for reportGroup "%s" (id=%s) with filter "%s" (id=%s) from eTracker API.', $reportGroup->getName(), $reportGroup->getUid(), $filter, $reportFilter->getUid()));
+                        $this->getLogger()->log(
+                            \TYPO3\CMS\Core\Log\LogLevel::INFO,
+                            sprintf(
+                                'Received no area data for reportGroup "%s" (id=%s) with filter "%s" (id=%s) from eTracker API.',
+                                $reportGroup->getName(),
+                                $reportGroup->getUid(),
+                                $filter,
+                                $reportFilter->getUid()
+                            )
+                        );
                     }
                 }
             }
 
         } catch (\Exception $e) {
-            throw new \RKW\RkwEtracker\Exception(sprintf('Error while trying to fetch area data for reportGroup "%s" (id=%s) from API: %s.', $reportGroup->getName(), $reportGroup->getUid(), $e->getMessage()), 1489562530);
+            throw new \RKW\RkwEtracker\Exception(
+                sprintf(
+                    'Error while trying to fetch area data for reportGroup "%s" (id=%s) from API: %s.',
+                    $reportGroup->getName(),
+                    $reportGroup->getUid(),
+                    $e->getMessage()
+                ),
+                1489562530
+            );
         }
     }
 
@@ -162,7 +194,7 @@ class Import
         \RKW\RkwEtracker\Domain\Model\Report $report,
         \RKW\RkwEtracker\Domain\Model\ReportGroup $reportGroup,
         array $credentials,
-        $limit = 0
+        int $limit = 0
     ) {
 
         try {
@@ -208,16 +240,41 @@ class Import
 
                         $this->mappingDownloadData($rawData, $downloadData);
                         $downloadDataRepository->add($downloadData);
-                        $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Import of eTracker download data for reportGroup "%s" (id=%s) with filter "%s" (id=%s) successful.', $reportGroup->getName(), $reportGroup->getUid(), $filter, $reportFilter->getUid()));
+                        $this->getLogger()->log(
+                            \TYPO3\CMS\Core\Log\LogLevel::INFO,
+                            sprintf(
+                                'Import of eTracker download data for reportGroup "%s" (id=%s) with filter "%s" (id=%s) successful.',
+                                $reportGroup->getName(),
+                                $reportGroup->getUid(), $filter,
+                                $reportFilter->getUid()
+                            )
+                        );
 
                     } else {
-                        $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Received no download data for reportGroup "%s" (id=%s) with filter "%s" (id=%s) from eTracker API.', $reportGroup->getName(), $reportGroup->getUid(), $filter, $reportFilter->getUid()));
+                        $this->getLogger()->log(
+                            \TYPO3\CMS\Core\Log\LogLevel::INFO,
+                            sprintf(
+                                'Received no download data for reportGroup "%s" (id=%s) with filter "%s" (id=%s) from eTracker API.',
+                                $reportGroup->getName(),
+                                $reportGroup->getUid(),
+                                $filter,
+                                $reportFilter->getUid()
+                            )
+                        );
                     }
                 }
             }
 
         } catch (\Exception $e) {
-            throw new \RKW\RkwEtracker\Exception(sprintf('Error while trying to fetch download data for reportGroup "%s" (id=%s) from API: %s.', $reportGroup->getName(), $reportGroup->getUid(), $e->getMessage()), 1489562530);
+            throw new \RKW\RkwEtracker\Exception(
+                sprintf(
+                    'Error while trying to fetch download data for reportGroup "%s" (id=%s) from API: %s.',
+                    $reportGroup->getName(),
+                    $reportGroup->getUid(),
+                    $e->getMessage()
+                ),
+                1489562530
+            );
         }
     }
 
@@ -249,7 +306,7 @@ class Import
             $curlHandle = curl_init();
             curl_setopt($curlHandle , CURLOPT_RETURNTRANSFER, true); // Do not output result directly on screen.
             curl_setopt($curlHandle, CURLOPT_FOLLOWLOCATION, true);  // If url has redirects then go to the final redirected URL.
-            curl_setopt($curlHandle, CURLOPT_HEADER, false);   // If you want header information of response
+            curl_setopt($curlHandle, CURLOPT_HEADER, false);   // We don't want header information of response, because otherwise json_decode won't work
 
             // login header for etracker
             $headers = [
@@ -259,7 +316,6 @@ class Import
                 'X-ET-password: ' . $credentials['apiPassword'],
             ];
             curl_setopt($curlHandle, CURLOPT_HTTPHEADER, $headers);
-
 
             // optional: proxy configuration
             if ($credentials['proxy']) {
@@ -284,7 +340,7 @@ class Import
             if (
                 ($requestResult)
                 && (
-                    (false == $connectCode)
+                    (!$connectCode)
                     || (200 == $connectCode)
                 )
             ){
@@ -296,20 +352,41 @@ class Import
                         ($jsonData->errorCode)
                         && (($jsonData->msg))
                     ) {
-                        $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::ERROR, sprintf('Error code %s while trying to receive data from eTracker API: %s.', $jsonData->errorCode, $jsonData->msg));
+                        $this->getLogger()->log(
+                            \TYPO3\CMS\Core\Log\LogLevel::ERROR,
+                            sprintf(
+                                'Error code %s while trying to receive data from eTracker API: %s.',
+                                $jsonData->errorCode,
+                                $jsonData->msg
+                            )
+                        );
                         throw new \RKW\RkwEtracker\Exception($jsonData->msg, 1583494777);
                     }
 
-                    $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::DEBUG, sprintf ('API-Result: %s',  str_replace("\n", '', print_r($requestResult, true))));
+                    $this->getLogger()->log(
+                        \TYPO3\CMS\Core\Log\LogLevel::DEBUG,
+                        sprintf (
+                            'API-Result: %s',
+                            str_replace("\n", '', print_r($requestResult, true))
+                        )
+                    );
                     return $jsonData;
+
                 }
 
             } else {
-                throw new \RKW\RkwEtracker\Exception('Got no valid response from API. HTTP-Status-Code: ' . $connectCode, 1583494777);
+                throw new \RKW\RkwEtracker\Exception(
+                    'Got no valid response from API. HTTP-Status-Code: ' .
+                    $connectCode,
+                    1583494777
+                );
             }
 
         } else {
-            throw new \RKW\RkwEtracker\Exception('Configuration for API-Login incomplete.', 1489562529);
+            throw new \RKW\RkwEtracker\Exception(
+                'Configuration for API-Login incomplete.',
+                1489562529
+            );
         }
 
         return [];
@@ -322,17 +399,13 @@ class Import
      *
      * @param array $rawData
      * @param \RKW\RkwEtracker\Domain\Model\AreaData $areaData
-     * @param \RKW\RkwEtracker\Domain\Model\ReportGroup $reportGroup
-     * @param \RKW\RkwEtracker\Domain\Model\ReportFilter $reportFilter
+     * @return void
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
      */
-    protected function mappingAreaData($rawData, $areaData)
+    protected function mappingAreaData(array $rawData, AreaData $areaData): void
     {
 
-        if (
-            ($rawData)
-            && (is_array($rawData))
-        ) {
+        if ($rawData) {
 
             // mapping for JSON-data to model
             $mapping = array(
@@ -368,14 +441,12 @@ class Import
      *
      * @param array $rawData
      * @param \RKW\RkwEtracker\Domain\Model\DownloadData $downloadData
+     * @return void
      */
-    protected function mappingDownloadData($rawData, $downloadData)
+    protected function mappingDownloadData(array $rawData, DownloadData $downloadData): void
     {
 
-        if (
-            ($rawData)
-            && (is_array($rawData))
-        ) {
+        if ($rawData) {
 
             // mapping for JSON-data to model
             $mapping = array(
@@ -408,13 +479,11 @@ class Import
      * @return void
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
-    protected function getSettings($which = ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS)
+    protected function getSettings(string $which = ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS): void
     {
-
         if (!$this->configuration) {
-            $this->configuration = Common::getTypoScriptConfiguration('Rkwetracker', $which);
+            $this->configuration = GeneralUtility::getTypoScriptConfiguration('Rkwetracker', $which);
         }
-
     }
 
 
@@ -427,7 +496,7 @@ class Import
     {
 
         if (!$this->logger instanceof \TYPO3\CMS\Core\Log\Logger) {
-            $this->logger = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Log\LogManager')->getLogger(__CLASS__);
+            $this->logger = GeneralUtility::makeInstance(LogManager::class)->getLogger(__CLASS__);
         }
 
         return $this->logger;

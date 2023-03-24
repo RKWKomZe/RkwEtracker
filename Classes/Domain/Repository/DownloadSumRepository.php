@@ -23,7 +23,7 @@ namespace RKW\RkwEtracker\Domain\Repository;
  * @package RKW_RkwEtracker
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class DownloadSumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class DownloadSumRepository extends AbstractRepository
 {
 
 

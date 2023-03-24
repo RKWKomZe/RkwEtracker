@@ -15,13 +15,14 @@ namespace RKW\RkwEtracker\Command;
  */
 
 use Madj2k\CoreExtended\Utility\GeneralUtility;
+use Madj2k\Postmaster\Mail\MailMessage;
 use RKW\RkwEtracker\Domain\Repository\AreaDataRepository;
 use RKW\RkwEtracker\Domain\Repository\DownloadDataRepository;
 use RKW\RkwEtracker\Domain\Repository\ReportRepository;
 use RKW\RkwEtracker\Etracker\Calculate;
 use RKW\RkwEtracker\Etracker\Import;
 use RKW\RkwEtracker\Utility\DateUtility;
-use Madj2k\Postmaster\Service\MailService;
+use Madj2k\Postmaster\Mail\MailMassage;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
@@ -137,8 +138,8 @@ class SendCommand extends Command
 
                 try {
 
-                    /** @var \Madj2k\Postmaster\Service\MailService $mailService */
-                    $mailService = GeneralUtility::makeInstance(MailService::class);
+                    /** @var \Madj2k\Postmaster\Mail\MailMessage $mailService */
+                    $mailService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(MailMessage::class);
 
                     // get recipients
                     if ($report->getRecipient()) {
@@ -249,8 +250,6 @@ class SendCommand extends Command
                             $io->note($message);
                             $this->getLogger()->log(LogLevel::INFO, $message);
 
-                            $result = 1;
-
                         } else {
                             $message = sprintf(
                                 'Could not send report with id=%s.',
@@ -285,6 +284,7 @@ class SendCommand extends Command
                     );
                     $io->error($message);
                     $this->getLogger()->log(LogLevel::ERROR, $message);
+                    $result = 1;
                 }
 
             } else {
@@ -300,6 +300,7 @@ class SendCommand extends Command
             );
             $io->error($message);
             $this->getLogger()->log(LogLevel::ERROR, $message);
+            $result = 1;
         }
 
         $io->writeln('Done');

@@ -15,6 +15,10 @@ namespace RKW\RkwEtracker\Domain\Repository;
  * The TYPO3 project - inspiring people to share!
  */
 
+use RKW\RkwEtracker\Domain\Model\Report;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
+
 /**
  * Class DownloadDataRepository
  *
@@ -23,34 +27,13 @@ namespace RKW\RkwEtracker\Domain\Repository;
  * @package RKW_RkwEtracker
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class DownloadDataRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class DownloadDataRepository extends AbstractRepository
 {
-
 
     /**
      * @var array
      */
-    protected $fields = array(1, 2, 3);
-
-
-    /**
-     * Find all labels of category in $level
-     *
-     * @param int $level
-     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-
-    public function findAllDownloadsGrouped()
-    {
-
-        $query = $this->createQuery();
-        $query->statement('SELECT * FROM tx_rkwetracker_domain_model_downloaddata
-          GROUP BY category
-          ORDER BY category'
-        );
-
-        return $query->execute();
-        //===
-    }*/
+    protected array $fields = [1, 2, 3];
 
 
     /**
@@ -58,10 +41,10 @@ class DownloadDataRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEtracker\Domain\Model\ReportFilter> $reportFilters
      * @param  \RKW\RkwEtracker\Domain\Model\Report $report
-     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface|null
+     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function findAllByFilters($reportFilters, $report)
+    public function findAllByFilters(ObjectStorage $reportFilters, Report $report): QueryResultInterface
     {
 
         $query = $this->createQuery();

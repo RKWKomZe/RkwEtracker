@@ -1,5 +1,4 @@
 <?php
-
 namespace RKW\RkwEtracker\Domain\Repository;
 
 /*
@@ -15,6 +14,8 @@ namespace RKW\RkwEtracker\Domain\Repository;
  * The TYPO3 project - inspiring people to share!
  */
 
+use RKW\RkwEtracker\Domain\Model\Report;
+
 /**
  * Class ReportRepository
  *
@@ -23,17 +24,17 @@ namespace RKW\RkwEtracker\Domain\Repository;
  * @package RKW_RkwEtracker
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class ReportRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class ReportRepository extends AbstractRepository
 {
 
     /**
      * Find all by status
      *
      * @param  array $status
-     * @return \RKW\RkwEtracker\Domain\Model\Report|object
+     * @return \RKW\RkwEtracker\Domain\Model\Report|null
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function findOneByStatus($status)
+    public function findOneByStatus(array $status):? Report
     {
         $query = $this->createQuery();
         $constraints = array();
@@ -50,9 +51,7 @@ class ReportRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         );
 
         $query->matching($query->logicalAnd($constraints));
-
         return $query->execute()->getFirst();
-        //===
 
     }
 
