@@ -9,8 +9,11 @@ plugin.tx_rkwetracker {
 		layoutRootPath = EXT:rkw_etracker/Resources/Private/Layouts/
 	}
 	persistence {
-		# cat=plugin.tx_rkwetracker; type=integer; label=Default storage PID
+		# cat=plugin.tx_rkwetracker; type=string; label=Default storage PID
 		storagePid =
+
+        # cat=plugin.tx_rkwetracker//a; type=integer; label=Storage PID for new records
+        newRecordStoragePid =
     }
 
     settings {

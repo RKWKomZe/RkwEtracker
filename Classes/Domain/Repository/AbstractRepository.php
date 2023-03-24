@@ -15,21 +15,26 @@ namespace RKW\RkwEtracker\Domain\Repository;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
+
 /**
- * Class SysDomainRepository
+ * Class AbstractRepository
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
  * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEtracker
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class SysDomainRepository extends AbstractRepository
+abstract class AbstractRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
 
-    // Order by BE sorting
-    protected $defaultOrderings = array(
-        'domainName' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
-    );
-
+    /**
+     * @return void
+     */
+    public function initializeObject(): void
+    {
+        $this->defaultQuerySettings = $this->objectManager->get(Typo3QuerySettings::class);
+        $this->defaultQuerySettings->setRespectStoragePage(false);
+    }
 
 }

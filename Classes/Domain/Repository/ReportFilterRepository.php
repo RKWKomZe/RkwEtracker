@@ -23,14 +23,14 @@ namespace RKW\RkwEtracker\Domain\Repository;
  * @package RKW_RkwEtracker
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class ReportFilterRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class ReportFilterRepository extends AbstractRepository
 {
 
     /**
      * @var array
      */
-    protected $defaultOrderings = array(
+    protected $defaultOrderings = [
         'sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
-    );
+    ];
 
 }

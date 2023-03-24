@@ -1,0 +1,115 @@
+plugin.tx_rkwetracker {
+
+    lib {
+
+        #=================================================================
+        secureCode = TEXT
+        secureCode.value = {$plugin.tx_rkwetracker.settings.secureCode}
+
+        #=================================================================
+        pageDomain = TEXT
+        pageDomain.data = getIndpEnv:HTTP_HOST
+
+        pageUrl = USER_INT
+        pageUrl.userFunc = Madj2k\CoreExtended\MetaTag\CanonicalGenerator->getPath
+
+        pageUrlEncoded = USER_INT
+        pageUrlEncoded.userFunc = Madj2k\CoreExtended\MetaTag\CanonicalGenerator->getPath
+        pageUrlEncoded.stdWrap.rawUrlEncode = 1
+
+        #=================================================================
+        // set categories via TypoScript - this way we can use levelfield-slide AND we
+        // have the possibility to override the values via TypoScript without having to
+        // change the template files!
+        #=================================================================
+        categoryLevel1 = TEXT
+        categoryLevel1.data = levelfield:-1, tx_rkwetracker_category_level1, slide
+
+        categoryLevel2 = TEXT
+        categoryLevel2.data = levelfield:-1, tx_rkwetracker_category_level2, slide
+
+        categoryLevel3 = TEXT
+        categoryLevel3.data = levelfield:-1, tx_rkwetracker_category_level3, slide
+
+        categoryLevel4 = TEXT
+        categoryLevel4.data = levelfield:-1, tx_rkwetracker_category_level4, slide
+
+        categoryLevel5 = TEXT
+        categoryLevel5.data = levelfield:-1, tx_rkwetracker_category_level5, slide
+    }
+}
+
+#===============================================================
+# Override configuration when rkw_projects installed
+#===============================================================
+[extensionLoaded('rkw_projects')]
+
+    plugin.tx_rkwetracker {
+
+        lib {
+
+            categoryLevel1 = COA
+            categoryLevel1 {
+                30 = RECORDS
+                30 {
+                    source.data = levelfield: -1 , tx_rkwbasics_department, slide
+                    tables = tx_rkwbasics_domain_model_department
+                    conf.tx_rkwbasics_domain_model_department = TEXT
+                    conf.tx_rkwbasics_domain_model_department {
+                        field = name
+                        override.field = internal_name
+                    }
+
+                    // Default value if empty
+                    stdWrap.ifEmpty.cObject = COA
+                    stdWrap.ifEmpty.cObject {
+                        10 = TEXT
+                        10.value = Default
+                    }
+                }
+            }
+
+            categoryLevel2 = COA
+            categoryLevel2 {
+                10 = RECORDS
+                10 {
+                    source.data = levelfield: -1 , tx_rkwprojects_project_uid, slide
+                    tables = tx_rkwprojects_domain_model_projects
+                    conf.tx_rkwprojects_domain_model_projects = TEXT
+                    conf.tx_rkwprojects_domain_model_projects {
+                        field = short_name
+                        override.field = internal_name
+                    }
+
+                    // Default value if empty
+                    stdWrap.ifEmpty.cObject = COA
+                    stdWrap.ifEmpty.cObject {
+                        10 = TEXT
+                        10.value = Default
+                    }
+                }
+            }
+
+            categoryLevel3 = COA
+            categoryLevel3 {
+                30 = RECORDS
+                30 {
+                    source.data = levelfield: -1, tx_rkwbasics_document_type, slide
+                    tables = tx_rkwbasics_domain_model_documenttype
+                    conf.tx_rkwbasics_domain_model_documenttype = TEXT
+                    conf.tx_rkwbasics_domain_model_documenttype {
+                        field = short_name
+                        override.field = internal_name
+                    }
+
+                    // Default value if empty
+                    stdWrap.ifEmpty.cObject = COA
+                    stdWrap.ifEmpty.cObject {
+                        10 = TEXT
+                        10.value = Default
+                    }
+                }
+            }
+        }
+    }
+[END]

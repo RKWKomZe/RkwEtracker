@@ -29,6 +29,7 @@ use TYPO3\CMS\Core\Log\LogLevel;
 use TYPO3\CMS\Core\Log\LogManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 
 /**
  * class FetchCommand
@@ -47,6 +48,12 @@ class FetchCommand extends Command
      * @var \RKW\RkwEtracker\Domain\Repository\ReportRepository|null
      */
     protected ?ReportRepository $reportRepository = null;
+
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager|null
+     */
+    protected ?PersistenceManager $persistenceManager = null;
 
 
     /**
@@ -85,11 +92,11 @@ class FetchCommand extends Command
             ->addArgument(
                 'apiPassword',
                 InputArgument::REQUIRED,
-                'The password for login to eTracker-API',
+                'The password for login to eTracker-API. Do not use special characters in the password that can be interpreted by the command line! ',
             )
             ->addOption(
                 'proxy',
-                'h',
+                'x',
                 InputOption::VALUE_REQUIRED,
                 'The host name of the proxy (optional).',
                 ''
@@ -142,7 +149,12 @@ class FetchCommand extends Command
     {
         /** @var \TYPO3\CMS\Extbase\Object\ObjectManager$objectManager */
         $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+
+        /** @var  \RKW\RkwEtracker\Domain\Repository\ReportRepository reportRepository */
         $this->reportRepository = $objectManager->get(ReportRepository::class);
+
+        /** @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager persistenceManager */
+        $this->persistenceManager = $objectManager->get(PersistenceManager::class);
 
         $this->settings = $this->getSettings();
     }
@@ -271,11 +283,12 @@ class FetchCommand extends Command
 
                     // update report - at least a status change may have happened by checkForImport
                     $this->reportRepository->update($report);
-                    $result = 1;
+                    $this->persistenceManager->persistAll();
 
                 } catch (\Exception $e) {
                     $report->setStatus(99);
                     $this->reportRepository->update($report);
+                    $this->persistenceManager->persistAll();
 
                     $message = sprintf(
                         'An error occurred while trying to fetch data from eTracker API. Message: %s',
@@ -283,6 +296,7 @@ class FetchCommand extends Command
                     );
                     $io->error($message);
                     $this->getLogger()->log(LogLevel::ERROR, $message);
+                    $result = 1;
                 }
 
             } else {
@@ -298,6 +312,7 @@ class FetchCommand extends Command
             );
             $io->error($message);
             $this->getLogger()->log(LogLevel::ERROR, $message);
+            $result = 1;
         }
 
         $io->writeln('Done');

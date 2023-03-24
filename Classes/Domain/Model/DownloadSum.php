@@ -256,7 +256,7 @@ class DownloadSum extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param int $quarter
      * @return void
      */
-    public function setQuarter(int $quarter): int
+    public function setQuarter(int $quarter): void
     {
         $this->quarter = $quarter;
     }

@@ -1,14 +1,6 @@
 <?php
 namespace RKW\RkwEtracker\Tests\Integration\Utility;
 
-use Nimut\TestingFramework\TestCase\FunctionalTestCase;
-
-use Madj2k\CoreExtended\Utility\FrontendSimulatorUtility;
-use RKW\RkwEtracker\Utility\TypolinkUtility;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
-use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
-
 /*
  * This file is part of the TYPO3 CMS project.
  *
@@ -22,21 +14,34 @@ use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
  * The TYPO3 project - inspiring people to share!
  */
 
+use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use Madj2k\CoreExtended\Utility\FrontendSimulatorUtility;
+use RKW\RkwEtracker\Utility\TypolinkUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
+
 /**
- * LinkUtilityTest
+ * TypolinkUtilityTest
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
  * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEtracker
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class LinkUtilityTest extends FunctionalTestCase
+class TypolinkUtilityTest extends FunctionalTestCase
 {
+    /**
+     * @const
+     */
+    const FIXTURE_PATH = __DIR__ . '/TypolinkUtilityTest/Fixtures';
+
 
     /**
      * @var string[]
      */
     protected $testExtensionsToLoad = [
+        'typo3conf/ext/core_extended',
         'typo3conf/ext/rkw_basics',
         'typo3conf/ext/rkw_authors',
         'typo3conf/ext/rkw_projects',
@@ -99,11 +104,7 @@ class LinkUtilityTest extends FunctionalTestCase
         }
 
         // import sql structure
-        $this->importDataSet(__DIR__ . '/Fixtures/Database/Pages.xml');
-        $this->importDataSet(__DIR__ . '/Fixtures/Database/SysDomain.xml');
-        $this->importDataSet(__DIR__ . '/Fixtures/Database/SysFile.xml');
-        $this->importDataSet(__DIR__ . '/Fixtures/Database/SysFileMetadata.xml');
-        $this->importDataSet(__DIR__ . '/Fixtures/Database/Projects.xml');
+        $this->importDataSet(self::FIXTURE_PATH . '/Database/Global.xml');
 
         // setup frontend
         $this->setUpFrontendRootPage(
@@ -113,8 +114,10 @@ class LinkUtilityTest extends FunctionalTestCase
                 'EXT:rkw_authors/Configuration/TypoScript/setup.txt',
                 'EXT:rkw_projects/Configuration/TypoScript/setup.txt',
                 'EXT:rkw_etracker/Configuration/TypoScript/setup.txt',
-                'EXT:rkw_etracker/Tests/Integration/Utility/Fixtures/Frontend/Configuration/Rootpage.typoscript',
-            ]
+                self::FIXTURE_PATH . '/Frontend/Configuration/Rootpage.typoscript',
+            ],
+            ['testing.com' => self::FIXTURE_PATH . '/Frontend/Configuration/config.yaml']
+
         );
 
         // init frontend (needed in test-context)
