@@ -98,8 +98,9 @@ plugin.tx_rkwetracker {
                     tables = tx_rkwbasics_domain_model_documenttype
                     conf.tx_rkwbasics_domain_model_documenttype = TEXT
                     conf.tx_rkwbasics_domain_model_documenttype {
-                        field = short_name
-                        override.field = internal_name
+                        field = name
+                        override.field = short_name
+                        override.override.field = internal_name
                     }
 
                     // Default value if empty
