@@ -294,13 +294,7 @@ class Import
 
         $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::DEBUG, sprintf ('API-Request: %s',  $url));
 
-        if (
-            ($credentials['apiEmail'])
-            && (\TYPO3\CMS\Core\Utility\GeneralUtility::validEmail($credentials['apiEmail']))
-            && ($credentials['apiToken'])
-            && ($credentials['apiAccountId'])
-            && ($credentials['apiPassword'])
-        ) {
+        if ($credentials['apiToken']) {
 
             // init curl
             $curlHandle = curl_init();
@@ -310,10 +304,7 @@ class Import
 
             // login header for etracker
             $headers = [
-                'X-ET-email: ' . $credentials['apiEmail'],
-                'X-ET-developerToken: ' . $credentials['apiToken'],
-                'X-ET-accountId: ' . $credentials['apiAccountId'],
-                'X-ET-password: ' . $credentials['apiPassword'],
+                'X-ET-Token: ' . $credentials['apiToken']
             ];
             curl_setopt($curlHandle, CURLOPT_HTTPHEADER, $headers);
 

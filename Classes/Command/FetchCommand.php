@@ -20,8 +20,8 @@ use RKW\RkwEtracker\Etracker\Import;
 use RKW\RkwEtracker\Utility\DateUtility;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use TYPO3\CMS\Core\Log\Logger;
@@ -75,24 +75,9 @@ class FetchCommand extends Command
     {
         $this->setDescription('Fetch data from eTracker.')
             ->addArgument(
-                'apiEmail',
-                InputArgument::REQUIRED,
-                'The email for login to eTracker-API',
-            )
-            ->addArgument(
-                'apiAccountId',
-                InputArgument::REQUIRED,
-                'The accountId for login to eTracker-API',
-            )
-            ->addArgument(
                 'apiToken',
                 InputArgument::REQUIRED,
                 'The token for login to eTracker-API',
-            )
-            ->addArgument(
-                'apiPassword',
-                InputArgument::REQUIRED,
-                'The password for login to eTracker-API. Do not use special characters in the password that can be interpreted by the command line! ',
             )
             ->addOption(
                 'proxy',
@@ -186,14 +171,12 @@ class FetchCommand extends Command
         try {
 
             if ($report = $this->reportRepository->findOneByStatus(array(0, 1, 89))) {
+
                 try {
 
                     // build credentials array
                     $credentials = [
-                        'apiEmail' => $input->getArgument('apiEmail'),
                         'apiToken' => $input->getArgument('apiToken'),
-                        'apiAccountId' => $input->getArgument('apiAccountId'),
-                        'apiPassword' => $input->getArgument('apiPassword'),
                         'proxy' => $input->getOption('proxy'),
                         'proxyUsername' => $input->getOption('proxyUsername'),
                         'proxyPassword' => $input->getOption('proxyPassword')
