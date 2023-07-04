@@ -419,6 +419,8 @@ class Import
                 $setter = 'set' . ucfirst($mapping[$key]);
                 if ($key == 7) {
                     $areaData->$setter(intval($value));
+                } elseif ($key == 6) {
+                    $areaData->$setter((float)$value);
                 } else {
                     $areaData->$setter($value);
                 }

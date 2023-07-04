@@ -196,6 +196,7 @@ class DateUtility
         if ($report->getType() == 1) {
             $dateArray = DateUtility::getStartEndLastQuarter($date, $dateLimit);
 
+
         // monthly reports
         } else if ($report->getType() == 2) {
             $dateArray = DateUtility::getStartEndLastMonth($date, $dateLimit);
