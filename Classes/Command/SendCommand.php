@@ -22,7 +22,6 @@ use RKW\RkwEtracker\Domain\Repository\ReportRepository;
 use RKW\RkwEtracker\Etracker\Calculate;
 use RKW\RkwEtracker\Etracker\Import;
 use RKW\RkwEtracker\Utility\DateUtility;
-use Madj2k\Postmaster\Mail\MailMassage;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
@@ -34,6 +33,7 @@ use TYPO3\CMS\Core\Log\LogLevel;
 use TYPO3\CMS\Core\Log\LogManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
@@ -74,6 +74,12 @@ class SendCommand extends Command
 
 
     /**
+     * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager|null
+     */
+    protected ?PersistenceManager $persistenceManager = null;
+
+
+    /**
      * @var array
      */
     protected array $settings = [];
@@ -109,6 +115,9 @@ class SendCommand extends Command
         $this->areaDataRepository = $objectManager->get(AreaDataRepository::class);
         $this->downloadDataRepository = $objectManager->get(DownloadDataRepository::class);
 
+        /** @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager persistenceManager */
+        $this->persistenceManager = $objectManager->get(PersistenceManager::class);
+
         $this->settings = $this->getSettings();
     }
 
@@ -133,10 +142,11 @@ class SendCommand extends Command
 
             if (
                 ($report = $this->reportRepository->findOneByStatus(array(2)))
-                && ($this->settings['view']['templateRootPath'])
+                && ($this->settings['view']['templateRootPaths'])
             ) {
 
                 try {
+
 
                     /** @var \Madj2k\Postmaster\Mail\MailMessage $mailService */
                     $mailService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(MailMessage::class);
@@ -186,6 +196,7 @@ class SendCommand extends Command
                                 'downloadData' => $downloadData,
                                 'downloadSum'  => $downloadSum,
                             );
+
                         }
 
                         // 4. calculate complete report sums
@@ -231,16 +242,22 @@ class SendCommand extends Command
                         );
 
                         // 7. send emails
-                        // $mailService->getQueueMail()->setPlaintextTemplate($this->settings['view']['templateRootPath'] . 'Email/Report');
-                        $mailService->getQueueMail()->setHtmlTemplate($this->settings['view']['templateRootPath'] . 'Email/Report');
+                        $mailService->getQueueMail()->addTemplatePaths($this->settings['view']['templateRootPaths']);
+                        $mailService->getQueueMail()->addPartialPaths($this->settings['view']['partialRootPaths']);
+
+                        // $mailService->getQueueMail()->setPlaintextTemplate('Email/Report');
+                        $mailService->getQueueMail()->setHtmlTemplate('Email/Report');
 
                         if ($recipientCount = count($mailService->getTo())) {
+
                             $mailService->send();
 
                             // update timestamp in report to prevent sending it twice
                             $report->setLastMailTstamp(time());
                             $report->setStatus(0);
+
                             $this->reportRepository->update($report);
+                            $this->persistenceManager->persistAll();
 
                             $message = sprintf(
                                 'Successfully send report with id=%s to %s recipients.',
@@ -267,7 +284,6 @@ class SendCommand extends Command
                         $io->warning($message);
                         $this->getLogger()->log(LogLevel::WARNING, $message);
                     }
-
 
                 } catch (\Exception $e) {
 
