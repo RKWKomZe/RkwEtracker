@@ -298,6 +298,8 @@ class SendCommand extends Command
                             $e->getMessage()
                         )
                     );
+
+                    // @extensionScannerIgnoreLine
                     $io->error($message);
                     $this->getLogger()->log(LogLevel::ERROR, $message);
                     $result = 1;
@@ -314,6 +316,8 @@ class SendCommand extends Command
             $message = sprintf('An error occurred while trying to send data from eTracker reports. Message: %s',
                 str_replace(array("\n", "\r"), '', $e->getMessage())
             );
+
+            // @extensionScannerIgnoreLine
             $io->error($message);
             $this->getLogger()->log(LogLevel::ERROR, $message);
             $result = 1;
