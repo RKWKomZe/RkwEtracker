@@ -37,6 +37,7 @@ use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
  * Execute on CLI with: 'vendor/bin/typo3 rkw_etracker:fetch'
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
+ * @author Christian Dilger <c.dilger@addorange.de>
  * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEtracker
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
@@ -170,7 +171,7 @@ class FetchCommand extends Command
         $result = 0;
         try {
 
-            if ($report = $this->reportRepository->findOneByStatus(array(0, 1, 89))) {
+            if ($report = $this->reportRepository->findOneByTypeAndStatus(DateUtility::getDueReportTypes(), array(0, 1, 89))) {
 
                 try {
 

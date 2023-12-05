@@ -28,29 +28,32 @@ class ReportRepository extends AbstractRepository
 {
 
     /**
-     * Find all by status
+     * Find all by type and status
      *
+     * @param  array $types
      * @param  array $status
      * @return \RKW\RkwEtracker\Domain\Model\Report|null
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function findOneByStatus(array $status):? Report
+    public function findOneByTypeAndStatus(array $types, array $status):? Report
     {
         $query = $this->createQuery();
         $constraints = array();
 
+        $constraints[] = $query->in('type', $types);
         $constraints[] = $query->in('status', $status);
         $constraints[] = $query->logicalNot($query->equals('status', 99));
 
         $query->setOrderings(
             array(
                 'status'          => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
-//                'type'            => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
+                'type'            => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
                 'lastFetchTstamp' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
             )
         );
 
         $query->matching($query->logicalAnd($constraints));
+
         return $query->execute()->getFirst();
 
     }
