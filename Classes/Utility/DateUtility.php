@@ -285,16 +285,12 @@ class DateUtility
 
         //  quarterly = current month is first of a quarter
         if (in_array($monthOfYear, [1,4,7,10])) {
-            $types[] = [
-                1 => 'quarterly'
-            ];
+            $types[1] = 'quarterly';
         }
 
         //  yearly = current month is first of a year
         if ($monthOfYear === 1) {
-            $types[] = [
-                0 => 'yearly'
-            ];
+            $types[0] = 'yearly';
         }
 
         return array_keys($types);
