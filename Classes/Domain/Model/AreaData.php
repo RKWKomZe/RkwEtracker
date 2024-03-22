@@ -22,6 +22,7 @@ namespace RKW\RkwEtracker\Domain\Model;
  * @author Steffen Kroggel <developer@steffenkroggel.de>
  * @copyright Steffen Kroggel, RKW Kompetenzzentrum
  * @licence http://www.gnu.org/copyleft/gpl.htm GNU General Public License, version 2 or later
+ * @deprecated This class will be removed soon. Do not use it any more.
  */
 class AreaData extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {

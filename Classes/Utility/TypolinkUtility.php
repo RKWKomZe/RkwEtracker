@@ -48,18 +48,13 @@ class TypolinkUtility extends \TYPO3\CMS\Frontend\ContentObject\ContentObjectRen
      * @param string $linkType
      * @return array
      */
-    public function getDataAttributes($typolink, $linkType = '')
+    public function getDataAttributes(string $typolink, string $linkType = ''): array
     {
 
-        // determine version
-        $currentVersion = VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version);
         $dataTags = [];
 
         // define dataTags array
-        $fileLinkType = 'file';
-        if ($currentVersion >= 8000000) {
-            $fileLinkType = LinkService::TYPE_FILE;
-        }
+        $fileLinkType = LinkService::TYPE_FILE;
 
         try {
 
@@ -126,38 +121,16 @@ class TypolinkUtility extends \TYPO3\CMS\Frontend\ContentObject\ContentObjectRen
      * @param string $typolink
      * @return \TYPO3\CMS\Core\Resource\File|null
      */
-    public function getFileObject(string $typolink)
+    public function getFileObject(string $typolink): ?\TYPO3\CMS\Core\Resource\File
     {
 
-        $currentVersion = VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version);
+        // Detecting kind of link and resolve all necessary parameters
+        /** @var \TYPO3\CMS\Core\LinkHandling\LinkService $linkService */
+        $linkService = GeneralUtility::makeInstance(LinkService::class);
+        $linkDetails = $linkService->resolve($typolink);
 
-        // For TYPO3 >= 8.0
-        if ($currentVersion >= 8000000) {
-
-            // Detecting kind of link and resolve all necessary parameters
-            /** @var \TYPO3\CMS\Core\LinkHandling\LinkService $linkService */
-            $linkService = GeneralUtility::makeInstance(LinkService::class);
-            $linkDetails = $linkService->resolve($typolink);
-            if ($linkDetails['file'] instanceof \TYPO3\CMS\Core\Resource\File) {
-                return $linkDetails['file'];
-            }
-        }
-
-        // For TYPO3 < 8.0
-        /** @var \TYPO3\CMS\Core\Resource\ResourceFactory $resourceFactory */
-        $resourceFactory = \TYPO3\CMS\Core\Resource\ResourceFactory::getInstance();
-        try {
-
-            /** @var \TYPO3\CMS\Core\Resource\File $file */
-            if (
-                ($file = $resourceFactory->retrieveFileOrFolderObject($typolink))
-                && ($file instanceof \TYPO3\CMS\Core\Resource\File)
-            ){
-                return $file;
-            }
-
-        } catch (\Exception $e) {
-            // e.g. element wasn't found
+        if ($linkDetails['file'] instanceof \TYPO3\CMS\Core\Resource\File) {
+            return $linkDetails['file'];
         }
 
         return null;
@@ -171,43 +144,18 @@ class TypolinkUtility extends \TYPO3\CMS\Frontend\ContentObject\ContentObjectRen
      * @return string
      * @see: https://docs.typo3.org/m/typo3/reference-typoscript/master/en-us/Functions/Typolink.html#resource-references
      */
-    public function getLinkType (string $typolink)
+    public function getLinkType (string $typolink): string
     {
 
-        $currentVersion = VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version);
+        // remove additional params from link. This is needed because the fileHandler is not working properly
+        // --> The UID of file has to be numeric. UID given: "8563 - - "zum Flyer RKW-Mitgliedschaft""
+        $typolinkCleaned = explode(' ', $typolink);
 
-        // For TYPO3 >= 8.0
-        if ($currentVersion >= 8000000) {
-
-            // remove additional params from link. This is needed because the fileHandler is not working properly
-            // --> The UID of file has to be numeric. UID given: "8563 - - "zum Flyer RKW-Mitgliedschaft""
-            $typolinkCleaned = explode(' ', $typolink);
-
-            // Detecting kind of link and resolve all necessary parameters
-            /** @var \TYPO3\CMS\Core\LinkHandling\LinkService $linkService*/
-            $linkService = GeneralUtility::makeInstance(LinkService::class);
-            $linkDetails = $linkService->resolve($typolinkCleaned[0]);
-            $linkType = $linkDetails['type'];
-
-        // For TYPO3 < 8.0
-        } else {
-
-            // detect link type based on core method
-            $linkType = $this->detectLinkTypeFromLinkParameter($typolink);
-
-            /**
-             * in case the FAL is used, we need a separate handling
-             * @see \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer->resolveMixedLinkParameter
-             */
-            if (
-                (strpos($typolink, 'file:') !== false)
-                && (strpos($typolink, 'file://') == false)
-            ) {
-                $linkType = 'file';
-            }
-        }
-
-        return $linkType;
+        // Detecting kind of link and resolve all necessary parameters
+        /** @var \TYPO3\CMS\Core\LinkHandling\LinkService $linkService*/
+        $linkService = GeneralUtility::makeInstance(LinkService::class);
+        $linkDetails = $linkService->resolve($typolinkCleaned[0]);
+        return $linkDetails['type'];
     }
 
 
@@ -216,7 +164,7 @@ class TypolinkUtility extends \TYPO3\CMS\Frontend\ContentObject\ContentObjectRen
      *
      * @return \TYPO3\CMS\Core\Log\Logger
      */
-    protected function getLogger()
+    protected function getLogger(): \TYPO3\CMS\Core\Log\Logger
     {
 
         if (!$this->logger instanceof \TYPO3\CMS\Core\Log\Logger) {

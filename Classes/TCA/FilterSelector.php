@@ -24,6 +24,7 @@ use \RKW\RkwEtracker\Utility\CategoryUtility;
  * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEtracker
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @deprecated This class will be removed soon. Do not use it any more.
  */
 class FilterSelector
 {
@@ -33,8 +34,9 @@ class FilterSelector
      * @params array &$params
      * @params object $pObj
      * @return void
+     * @throws \TYPO3\CMS\Extbase\Object\Exception
      */
-    public function getCombinedFilterLabels(array &$params, $pObj)
+    public function getCombinedFilterLabels(array &$params, $pObj): void
     {
 
         $uid = intval($params['row']['uid']);
