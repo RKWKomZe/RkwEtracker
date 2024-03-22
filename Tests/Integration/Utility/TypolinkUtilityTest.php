@@ -41,6 +41,7 @@ class TypolinkUtilityTest extends FunctionalTestCase
      * @var string[]
      */
     protected $testExtensionsToLoad = [
+        'typo3conf/ext/ajax_api',
         'typo3conf/ext/core_extended',
         'typo3conf/ext/rkw_basics',
         'typo3conf/ext/rkw_authors',
@@ -139,7 +140,7 @@ class TypolinkUtilityTest extends FunctionalTestCase
          * When getFileObject is called with that id
          * Then null is returned
          */
-        self::assertNull($this->subject->getFileObject(999));
+        self::assertNull($this->subject->getFileObject('file:999'));
     }
 
 
@@ -155,7 +156,7 @@ class TypolinkUtilityTest extends FunctionalTestCase
          * When getFileObject is called with its id
          * Then the file-object is returned
          */
-        self::assertInstanceOf('\TYPO3\CMS\Core\Resource\File', $this->subject->getFileObject(2));
+        self::assertInstanceOf('\TYPO3\CMS\Core\Resource\File', $this->subject->getFileObject('file:2'));
     }
 
 
@@ -221,7 +222,7 @@ class TypolinkUtilityTest extends FunctionalTestCase
          * When getFileObject is called with that path
          * Then the file object is returned
          */
-        self::assertInstanceOf('\TYPO3\CMS\Core\Resource\File', $this->subject->getFileObject('0:fileadmin/media/file-placeholder-1.pdf'));
+        self::assertInstanceOf('\TYPO3\CMS\Core\Resource\File', $this->subject->getFileObject('file:fileadmin/media/file-placeholder-1.pdf'));
     }
 
     //=============================================

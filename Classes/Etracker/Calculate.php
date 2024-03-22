@@ -1,9 +1,5 @@
 <?php
-
 namespace RKW\RkwEtracker\Etracker;
-
-use Madj2k\CoreExtended\Utility\GeneralUtility as Common;
-use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -18,6 +14,16 @@ use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
  * The TYPO3 project - inspiring people to share!
  */
 
+use RKW\RkwEtracker\Domain\Model\AreaSum;
+use RKW\RkwEtracker\Domain\Model\DownloadSum;
+use RKW\RkwEtracker\Domain\Model\Report;
+use RKW\RkwEtracker\Domain\Model\ReportAreaSum;
+use RKW\RkwEtracker\Domain\Model\ReportDownloadSum;
+use RKW\RkwEtracker\Domain\Model\ReportGroup;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
+
+
 /**
  * Class Calcutate
  *
@@ -25,6 +31,7 @@ use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
  * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEtracker
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @deprecated This class will be removed soon. Do not use it any more.
  */
 class Calculate
 {
@@ -37,11 +44,11 @@ class Calculate
      * @param \TYPO3\CMS\Extbase\Persistence\QueryResultInterface|null $results
      * @return \RKW\RkwEtracker\Domain\Model\AreaSum
      */
-    public function getAreaSum(\RKW\RkwEtracker\Domain\Model\Report $report, \RKW\RkwEtracker\Domain\Model\ReportGroup $reportGroup, $results)
+    public function getAreaSum(Report $report, ReportGroup $reportGroup, ?QueryResultInterface $results): AreaSum
     {
 
         /** @var \RKW\RkwEtracker\Domain\Model\AreaSum $areaSum */
-        $areaSum = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\RkwEtracker\Domain\Model\AreaSum');
+        $areaSum = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(AreaSum::class);
 
         // set basic data
         $areaSum->setReport($report);
@@ -95,11 +102,11 @@ class Calculate
      * @param \TYPO3\CMS\Extbase\Persistence\QueryResultInterface|null $results
      * @return \RKW\RkwEtracker\Domain\Model\DownloadSum
      */
-    public function getDownloadSum(\RKW\RkwEtracker\Domain\Model\Report $report, \RKW\RkwEtracker\Domain\Model\ReportGroup $reportGroup, $results)
+    public function getDownloadSum(Report $report,ReportGroup $reportGroup, ?QueryResultInterface $results): DownloadSum
     {
 
         /** @var \RKW\RkwEtracker\Domain\Model\DownloadSum $downloadSum */
-        $downloadSum = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\RkwEtracker\Domain\Model\DownloadSum');
+        $downloadSum = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(DownloadSum::class);
 
         // set basic data
         $downloadSum->setReport($report);
@@ -147,11 +154,11 @@ class Calculate
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEtracker\Domain\Model\AreaSum> $areaSums
      * @return \RKW\RkwEtracker\Domain\Model\ReportAreaSum
      */
-    public function getReportAreaSum(\RKW\RkwEtracker\Domain\Model\Report $report, $areaSums)
+    public function getReportAreaSum(Report $report, ObjectStorage $areaSums): ReportAreaSum
     {
 
         /** @var \RKW\RkwEtracker\Domain\Model\ReportAreaSum $reportAreaSum */
-        $reportAreaSum = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\RkwEtracker\Domain\Model\ReportAreaSum');
+        $reportAreaSum = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(ReportAreaSum::class);
 
         // set basic data
         $reportAreaSum->setReport($report);
@@ -204,11 +211,11 @@ class Calculate
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\RKW\RkwEtracker\Domain\Model\DownloadSum> $downloadSums
      * @return \RKW\RkwEtracker\Domain\Model\ReportDownloadSum
      */
-    public function getReportDownloadSum(\RKW\RkwEtracker\Domain\Model\Report $report, $downloadSums)
+    public function getReportDownloadSum(Report $report, ObjectStorage $downloadSums): ReportDownloadSum
     {
 
         /** @var \RKW\RkwEtracker\Domain\Model\ReportDownloadSum $reportDownloadSum */
-        $reportDownloadSum = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\RkwEtracker\Domain\Model\ReportDownloadSum');
+        $reportDownloadSum = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(ReportDownloadSum::class);
 
         // set basic data
         $reportDownloadSum->setReport($report);
@@ -245,7 +252,6 @@ class Calculate
         }
 
         return $reportDownloadSum;
-        //===
     }
 
 

@@ -107,6 +107,7 @@ class CategoryUtility
      * @param \RKW\RkwEtracker\Domain\Model\ReportFilter $reportFilter
      * @param bool $includeDomain
      * @return array
+     * @deprecated This method will be removed soon. Do not use it any more.
      */
     public static function reportFilterCategoriesToArray(
         \RKW\RkwEtracker\Domain\Model\ReportFilter $reportFilter,
@@ -167,6 +168,7 @@ class CategoryUtility
      * @param \RKW\RkwEtracker\Domain\Model\ReportFilter $reportFilter
      * @param bool $includeDomain
      * @return string
+     * @deprecated This method will be removed soon. Do not use it any more.
      */
     public static function reportFilterEventsToString(
         \RKW\RkwEtracker\Domain\Model\ReportFilter $reportFilter,
@@ -208,6 +210,7 @@ class CategoryUtility
      * @param \RKW\RkwEtracker\Domain\Model\ReportFilter $reportFilter
      * @param bool $includeDomain
      * @return string
+     * @deprecated This method will be removed soon. Do not use it any more.
      */
     public static function reportFilterCategoriesToJson(
         \RKW\RkwEtracker\Domain\Model\ReportFilter $reportFilter,
@@ -247,6 +250,7 @@ class CategoryUtility
      * @param \RKW\RkwEtracker\Domain\Model\ReportFilter $reportFilter
      * @param bool $includeDomain
      * @return string
+     * @deprecated This method will be removed soon. Do not use it any more.
      */
     public static function reportFilterEventsToJson(
         \RKW\RkwEtracker\Domain\Model\ReportFilter $reportFilter,
