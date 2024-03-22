@@ -20,6 +20,7 @@ namespace RKW\RkwEtracker\Controller;
  * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwEtracker
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @deprecated This class will be removed soon. Do not use it any more.
  */
 class RedirectController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
@@ -28,6 +29,7 @@ class RedirectController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * @const eTracker Login Url
      */
     const eTrackerLoginUrl = 'https://application.etracker.com/login.php';
+
 
     /**
      * @const eTracker Login Url
@@ -42,7 +44,6 @@ class RedirectController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * @param string $redirectUrl
      * @return void
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
 	 */
 	public function redirectAction(string $redirectUrl = '/')
     {
