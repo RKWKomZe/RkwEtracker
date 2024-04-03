@@ -37,7 +37,7 @@ class Typolink
      * @param array $conf
      * @return string
      */
-    public function getParsedLinkWithDataAttributes(array $data = [], array $conf = []): string
+    public function getParsedLinkWithDataAttributes(array $data = [], $conf = []): string
     {
 
         /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
