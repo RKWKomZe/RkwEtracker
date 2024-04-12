@@ -20,11 +20,12 @@ $EM_CONF[$_EXTKEY] = [
 	'internal' => '',
 	'uploadfolder' => '0',
 	'clearCacheOnLoad' => 0,
-	'version' => '9.5.1000',
+	'version' => '9.5.1001',
 	'constraints' => [
 		'depends' => [
             'typo3' => '9.5.0-10.4.99',
             'core_extended' => '9.5.4-10.4.99',
+            'dr_seo' => '9.5.4-12.4.99',
             'postmaster' => '9.5.0-10.4.99',
             'rkw_basics' => '9.5.0-10.4.99'
 		],
