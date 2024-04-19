@@ -15,9 +15,6 @@ return [
 		'searchFields' => 'time_per_event,events,unique_events,report,report_fetch_counter,month,quarter,year,',
 		'iconfile' => 'EXT:rkw_etracker/Resources/Public/Icons/tx_rkwetracker_domain_model_reportdownloadsum.gif'
 	],
-	'interface' => [
-		'showRecordFieldList' => 'time_per_event, events, unique_events, report, report_group, report_fetch_counter, month, quarter, year',
-	],
 	'types' => [
 		'1' => ['showitem' => 'time_per_event, events, unique_events, report, report_group, report_fetch_counter, month, quarter, year, '],
 	],

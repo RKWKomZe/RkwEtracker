@@ -23,11 +23,11 @@ $EM_CONF[$_EXTKEY] = [
 	'version' => '9.5.12',
 	'constraints' => [
 		'depends' => [
-            'typo3' => '9.5.0-10.4.99',
-            'core_extended' => '9.5.4-10.4.99',
-            'dr_seo' => '9.5.4-12.4.99',
-            'postmaster' => '9.5.0-10.4.99',
-            'rkw_basics' => '9.5.0-10.4.99'
+            'typo3' => '10.4.0-10.4.99',
+            'core_extended' => '10.4.0-12.4.99',
+            'dr_seo' => '12.4.0-12.4.99',
+            'postmaster' => '10.4.0-12.4.99',
+            'rkw_basics' => '10.4.0-12.4.99'
 		],
 		'conflicts' => [
 		],

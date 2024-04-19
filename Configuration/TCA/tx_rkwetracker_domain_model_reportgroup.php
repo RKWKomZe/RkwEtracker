@@ -16,9 +16,6 @@ return [
 		'searchFields' => 'name,description,filter,',
 		'iconfile' => 'EXT:rkw_etracker/Resources/Public/Icons/tx_rkwetracker_domain_model_reportgroup.gif'
 	],
-	'interface' => [
-		'showRecordFieldList' => 'name, description',
-	],
 	'types' => [
 		'1' => ['showitem' => 'name, description, filter'],
 	],
@@ -77,7 +74,7 @@ return [
 				],
 			],
 		],
-		
+
 		'report' => [
 			'config' => [
 				'type' => 'passthrough',
