@@ -17,9 +17,6 @@ return [
 		'searchFields' => 'name, description,groups,',
 		'iconfile' => 'EXT:rkw_etracker/Resources/Public/Icons/tx_rkwetracker_domain_model_report.gif'
 	],
-	'interface' => [
-		'showRecordFieldList' => 'hidden, name, description, link_to_api, recipient, groups, type, status, last_fetch_tstamp, last_start_tstamp, last_end_tstamp,  month, quarter, year',
-	],
 	'types' => [
 		'1' => ['showitem' => 'hidden,--palette--;;1, name, description, link_to_api, recipient, type, status, last_start_tstamp, last_end_tstamp, last_fetch_tstamp, last_mail_tstamp, groups, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'],
 	],

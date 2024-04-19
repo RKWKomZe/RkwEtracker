@@ -15,9 +15,6 @@ return [
 		'searchFields' => 'report_group,visitors,page_impressions,page_impressions_per_visitor,time_per_visitor,time_per_page,report,report_fetch_counter,month,quarter,year,',
 		'iconfile' => 'EXT:rkw_etracker/Resources/Public/Icons/tx_rkwetracker_domain_model_reportareasum.gif'
 	],
-	'interface' => [
-		'showRecordFieldList' => 'report_group, visitors, page_impressions, page_impressions_per_visitor, time_per_visitor, time_per_page, report, report_group, report_fetch_counter, month, quarter, year',
-	],
 	'types' => [
 		'1' => ['showitem' => 'report_group, visitors, page_impressions, page_impressions_per_visitor, time_per_visitor, time_per_page, report, report_group, report_fetch_counter, month, quarter, year, '],
 	],
