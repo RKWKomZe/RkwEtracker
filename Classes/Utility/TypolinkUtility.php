@@ -72,6 +72,11 @@ class TypolinkUtility extends \TYPO3\CMS\Frontend\ContentObject\ContentObjectRen
             // only do this on files!
             if ($linkType == $fileLinkType) {
 
+                //  use rawurldecode to assign correct project as
+                //  LegacyLinkNotationConverter->resolve cannot cope with
+                //  umlauts in file names
+                $typolink = rawurldecode($typolink);
+
                 /** @var \TYPO3\CMS\Core\Resource\File $file */
                 if (
                     ($file = $this->getFileObject($typolink))
