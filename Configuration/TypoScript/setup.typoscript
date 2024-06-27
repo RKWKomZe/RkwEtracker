@@ -1,80 +1,3 @@
-/** !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  * TABLE-MAPPING IS DEPRECATED SINCE TYPO3 10.4
-  * PLEASE ADD ANY CHANGES TO
-  * EXT:extension/Configuration/Extbase/Persistence/Classes.php
-  * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
-config.tx_extbase{
-    persistence{
-        classes{
-
-            RKW\RkwEtracker\Domain\Model\SysDomain {
-                mapping {
-                    tableName = sys_domain
-
-                    # on pages tables it's the doktype
-                    # if we set an value, we filter by it
-                    # if we do not set anything, all pages are found
-                    recordType =
-
-                    # mapping to properties of class
-                    columns {
-                        domainName.mapOnProperty = domainName
-                    }
-                }
-            }
-
-            #===============================================
-
-            RKW\RkwEtracker\Domain\Model\AreaData {
-
-                // storage for new records
-                newRecordStoragePid = {$plugin.tx_rkwetracker.persistence.storagePid}
-            }
-
-            #===============================================
-
-            RKW\RkwEtracker\Domain\Model\AreaSum {
-
-                // storage for new records
-                newRecordStoragePid = {$plugin.tx_rkwetracker.persistence.storagePid}
-            }
-
-            #===============================================
-
-            RKW\RkwEtracker\Domain\Model\DownloadData {
-
-                // storage for new records
-                newRecordStoragePid = {$plugin.tx_rkwetracker.persistence.storagePid}
-            }
-
-            #===============================================
-
-            RKW\RkwEtracker\Domain\Model\DownloadSum {
-
-                // storage for new records
-                newRecordStoragePid = {$plugin.tx_rkwetracker.persistence.newRecordStoragePid}
-            }
-
-            #===============================================
-
-            RKW\RkwEtracker\Domain\Model\ReportAreaSum {
-
-                // storage for new records
-                newRecordStoragePid = {$plugin.tx_rkwetracker.persistence.newRecordStoragePid}
-            }
-
-            #===============================================
-
-            RKW\RkwEtracker\Domain\Model\ReportDownloadSum {
-
-                // storage for new records
-                newRecordStoragePid = {$plugin.tx_rkwetracker.persistence.newRecordStoragePid}
-            }
-        }
-    }
-}
-
-
 plugin.tx_rkwetracker {
 	view {
         layoutRootPaths {
@@ -102,19 +25,8 @@ plugin.tx_rkwetracker {
         blockCookiesOnPageLoad = {$plugin.tx_rkwetracker.settings.blockCookiesOnPageLoad}
         respectDoNotTrack = {$plugin.tx_rkwetracker.settings.respectDoNotTrack}
 
-        singleSignOnAccountId = {$plugin.tx_rkwetracker.settings.singleSignOnAccountId}
-        singleSignOnPassword = {$plugin.tx_rkwetracker.settings.singleSignOnPassword}
-        singleSignOnPid = {$plugin.tx_rkwetracker.settings.singleSignOnPid}
-        singleSignOnAllowedIps = {$plugin.tx_rkwetracker.settings.singleSignOnAllowedIps}
-
-        proxy = {$plugin.tx_rkwetracker.settings.proxy}
-        proxyUsername = {$plugin.tx_rkwetracker.settings.proxyUsername}
-        proxyPassword = {$plugin.tx_rkwetracker.settings.proxyPassword}
-
         defaultLanguageKey = {$plugin.tx_rkwetracker.settings.defaultLanguageKey}
         accountStartDate = {$plugin.tx_rkwetracker.settings.accountStartDate}
-
-        reportDomainExcludeList = {$plugin.tx_rkwetracker.settings.reportDomainExcludeList}
 	}
 
 

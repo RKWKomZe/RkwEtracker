@@ -22,18 +22,6 @@ call_user_func(
 
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
             'RKW.' . $extKey,
-            'Pi2',
-            [
-                'Redirect' => 'redirect',
-            ],
-            // non-cacheable actions
-            [
-                'Redirect' => 'redirect',
-            ]
-        );
-
-        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-            'RKW.' . $extKey,
             'Pi3',
             [
                 'Code' => 'optOut'

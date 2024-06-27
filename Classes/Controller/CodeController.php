@@ -51,7 +51,6 @@ class CodeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     public function optOutAction()
     {
-
         $this->view->assign(
             'domain', getenv('HTTP_HOST')
         );
