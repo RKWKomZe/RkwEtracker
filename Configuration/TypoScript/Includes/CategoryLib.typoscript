@@ -11,10 +11,10 @@ plugin.tx_rkwetracker {
         pageDomain.data = getIndpEnv:HTTP_HOST
 
         pageUrl = USER_INT
-        pageUrl.userFunc = Madj2k\DrSeo\MetaTag\CanonicalGenerator->getPath
+        pageUrl.userFunc = Madj2k\DrSerp\MetaTag\CanonicalGenerator->getPath
 
         pageUrlEncoded = USER_INT
-        pageUrlEncoded.userFunc = Madj2k\DrSeo\MetaTag\CanonicalGenerator->getPath
+        pageUrlEncoded.userFunc = Madj2k\DrSerp\MetaTag\CanonicalGenerator->getPath
         pageUrlEncoded.stdWrap.rawUrlEncode = 1
 
         #=================================================================
