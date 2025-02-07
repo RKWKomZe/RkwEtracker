@@ -136,7 +136,7 @@ module.tx_rkwetracker < plugin.tx_rkwetracker
 # Insert Tracking
 #===============================================================
 # Add jquery if not disabled
-[{$plugin.tx_rkwetracker.settings.includeJquery} == 11 && {$plugin.tx_rkwetracker.settings.disable} == 0]
+[{$plugin.tx_rkwetracker.settings.includeJquery} == 1 && {$plugin.tx_rkwetracker.settings.disable} == 0]
     page.includeJSFooterlibs.jquery = EXT:rkw_etracker/Resources/Public/Js/jquery-3.4.1.min.js
 [END]
 
@@ -164,7 +164,7 @@ tt_content {
 }
 
 
-[{$plugin.tx_rkwetracker.settings.disable} == 0]
+[{$plugin.tx_rkwetracker.settings.disable} == 0 && {$plugin.tx_rkwetracker.settings.disableCode} == 0]
     # Include tracking code in header of page
     page.headerData {
 
